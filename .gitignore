@@ -1,0 +1,33 @@
+#
+# This source file is part of the HealthKitOnFHIR open source project
+#
+# SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+# 
+
+# Swift Package Manager
+Package.resolved
+*.xcodeproj
+.swiftpm
+.build/
+.xcodebuild/
+coverage.lcov
+*.xcresult
+
+# IDE related folders
+.idea
+
+# Xcode User settings
+xcuserdata/
+
+# Other files
+.DS_Store
+.env
+
+# Documentation generation
+*.doccarchive
+docs/
+
+# UITests Project
+!UITests.xcodeproj
