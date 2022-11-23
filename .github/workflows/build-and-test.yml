@@ -20,7 +20,7 @@ jobs:
     name: Build and Test Swift Package
     uses: StanfordBDHG/.github/.github/workflows/build-and-test-xcodebuild-spm.yml@v1
     with:
-      scheme: HealthKitOnFHIR-Package
+      scheme: HealthKitOnFHIR
   build_and_test-uitests:
     name: Build and Test UITest App
     uses: StanfordBDHG/.github/.github/workflows/build-and-test-xcodebuild.yml@v1
@@ -32,6 +32,6 @@ jobs:
     needs: [build_and_test-spm, build_and_test-uitests]
     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v1
     with:
-      coveragereports: HealthKitOnFHIR-Package.xcresult TestApp.xcresult
+      coveragereports: HealthKitOnFHIR.xcresult TestApp.xcresult
     secrets:
       token: ${{ secrets.CODECOV_TOKEN }}
