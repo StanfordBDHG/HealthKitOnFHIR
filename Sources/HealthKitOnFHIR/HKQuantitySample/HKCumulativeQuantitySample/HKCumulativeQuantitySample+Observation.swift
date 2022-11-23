@@ -7,10 +7,11 @@
 //
 
 import HealthKit
+import ModelsR4
 
 
-struct HealthKitOnFHIR {
-    var healthKitOnFHIR: String {
-        "HealthKitOnFHIR"
+extension HKCumulativeQuantitySample {
+    func buildCumulativeQuantitySampleObservation(_ observation: inout Observation) throws {
+        throw HealthKitOnFHIRError.notSupported
     }
 }
