@@ -47,6 +47,7 @@ extension HKCumulativeQuantitySample {
                 .addCategory(category)
                 .addCoding(loincCoding)
                 .setEffective(startDate: self.startDate, endDate: self.endDate)
+                .setIssued(on: Date())
                 .setValue(
                     Quantity(
                         unit: unit.asFHIRStringPrimitive(),

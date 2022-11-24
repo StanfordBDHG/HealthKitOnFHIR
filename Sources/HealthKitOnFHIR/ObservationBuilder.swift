@@ -21,20 +21,24 @@ class ObservationBuilder {
         )
     }
 
-    func addCategory(_ concept: CodeableConcept) -> ObservationBuilder {
-        if var categories = self.observation.category {
-            categories.append(concept)
-        } else {
-            self.observation.category = [concept]
+    func addCategory(_ concepts: CodeableConcept...) -> ObservationBuilder {
+        for concept in concepts {
+            if var categories = self.observation.category {
+                categories.append(concept)
+            } else {
+                self.observation.category = [concept]
+            }
         }
         return self
     }
 
-    func addCoding(_ coding: Coding) -> ObservationBuilder {
-        if var codings = self.observation.code.coding {
-            codings.append(coding)
-        } else {
-            self.observation.code.coding = [coding]
+    func addCoding(_ codings: Coding...) -> ObservationBuilder {
+        for coding in codings {
+            if var codings = self.observation.code.coding {
+                codings.append(coding)
+            } else {
+                self.observation.code.coding = [coding]
+            }
         }
         return self
     }
