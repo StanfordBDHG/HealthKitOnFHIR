@@ -16,9 +16,19 @@ class ObservationBuilder {
     init() {
         self.observation = Observation(
             code: CodeableConcept(),
-            identifier: [Identifier(id: FHIRPrimitive(FHIRString(UUID().uuidString)))],
             status: FHIRPrimitive<ObservationStatus>(.final)
         )
+    }
+
+    func addIdentifier(_ identifiers: Identifier...) -> ObservationBuilder {
+        for identifier in identifiers {
+            if var existingIdentifiers = self.observation.identifier {
+                existingIdentifiers.append(identifier)
+            } else {
+                self.observation.identifier = [identifier]
+            }
+        }
+        return self
     }
 
     func addCategory(_ concepts: CodeableConcept...) -> ObservationBuilder {
