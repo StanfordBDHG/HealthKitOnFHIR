@@ -27,6 +27,9 @@ let package = Package(
             name: "HealthKitOnFHIR",
             dependencies: [
                 .product(name: "ModelsR4", package: "FHIRModels")
+            ],
+            resources: [
+                .process("mapping.json")
             ]
         ),
         .testTarget(

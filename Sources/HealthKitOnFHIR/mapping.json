@@ -1,0 +1,12 @@
+[
+    {
+        "hktype": "HKQuantityTypeIdentifierStepCount",
+        "codes": [
+            {
+                "code": "55423-8",
+                "display": "Number of steps in unspecified time Pedometer",
+                "system": "http://loinc.org"
+            }
+        ]
+    }
+]
