@@ -39,28 +39,42 @@ final class HealthKitOnFHIRTests: XCTestCase {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         let data = try encoder.encode(observation)
-        print(String(data: data, encoding: .utf8)!)
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print(jsonString)
+        }
 
         // Test mapping to LOINC code
-        guard let loincSystem = URL(string: "http://loinc.org") else { return }
-        let loincCoding = Coding(code: "55423-8".asFHIRStringPrimitive(),
-                                 display: "Number of steps in unspecified time Pedometer".asFHIRStringPrimitive(),
-                                 system: loincSystem.asFHIRURIPrimitive()
+        guard let loincSystem = URL(string: "http://loinc.org") else {
+            return
+        }
+        let loincCoding = Coding(
+            code: "55423-8".asFHIRStringPrimitive(),
+            display: "Number of steps in unspecified time Pedometer".asFHIRStringPrimitive(),
+            system: loincSystem.asFHIRURIPrimitive()
         )
         XCTAssertEqual(observation.code.coding, [loincCoding])
 
         // Test mapping to category
-        guard let snomedSystem = URL(string: "http://snomed.info/sct") else { return }
-        let categoryCoding = Coding(code: "68130003".asFHIRStringPrimitive(),
-                                    display: "Physical activity (observable entity)".asFHIRStringPrimitive(),
-                                    system: snomedSystem.asFHIRURIPrimitive()
+        guard let snomedSystem = URL(string: "http://snomed.info/sct") else {
+            return
+        }
+        let categoryCoding = Coding(
+            code: "68130003".asFHIRStringPrimitive(),
+            display: "Physical activity (observable entity)".asFHIRStringPrimitive(),
+            system: snomedSystem.asFHIRURIPrimitive()
         )
         let category = CodeableConcept(coding: [categoryCoding])
         XCTAssertEqual(observation.category, [category])
 
         // Test value
-        XCTAssertEqual(observation.value,
-            .quantity(Quantity(unit: "steps".asFHIRStringPrimitive(), value: 42.asFHIRDecimalPrimitive()))
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "steps".asFHIRStringPrimitive(),
+                    value: 42.asFHIRDecimalPrimitive()
+                )
+            )
         )
     }
     
