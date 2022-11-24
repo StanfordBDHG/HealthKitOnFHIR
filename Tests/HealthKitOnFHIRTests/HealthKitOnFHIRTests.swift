@@ -65,7 +65,7 @@ final class HealthKitOnFHIRTests: XCTestCase {
     }
     
     
-    func testdiscreteQuantitySample() throws {
+    func testDiscreteQuantitySample() throws {
         let unit = HKUnit.count().unitDivided(by: .minute())
         let discreteQuantitySample = HKDiscreteQuantitySample(
             type: HKQuantityType(.heartRate),
@@ -73,6 +73,35 @@ final class HealthKitOnFHIRTests: XCTestCase {
             start: try startDate,
             end: try endDate
         )
-        XCTAssertThrowsError(try discreteQuantitySample.observation)
+
+        let observation = try discreteQuantitySample.observation
+
+        // Print out the FHIR Observation JSON
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let data = try encoder.encode(observation)
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print(jsonString)
+        }
+
+        guard let loincSystem = URL(string: "http://loinc.org") else {
+            return
+        }
+        let loincCoding = Coding(
+            code: "8867-4".asFHIRStringPrimitive(),
+            display: "Heart rate".asFHIRStringPrimitive(),
+            system: loincSystem.asFHIRURIPrimitive()
+        )
+        XCTAssertEqual(observation.code.coding, [loincCoding])
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "count/min".asFHIRStringPrimitive(),
+                    value: 84.asFHIRDecimalPrimitive()
+                )
+            )
+        )
     }
 }
