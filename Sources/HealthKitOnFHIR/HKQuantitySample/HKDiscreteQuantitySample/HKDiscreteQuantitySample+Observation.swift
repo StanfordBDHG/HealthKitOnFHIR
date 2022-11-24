@@ -11,7 +11,7 @@ import ModelsR4
 
 
 extension HKDiscreteQuantitySample {
-    func buildDiscreteQuantitySampleObservation(_ observation: inout Observation) throws {
+    func buildDiscreteQuantitySampleObservation(_ builder: inout ObservationBuilder) throws {
         throw HealthKitOnFHIRError.notSupported
     }
 }
