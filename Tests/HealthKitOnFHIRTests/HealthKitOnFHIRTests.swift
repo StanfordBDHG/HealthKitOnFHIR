@@ -43,7 +43,6 @@ final class HealthKitOnFHIRTests: XCTestCase {
             print(jsonString)
         }
 
-        // Test mapping to LOINC code
         guard let loincSystem = URL(string: "http://loinc.org") else {
             return
         }
@@ -54,19 +53,6 @@ final class HealthKitOnFHIRTests: XCTestCase {
         )
         XCTAssertEqual(observation.code.coding, [loincCoding])
 
-        // Test mapping to category
-        guard let snomedSystem = URL(string: "http://snomed.info/sct") else {
-            return
-        }
-        let categoryCoding = Coding(
-            code: "68130003".asFHIRStringPrimitive(),
-            display: "Physical activity (observable entity)".asFHIRStringPrimitive(),
-            system: snomedSystem.asFHIRURIPrimitive()
-        )
-        let category = CodeableConcept(coding: [categoryCoding])
-        XCTAssertEqual(observation.category, [category])
-
-        // Test value
         XCTAssertEqual(
             observation.value,
             .quantity(
