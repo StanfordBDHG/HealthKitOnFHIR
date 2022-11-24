@@ -20,36 +20,18 @@ class ObservationBuilder {
         )
     }
 
-    func addIdentifier(_ identifiers: Identifier...) -> ObservationBuilder {
-        for identifier in identifiers {
-            if var existingIdentifiers = self.observation.identifier {
-                existingIdentifiers.append(identifier)
-            } else {
-                self.observation.identifier = [identifier]
-            }
-        }
+    func addIdentifiers(_ identifiers: [Identifier]) -> ObservationBuilder {
+        self.observation.identifier = (self.observation.identifier ?? []) + identifiers
         return self
     }
 
-    func addCategory(_ concepts: CodeableConcept...) -> ObservationBuilder {
-        for concept in concepts {
-            if var categories = self.observation.category {
-                categories.append(concept)
-            } else {
-                self.observation.category = [concept]
-            }
-        }
+    func addCategories(_ concepts: [CodeableConcept]) -> ObservationBuilder {
+        self.observation.category = (self.observation.category ?? []) + concepts
         return self
     }
 
-    func addCoding(_ codings: Coding...) -> ObservationBuilder {
-        for coding in codings {
-            if var codings = self.observation.code.coding {
-                codings.append(coding)
-            } else {
-                self.observation.code.coding = [coding]
-            }
-        }
+    func addCodings(_ codings: [Coding]) -> ObservationBuilder {
+        self.observation.code.coding = (self.observation.code.coding ?? []) + codings
         return self
     }
 

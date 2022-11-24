@@ -13,8 +13,9 @@ import ModelsR4
 extension HKCumulativeQuantitySample {
     func buildCumulativeQuantitySampleObservation(_ builder: inout ObservationBuilder) throws {
         builder
-            .addIdentifier(Identifier(id: self.uuid.uuidString.asFHIRStringPrimitive()))
+            .addIdentifiers([Identifier(id: self.uuid.uuidString.asFHIRStringPrimitive())])
             .setIssued(on: Date())
+            .setEffective(startDate: self.startDate, endDate: self.endDate)
 
         switch self.sampleType {
         case HKQuantityType(.stepCount):
@@ -48,9 +49,8 @@ extension HKCumulativeQuantitySample {
             )
 
             builder
-                .addCategory(category)
-                .addCoding(loincCoding)
-                .setEffective(startDate: self.startDate, endDate: self.endDate)
+                .addCategories([category])
+                .addCodings([loincCoding])
                 .setValue(
                     Quantity(
                         unit: unit.asFHIRStringPrimitive(),
