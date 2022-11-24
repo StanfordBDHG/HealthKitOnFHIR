@@ -12,6 +12,10 @@ import ModelsR4
 
 extension HKQuantitySample {
     func buildQuantitySampleObservation(_ builder: inout ObservationBuilder) throws {
+        builder
+            .addIdentifiers([Identifier(id: self.uuid.uuidString.asFHIRStringPrimitive())])
+            .setIssued(on: Date())
+        
         switch self {
         case let cumulativeQuantitySample as HKCumulativeQuantitySample:
             try cumulativeQuantitySample.buildCumulativeQuantitySampleObservation(&builder)
