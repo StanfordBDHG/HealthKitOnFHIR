@@ -11,12 +11,12 @@ import ModelsR4
 
 
 extension HKQuantitySample {
-    func buildQuantitySampleObservation(_ observation: inout Observation) throws {
+    func buildQuantitySampleObservation(_ builder: inout ObservationBuilder) throws {
         switch self {
         case let cumulativeQuantitySample as HKCumulativeQuantitySample:
-            try cumulativeQuantitySample.buildCumulativeQuantitySampleObservation(&observation)
+            try cumulativeQuantitySample.buildCumulativeQuantitySampleObservation(&builder)
         case let discreteQuantitySample as HKDiscreteQuantitySample:
-            try discreteQuantitySample.buildDiscreteQuantitySampleObservation(&observation)
+            try discreteQuantitySample.buildDiscreteQuantitySampleObservation(&builder)
         default:
             throw HealthKitOnFHIRError.notSupported
         }
