@@ -23,6 +23,9 @@ extension HKSampleType {
         let system: String
     }
 
+
+    /// Converts an HKSampleType into corresponding FHIR Coding(s) based on a specified mapping
+    /// - Returns: An array of Codings
     func convertToCodes() -> [Coding] {
         guard let mapping = HKSampleTypeCodeMapping.allMappings.first(where: { $0.hktype == self.identifier }) else {
             return []

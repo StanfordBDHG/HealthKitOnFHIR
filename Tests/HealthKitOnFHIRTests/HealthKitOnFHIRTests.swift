@@ -49,7 +49,6 @@ final class HealthKitOnFHIRTests: XCTestCase {
         )
     }
     
-    
     func testDiscreteQuantitySample() throws {
         let unit = HKUnit.count().unitDivided(by: .minute())
         let sampleType = HKQuantityType(.heartRate)
@@ -61,14 +60,6 @@ final class HealthKitOnFHIRTests: XCTestCase {
         )
 
         let observation = try discreteQuantitySample.observation
-
-        // Print out the FHIR Observation JSON
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try encoder.encode(observation)
-        if let jsonString = String(data: data, encoding: .utf8) {
-            print(jsonString)
-        }
 
         XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
 
