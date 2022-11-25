@@ -26,8 +26,9 @@ final class HealthKitOnFHIRTests: XCTestCase {
     }
     
     func testCumulativeQuantitySample() throws {
+        let sampleType = HKQuantityType(.stepCount)
         let cumulativeQuantitySample = HKCumulativeQuantitySample(
-            type: HKQuantityType(.stepCount),
+            type: sampleType,
             quantity: HKQuantity(unit: .count(), doubleValue: 42),
             start: try startDate,
             end: try endDate
@@ -35,23 +36,7 @@ final class HealthKitOnFHIRTests: XCTestCase {
 
         let observation = try cumulativeQuantitySample.observation
 
-        // Print out the FHIR Observation JSON
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try encoder.encode(observation)
-        if let jsonString = String(data: data, encoding: .utf8) {
-            print(jsonString)
-        }
-
-        guard let loincSystem = URL(string: "http://loinc.org") else {
-            return
-        }
-        let loincCoding = Coding(
-            code: "55423-8".asFHIRStringPrimitive(),
-            display: "Number of steps in unspecified time Pedometer".asFHIRStringPrimitive(),
-            system: loincSystem.asFHIRURIPrimitive()
-        )
-        XCTAssertEqual(observation.code.coding, [loincCoding])
+        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
 
         XCTAssertEqual(
             observation.value,
@@ -67,8 +52,9 @@ final class HealthKitOnFHIRTests: XCTestCase {
     
     func testDiscreteQuantitySample() throws {
         let unit = HKUnit.count().unitDivided(by: .minute())
+        let sampleType = HKQuantityType(.heartRate)
         let discreteQuantitySample = HKDiscreteQuantitySample(
-            type: HKQuantityType(.heartRate),
+            type: sampleType,
             quantity: HKQuantity(unit: unit, doubleValue: 84),
             start: try startDate,
             end: try endDate
@@ -84,15 +70,7 @@ final class HealthKitOnFHIRTests: XCTestCase {
             print(jsonString)
         }
 
-        guard let loincSystem = URL(string: "http://loinc.org") else {
-            return
-        }
-        let loincCoding = Coding(
-            code: "8867-4".asFHIRStringPrimitive(),
-            display: "Heart rate".asFHIRStringPrimitive(),
-            system: loincSystem.asFHIRURIPrimitive()
-        )
-        XCTAssertEqual(observation.code.coding, [loincCoding])
+        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
 
         XCTAssertEqual(
             observation.value,
