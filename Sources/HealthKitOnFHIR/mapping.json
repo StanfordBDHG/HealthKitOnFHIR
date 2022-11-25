@@ -8,5 +8,15 @@
                 "system": "http://loinc.org"
             }
         ]
+    },
+    {
+        "hktype": "HKQuantityTypeIdentifierHeartRate",
+        "codes": [
+            {
+                "code": "8867-4",
+                "display": "Heart rate",
+                "system": "http://loinc.org"
+            }
+        ]
     }
 ]

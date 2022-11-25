@@ -11,7 +11,7 @@
 
 
 extension HKSample {
-    /// A FHRI observation based on the concrete subclass of `HKSample`.
+    /// A FHIR observation based on the concrete subclass of `HKSample`.
     ///
     /// If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
     public var observation: Observation {
