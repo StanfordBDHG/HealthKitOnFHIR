@@ -13,7 +13,7 @@ import SwiftUI
 struct WriteDataView: View {
     private var manager = HealthKitManager()
     @State private var steps: Double?
-    @State private var alertPresented = false
+    @State private var status = ""
 
     var body: some View {
         Form {
@@ -23,14 +23,12 @@ struct WriteDataView: View {
                     Task {
                         await writeSteps()
                     }
-                })
-                .alert(isPresented: $alertPresented, content: {
-                    Alert(
-                        title: Text("Success"),
-                        message: Text("Successfully wrote data to Apple Health"),
-                        dismissButton: .default(Text("Done"))
-                    )
-                })
+                }).disabled(steps == nil)
+            }
+            Section {
+                if !self.status.isEmpty {
+                    Text(status)
+                }
             }
         }
         .navigationBarTitle("Write Data")
@@ -47,7 +45,7 @@ struct WriteDataView: View {
             steps: steps
         )
         if success {
-            self.alertPresented.toggle()
+            self.status = "Data successfully written!"
         }
     }
 }
