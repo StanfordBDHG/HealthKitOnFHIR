@@ -19,7 +19,7 @@ struct WriteDataView: View {
         Form {
             Section {
                 TextField("Number of steps...", value: $steps, format: .number)
-                Button("Write Data", action: {
+                Button("Write Step Count", action: {
                     Task {
                         await writeSteps()
                     }
@@ -33,6 +33,7 @@ struct WriteDataView: View {
                 })
             }
         }
+        .navigationBarTitle("Write Data")
     }
 
     private func writeSteps() async {
