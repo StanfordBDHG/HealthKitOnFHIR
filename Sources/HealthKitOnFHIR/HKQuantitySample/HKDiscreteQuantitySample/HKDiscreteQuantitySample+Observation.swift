@@ -12,35 +12,31 @@ import ModelsR4
 
 extension HKDiscreteQuantitySample {
     func buildDiscreteQuantitySampleObservation(_ builder: inout ObservationBuilder) throws {
-        builder.setEffective(startDate: self.startDate, endDate: self.endDate)
+        var unit: String?
+        var value: Double?
 
         switch self.quantityType {
         case HKQuantityType(.heartRate):
-            let unit = "count/min"
-            let value = self.quantity.doubleValue(for: HKUnit(from: unit))
-
-            builder
-                .addCodings(self.sampleType.convertToCodes())
-                .setValue(
-                    Quantity(
-                        unit: unit.asFHIRStringPrimitive(),
-                        value: value.asFHIRDecimalPrimitive()
-                    )
-                )
+            unit = "count/min"
+            value = self.quantity.doubleValue(for: HKUnit(from: "count/min"))
         case HKQuantityType(.bloodGlucose):
-            let unit = "mg/dL"
-            let value = self.quantity.doubleValue(for: HKUnit(from: unit))
-
-            builder
-                .addCodings(self.sampleType.convertToCodes())
-                .setValue(
-                    Quantity(
-                        unit: unit.asFHIRStringPrimitive(),
-                        value: value.asFHIRDecimalPrimitive()
-                    )
-                )
+            unit = "mg/dL"
+            value = self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
+        case HKQuantityType(.oxygenSaturation):
+            unit = "%"
+            value = self.quantity.doubleValue(for: HKUnit.percent())
         default:
             throw HealthKitOnFHIRError.notSupported
         }
+
+        builder
+            .setEffective(startDate: self.startDate, endDate: self.endDate)
+            .addCodings(self.sampleType.convertToCodes())
+            .setValue(
+                Quantity(
+                    unit: unit?.asFHIRStringPrimitive(),
+                    value: value?.asFHIRDecimalPrimitive()
+                )
+            )
     }
 }
