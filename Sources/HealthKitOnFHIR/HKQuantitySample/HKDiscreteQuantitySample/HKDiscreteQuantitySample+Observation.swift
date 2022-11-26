@@ -16,12 +16,15 @@ extension HKDiscreteQuantitySample {
         var value: Double?
 
         switch self.quantityType {
-        case HKQuantityType(.heartRate):
-            unit = "count/min"
-            value = self.quantity.doubleValue(for: HKUnit(from: "count/min"))
         case HKQuantityType(.bloodGlucose):
             unit = "mg/dL"
             value = self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
+        case HKQuantityType(.bodyTemperature):
+            unit = "degC"
+            value = self.quantity.doubleValue(for: HKUnit.degreeCelsius())
+        case HKQuantityType(.heartRate):
+            unit = "count/min"
+            value = self.quantity.doubleValue(for: HKUnit(from: "count/min"))
         case HKQuantityType(.oxygenSaturation):
             unit = "%"
             value = self.quantity.doubleValue(for: HKUnit.percent())

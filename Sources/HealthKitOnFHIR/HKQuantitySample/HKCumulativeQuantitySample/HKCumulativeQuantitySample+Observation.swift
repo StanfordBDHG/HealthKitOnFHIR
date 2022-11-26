@@ -22,7 +22,7 @@ extension HKCumulativeQuantitySample {
         default:
             throw HealthKitOnFHIRError.notSupported
         }
-
+        
         builder
             .setEffective(startDate: self.startDate, endDate: self.endDate)
             .addCodings(self.sampleType.convertToCodes())

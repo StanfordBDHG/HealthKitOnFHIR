@@ -1,10 +1,20 @@
 [
     {
-        "hktype": "HKQuantityTypeIdentifierStepCount",
+        "hktype": "HKQuantityTypeIdentifierBloodGlucose",
         "codes": [
             {
-                "code": "55423-8",
-                "display": "Number of steps in unspecified time Pedometer",
+                "code": "41653-7",
+                "display": "Glucose Glucometer (BldC) [Mass/Vol]",
+                "system": "http://loinc.org"
+            }
+        ]
+    },
+    {
+        "hktype": "HKQuantityTypeIdentifierBodyTemperature",
+        "codes": [
+            {
+                "code": "8310-5",
+                "display": "Body temperature",
                 "system": "http://loinc.org"
             }
         ]
@@ -20,21 +30,21 @@
         ]
     },
     {
-        "hktype": "HKQuantityTypeIdentifierBloodGlucose",
-        "codes": [
-            {
-                "code": "41653-7",
-                "display": "Glucose Glucometer (BldC) [Mass/Vol]",
-                "system": "http://loinc.org"
-            }
-        ]
-    },
-    {
         "hktype": "HKQuantityTypeIdentifierOxygenSaturation",
         "codes": [
             {
                 "code": "59408-5",
                 "display": "Oxygen saturation in Arterial blood by Pulse oximetry",
+                "system": "http://loinc.org"
+            }
+        ]
+    },
+    {
+        "hktype": "HKQuantityTypeIdentifierStepCount",
+        "codes": [
+            {
+                "code": "55423-8",
+                "display": "Number of steps in unspecified time Pedometer",
                 "system": "http://loinc.org"
             }
         ]
