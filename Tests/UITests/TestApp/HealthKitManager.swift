@@ -28,15 +28,19 @@ class HealthKitManager {
         return true
     }
 
-    func readStepCount() async -> [HKQuantitySample]? {
+    func readStepCount() async -> [HKQuantitySample] {
         guard let healthStore,
               let sampleType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {
-            return nil
+            return []
         }
 
-        let samples = try! await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[HKQuantitySample], Error>) in
-                healthStore.execute(HKSampleQuery(sampleType: sampleType, predicate: nil, limit: Int(HKObjectQueryNoLimit), sortDescriptors: nil) { query, samples, error in
-
+        let samples = try? await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[HKQuantitySample], Error>) in
+                healthStore.execute(HKSampleQuery(
+                    sampleType: sampleType,
+                    predicate: nil,
+                    limit: Int(HKObjectQueryNoLimit),
+                    sortDescriptors: nil
+                ) { _, samples, error in
                     if let error {
                         continuation.resume(throwing: error)
                         return
@@ -50,7 +54,7 @@ class HealthKitManager {
                 })
         }
 
-        return samples
+        return samples ?? []
     }
 
 
@@ -62,7 +66,7 @@ class HealthKitManager {
 
         let stepsSample = HKQuantitySample(
             type: stepType,
-            quantity: HKQuantity.init(unit: HKUnit.count(), doubleValue: steps),
+            quantity: HKQuantity(unit: HKUnit.count(), doubleValue: steps),
             start: startDate,
             end: endDate
         )

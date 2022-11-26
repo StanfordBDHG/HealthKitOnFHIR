@@ -15,21 +15,6 @@ struct WriteDataView: View {
     @State private var steps: Double?
     @State private var alertPresented = false
 
-    private func writeSteps() async {
-        guard let steps,
-        await manager.requestAuthorization() == true else {
-            return
-        }
-        let success = await manager.writeSteps(
-            startDate: Date() - 60 * 60,
-            endDate: Date(),
-            steps: steps
-        )
-        if success {
-            self.alertPresented.toggle()
-        }
-    }
-
     var body: some View {
         Form {
             Section {
@@ -47,6 +32,21 @@ struct WriteDataView: View {
                     )
                 })
             }
+        }
+    }
+
+    private func writeSteps() async {
+        guard let steps,
+        await manager.requestAuthorization() == true else {
+            return
+        }
+        let success = await manager.writeSteps(
+            startDate: Date() - 60 * 60,
+            endDate: Date(),
+            steps: steps
+        )
+        if success {
+            self.alertPresented.toggle()
         }
     }
 }
