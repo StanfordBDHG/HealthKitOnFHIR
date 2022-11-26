@@ -14,7 +14,7 @@ extension HKCumulativeQuantitySample {
     func buildCumulativeQuantitySampleObservation(_ builder: inout ObservationBuilder) throws {
         builder.setEffective(startDate: self.startDate, endDate: self.endDate)
 
-        switch self.sampleType {
+        switch self.quantityType {
         case HKQuantityType(.stepCount):
             let unit = "steps"
             let value = self.quantity.doubleValue(for: HKUnit.count())

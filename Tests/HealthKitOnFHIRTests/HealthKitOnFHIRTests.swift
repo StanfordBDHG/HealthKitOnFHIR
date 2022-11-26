@@ -24,17 +24,41 @@ final class HealthKitOnFHIRTests: XCTestCase {
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }
     }
+
+    func testBloodGlucose() throws {
+        let sampleType = HKQuantityType(.bloodGlucose)
+        let bloodGlucoseSample = HKDiscreteQuantitySample(
+            type: sampleType,
+            quantity: HKQuantity(unit: HKUnit(from: "mg/dL"), doubleValue: 99),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let observation = try bloodGlucoseSample.observation
+
+        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "mg/dL".asFHIRStringPrimitive(),
+                    value: 99.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
-    func testCumulativeQuantitySample() throws {
+    func testStepCount() throws {
         let sampleType = HKQuantityType(.stepCount)
-        let cumulativeQuantitySample = HKCumulativeQuantitySample(
+        let stepCountSample = HKCumulativeQuantitySample(
             type: sampleType,
             quantity: HKQuantity(unit: .count(), doubleValue: 42),
             start: try startDate,
             end: try endDate
         )
 
-        let observation = try cumulativeQuantitySample.observation
+        let observation = try stepCountSample.observation
 
         XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
 
@@ -49,17 +73,17 @@ final class HealthKitOnFHIRTests: XCTestCase {
         )
     }
     
-    func testDiscreteQuantitySample() throws {
+    func testHeartRateSample() throws {
         let unit = HKUnit.count().unitDivided(by: .minute())
         let sampleType = HKQuantityType(.heartRate)
-        let discreteQuantitySample = HKDiscreteQuantitySample(
+        let heartRateSample = HKDiscreteQuantitySample(
             type: sampleType,
             quantity: HKQuantity(unit: unit, doubleValue: 84),
             start: try startDate,
             end: try endDate
         )
 
-        let observation = try discreteQuantitySample.observation
+        let observation = try heartRateSample.observation
 
         XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
 

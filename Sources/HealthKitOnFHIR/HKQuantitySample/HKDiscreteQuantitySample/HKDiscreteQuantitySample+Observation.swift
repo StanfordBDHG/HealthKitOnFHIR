@@ -14,9 +14,21 @@ extension HKDiscreteQuantitySample {
     func buildDiscreteQuantitySampleObservation(_ builder: inout ObservationBuilder) throws {
         builder.setEffective(startDate: self.startDate, endDate: self.endDate)
 
-        switch self.sampleType {
+        switch self.quantityType {
         case HKQuantityType(.heartRate):
             let unit = "count/min"
+            let value = self.quantity.doubleValue(for: HKUnit(from: unit))
+
+            builder
+                .addCodings(self.sampleType.convertToCodes())
+                .setValue(
+                    Quantity(
+                        unit: unit.asFHIRStringPrimitive(),
+                        value: value.asFHIRDecimalPrimitive()
+                    )
+                )
+        case HKQuantityType(.bloodGlucose):
+            let unit = "mg/dL"
             let value = self.quantity.doubleValue(for: HKUnit(from: unit))
 
             builder

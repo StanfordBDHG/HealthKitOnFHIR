@@ -18,5 +18,15 @@
                 "system": "http://loinc.org"
             }
         ]
+    },
+    {
+        "hktype": "HKQuantityTypeIdentifierBloodGlucose",
+        "codes": [
+            {
+                "code": "41653-7",
+                "display": "Glucose Glucometer (BldC) [Mass/Vol]",
+                "system": "http://loinc.org"
+            }
+        ]
     }
 ]
