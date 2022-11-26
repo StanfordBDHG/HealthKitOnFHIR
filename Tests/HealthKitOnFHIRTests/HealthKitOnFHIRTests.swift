@@ -122,4 +122,16 @@ final class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testUnsupportedTypeSample() throws {
+        let unit = HKUnit.gram()
+        let sampleType = HKQuantityType(.dietaryVitaminC)
+        let vitaminCSample = HKQuantitySample(
+            type: sampleType,
+            quantity: HKQuantity(unit: unit, doubleValue: 1),
+            start: try startDate,
+            end: try endDate
+        )
+        XCTAssertThrowsError(try vitaminCSample.observation)
+    }
 }
