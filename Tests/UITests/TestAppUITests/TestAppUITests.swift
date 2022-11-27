@@ -17,10 +17,10 @@ class TestAppUITests: XCTestCase {
     }
     
     func testHealthKitOnFHIR() throws {
-
+        // Due to the problem that GitHub Action Runners do have an empty HealthKit instance we skip the tests on GitHub Action runners:
         if ProcessInfo.processInfo.environment["SIMULATOR_HOST_HOME"] == "/Users/runner" {
-                    throw XCTSkip("The GitHub Action environment does not support interactions with the HealthApp, therefore we don't run the tests for now.")
-                }
+            throw XCTSkip("The GitHub Action environment does not support interactions with the HealthApp, therefore we don't run the tests for now.")
+            }
 
         let app = XCUIApplication()
         app.launch()
