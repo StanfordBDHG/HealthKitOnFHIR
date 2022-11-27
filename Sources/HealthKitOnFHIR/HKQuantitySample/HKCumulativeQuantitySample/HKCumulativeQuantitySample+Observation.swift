@@ -12,23 +12,25 @@ import ModelsR4
 
 extension HKCumulativeQuantitySample {
     func buildCumulativeQuantitySampleObservation(_ builder: inout ObservationBuilder) throws {
-        builder.setEffective(startDate: self.startDate, endDate: self.endDate)
+        var unit: String?
+        var value: Double?
 
         switch self.quantityType {
         case HKQuantityType(.stepCount):
-            let unit = "steps"
-            let value = self.quantity.doubleValue(for: HKUnit.count())
-
-            builder
-                .addCodings(self.sampleType.convertToCodes())
-                .setValue(
-                    Quantity(
-                        unit: unit.asFHIRStringPrimitive(),
-                        value: value.asFHIRDecimalPrimitive()
-                    )
-                )
+            unit = "steps"
+            value = self.quantity.doubleValue(for: HKUnit.count())
         default:
             throw HealthKitOnFHIRError.notSupported
         }
+        
+        builder
+            .setEffective(startDate: self.startDate, endDate: self.endDate)
+            .addCodings(self.sampleType.convertToCodes())
+            .setValue(
+                Quantity(
+                    unit: unit?.asFHIRStringPrimitive(),
+                    value: value?.asFHIRDecimalPrimitive()
+                )
+            )
     }
 }
