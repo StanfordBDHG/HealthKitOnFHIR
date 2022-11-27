@@ -30,6 +30,16 @@
         ]
     },
     {
+        "hktype": "HKQuantityTypeIdentifierHeight",
+        "codes": [
+            {
+                "code": "8302-2",
+                "display": "Body height",
+                "system": "http://loinc.org"
+            }
+        ]
+    },
+    {
         "hktype": "HKQuantityTypeIdentifierOxygenSaturation",
         "codes": [
             {
