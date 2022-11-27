@@ -148,6 +148,31 @@ final class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testHeightSample() throws {
+        let unit = HKUnit.meter()
+        let sampleType = HKQuantityType(.height)
+        let heightSample = HKQuantitySample(
+            type: sampleType,
+            quantity: HKQuantity(unit: unit, doubleValue: 1.77),
+            start: try startDate,
+            end: try startDate
+        )
+
+        let observation = try heightSample.observation
+
+        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "m".asFHIRStringPrimitive(),
+                    value: 1.77.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
     func testUnsupportedTypeSample() throws {
         let unit = HKUnit.gram()
         let sampleType = HKQuantityType(.dietaryVitaminC)

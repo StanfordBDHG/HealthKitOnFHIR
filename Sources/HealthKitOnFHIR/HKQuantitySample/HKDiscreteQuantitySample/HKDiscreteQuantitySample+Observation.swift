@@ -25,6 +25,9 @@ extension HKDiscreteQuantitySample {
         case HKQuantityType(.heartRate):
             unit = "count/min"
             value = self.quantity.doubleValue(for: HKUnit(from: "count/min"))
+        case HKQuantityType(.height):
+            unit = "m"
+            value = self.quantity.doubleValue(for: HKUnit.meter())
         case HKQuantityType(.oxygenSaturation):
             unit = "%"
             value = self.quantity.doubleValue(for: HKUnit.percent())
