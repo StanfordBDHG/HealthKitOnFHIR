@@ -31,7 +31,7 @@ class TestAppUITests: XCTestCase {
         lazy var turnOnAllCategories = app.tables.cells.firstMatch
         lazy var allowCategories = app.navigationBars.buttons.element(boundBy: 1)
 
-        if turnOnAllCategories.waitForExistence(timeout: 3.0) {
+        if turnOnAllCategories.waitForExistence(timeout: 10.0) {
             turnOnAllCategories.tap()
             allowCategories.tap()
         }
@@ -42,7 +42,7 @@ class TestAppUITests: XCTestCase {
             evaluatedWith: app.staticTexts["Data successfully written!"],
             handler: .none
         )
-        let result = XCTWaiter.wait(for: [expectation], timeout: 3.0)
+        let result = XCTWaiter.wait(for: [expectation], timeout: 10.0)
         XCTAssertEqual(result, .completed)
 
         // Navigate back to home screen
