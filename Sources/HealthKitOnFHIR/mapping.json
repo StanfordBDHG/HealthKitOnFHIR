@@ -10,6 +10,16 @@
         ]
     },
     {
+        "hktype": "HKQuantityTypeIdentifierBodyMass",
+        "codes": [
+            {
+                "code": "29463-7",
+                "display": "Body weight",
+                "system": "http://loinc.org"
+            }
+        ]
+    },
+    {
         "hktype": "HKQuantityTypeIdentifierBodyTemperature",
         "codes": [
             {

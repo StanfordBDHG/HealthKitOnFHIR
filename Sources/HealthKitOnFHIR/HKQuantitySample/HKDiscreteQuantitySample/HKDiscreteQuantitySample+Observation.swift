@@ -19,6 +19,9 @@ extension HKDiscreteQuantitySample {
         case HKQuantityType(.bloodGlucose):
             unit = "mg/dL"
             value = self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
+        case HKQuantityType(.bodyMass):
+            unit = "kg"
+            value = self.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo))
         case HKQuantityType(.bodyTemperature):
             unit = "degC"
             value = self.quantity.doubleValue(for: HKUnit.degreeCelsius())
