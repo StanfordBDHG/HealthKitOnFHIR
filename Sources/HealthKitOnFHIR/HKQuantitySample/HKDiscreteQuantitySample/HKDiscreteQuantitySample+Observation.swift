@@ -34,6 +34,9 @@ extension HKDiscreteQuantitySample {
         case HKQuantityType(.oxygenSaturation):
             unit = "%"
             value = self.quantity.doubleValue(for: HKUnit.percent())
+        case HKQuantityType(.respiratoryRate):
+            unit = "count/min"
+            value = self.quantity.doubleValue(for: HKUnit(from: "count/min"))
         default:
             throw HealthKitOnFHIRError.notSupported
         }

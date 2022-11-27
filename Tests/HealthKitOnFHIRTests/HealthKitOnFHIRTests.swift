@@ -198,6 +198,31 @@ final class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testRespiratoryRateSample() throws {
+        let unit = HKUnit(from: "count/min")
+        let sampleType = HKQuantityType(.respiratoryRate)
+        let respiratoryRateSample = HKQuantitySample(
+            type: sampleType,
+            quantity: HKQuantity(unit: unit, doubleValue: 18),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let observation = try respiratoryRateSample.observation
+
+        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "count/min".asFHIRStringPrimitive(),
+                    value: 18.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
     func testUnsupportedTypeSample() throws {
         let unit = HKUnit.gram()
         let sampleType = HKQuantityType(.dietaryVitaminC)

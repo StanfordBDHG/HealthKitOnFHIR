@@ -60,6 +60,16 @@
         ]
     },
     {
+        "hktype": "HKQuantityTypeIdentifierRespiratoryRate",
+        "codes": [
+            {
+                "code": "9279-1",
+                "display": "Respiratory rate",
+                "system": "http://loinc.org"
+            }
+        ]
+    },
+    {
         "hktype": "HKQuantityTypeIdentifierStepCount",
         "codes": [
             {
