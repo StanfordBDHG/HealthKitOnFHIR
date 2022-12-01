@@ -18,7 +18,7 @@ extension HKSample {
         get throws {
             var observation = Observation(
                 code: CodeableConcept(),
-                status: FHIRPrimitive<ObservationStatus>(.final)
+                status: FHIRPrimitive(.final)
             )
             
             observation.appendIdentifier(Identifier(id: self.uuid.uuidString.asFHIRStringPrimitive()))

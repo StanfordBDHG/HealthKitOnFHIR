@@ -32,7 +32,7 @@ extension Observation {
             self[keyPath: collection] = []
             self[keyPath: collection]?.reserveCapacity(elements.count)
         } else {
-            self[keyPath: collection]?.reserveCapacity(self[keyPath: collection]?.count ?? 0 + elements.count)
+            self[keyPath: collection]?.reserveCapacity((self[keyPath: collection]?.count ?? 0) + elements.count)
         }
         
         for element in elements {

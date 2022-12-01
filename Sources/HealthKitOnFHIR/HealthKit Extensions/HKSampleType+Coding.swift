@@ -20,7 +20,8 @@ extension HKSampleType {
     }
     
     struct MappedCode: Codable {
-        let code, display: String
+        let code: String
+        let display: String
         let system: String
     }
     
