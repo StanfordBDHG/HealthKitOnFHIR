@@ -10,12 +10,15 @@ import HealthKit
 import ModelsR4
 
 
-extension HKDiscreteQuantitySample {
-    func buildDiscreteQuantitySampleObservation(_ builder: inout ObservationBuilder) throws {
-        var unit: String?
-        var value: Double?
-
+extension HKQuantitySample {
+    func buildQuantitySampleObservation(_ observation: inout Observation) throws {
+        let unit: String
+        let value: Double
+        
         switch self.quantityType {
+        case HKQuantityType(.stepCount):
+            unit = "steps"
+            value = self.quantity.doubleValue(for: HKUnit.count())
         case HKQuantityType(.bloodGlucose):
             unit = "mg/dL"
             value = self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
@@ -40,15 +43,12 @@ extension HKDiscreteQuantitySample {
         default:
             throw HealthKitOnFHIRError.notSupported
         }
-
-        builder
-            .setEffective(startDate: self.startDate, endDate: self.endDate)
-            .addCodings(self.sampleType.convertToCodes())
-            .setValue(
-                Quantity(
-                    unit: unit?.asFHIRStringPrimitive(),
-                    value: value?.asFHIRDecimalPrimitive()
-                )
+        
+        observation.setValue(
+            Quantity(
+                unit: unit.asFHIRStringPrimitive(),
+                value: value.asFHIRDecimalPrimitive()
             )
+        )
     }
 }
