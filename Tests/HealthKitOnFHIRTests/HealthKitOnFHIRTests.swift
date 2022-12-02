@@ -24,25 +24,49 @@ final class HealthKitOnFHIRTests: XCTestCase {
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }
     }
-
-    func testBloodGlucose() throws {
-        let sampleType = HKQuantityType(.bloodGlucose)
-        let bloodGlucoseSample = HKQuantitySample(
-            type: sampleType,
-            quantity: HKQuantity(unit: HKUnit(from: "mg/dL"), doubleValue: 99),
+    
+    private func createObservationFrom(
+        type quantityType: HKQuantityType,
+        quantity: HKQuantity
+    ) throws -> Observation {
+        let quantitySample = HKQuantitySample(
+            type: quantityType,
+            quantity: quantity,
             start: try startDate,
             end: try endDate
         )
-
-        let observation = try bloodGlucoseSample.observation
-
-        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
-
+        return try quantitySample.observation
+    }
+    
+    private func loincCode(code: String, display: String) -> Coding {
+        Coding(
+            code: FHIRPrimitive(stringLiteral: code),
+            display: FHIRPrimitive(stringLiteral: display),
+            system: FHIRPrimitive(FHIRURI(stringLiteral: "http://loinc.org"))
+        )
+    }
+    
+    func testBloodGlucose() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.bloodGlucose),
+            quantity: HKQuantity(unit: HKUnit(from: "mg/dL"), doubleValue: 99)
+        )
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "41653-7",
+                    display: "Glucose Glucometer (BldC) [Mass/Vol]"
+                )
+            ]
+        )
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "mg/dL".asFHIRStringPrimitive(),
+                    unit: "mg/dL",
                     value: 99.asFHIRDecimalPrimitive()
                 )
             )
@@ -50,23 +74,26 @@ final class HealthKitOnFHIRTests: XCTestCase {
     }
     
     func testStepCount() throws {
-        let sampleType = HKQuantityType(.stepCount)
-        let stepCountSample = HKQuantitySample(
-            type: sampleType,
-            quantity: HKQuantity(unit: .count(), doubleValue: 42),
-            start: try startDate,
-            end: try endDate
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42)
         )
-
-        let observation = try stepCountSample.observation
-
-        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
-
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "55423-8",
+                    display: "Number of steps in unspecified time Pedometer"
+                )
+            ]
+        )
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "steps".asFHIRStringPrimitive(),
+                    unit: "steps",
                     value: 42.asFHIRDecimalPrimitive()
                 )
             )
@@ -74,164 +101,173 @@ final class HealthKitOnFHIRTests: XCTestCase {
     }
     
     func testHeartRateSample() throws {
-        let unit = HKUnit.count().unitDivided(by: .minute())
-        let sampleType = HKQuantityType(.heartRate)
-        let heartRateSample = HKQuantitySample(
-            type: sampleType,
-            quantity: HKQuantity(unit: unit, doubleValue: 84),
-            start: try startDate,
-            end: try endDate
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.heartRate),
+            quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
         )
-
-        let observation = try heartRateSample.observation
-
-        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
-
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "8867-4",
+                    display: "Heart rate"
+                )
+            ]
+        )
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "count/min".asFHIRStringPrimitive(),
+                    unit: "count/min",
                     value: 84.asFHIRDecimalPrimitive()
                 )
             )
         )
     }
-
+    
     func testOxygenSaturationSample() throws {
-        let unit = HKUnit.percent()
-        let sampleType = HKQuantityType(.oxygenSaturation)
-        let oxygenSaturationSample = HKQuantitySample(
-            type: sampleType,
-            quantity: HKQuantity(unit: unit, doubleValue: 99),
-            start: try startDate,
-            end: try endDate
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.oxygenSaturation),
+            quantity: HKQuantity(unit: .percent(), doubleValue: 99)
         )
-
-        let observation = try oxygenSaturationSample.observation
-
-        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
-
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "59408-5",
+                    display: "Oxygen saturation in Arterial blood by Pulse oximetry"
+                )
+            ]
+        )
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "%".asFHIRStringPrimitive(),
+                    unit: "%",
                     value: 99.asFHIRDecimalPrimitive()
                 )
             )
         )
     }
-
+    
     func testBodyTemperatureSample() throws {
-        let unit = HKUnit.degreeCelsius()
-        let sampleType = HKQuantityType(.bodyTemperature)
-        let bodyTemperatureSample = HKQuantitySample(
-            type: sampleType,
-            quantity: HKQuantity(unit: unit, doubleValue: 37),
-            start: try startDate,
-            end: try startDate
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.bodyTemperature),
+            quantity: HKQuantity(unit: .degreeCelsius(), doubleValue: 37)
         )
-
-        let observation = try bodyTemperatureSample.observation
-
-        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
-
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "8310-5",
+                    display: "Body temperature"
+                )
+            ]
+        )
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "degC".asFHIRStringPrimitive(),
+                    unit: "degC",
                     value: 37.asFHIRDecimalPrimitive()
                 )
             )
         )
     }
-
+    
     func testHeightSample() throws {
-        let unit = HKUnit.meter()
-        let sampleType = HKQuantityType(.height)
-        let heightSample = HKQuantitySample(
-            type: sampleType,
-            quantity: HKQuantity(unit: unit, doubleValue: 1.77),
-            start: try startDate,
-            end: try startDate
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.height),
+            quantity: HKQuantity(unit: .meter(), doubleValue: 1.77)
         )
-
-        let observation = try heightSample.observation
-
-        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
-
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "8302-2",
+                    display: "Body height"
+                )
+            ]
+        )
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "m".asFHIRStringPrimitive(),
+                    unit: "m",
                     value: 1.77.asFHIRDecimalPrimitive()
                 )
             )
         )
     }
-
+    
     func testBodyMassSample() throws {
-        let unit = HKUnit.gramUnit(with: .kilo)
-        let sampleType = HKQuantityType(.bodyMass)
-        let bodyMassSample = HKQuantitySample(
-            type: sampleType,
-            quantity: HKQuantity(unit: unit, doubleValue: 60),
-            start: try startDate,
-            end: try startDate
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.bodyMass),
+            quantity: HKQuantity(unit: .gramUnit(with: .kilo), doubleValue: 60)
         )
-
-        let observation = try bodyMassSample.observation
-
-        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
-
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "29463-7",
+                    display: "Body weight"
+                )
+            ]
+        )
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "kg".asFHIRStringPrimitive(),
+                    unit: "kg",
                     value: 60.asFHIRDecimalPrimitive()
                 )
             )
         )
     }
-
+    
     func testRespiratoryRateSample() throws {
-        let unit = HKUnit(from: "count/min")
-        let sampleType = HKQuantityType(.respiratoryRate)
-        let respiratoryRateSample = HKQuantitySample(
-            type: sampleType,
-            quantity: HKQuantity(unit: unit, doubleValue: 18),
-            start: try startDate,
-            end: try endDate
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.respiratoryRate),
+            quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 18)
         )
-
-        let observation = try respiratoryRateSample.observation
-
-        XCTAssertEqual(observation.code.coding, sampleType.convertToCodes())
-
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "9279-1",
+                    display: "Respiratory rate"
+                )
+            ]
+        )
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "count/min".asFHIRStringPrimitive(),
+                    unit: "count/min",
                     value: 18.asFHIRDecimalPrimitive()
                 )
             )
         )
     }
-
+    
     func testUnsupportedTypeSample() throws {
-        let unit = HKUnit.gram()
-        let sampleType = HKQuantityType(.dietaryVitaminC)
-        let vitaminCSample = HKQuantitySample(
-            type: sampleType,
-            quantity: HKQuantity(unit: unit, doubleValue: 1),
-            start: try startDate,
-            end: try endDate
+        XCTAssertThrowsError(
+            try createObservationFrom(
+                type: HKQuantityType(.dietaryVitaminC),
+                quantity: HKQuantity(unit: .gram(), doubleValue: 1)
+            )
         )
-        XCTAssertThrowsError(try vitaminCSample.observation)
     }
 }

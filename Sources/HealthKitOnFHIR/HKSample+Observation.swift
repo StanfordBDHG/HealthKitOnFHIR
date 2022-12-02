@@ -16,16 +16,25 @@ extension HKSample {
     /// If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
     public var observation: Observation {
         get throws {
-            var builder = ObservationBuilder()
+            var observation = Observation(
+                code: CodeableConcept(),
+                status: FHIRPrimitive(.final)
+            )
+            
+            observation.appendIdentifier(Identifier(id: self.uuid.uuidString.asFHIRStringPrimitive()))
+            observation.setEffective(startDate: self.startDate, endDate: self.endDate)
+            observation.setIssued(on: Date())
+            
+            observation.appendCodings(self.sampleType.codes)
             
             switch self {
             case let quantitySample as HKQuantitySample:
-                try quantitySample.buildQuantitySampleObservation(&builder)
+                try quantitySample.buildQuantitySampleObservation(&observation)
             default:
                 throw HealthKitOnFHIRError.notSupported
             }
             
-            return builder.build()
+            return observation
         }
     }
 }

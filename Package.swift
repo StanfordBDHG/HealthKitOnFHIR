@@ -29,7 +29,7 @@ let package = Package(
                 .product(name: "ModelsR4", package: "FHIRModels")
             ],
             resources: [
-                .process("mapping.json")
+                .process("Resources")
             ]
         ),
         .testTarget(
