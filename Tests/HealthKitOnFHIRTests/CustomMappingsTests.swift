@@ -39,6 +39,17 @@ final class CustomMappingsTests: XCTestCase {
         )
         
         XCTAssertEqual(
+            quantitySample.quantityType.codes,
+            [
+                Coding(
+                    code: "29463-7",
+                    display: "Body weight",
+                    system: FHIRPrimitive(FHIRURI(stringLiteral: "http://loinc.org"))
+                )
+            ]
+        )
+        
+        XCTAssertEqual(
             observation.code.coding,
             [
                 Coding(
