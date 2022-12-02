@@ -12,6 +12,9 @@ import XCTest
 
 final class CustomMappingsTests: XCTestCase {
     func testCustomMappingsTests() throws {
+        // swiftlint:disable:previous function_body_length
+        // We disable the function body length as this is a test case
+        
         let quantitySample = HKQuantitySample(
             type: HKQuantityType(.bodyMass),
             quantity: HKQuantity(unit: .gramUnit(with: .kilo), doubleValue: 60),
