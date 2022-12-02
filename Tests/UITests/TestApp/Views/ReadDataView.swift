@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-import SwiftUI
 @preconcurrency import HealthKit
+import SwiftUI
 
 
 struct ReadDataView: View {
