@@ -271,4 +271,10 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+    
+    func testUnsupportedType() throws {
+        XCTAssertThrowsError(
+            try HKWorkout(activityType: .running, start: Date(), end: Date()).observation
+        )
+    }
 }

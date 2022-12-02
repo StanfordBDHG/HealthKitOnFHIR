@@ -14,15 +14,10 @@ extension Foundation.Bundle {
         // swiftlint:disable:previous function_default_parameter_at_end
         // We use the parameter order here with the default parameter at the beginning to follow the Swift API guidelines to
         // form API calls similar to English sentences.
-        guard let url = self.url(forResource: file, withExtension: nil) else {
-            fatalError("Could not find \(file) in the module.")
-        }
         
-        let data: Data
-        do {
-            data = try Data(contentsOf: url)
-        } catch {
-            fatalError("Could not load \(file) in the module: \(error)")
+        guard let url = self.url(forResource: file, withExtension: nil),
+              let data = try? Data(contentsOf: url) else {
+            fatalError("Could not load \(file) in the module.")
         }
         
         do {
