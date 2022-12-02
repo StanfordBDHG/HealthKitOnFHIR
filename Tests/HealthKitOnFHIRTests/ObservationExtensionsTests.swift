@@ -6,12 +6,14 @@
 // SPDX-License-Identifier: MIT
 //
 
-import XCTest
 @testable import HealthKitOnFHIR
+import XCTest
 
 
 final class ObservationExtensionsTests: XCTestCase {
     func testCollectionExtensions() throws {
+        // swiftlint:disable:previous function_body_length
+        // We disable the function body length as this is a test case
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         observation.appendIdentifier(
