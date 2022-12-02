@@ -10,22 +10,23 @@
 import XCTest
 
 
-final class HealthKitOnFHIRTests: XCTestCase {
-    private var startDate: Date {
+class HealthKitOnFHIRTests: XCTestCase {
+    var startDate: Date {
         get throws {
             let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 0) // Date Stanford University opened (https://www.stanford.edu/about/history/)
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }
     }
     
-    private var endDate: Date {
+    var endDate: Date {
         get throws {
             let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 42)
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }
     }
     
-    private func createObservationFrom(
+    
+    func createObservationFrom(
         type quantityType: HKQuantityType,
         quantity: HKQuantity
     ) throws -> Observation {
@@ -38,7 +39,7 @@ final class HealthKitOnFHIRTests: XCTestCase {
         return try quantitySample.observation
     }
     
-    private func loincCode(code: String, display: String) -> Coding {
+    func loincCode(code: String, display: String) -> Coding {
         Coding(
             code: FHIRPrimitive(stringLiteral: code),
             display: FHIRPrimitive(stringLiteral: display),
@@ -120,7 +121,7 @@ final class HealthKitOnFHIRTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "count/min",
+                    unit: "beats/min",
                     value: 84.asFHIRDecimalPrimitive()
                 )
             )
