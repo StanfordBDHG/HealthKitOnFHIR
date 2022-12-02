@@ -8,15 +8,18 @@
 
 import SwiftUI
 
+
 struct JSONView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var data: String
-
+    
+    
     var body: some View {
         VStack {
             ScrollView {
                 Text(data)
-            }.padding()
+            }
+                .padding()
             Button("Dismiss") {
                 dismiss()
             }
