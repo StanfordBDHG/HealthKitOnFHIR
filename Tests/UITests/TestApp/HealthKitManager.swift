@@ -10,7 +10,8 @@
 import Foundation
 import HealthKit
 
-class HealthKitManager {
+
+class HealthKitManager: ObservableObject {
     var healthStore: HKHealthStore?
 
     init() {
@@ -18,66 +19,44 @@ class HealthKitManager {
             healthStore = HKHealthStore()
         }
     }
-
-    func requestAuthorization() async -> Bool {
+    
+    
+    func requestAuthorization() async throws {
         guard let healthStore,
-              let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount),
-              let _: () = try? await healthStore.requestAuthorization(toShare: [stepType], read: [stepType]) else {
-            return false
+                let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
+            throw HKError(.errorHealthDataUnavailable)
         }
-        return true
+        
+        try await healthStore.requestAuthorization(toShare: [stepType], read: [stepType])
     }
-
-    func readStepCount() async -> [HKQuantitySample] {
-        guard let healthStore,
-              let sampleType = HKSampleType.quantityType(forIdentifier: HKQuantityTypeIdentifier.stepCount) else {
+    
+    func readStepCount() async throws -> [HKQuantitySample] {
+        guard let healthStore else {
             return []
         }
-
-        let samples = try? await withCheckedThrowingContinuation { (continuation: CheckedContinuation<[HKQuantitySample], Error>) in
-                healthStore.execute(HKSampleQuery(
-                    sampleType: sampleType,
-                    predicate: nil,
-                    limit: Int(HKObjectQueryNoLimit),
-                    sortDescriptors: nil
-                ) { _, samples, error in
-                    if let error {
-                        continuation.resume(throwing: error)
-                        return
-                    }
-
-                    guard let samples = samples as? [HKQuantitySample] else {
-                        return
-                    }
-
-                    continuation.resume(returning: samples)
-                })
-        }
-
-        return samples ?? []
+        
+        let query = HKSampleQueryDescriptor(
+            predicates: [.quantitySample(type: HKQuantityType(.stepCount))],
+            sortDescriptors: [],
+            limit: HKObjectQueryNoLimit
+        )
+            
+        return try await query.result(for: healthStore)
     }
-
-
-    func writeSteps(startDate: Date, endDate: Date, steps: Double) async -> Bool {
-        guard let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount),
-        let healthStore else {
-            return false
+    
+    func writeSteps(startDate: Date, endDate: Date, steps: Double) async throws {
+        guard let healthStore,
+              let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
+            throw HKError(.errorHealthDataUnavailable)
         }
-
+        
         let stepsSample = HKQuantitySample(
             type: stepType,
             quantity: HKQuantity(unit: HKUnit.count(), doubleValue: steps),
             start: startDate,
             end: endDate
         )
-
-        do {
-            try await healthStore.save(stepsSample)
-            return true
-        } catch {
-            print(error.localizedDescription)
-        }
-
-        return false
+        
+        try await healthStore.save(stepsSample)
     }
 }
