@@ -13,7 +13,8 @@ import HealthKit
 
 class HealthKitManager: ObservableObject {
     var healthStore: HKHealthStore?
-
+    
+    
     init() {
         if HKHealthStore.isHealthDataAvailable() {
             healthStore = HKHealthStore()
@@ -23,7 +24,7 @@ class HealthKitManager: ObservableObject {
     
     func requestAuthorization() async throws {
         guard let healthStore,
-                let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
+              let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
             throw HKError(.errorHealthDataUnavailable)
         }
         
@@ -40,7 +41,7 @@ class HealthKitManager: ObservableObject {
             sortDescriptors: [],
             limit: HKObjectQueryNoLimit
         )
-            
+        
         return try await query.result(for: healthStore)
     }
     

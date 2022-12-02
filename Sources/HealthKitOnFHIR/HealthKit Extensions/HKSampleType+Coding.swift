@@ -12,23 +12,15 @@ import ModelsR4
 
 
 extension HKSampleType {
-    struct HKSampleTypeCodeMapping: Codable {
-        let hktype: String
-        let codes: [MappedCode]
-        
-        static let allMappings: [HKSampleTypeCodeMapping] = Bundle.module.decode(file: "mapping.json")
-    }
-    
-    struct MappedCode: Codable {
-        let code: String
-        let display: String
-        let system: String
+    /// Converts an HKSampleType into corresponding FHIR Coding(s) based on a specified mapping
+    var codes: [Coding] {
+        codes()
     }
     
     
     /// Converts an HKSampleType into corresponding FHIR Coding(s) based on a specified mapping
-    var codes: [Coding] {
-        guard let mapping = HKSampleTypeCodeMapping.allMappings.first(where: { $0.hktype == self.identifier }) else {
+    func codes(mappings: [String: HKQuanitySampleMapping] = HKQuanitySampleMapping.default) -> [Coding] {
+        guard let mapping = mappings[self.identifier] else {
             return []
         }
         
