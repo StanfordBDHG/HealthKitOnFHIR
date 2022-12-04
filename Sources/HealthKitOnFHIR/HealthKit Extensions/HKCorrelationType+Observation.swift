@@ -46,7 +46,7 @@ extension HKCorrelation {
                 continue
             }
 
-            try? sample.buildQuantitySampleObservationComponent(&observation)
+            try sample.buildQuantitySampleObservationComponent(&observation)
         }
     }
 }

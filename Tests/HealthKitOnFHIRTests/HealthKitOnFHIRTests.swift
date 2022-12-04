@@ -335,6 +335,24 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
         XCTAssertThrowsError(try correlation.observation)
     }
+
+    func testInvalidComponent() throws {
+        let vitaminC = HKQuantitySample(
+            type: HKQuantityType(.dietaryVitaminC),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 1),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let correlation = HKCorrelation(
+            type: HKCorrelationType(.bloodPressure),
+            start: try startDate,
+            end: try endDate,
+            objects: [vitaminC]
+        )
+
+        XCTAssertThrowsError(try correlation.observation)
+    }
     
     func testUnsupportedType() throws {
         XCTAssertThrowsError(
