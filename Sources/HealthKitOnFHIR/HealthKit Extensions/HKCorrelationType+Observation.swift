@@ -28,14 +28,12 @@ extension HKCorrelation {
         ))
 
         // Add vital-signs category code
-        observation.appendCategory(
-            CodeableConcept(coding: [Coding(
-                code: "vital-signs".asFHIRStringPrimitive(),
-                display: "Vital Signs".asFHIRStringPrimitive(),
-                system: FHIRPrimitive(FHIRURI(stringLiteral: "http://terminology.hl7.org/CodeSystem/observation-category"))
-                )]
-            )
+        let vitalSignsCoding = Coding(
+            code: "vital-signs".asFHIRStringPrimitive(),
+            display: "Vital Signs".asFHIRStringPrimitive(),
+            system: FHIRPrimitive(FHIRURI(stringLiteral: "http://terminology.hl7.org/CodeSystem/observation-category"))
         )
+        observation.appendCategory(CodeableConcept(coding: [vitalSignsCoding]))
 
         // Add systolic and diastolic blood pressure as separate components to observation
         for object in self.objects {
@@ -45,7 +43,8 @@ extension HKCorrelation {
             }
 
             let component = ObservationComponent(code: CodeableConcept(coding: mapping.codes as? [Coding]))
-            component.value = .quantity(Quantity(
+            component.value = .quantity(
+                Quantity(
                     unit: (mapping.unit.unitAlias ?? mapping.unit.hkunit).asFHIRStringPrimitive(),
                     value: sample.quantity.doubleValue(for: HKUnit(from: mapping.unit.hkunit)).asFHIRDecimalPrimitive()
                 )

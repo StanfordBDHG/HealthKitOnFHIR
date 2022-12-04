@@ -300,10 +300,10 @@ class HealthKitOnFHIRTests: XCTestCase {
             $0.value == .quantity(
                 Quantity(
                     unit: "mmHg",
-                    value: 80.asFHIRDecimalPrimitive())
+                    value: 80.asFHIRDecimalPrimitive()
+                )
             )
         }.count)
-
     }
     
     func testUnsupportedTypeSample() throws {
