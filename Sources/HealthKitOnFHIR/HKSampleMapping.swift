@@ -6,28 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-// swiftlint:disable type_contents_order file_types_order
-public struct HKSampleMapping: Codable {
-    public let quantitySampleMapping: [String: HKQuantitySampleMapping]
-    public let correlationMapping: [String: HKCorrelationMapping]
-
-    public static let `default`: HKSampleMapping = {
-        Bundle.module.decode(HKSampleMapping.self, from: "HKSampleMapping.json")
-    }()
-
-    public init(
-        hkQuantitySampleMapping: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
-        hkCorrelationMapping: [String: HKCorrelationMapping] = HKCorrelationMapping.default
-    ) {
-        self.correlationMapping = hkCorrelationMapping
-        self.quantitySampleMapping = hkQuantitySampleMapping
-    }
-}
-
 public struct HKCorrelationMapping: Codable {
-    public let codes: [MappedCode]
-    public let categories: [MappedCode]
-
     public static let `default`: [String: HKCorrelationMapping] = {
         var mappings = HKSampleMapping.default.correlationMapping
         for mapping in mappings {
@@ -37,6 +16,9 @@ public struct HKCorrelationMapping: Codable {
         }
         return mappings
     }()
+
+    public let codes: [MappedCode]
+    public let categories: [MappedCode]
 }
 
 public struct HKQuantitySampleMapping: Codable {
@@ -95,5 +77,22 @@ public struct MappedCode: Codable {
         self.code = code
         self.display = display
         self.system = system
+    }
+}
+
+public struct HKSampleMapping: Codable {
+    public static let `default`: HKSampleMapping = {
+        Bundle.module.decode(HKSampleMapping.self, from: "HKSampleMapping.json")
+    }()
+
+    public let quantitySampleMapping: [String: HKQuantitySampleMapping]
+    public let correlationMapping: [String: HKCorrelationMapping]
+
+    public init(
+        hkQuantitySampleMapping: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
+        hkCorrelationMapping: [String: HKCorrelationMapping] = HKCorrelationMapping.default
+    ) {
+        self.correlationMapping = hkCorrelationMapping
+        self.quantitySampleMapping = hkQuantitySampleMapping
     }
 }

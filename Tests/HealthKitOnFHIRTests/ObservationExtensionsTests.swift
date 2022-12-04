@@ -75,7 +75,22 @@ final class ObservationExtensionsTests: XCTestCase {
                 CodeableConcept(id: "Concept3")
             ]
         )
-        
+        observation.appendComponent(
+            ObservationComponent(
+                code: CodeableConcept(id: "Concept4"),
+                value: .boolean(true.asPrimitive())
+            )
+        )
+        observation.appendComponents([
+            ObservationComponent(
+                code: CodeableConcept(id: "Concept5"),
+                value: .string("Test".asFHIRStringPrimitive())
+            ),
+            ObservationComponent(
+                code: CodeableConcept(id: "Concept6"),
+                value: .integer(10.asFHIRIntegerPrimitive())
+            )
+        ])
         
         XCTAssertEqual(
             observation.identifier,
@@ -112,6 +127,18 @@ final class ObservationExtensionsTests: XCTestCase {
                 CodeableConcept(id: "Concept2"),
                 CodeableConcept(id: "Concept3")
             ]
+        )
+        XCTAssertEqual(
+            observation.component?[0].value,
+            .boolean(true.asPrimitive())
+        )
+        XCTAssertEqual(
+            observation.component?[1].value,
+            .string("Test".asFHIRStringPrimitive())
+        )
+        XCTAssertEqual(
+            observation.component?[2].value,
+            .integer(10.asFHIRIntegerPrimitive())
         )
     }
 }

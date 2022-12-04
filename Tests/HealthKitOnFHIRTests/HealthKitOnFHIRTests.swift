@@ -317,6 +317,24 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testUnsupportedCorrelation() throws {
+        // Food correlations are not currently supported
+        let vitaminC = HKQuantitySample(
+            type: HKQuantityType(.dietaryVitaminC),
+            quantity: HKQuantity(unit: .moleUnit(withMolarMass: 1000), doubleValue: 1000),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let correlation = HKCorrelation(
+            type: HKCorrelationType(.food),
+            start: try startDate,
+            end: try endDate,
+            objects: [vitaminC]
+        )
+        XCTAssertThrowsError(try correlation.observation)
+    }
     
     func testUnsupportedType() throws {
         XCTAssertThrowsError(
