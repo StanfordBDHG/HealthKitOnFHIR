@@ -11,6 +11,9 @@ import XCTest
 
 
 class HealthKitOnFHIRTests: XCTestCase {
+    // swiftlint:disable:previous type_body_length
+    // We disable the type body length as this is a test class
+
     var startDate: Date {
         get throws {
             let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 0) // Date Stanford University opened (https://www.stanford.edu/about/history/)
