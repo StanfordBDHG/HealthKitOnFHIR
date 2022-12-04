@@ -37,19 +37,11 @@ extension HKCorrelation {
 
         // Add systolic and diastolic blood pressure as separate components to observation
         for object in self.objects {
-            guard let sample = object as? HKQuantitySample,
-                  let mapping = mappings[sample.quantityType.identifier] else {
-                throw HealthKitOnFHIRError.notSupported
+            guard let sample = object as? HKQuantitySample else {
+                continue
             }
 
-            let component = ObservationComponent(code: CodeableConcept(coding: mapping.codes as? [Coding]))
-            component.value = .quantity(
-                Quantity(
-                    unit: (mapping.unit.unitAlias ?? mapping.unit.hkunit).asFHIRStringPrimitive(),
-                    value: sample.quantity.doubleValue(for: HKUnit(from: mapping.unit.hkunit)).asFHIRDecimalPrimitive()
-                )
-            )
-            observation.appendComponent(component)
+            try? sample.buildQuantitySampleObservationComponent(&observation)
         }
     }
 }
