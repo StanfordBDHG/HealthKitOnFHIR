@@ -46,7 +46,7 @@
         "unit": {
             "hkunit": "mmHg"
         }
-    }
+    },
     "HKQuantityTypeIdentifierBodyTemperature": {
         "codes": [
             {

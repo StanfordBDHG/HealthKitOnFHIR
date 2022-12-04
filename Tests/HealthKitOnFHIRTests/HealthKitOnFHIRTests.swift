@@ -262,6 +262,49 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testBloodPressureCorrelation() throws {
+        let systolicBloodPressure = HKQuantitySample(
+            type: HKQuantityType(.bloodPressureSystolic),
+            quantity: HKQuantity(unit: .millimeterOfMercury(), doubleValue: 120),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let diastolicBloodPressure = HKQuantitySample(
+            type: HKQuantityType(.bloodPressureDiastolic),
+            quantity: HKQuantity(unit: .millimeterOfMercury(), doubleValue: 80),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let correlation = HKCorrelation(
+            type: HKCorrelationType(.bloodPressure),
+            start: try startDate,
+            end: try endDate,
+            objects: [systolicBloodPressure, diastolicBloodPressure]
+        )
+
+        let observation = try correlation.observation
+
+        XCTAssertEqual(1, observation.component?.filter {
+            $0.value == .quantity(
+                Quantity(
+                    unit: "mmHg",
+                    value: 120.asFHIRDecimalPrimitive()
+                )
+            )
+        }.count)
+
+        XCTAssertEqual(1, observation.component?.filter {
+            $0.value == .quantity(
+                Quantity(
+                    unit: "mmHg",
+                    value: 80.asFHIRDecimalPrimitive())
+            )
+        }.count)
+
+    }
     
     func testUnsupportedTypeSample() throws {
         XCTAssertThrowsError(

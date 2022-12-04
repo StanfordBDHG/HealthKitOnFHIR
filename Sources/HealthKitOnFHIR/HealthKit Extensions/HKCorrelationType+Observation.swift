@@ -20,12 +20,14 @@ extension HKCorrelation {
             throw HealthKitOnFHIRError.notSupported
         }
 
+        // Add LOINC code for blood pressure panel
         observation.appendCoding(Coding(
             code: "85354-9",
             display: "Blood pressure panel",
             system: FHIRPrimitive(FHIRURI(stringLiteral: "http://loinc.org"))
         ))
 
+        // Add vital-signs category code
         observation.appendCategory(
             CodeableConcept(coding: [Coding(
                 code: "vital-signs".asFHIRStringPrimitive(),
@@ -35,6 +37,7 @@ extension HKCorrelation {
             )
         )
 
+        // Add systolic and diastolic blood pressure as separate components to observation
         for object in self.objects {
             guard let sample = object as? HKQuantitySample,
                   let mapping = mappings[sample.quantityType.identifier] else {
@@ -42,13 +45,12 @@ extension HKCorrelation {
             }
 
             let component = ObservationComponent(code: CodeableConcept(coding: mapping.codes as? [Coding]))
-            component.value = ObservationComponent.ValueX.quantity(Quantity(
+            component.value = .quantity(Quantity(
                     unit: (mapping.unit.unitAlias ?? mapping.unit.hkunit).asFHIRStringPrimitive(),
                     value: sample.quantity.doubleValue(for: HKUnit(from: mapping.unit.hkunit)).asFHIRDecimalPrimitive()
                 )
             )
             observation.appendComponent(component)
-
         }
     }
 }
