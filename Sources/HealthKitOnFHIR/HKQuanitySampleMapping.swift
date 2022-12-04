@@ -7,7 +7,7 @@
 //
 
 
-public struct HKQuanitySampleMapping: Codable {
+public struct HKQuantitySampleMapping: Codable {
     public struct MappedCode: Codable {
         public let code: String
         public let display: String
@@ -40,8 +40,8 @@ public struct HKQuanitySampleMapping: Codable {
     }
     
     
-    public static let `default`: [String: HKQuanitySampleMapping] = {
-        let mappings = Bundle.module.decode([String: HKQuanitySampleMapping].self, from: "HKQuanitySampleMapping.json")
+    public static let `default`: [String: HKQuantitySampleMapping] = {
+        let mappings = Bundle.module.decode([String: HKQuantitySampleMapping].self, from: "HKQuantitySampleMapping.json")
         
         for mapping in mappings {
             guard let quantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier(rawValue: mapping.key)) else {

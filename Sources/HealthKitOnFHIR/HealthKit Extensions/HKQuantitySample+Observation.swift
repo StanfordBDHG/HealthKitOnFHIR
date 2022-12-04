@@ -13,7 +13,7 @@ import ModelsR4
 extension HKQuantitySample {
     func buildQuantitySampleObservation(
         _ observation: inout Observation,
-        mappings: [String: HKQuanitySampleMapping] = HKQuanitySampleMapping.default
+        mappings: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
     ) throws {
         guard let mapping = mappings[self.quantityType.identifier] else {
             throw HealthKitOnFHIRError.notSupported

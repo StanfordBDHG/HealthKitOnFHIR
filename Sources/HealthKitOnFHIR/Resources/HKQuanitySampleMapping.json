@@ -23,6 +23,30 @@
             "hkunit": "kg"
         }
     },
+    "HKQuantityTypeIdentifierBloodPressureDiastolic": {
+        "codes": [
+            {
+                "code": "8867-4",
+                "display": "Diastolic blood pressure",
+                "system": "http://loinc.org"
+            }
+        ],
+        "unit": {
+            "hkunit": "mmHg"
+        }
+    },
+    "HKQuantityTypeIdentifierBloodPressureSystolic": {
+        "codes": [
+            {
+                "code": "8480-6",
+                "display": "Systolic blood pressure",
+                "system": "http://loinc.org"
+            }
+        ],
+        "unit": {
+            "hkunit": "mmHg"
+        }
+    }
     "HKQuantityTypeIdentifierBodyTemperature": {
         "codes": [
             {

@@ -25,15 +25,15 @@ final class CustomMappingsTests: XCTestCase {
         let observation = try quantitySample.observation(
             withMapping: [
                 "HKQuantityTypeIdentifierBodyMass":
-                HKQuanitySampleMapping(
+                HKQuantitySampleMapping(
                     codes: [
-                        HKQuanitySampleMapping.MappedCode(
+                        HKQuantitySampleMapping.MappedCode(
                             code: "SU-01",
                             display: "Stanford University",
                             system: "http://stanford.edu"
                         )
                     ],
-                    unit: HKQuanitySampleMapping.Unit(
+                    unit: HKQuantitySampleMapping.Unit(
                         hkunit: "oz",
                         unitAlias: "ounces"
                     )

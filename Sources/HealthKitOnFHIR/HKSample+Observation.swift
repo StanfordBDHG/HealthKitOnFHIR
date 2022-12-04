@@ -24,9 +24,9 @@ extension HKSample {
     /// A FHIR observation based on the concrete subclass of `HKSample`.
     ///
     /// If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
-    /// - Parameter withMapping: A mapping to map `HKQuanitySampleTypes` to corresponding FHIR codes and units.
+    /// - Parameter withMapping: A mapping to map `HKQuantitySampleTypes` to corresponding FHIR codes and units.
     /// - Returns: A FHIR observation based on the concrete subclass of `HKSample`.
-    public func observation(withMapping mapping: [String: HKQuanitySampleMapping] = HKQuanitySampleMapping.default) throws -> Observation {
+    public func observation(withMapping mapping: [String: HKQuantitySampleMapping] = HKQuanitySampleMapping.default) throws -> Observation {
         var observation = Observation(
             code: CodeableConcept(),
             status: FHIRPrimitive(.final)
