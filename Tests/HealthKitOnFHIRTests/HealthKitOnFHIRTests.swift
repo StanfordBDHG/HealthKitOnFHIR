@@ -322,7 +322,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         // Food correlations are not currently supported
         let vitaminC = HKQuantitySample(
             type: HKQuantityType(.dietaryVitaminC),
-            quantity: HKQuantity(unit: .moleUnit(withMolarMass: 1000), doubleValue: 1000),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 1),
             start: try startDate,
             end: try endDate
         )
@@ -340,5 +340,16 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertThrowsError(
             try HKWorkout(activityType: .running, start: Date(), end: Date()).observation
         )
+    }
+
+    func testUnsupportedMapping() throws {
+        let sample = HKQuantitySample(
+            type: HKQuantityType(.dietaryVitaminC),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 1),
+            start: try startDate,
+            end: try endDate
+        )
+
+        XCTAssertEqual(sample.quantityType.codes, [])
     }
 }
