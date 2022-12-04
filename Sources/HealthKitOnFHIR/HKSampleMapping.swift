@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+// swiftlint:disable type_contents_order file_types_order
 public struct HKSampleMapping: Codable {
     public let quantitySampleMapping: [String: HKQuantitySampleMapping]
     public let correlationMapping: [String: HKCorrelationMapping]
@@ -17,7 +18,7 @@ public struct HKSampleMapping: Codable {
     public init(
         hkQuantitySampleMapping: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
         hkCorrelationMapping: [String: HKCorrelationMapping] = HKCorrelationMapping.default
-    ){
+    ) {
         self.correlationMapping = hkCorrelationMapping
         self.quantitySampleMapping = hkQuantitySampleMapping
     }

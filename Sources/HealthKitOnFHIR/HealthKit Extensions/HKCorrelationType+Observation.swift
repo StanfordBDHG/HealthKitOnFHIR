@@ -36,7 +36,8 @@ extension HKCorrelation {
                         code: category.code.asFHIRStringPrimitive(),
                         display: category.display.asFHIRStringPrimitive(),
                         system: FHIRPrimitive(FHIRURI(stringLiteral: category.system))
-                    )])
+                    )
+                ])
             )
         }
 
