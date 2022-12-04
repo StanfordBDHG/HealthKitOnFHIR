@@ -11,8 +11,8 @@ import HealthKit
 import ModelsR4
 
 
-extension HKSampleType {
-    /// Converts an HKSampleType into corresponding FHIR Coding(s) based on a specified mapping
+extension HKQuantityType {
+    /// Converts an HKQuantityType into corresponding FHIR Coding(s) based on a specified mapping
     var codes: [Coding] {
         codes()
     }

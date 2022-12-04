@@ -13,29 +13,33 @@ import ModelsR4
 extension HKCorrelation {
     func buildCorrelationObservation(
         _ observation: inout Observation,
-        mappings: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
+        mappings: HKSampleMapping = HKSampleMapping.default
     ) throws {
-        // Blood Pressure is the only correlation type currently supported
-        guard self.correlationType == HKCorrelationType(.bloodPressure) else {
+        guard let mapping = mappings.correlationMapping[self.correlationType.identifier] else {
             throw HealthKitOnFHIRError.notSupported
         }
 
-        // Add LOINC code for blood pressure panel
-        observation.appendCoding(Coding(
-            code: "85354-9",
-            display: "Blood pressure panel",
-            system: FHIRPrimitive(FHIRURI(stringLiteral: "http://loinc.org"))
-        ))
+        for coding in mapping.codes {
+            observation.appendCoding(
+                Coding(
+                    code: coding.code.asFHIRStringPrimitive(),
+                    display: coding.display.asFHIRStringPrimitive(),
+                    system: FHIRPrimitive(FHIRURI(stringLiteral: coding.system))
+                )
+            )
+        }
 
-        // Add vital-signs category code
-        let vitalSignsCoding = Coding(
-            code: "vital-signs".asFHIRStringPrimitive(),
-            display: "Vital Signs".asFHIRStringPrimitive(),
-            system: FHIRPrimitive(FHIRURI(stringLiteral: "http://terminology.hl7.org/CodeSystem/observation-category"))
-        )
-        observation.appendCategory(CodeableConcept(coding: [vitalSignsCoding]))
+        for category in mapping.categories {
+            observation.appendCategory(
+                CodeableConcept(coding: [
+                    Coding(
+                        code: category.code.asFHIRStringPrimitive(),
+                        display: category.display.asFHIRStringPrimitive(),
+                        system: FHIRPrimitive(FHIRURI(stringLiteral: category.system))
+                    )])
+            )
+        }
 
-        // Add systolic and diastolic blood pressure as separate components to observation
         for object in self.objects {
             guard let sample = object as? HKQuantitySample else {
                 continue

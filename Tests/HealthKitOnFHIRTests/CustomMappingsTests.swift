@@ -21,24 +21,28 @@ final class CustomMappingsTests: XCTestCase {
             start: Date(),
             end: Date()
         )
+
+        let customMapping = [
+            "HKQuantityTypeIdentifierBodyMass":
+            HKQuantitySampleMapping(
+                codes: [
+                    MappedCode(
+                        code: "SU-01",
+                        display: "Stanford University",
+                        system: "http://stanford.edu"
+                    )
+                ],
+                unit: MappedUnit(
+                    hkunit: "oz",
+                    unitAlias: "ounces"
+                )
+            )
+        ]
+
+        let hkSampleMapping = HKSampleMapping(hkQuantitySampleMapping: customMapping)
         
         let observation = try quantitySample.observation(
-            withMapping: [
-                "HKQuantityTypeIdentifierBodyMass":
-                HKQuantitySampleMapping(
-                    codes: [
-                        HKQuantitySampleMapping.MappedCode(
-                            code: "SU-01",
-                            display: "Stanford University",
-                            system: "http://stanford.edu"
-                        )
-                    ],
-                    unit: HKQuantitySampleMapping.Unit(
-                        hkunit: "oz",
-                        unitAlias: "ounces"
-                    )
-                )
-            ]
+            withMapping: hkSampleMapping
         )
         
         XCTAssertEqual(
