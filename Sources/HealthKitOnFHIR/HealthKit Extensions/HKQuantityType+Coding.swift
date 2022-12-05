@@ -11,15 +11,15 @@ import HealthKit
 import ModelsR4
 
 
-extension HKSampleType {
-    /// Converts an HKSampleType into corresponding FHIR Coding(s) based on a specified mapping
+extension HKQuantityType {
+    /// Converts an HKQuantityType into corresponding FHIR Coding(s) based on a specified mapping
     var codes: [Coding] {
         codes()
     }
     
     
-    /// Converts an HKSampleType into corresponding FHIR Coding(s) based on a specified mapping
-    func codes(mappings: [String: HKQuanitySampleMapping] = HKQuanitySampleMapping.default) -> [Coding] {
+    /// Converts an HKQuantityType into corresponding FHIR Coding(s) based on a specified mapping
+    func codes(mappings: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default) -> [Coding] {
         guard let mapping = mappings[self.identifier] else {
             return []
         }

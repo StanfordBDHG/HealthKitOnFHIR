@@ -11,6 +11,9 @@ import XCTest
 
 
 class HealthKitOnFHIRTests: XCTestCase {
+    // swiftlint:disable:previous type_body_length
+    // We disable the type body length as this is a test class
+
     var startDate: Date {
         get throws {
             let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 0) // Date Stanford University opened (https://www.stanford.edu/about/history/)
@@ -262,6 +265,49 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testBloodPressureCorrelation() throws {
+        let systolicBloodPressure = HKQuantitySample(
+            type: HKQuantityType(.bloodPressureSystolic),
+            quantity: HKQuantity(unit: .millimeterOfMercury(), doubleValue: 120),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let diastolicBloodPressure = HKQuantitySample(
+            type: HKQuantityType(.bloodPressureDiastolic),
+            quantity: HKQuantity(unit: .millimeterOfMercury(), doubleValue: 80),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let correlation = HKCorrelation(
+            type: HKCorrelationType(.bloodPressure),
+            start: try startDate,
+            end: try endDate,
+            objects: [systolicBloodPressure, diastolicBloodPressure]
+        )
+
+        let observation = try correlation.observation
+
+        XCTAssertEqual(1, observation.component?.filter {
+            $0.value == .quantity(
+                Quantity(
+                    unit: "mmHg",
+                    value: 120.asFHIRDecimalPrimitive()
+                )
+            )
+        }.count)
+
+        XCTAssertEqual(1, observation.component?.filter {
+            $0.value == .quantity(
+                Quantity(
+                    unit: "mmHg",
+                    value: 80.asFHIRDecimalPrimitive()
+                )
+            )
+        }.count)
+    }
     
     func testUnsupportedTypeSample() throws {
         XCTAssertThrowsError(
@@ -271,10 +317,57 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testUnsupportedCorrelation() throws {
+        // Food correlations are not currently supported
+        let vitaminC = HKQuantitySample(
+            type: HKQuantityType(.dietaryVitaminC),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 1),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let correlation = HKCorrelation(
+            type: HKCorrelationType(.food),
+            start: try startDate,
+            end: try endDate,
+            objects: [vitaminC]
+        )
+        XCTAssertThrowsError(try correlation.observation)
+    }
+
+    func testInvalidComponent() throws {
+        let vitaminC = HKQuantitySample(
+            type: HKQuantityType(.dietaryVitaminC),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 1),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let correlation = HKCorrelation(
+            type: HKCorrelationType(.bloodPressure),
+            start: try startDate,
+            end: try endDate,
+            objects: [vitaminC]
+        )
+
+        XCTAssertThrowsError(try correlation.observation)
+    }
     
     func testUnsupportedType() throws {
         XCTAssertThrowsError(
             try HKWorkout(activityType: .running, start: Date(), end: Date()).observation
         )
+    }
+
+    func testUnsupportedMapping() throws {
+        let sample = HKQuantitySample(
+            type: HKQuantityType(.dietaryVitaminC),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 1),
+            start: try startDate,
+            end: try endDate
+        )
+
+        XCTAssertEqual(sample.quantityType.codes, [])
     }
 }

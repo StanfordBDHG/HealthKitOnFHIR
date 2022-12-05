@@ -64,4 +64,12 @@ extension Observation {
     func appendCodings(_ codings: [Coding]) {
         appendElements(codings, to: \.code.coding)
     }
+
+    func appendComponent(_ component: ObservationComponent) {
+        appendElement(component, to: \.component)
+    }
+
+    func appendComponents(_ components: [ObservationComponent]) {
+        appendElements(components, to: \.component)
+    }
 }
