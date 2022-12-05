@@ -19,6 +19,14 @@ public struct HKCorrelationMapping: Codable {
 
     public let codes: [MappedCode]
     public let categories: [MappedCode]
+
+    public init(
+        codes: [MappedCode],
+        categories: [MappedCode]
+    ) {
+        self.codes = codes
+        self.categories = categories
+    }
 }
 
 public struct HKQuantitySampleMapping: Codable {
