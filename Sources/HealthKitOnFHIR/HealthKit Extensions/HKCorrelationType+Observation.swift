@@ -43,7 +43,7 @@ extension HKCorrelation {
 
         for object in self.objects {
             guard let sample = object as? HKQuantitySample else {
-                continue
+                throw HealthKitOnFHIRError.notSupported
             }
 
             try sample.buildQuantitySampleObservationComponent(&observation)

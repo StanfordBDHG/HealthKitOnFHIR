@@ -1,5 +1,5 @@
 {
-    "correlationMapping": {
+    "HKCorrelation": {
         "HKCorrelationTypeIdentifierBloodPressure": {
             "codes": [{
                 "code": "85354-9",
@@ -13,7 +13,7 @@
             }]
         }
     },
-    "quantitySampleMapping": {
+    "HKQuantitySample": {
         "HKQuantityTypeIdentifierBloodGlucose": {
             "codes": [
                 {

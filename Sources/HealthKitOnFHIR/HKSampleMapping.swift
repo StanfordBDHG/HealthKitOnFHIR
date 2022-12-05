@@ -88,13 +88,18 @@ public struct MappedCode: Codable {
     }
 }
 
-public struct HKSampleMapping: Codable {
+public struct HKSampleMapping: Decodable {
     public static let `default`: HKSampleMapping = {
         Bundle.module.decode(HKSampleMapping.self, from: "HKSampleMapping.json")
     }()
 
     public let quantitySampleMapping: [String: HKQuantitySampleMapping]
     public let correlationMapping: [String: HKCorrelationMapping]
+
+    enum CodingKeys: String, CodingKey {
+        case quantitySampleMapping = "HKQuantitySample"
+        case correlationMapping = "HKCorrelation"
+    }
 
     public init(
         hkQuantitySampleMapping: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
