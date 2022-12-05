@@ -7,7 +7,7 @@
 //
 
 public struct HKSampleMapping: Decodable {
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case quantitySampleMapping = "HKQuantitySample"
         case correlationMapping = "HKCorrelation"
     }
@@ -19,11 +19,38 @@ public struct HKSampleMapping: Decodable {
     public let quantitySampleMapping: [String: HKQuantitySampleMapping]
     public let correlationMapping: [String: HKCorrelationMapping]
 
+    public init(from decoder: Decoder) throws {
+        let mappings = try decoder.container(keyedBy: CodingKeys.self)
+        let quantitySampleMapping = try mappings.decode(
+            Dictionary<String, HKQuantitySampleMapping>.self,
+            forKey: .quantitySampleMapping
+        )
+        let correlationMapping = try mappings.decode(
+            Dictionary<String, HKCorrelationMapping>.self,
+            forKey: .correlationMapping
+        )
+        self.init(
+            quantitySampleMapping: quantitySampleMapping,
+            correlationMapping: correlationMapping
+        )
+    }
+
     public init(
-        hkQuantitySampleMapping: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
-        hkCorrelationMapping: [String: HKCorrelationMapping] = HKCorrelationMapping.default
+        quantitySampleMapping: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
+        correlationMapping: [String: HKCorrelationMapping] = HKCorrelationMapping.default
     ) {
-        self.correlationMapping = hkCorrelationMapping
-        self.quantitySampleMapping = hkQuantitySampleMapping
+        for mapping in quantitySampleMapping {
+            guard HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier(rawValue: mapping.key)) != nil else {
+                fatalError("HKQuantityType for the String value \(mapping.key) does not exist. Please inspect your configuration.")
+            }
+        }
+        self.quantitySampleMapping = quantitySampleMapping
+
+        for mapping in correlationMapping {
+            guard HKCorrelationType.correlationType(forIdentifier: HKCorrelationTypeIdentifier(rawValue: mapping.key)) != nil else {
+                fatalError("HKCorrelationType for the String value \(mapping.key) does not exist. Please inspect your configuration.")
+            }
+        }
+        self.correlationMapping = correlationMapping
     }
 }

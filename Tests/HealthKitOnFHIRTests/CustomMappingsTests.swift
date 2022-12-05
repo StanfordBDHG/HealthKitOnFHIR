@@ -39,7 +39,7 @@ final class CustomMappingsTests: XCTestCase {
             )
         ]
 
-        let hkSampleMapping = HKSampleMapping(hkQuantitySampleMapping: customMapping)
+        let hkSampleMapping = HKSampleMapping(quantitySampleMapping: customMapping)
         
         let observation = try quantitySample.observation(
             withMapping: hkSampleMapping

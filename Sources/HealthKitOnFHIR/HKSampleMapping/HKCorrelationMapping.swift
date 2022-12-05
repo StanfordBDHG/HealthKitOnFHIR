@@ -7,16 +7,7 @@
 //
 
 public struct HKCorrelationMapping: Codable {
-    public static let `default`: [String: HKCorrelationMapping] = {
-        var mappings = HKSampleMapping.default.correlationMapping
-        for mapping in mappings {
-            guard let correlationType = HKCorrelationType.correlationType(forIdentifier: HKCorrelationTypeIdentifier(rawValue: mapping.key)) else {
-                fatalError("HKCorrelationType for the String value \(mapping.key) does not exist. Please inspect your configuration.")
-            }
-        }
-        return mappings
-    }()
-
+    public static let `default` = HKSampleMapping.default.correlationMapping
     public let codes: [MappedCode]
     public let categories: [MappedCode]
 
