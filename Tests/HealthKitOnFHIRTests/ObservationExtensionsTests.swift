@@ -12,8 +12,6 @@ import XCTest
 
 final class ObservationExtensionsTests: XCTestCase {
     func testCollectionExtensionsIdentifier() throws {
-        // swiftlint:disable:previous function_body_length
-        // We disable the function body length as this is a test case
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -48,8 +46,6 @@ final class ObservationExtensionsTests: XCTestCase {
     }
     
     func testCollectionExtensionsCoding() throws {
-        // swiftlint:disable:previous function_body_length
-        // We disable the function body length as this is a test case
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -112,8 +108,6 @@ final class ObservationExtensionsTests: XCTestCase {
     }
     
     func testCollectionExtensionsCategories() throws {
-        // swiftlint:disable:previous function_body_length
-        // We disable the function body length as this is a test case
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -147,8 +141,6 @@ final class ObservationExtensionsTests: XCTestCase {
     }
     
     func testCollectionExtensionsComponents() throws {
-        // swiftlint:disable:previous function_body_length
-        // We disable the function body length as this is a test case
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
