@@ -51,7 +51,6 @@ struct ReadDataView: View {
         }
         
         self.json = String(decoding: data, as: UTF8.self)
-        print(self.json)
     }
 }
 
