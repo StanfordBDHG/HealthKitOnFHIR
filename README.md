@@ -58,10 +58,10 @@ let query = HKSampleQueryDescriptor(
 )
 
 // run the query on the HKHealthStore
-let results = try await query.result(for: healthStore)
+let results = try? await query.result(for: healthStore)
 
 // convert the results to FHIR observations
-let observations = results.compactMap { sample in
+let observations = results?.compactMap { sample in
     try? sample.observation
 }
 
@@ -78,10 +78,9 @@ let json = String(decoding: data, as: UTF8.self)
 print(json)
 ```
 
-The following FHIR observation would be created:
+The following is an example of a FHIR observation that would be generated:
 
 ```json
-[
   {
     "status" : "final",
     "valueQuantity" : {
@@ -109,8 +108,8 @@ The following FHIR observation would be created:
     ],
     "resourceType" : "Observation"
   }
-]
 ```
+
 Codes and units can be customized by editing the [JSON mapping file](https://github.com/StanfordBDHG/HealthKitOnFHIR/blob/main/Sources/HealthKitOnFHIR/Resources/HKSampleMapping.json).
 
 ## License
