@@ -40,7 +40,78 @@ HealthKitOnFHIR can be installed into your Xcode project using [Swift Package Ma
 
 ## Usage
 
-The HealthKitOnFHIR library provides an extension that converts supported HealthKit samples to FHIR [Observations](https://hl7.org/fhir/R4/observation.html) resources.
+The HealthKitOnFHIR library provides extensions that converts supported HealthKit samples to FHIR [Observations](https://hl7.org/fhir/R4/observation.html) resources. An [example application](https://github.com/StanfordBDHG/HealthKitOnFHIR/tree/main/Tests/UITests/TestApp) is provided.
+
+In the following example, we will query the HealthKit store for step count data, convert the resulting samples to FHIR observations, and encode into JSON.
+
+```swift
+import HealthKitOnFHIR
+
+// initialize an HKHealthStore instance and request permissions with it
+// ...
+
+// create a query for step data
+let query = HKSampleQueryDescriptor(
+    predicates: [.quantitySample(type: HKQuantityType(.stepCount))],
+    sortDescriptors: [],
+    limit: HKObjectQueryNoLimit
+)
+
+// run the query on the HKHealthStore
+let results = try await query.result(for: healthStore)
+
+// convert the results to FHIR observations
+let observations = results.compactMap { sample in
+    try? sample.observation
+}
+
+// Encode FHIR observations as JSON
+let encoder = JSONEncoder()
+encoder.outputFormatting = .prettyPrinted
+
+guard let data = try? encoder.encode(observations) else {
+    return
+}
+
+// Print the resulting JSON
+let json = String(decoding: data, as: UTF8.self)
+print(json)
+```
+
+The following FHIR observation would be created:
+
+```json
+[
+  {
+    "status" : "final",
+    "valueQuantity" : {
+      "value" : 2,
+      "unit" : "steps"
+    },
+    "issued" : "2022-12-08T05:18:29.608404994-05:00",
+    "code" : {
+      "coding" : [
+        {
+          "display" : "Number of steps in unspecified time Pedometer",
+          "system" : "http:\/\/loinc.org",
+          "code" : "55423-8"
+        }
+      ]
+    },
+    "effectivePeriod" : {
+      "end" : "2022-11-27T12:01:37.774554967-05:00",
+      "start" : "2022-11-27T13:01:37.774554967-05:00"
+    },
+    "identifier" : [
+      {
+        "id" : "87642F17-5190-433C-8594-B887191166C6"
+      }
+    ],
+    "resourceType" : "Observation"
+  }
+]
+```
+Codes and units can be customized by editing the [JSON mapping file](https://github.com/StanfordBDHG/HealthKitOnFHIR/blob/main/Sources/HealthKitOnFHIR/Resources/HKSampleMapping.json).
 
 ## License
 This project is licensed under the MIT License. See [Licenses](https://github.com/StanfordBDHG/HealthKitOnFHIR/tree/main/LICENSES) for more information.
