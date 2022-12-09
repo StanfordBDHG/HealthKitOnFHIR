@@ -18,7 +18,7 @@ extension HKCorrelation {
         guard let mapping = mappings.correlationMapping[self.correlationType.identifier] else {
             throw HealthKitOnFHIRError.notSupported
         }
-
+        
         for coding in mapping.codes {
             observation.appendCoding(
                 Coding(
@@ -28,7 +28,7 @@ extension HKCorrelation {
                 )
             )
         }
-
+        
         for category in mapping.categories {
             observation.appendCategory(
                 CodeableConcept(coding: [
@@ -40,12 +40,12 @@ extension HKCorrelation {
                 ])
             )
         }
-
+        
         for object in self.objects {
             guard let sample = object as? HKQuantitySample else {
                 throw HealthKitOnFHIRError.notSupported
             }
-
+            
             try sample.buildQuantitySampleObservationComponent(&observation)
         }
     }

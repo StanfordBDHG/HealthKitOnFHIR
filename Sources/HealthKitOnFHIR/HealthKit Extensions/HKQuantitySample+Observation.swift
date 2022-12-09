@@ -18,7 +18,7 @@ extension HKQuantitySample {
         guard let mapping: HKQuantitySampleMapping = mappings.quantitySampleMapping[self.quantityType.identifier] else {
             throw HealthKitOnFHIRError.notSupported
         }
-
+        
         for coding in mapping.codes {
             observation.appendCoding(
                 Coding(
@@ -28,10 +28,10 @@ extension HKQuantitySample {
                 )
             )
         }
-
+        
         observation.setValue(buildQuantity(mapping))
     }
-
+    
     func buildQuantitySampleObservationComponent(
         _ observation: inout Observation,
         mappings: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
@@ -39,12 +39,12 @@ extension HKQuantitySample {
         guard let mapping = mappings[self.quantityType.identifier] else {
             throw HealthKitOnFHIRError.notSupported
         }
-
+        
         let component = ObservationComponent(code: CodeableConcept(coding: mapping.codes as? [Coding]))
         component.value = .quantity(buildQuantity(mapping))
         observation.appendComponent(component)
     }
-
+    
     private func buildQuantity(_ mapping: HKQuantitySampleMapping) -> Quantity {
         Quantity(
             unit: (mapping.unit.unitAlias ?? mapping.unit.hkunit).asFHIRStringPrimitive(),

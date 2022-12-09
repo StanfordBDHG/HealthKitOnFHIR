@@ -6,11 +6,23 @@
 // SPDX-License-Identifier: MIT
 //
 
-public struct HKCorrelationMapping: Codable {
-    public static let `default` = HKSampleMapping.default.correlationMapping
-    public let codes: [MappedCode]
-    public let categories: [MappedCode]
 
+/// <#Description#>
+public struct HKCorrelationMapping: Codable {
+    /// <#Description#>
+    public static let `default` = HKSampleMapping.default.correlationMapping
+    
+    
+    /// <#Description#>
+    public let codes: [MappedCode]
+    /// <#Description#>
+    public let categories: [MappedCode]
+    
+    
+    /// <#Description#>
+    /// - Parameters:
+    ///   - codes: <#codes description#>
+    ///   - categories: <#categories description#>
     public init(
         codes: [MappedCode],
         categories: [MappedCode]

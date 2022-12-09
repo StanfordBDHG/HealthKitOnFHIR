@@ -31,12 +31,12 @@ extension HKSample {
             code: CodeableConcept(),
             status: FHIRPrimitive(.final)
         )
-
+        
         // Set basic elements applicable to all observations
         observation.appendIdentifier(Identifier(id: self.uuid.uuidString.asFHIRStringPrimitive()))
         observation.setEffective(startDate: self.startDate, endDate: self.endDate)
         observation.setIssued(on: Date())
-
+        
         // Set specific data based on HealthKit type
         switch self {
         case let quantitySample as HKQuantitySample:
