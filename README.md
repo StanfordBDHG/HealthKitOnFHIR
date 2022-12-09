@@ -15,7 +15,7 @@ SPDX-License-Identifier: MIT
 
 ## Features
 - Extensions to convert data from Apple HealthKit to HL7® FHIR® R4.
-- Customizable mappings between HealthKit data types and standardized codes (e.g. LOINC)
+- Customizable mappings between HealthKit data types and standardized codes (e.g., LOINC)
 
 ## Supported HealthKit Data Types
 - HKCorrelationType
@@ -40,37 +40,55 @@ HealthKitOnFHIR can be installed into your Xcode project using [Swift Package Ma
 
 ## Usage
 
-The HealthKitOnFHIR library provides extensions that converts supported HealthKit samples to FHIR [Observations](https://hl7.org/fhir/R4/observation.html) resources. An [example application](https://github.com/StanfordBDHG/HealthKitOnFHIR/tree/main/Tests/UITests/TestApp) is provided.
+The HealthKitOnFHIR library provides extensions that convert supported HealthKit samples to FHIR [Observations](https://hl7.org/fhir/R4/observation.html) resources.
 
-In the following example, we will query the HealthKit store for step count data, convert the resulting samples to FHIR observations, and encode into JSON.
+```swift
+let sample: HKSample = // ...
+let observation = try sample.observation
+```
+
+Codes and units can be customized by passing in a custom HKSampleMapping instance to the `observation(withMapping:)` method.
+
+```swift
+let sample: HKSample = // ...
+let hksampleMapping: HKSampleMapping = // ...
+let observation = try sample.observation(withMapping: hksampleMapping)
+```
+
+## Example
+
+In the following example, we will query the HealthKit store for step count data, convert the resulting samples to FHIR observations, and encode them into JSON.
 
 ```swift
 import HealthKitOnFHIR
 
-// initialize an HKHealthStore instance and request permissions with it
+// Initialize an HKHealthStore instance and request permissions with it
 // ...
 
-// create a query for step data
-let query = HKSampleQueryDescriptor(
-    predicates: [.quantitySample(type: HKQuantityType(.stepCount))],
-    sortDescriptors: [],
-    limit: HKObjectQueryNoLimit
+let date = ISO8601DateFormatter().date(from: "1885-11-11T00:00:00-08:00") ?? .now
+let sample = HKQuantitySample(
+    type: HKQuantityType(.heartRate),
+    quantity: HKQuantity(unit: HKUnit.count().unitDivided(by: .minute()), doubleValue: 42.0),
+    start: date,
+    end: date
 )
 
-// run the query on the HKHealthStore
-let results = try? await query.result(for: healthStore)
-
-// convert the results to FHIR observations
-let observations = results?.compactMap { sample in
-    try? sample.observation
+// Convert the results to FHIR observations
+let observation: Observation
+do {
+    try observation = sample.observation
+} catch {
+    // Handle any mapping errors here.
+    // ...
 }
 
 // Encode FHIR observations as JSON
 let encoder = JSONEncoder()
-encoder.outputFormatting = .prettyPrinted
+encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
 
-guard let data = try? encoder.encode(observations) else {
-    return
+guard let data = try? encoder.encode(observation) else {
+    // Handle any encoding errors here.
+    // ...
 }
 
 // Print the resulting JSON
@@ -78,39 +96,36 @@ let json = String(decoding: data, as: UTF8.self)
 print(json)
 ```
 
-The following is an example of a FHIR observation that would be generated:
+The following example generates the following FHIR observation:
 
 ```json
-  {
-    "status" : "final",
-    "valueQuantity" : {
-      "value" : 2,
-      "unit" : "steps"
-    },
-    "issued" : "2022-12-08T05:18:29.608404994-05:00",
-    "code" : {
-      "coding" : [
-        {
-          "display" : "Number of steps in unspecified time Pedometer",
-          "system" : "http:\/\/loinc.org",
-          "code" : "55423-8"
-        }
-      ]
-    },
-    "effectivePeriod" : {
-      "end" : "2022-11-27T12:01:37.774554967-05:00",
-      "start" : "2022-11-27T13:01:37.774554967-05:00"
-    },
-    "identifier" : [
+{
+  "code" : {
+    "coding" : [
       {
-        "id" : "87642F17-5190-433C-8594-B887191166C6"
+        "code" : "8867-4",
+        "display" : "Heart rate",
+        "system" : "http://loinc.org"
       }
-    ],
-    "resourceType" : "Observation"
+    ]
+  },
+  "effectiveDateTime" : "1885-11-11T00:00:00-08:00",
+  "identifier" : [
+    {
+      "id" : "8BA093D9-B99B-4A3C-8C9E-98C86F49F5D8"
+    }
+  ],
+  "issued" : "2023-01-01T00:00:00-08:00",
+  "resourceType" : "Observation",
+  "status" : "final",
+  "valueQuantity" : {
+    "code": "/min",
+    "unit": "beats/minute",
+    "system": "http://unitsofmeasure.org",
+    "value" : 42
   }
+}
 ```
-
-Codes and units can be customized by editing the [JSON mapping file](https://github.com/StanfordBDHG/HealthKitOnFHIR/blob/main/Sources/HealthKitOnFHIR/Resources/HKSampleMapping.json).
 
 ## License
 This project is licensed under the MIT License. See [Licenses](https://github.com/StanfordBDHG/HealthKitOnFHIR/tree/main/LICENSES) for more information.
