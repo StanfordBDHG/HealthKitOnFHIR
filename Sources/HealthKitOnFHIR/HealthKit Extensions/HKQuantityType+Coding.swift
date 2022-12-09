@@ -24,12 +24,6 @@ extension HKQuantityType {
             return []
         }
         
-        return mapping.codes.map {
-            Coding(
-                code: $0.code.asFHIRStringPrimitive(),
-                display: $0.display.asFHIRStringPrimitive(),
-                system: FHIRPrimitive(FHIRURI(stringLiteral: $0.system))
-            )
-        }
+        return mapping.codings.map(\.coding)
     }
 }

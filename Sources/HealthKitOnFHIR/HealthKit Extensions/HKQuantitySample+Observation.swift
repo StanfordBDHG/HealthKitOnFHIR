@@ -19,14 +19,8 @@ extension HKQuantitySample {
             throw HealthKitOnFHIRError.notSupported
         }
         
-        for coding in mapping.codes {
-            observation.appendCoding(
-                Coding(
-                    code: coding.code.asFHIRStringPrimitive(),
-                    display: coding.display.asFHIRStringPrimitive(),
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: coding.system))
-                )
-            )
+        for code in mapping.codings {
+            observation.appendCoding(code.coding)
         }
         
         observation.setValue(buildQuantity(mapping))
@@ -40,7 +34,7 @@ extension HKQuantitySample {
             throw HealthKitOnFHIRError.notSupported
         }
         
-        let component = ObservationComponent(code: CodeableConcept(coding: mapping.codes as? [Coding]))
+        let component = ObservationComponent(code: CodeableConcept(coding: mapping.codings as? [Coding]))
         component.value = .quantity(buildQuantity(mapping))
         observation.appendComponent(component)
     }

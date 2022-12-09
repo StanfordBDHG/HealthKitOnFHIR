@@ -19,25 +19,13 @@ extension HKCorrelation {
             throw HealthKitOnFHIRError.notSupported
         }
         
-        for coding in mapping.codes {
-            observation.appendCoding(
-                Coding(
-                    code: coding.code.asFHIRStringPrimitive(),
-                    display: coding.display.asFHIRStringPrimitive(),
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: coding.system))
-                )
-            )
+        for code in mapping.codings {
+            observation.appendCoding(code.coding)
         }
         
         for category in mapping.categories {
             observation.appendCategory(
-                CodeableConcept(coding: [
-                    Coding(
-                        code: category.code.asFHIRStringPrimitive(),
-                        display: category.display.asFHIRStringPrimitive(),
-                        system: FHIRPrimitive(FHIRURI(stringLiteral: category.system))
-                    )
-                ])
+                CodeableConcept(coding: [category.coding])
             )
         }
         

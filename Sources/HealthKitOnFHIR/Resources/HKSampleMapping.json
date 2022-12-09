@@ -1,7 +1,7 @@
 {
     "HKCorrelation": {
         "HKCorrelationTypeIdentifierBloodPressure": {
-            "codes": [{
+            "codings": [{
                 "code": "85354-9",
                 "display": "Blood pressure panel",
                 "system": "http://loinc.org"
@@ -15,7 +15,7 @@
     },
     "HKQuantitySample": {
         "HKQuantityTypeIdentifierBloodGlucose": {
-            "codes": [
+            "codings": [
                 {
                     "code": "41653-7",
                     "display": "Glucose Glucometer (BldC) [Mass/Vol]",
@@ -27,7 +27,7 @@
             }
         },
         "HKQuantityTypeIdentifierBodyMass": {
-            "codes": [
+            "codings": [
                 {
                     "code": "29463-7",
                     "display": "Body weight",
@@ -39,7 +39,7 @@
             }
         },
         "HKQuantityTypeIdentifierBloodPressureDiastolic": {
-            "codes": [
+            "codings": [
                 {
                     "code": "8867-4",
                     "display": "Diastolic blood pressure",
@@ -51,7 +51,7 @@
             }
         },
         "HKQuantityTypeIdentifierBloodPressureSystolic": {
-            "codes": [
+            "codings": [
                 {
                     "code": "8480-6",
                     "display": "Systolic blood pressure",
@@ -63,7 +63,7 @@
             }
         },
         "HKQuantityTypeIdentifierBodyTemperature": {
-            "codes": [
+            "codings": [
                 {
                     "code": "8310-5",
                     "display": "Body temperature",
@@ -75,7 +75,7 @@
             }
         },
         "HKQuantityTypeIdentifierHeartRate": {
-            "codes": [
+            "codings": [
                 {
                     "code": "8867-4",
                     "display": "Heart rate",
@@ -88,7 +88,7 @@
             }
         },
         "HKQuantityTypeIdentifierHeight": {
-            "codes": [
+            "codings": [
                 {
                     "code": "8302-2",
                     "display": "Body height",
@@ -100,7 +100,7 @@
             }
         },
         "HKQuantityTypeIdentifierOxygenSaturation": {
-            "codes": [
+            "codings": [
                 {
                     "code": "59408-5",
                     "display": "Oxygen saturation in Arterial blood by Pulse oximetry",
@@ -112,7 +112,7 @@
             }
         },
         "HKQuantityTypeIdentifierRespiratoryRate": {
-            "codes": [
+            "codings": [
                 {
                     "code": "9279-1",
                     "display": "Respiratory rate",
@@ -124,7 +124,7 @@
             }
         },
         "HKQuantityTypeIdentifierStepCount": {
-            "codes": [
+            "codings": [
                 {
                     "code": "55423-8",
                     "display": "Number of steps in unspecified time Pedometer",

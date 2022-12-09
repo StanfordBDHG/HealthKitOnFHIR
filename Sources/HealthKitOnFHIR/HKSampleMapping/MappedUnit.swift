@@ -7,7 +7,7 @@
 //
 
 
-/// <#Description#>
+/// A ``MappedUnit`` instance is used to specify a unit mapping for FHIR observations mapped from HealthKit's `HKUnit`s.
 public struct MappedUnit: Codable {
     private enum CodingKeys: String, CodingKey {
         case hkunit
@@ -15,10 +15,11 @@ public struct MappedUnit: Codable {
     }
     
     
-    /// <#Description#>
-    public let hkunit: String
-    /// <#Description#>
-    public let unitAlias: String?
+    /// The specified `HKUnit`'s string value that should be mapped.
+    public var hkunit: String
+    /// The unit alias that is used for the FHIR obseration.
+    public var unitAlias: String?
+    
     
     
     public init(from decoder: Decoder) throws {
@@ -29,10 +30,10 @@ public struct MappedUnit: Codable {
         self.init(hkunit: hkunit, unitAlias: unitAlias)
     }
     
-    /// <#Description#>
+    /// A ``MappedUnit`` instance is used to specify a unit mapping for FHIR observations mapped from HealthKit's `HKUnit`s.
     /// - Parameters:
-    ///   - hkunit: <#hkunit description#>
-    ///   - unitAlias: <#unitAlias description#>
+    ///   - hkunit: The specified `HKUnit`'s string value that should be mapped.
+    ///   - unitAlias: The unit alias that is used for the FHIR obseration.
     public init(
         hkunit: String,
         unitAlias: String?

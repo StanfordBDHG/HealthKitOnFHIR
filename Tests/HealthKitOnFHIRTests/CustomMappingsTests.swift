@@ -25,7 +25,7 @@ final class CustomMappingsTests: XCTestCase {
         let customMapping = [
             "HKQuantityTypeIdentifierBodyMass":
             HKQuantitySampleMapping(
-                codes: [
+                codings: [
                     MappedCode(
                         code: "SU-01",
                         display: "Stanford University",

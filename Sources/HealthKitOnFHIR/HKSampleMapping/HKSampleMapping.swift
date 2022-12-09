@@ -7,7 +7,7 @@
 //
 
 
-/// <#Description#>
+/// A ``HKSampleMapping`` instance is used to specify the mapping of ``HKSample``s to FHIR observations allowing the customization of, e.g., codings and units.
 public struct HKSampleMapping: Decodable {
     private enum CodingKeys: String, CodingKey {
         case quantitySampleMapping = "HKQuantitySample"
@@ -15,16 +15,20 @@ public struct HKSampleMapping: Decodable {
     }
     
     
-    /// <#Description#>
+    /// A default instance of an ``HKSampleMapping`` instance allowing developers to customize the ``HKSampleMapping``.
+    ///
+    /// The default values are loaded from the `HKSampleMapping.json` resource in the ``HealthKitOnFHIR`` Swift Package.
     public static let `default`: HKSampleMapping = {
         Bundle.module.decode(HKSampleMapping.self, from: "HKSampleMapping.json")
     }()
     
     
-    /// <#Description#>
-    public let quantitySampleMapping: [String: HKQuantitySampleMapping]
-    /// <#Description#>
-    public let correlationMapping: [String: HKCorrelationMapping]
+    /// The ``HKSampleMapping/quantitySampleMapping`` property defines the mapping of `HKQuantitySample`s to FHIR observations.
+    /// ``HealthKitOnFHIR`` uses the string keys to identify the correct `HKQuantityType` using its `identifier` property.
+    public var quantitySampleMapping: [String: HKQuantitySampleMapping]
+    /// The ``HKSampleMapping/correlationMapping`` property defines the mapping of `HKCorrelation`s to FHIR observations.
+    /// ``HealthKitOnFHIR`` uses the string keys to identify the correct `HKCorrelationType` using its `identifier` property.
+    public var correlationMapping: [String: HKCorrelationMapping]
     
     
     public init(from decoder: Decoder) throws {
@@ -43,10 +47,12 @@ public struct HKSampleMapping: Decodable {
         )
     }
     
-    /// <#Description#>
+    /// A ``HKSampleMapping`` instance is used to specify the mapping of ``HKSample``s to FHIR observations allowing the customization of, e.g., codings and units.
     /// - Parameters:
-    ///   - quantitySampleMapping: <#quantitySampleMapping description#>
-    ///   - correlationMapping: <#correlationMapping description#>
+    ///   - quantitySampleMapping: The ``HKSampleMapping/quantitySampleMapping`` property defines the mapping of `HKQuantitySample`s to FHIR observations.
+    ///                            ``HealthKitOnFHIR`` uses the string keys to identify the correct `HKQuantityType` using its `identifier` property.
+    ///   - correlationMapping: The ``HKSampleMapping/correlationMapping`` property defines the mapping of `HKCorrelation`s to FHIR observations.
+    ///                         ``HealthKitOnFHIR`` uses the string keys to identify the correct `HKCorrelationType` using its `identifier` property.
     public init(
         quantitySampleMapping: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
         correlationMapping: [String: HKCorrelationMapping] = HKCorrelationMapping.default

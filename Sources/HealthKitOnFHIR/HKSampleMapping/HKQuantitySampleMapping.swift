@@ -7,27 +7,29 @@
 //
 
 
-/// <#Description#>
+/// An ``HKQuantitySampleMapping`` allows developers to customize the mapping of `HKQuantitySample`s to an FHIR observations.
 public struct HKQuantitySampleMapping: Codable {
-    /// <#Description#>
+    /// A default instance of an ``HKQuantitySampleMapping`` instance allowing developers to customize the ``HKQuantitySampleMapping``.
+    ///
+    /// The default values are loaded from the `HKSampleMapping.json` resource in the ``HealthKitOnFHIR`` Swift Package.
     public static let `default` = HKSampleMapping.default.quantitySampleMapping
     
     
-    /// <#Description#>
-    public let codes: [MappedCode]
-    /// <#Description#>
-    public let unit: MappedUnit
+    /// The FHIR codings defined as ``MappedCode``s used for the specified `HKQuantitySample` type
+    public var codings: [MappedCode]
+    /// The FHIR units defined as ``MappedUnit``s used for the specified `HKQuantitySample` type
+    public var unit: MappedUnit
 
     
-    /// <#Description#>
+    /// An ``HKQuantitySampleMapping`` allows developers to customize the mapping of `HKQuantitySample`s to an FHIR observations.
     /// - Parameters:
-    ///   - codes: <#codes description#>
-    ///   - unit: <#unit description#>
+    ///   - codings: The FHIR codings defined as ``MappedCode``s used for the specified `HKQuantitySample` type
+    ///   - unit: The FHIR units defined as ``MappedUnit``s used for the specified `HKQuantitySample` type
     public init(
-        codes: [MappedCode],
+        codings: [MappedCode],
         unit: MappedUnit
     ) {
-        self.codes = codes
+        self.codings = codings
         self.unit = unit
     }
 }
