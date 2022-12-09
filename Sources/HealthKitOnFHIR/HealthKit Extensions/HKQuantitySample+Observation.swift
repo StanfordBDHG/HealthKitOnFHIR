@@ -47,7 +47,9 @@ extension HKQuantitySample {
 
     private func buildQuantity(_ mapping: HKQuantitySampleMapping) -> Quantity {
         Quantity(
-            unit: (mapping.unit.unitAlias ?? mapping.unit.hkunit).asFHIRStringPrimitive(),
+            code: mapping.unit.code?.asFHIRStringPrimitive(),
+            system: mapping.unit.system?.asFHIRURIPrimitive(),
+            unit: mapping.unit.unit.asFHIRStringPrimitive(),
             value: self.quantity.doubleValue(for: HKUnit(from: mapping.unit.hkunit)).asFHIRDecimalPrimitive()
         )
     }
