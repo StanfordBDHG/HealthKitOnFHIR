@@ -6,16 +6,30 @@
 // SPDX-License-Identifier: MIT
 //
 
-public struct HKCorrelationMapping: Codable {
-    public static let `default` = HKSampleMapping.default.correlationMapping
-    public let codes: [MappedCode]
-    public let categories: [MappedCode]
 
+/// An ``HKCorrelationMapping`` allows developers to customize the mapping of `HKCorrelation`s to an FHIR observations.
+public struct HKCorrelationMapping: Decodable {
+    /// A default instance of an ``HKCorrelationMapping`` instance allowing developers to customize the ``HKCorrelationMapping``.
+    ///
+    /// The default values are loaded from the `HKSampleMapping.json` resource in the ``HealthKitOnFHIR`` Swift Package.
+    public static let `default` = HKSampleMapping.default.correlationMapping
+    
+    
+    /// The FHIR codings defined as ``MappedCode``s used for the specified `HKCorrelation` type
+    public var codings: [MappedCode]
+    /// The FHIR categories defined as ``MappedCode``s used for the specified `HKCorrelation` type
+    public var categories: [MappedCode]
+    
+    
+    /// An ``HKCorrelationMapping`` allows developers to customize the mapping of `HKCorrelation`s to an FHIR Observations.
+    /// - Parameters:
+    ///   - codings: The FHIR codings defined as ``MappedCode``s used for the specified `HKCorrelation` type
+    ///   - categories: The FHIR categories defined as ``MappedCode``s used for the specified `HKCorrelation` type
     public init(
-        codes: [MappedCode],
+        codings: [MappedCode],
         categories: [MappedCode]
     ) {
-        self.codes = codes
+        self.codings = codings
         self.categories = categories
     }
 }

@@ -22,28 +22,37 @@ final class CustomMappingsTests: XCTestCase {
             end: Date()
         )
 
-        guard let ucumSystem = URL(string: "http://unitsofmeasure.org") else {
+        guard let ucumSystem = URL(string: "http://unitsofmeasure.org"),
+              let stanfordURL = URL(string: "http://stanford.edu") else {
+            XCTFail("Could not create URLs")
             return
         }
 
-        let customMapping = [
-            "HKQuantityTypeIdentifierBodyMass":
+        var customMapping = [
+            HKQuantityType(.bodyMass):
             HKQuantitySampleMapping(
-                codes: [
+                codings: [
                     MappedCode(
                         code: "SU-01",
                         display: "Stanford University",
-                        system: "http://stanford.edu"
+                        system: stanfordURL
                     )
                 ],
                 unit: MappedUnit(
-                    hkunit: "oz",
+                    hkunit: .ounce(),
                     unit: "oz",
                     system: ucumSystem,
                     code: "[oz_av]"
                 )
             )
         ]
+        customMapping[HKQuantityType(.bodyMass)]?.unit.removeSystemAndCode()
+        XCTAssertNil(customMapping[HKQuantityType(.bodyMass)]?.unit.system)
+        XCTAssertNil(customMapping[HKQuantityType(.bodyMass)]?.unit.code)
+        
+        customMapping[HKQuantityType(.bodyMass)]?.unit.update(system: ucumSystem, code: "[oz_av]")
+        XCTAssertEqual(customMapping[HKQuantityType(.bodyMass)]?.unit.system, ucumSystem)
+        XCTAssertEqual(customMapping[HKQuantityType(.bodyMass)]?.unit.code, "[oz_av]")
 
         let hkSampleMapping = HKSampleMapping(quantitySampleMapping: customMapping)
         
@@ -68,7 +77,7 @@ final class CustomMappingsTests: XCTestCase {
                 Coding(
                     code: "SU-01",
                     display: "Stanford University",
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: "http://stanford.edu"))
+                    system: FHIRPrimitive(FHIRURI(stanfordURL))
                 )
             ]
         )

@@ -15,37 +15,25 @@ extension HKCorrelation {
         _ observation: inout Observation,
         mappings: HKSampleMapping = HKSampleMapping.default
     ) throws {
-        guard let mapping = mappings.correlationMapping[self.correlationType.identifier] else {
+        guard let mapping = mappings.correlationMapping[self.correlationType] else {
             throw HealthKitOnFHIRError.notSupported
         }
-
-        for coding in mapping.codes {
-            observation.appendCoding(
-                Coding(
-                    code: coding.code.asFHIRStringPrimitive(),
-                    display: coding.display.asFHIRStringPrimitive(),
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: coding.system))
-                )
-            )
+        
+        for code in mapping.codings {
+            observation.appendCoding(code.coding)
         }
-
+        
         for category in mapping.categories {
             observation.appendCategory(
-                CodeableConcept(coding: [
-                    Coding(
-                        code: category.code.asFHIRStringPrimitive(),
-                        display: category.display.asFHIRStringPrimitive(),
-                        system: FHIRPrimitive(FHIRURI(stringLiteral: category.system))
-                    )
-                ])
+                CodeableConcept(coding: [category.coding])
             )
         }
-
+        
         for object in self.objects {
             guard let sample = object as? HKQuantitySample else {
                 throw HealthKitOnFHIRError.notSupported
             }
-
+            
             try sample.buildQuantitySampleObservationComponent(&observation)
         }
     }
