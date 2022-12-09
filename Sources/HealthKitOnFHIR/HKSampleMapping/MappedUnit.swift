@@ -19,11 +19,11 @@ public struct MappedUnit: Decodable {
     
     /// The specified `HKUnit` that should be mapped.
     public var hkunit: HKUnit
-    /// <#Description#>
+    /// The unit.
     public let unit: String
-    /// <#Description#>
+    /// The coding system.
     public let system: URL?
-    /// <#Description#>
+    /// The identifying code.
     public let code: String?
     
     
@@ -45,9 +45,9 @@ public struct MappedUnit: Decodable {
     /// A ``MappedUnit`` instance is used to specify a unit mapping for FHIR observations mapped from HealthKit's `HKUnit`s.
     /// - Parameters:
     ///   - hkunit: The specified `HKUnit` that should be mapped.
-    ///   - unit: <#unit description#>
-    ///   - system: <#system description#>
-    ///   - code: <#code description#>
+    ///   - unit: The unit.
+    ///   - system: The coding system.
+    ///   - code: The identifying code.
     public init(
         hkunit: HKUnit,
         unit: String,
