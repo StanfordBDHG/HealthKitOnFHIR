@@ -70,6 +70,8 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
+                    code: "mg/dL",
+                    system: "http://unitsofmeasure.org",
                     unit: "mg/dL",
                     value: 99.asFHIRDecimalPrimitive()
                 )
@@ -124,7 +126,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "beats/min",
+                    code: "/min",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "beats/minute",
                     value: 84.asFHIRDecimalPrimitive()
                 )
             )
@@ -151,6 +155,8 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
+                    code: "%",
+                    system: "http://unitsofmeasure.org",
                     unit: "%",
                     value: 99.asFHIRDecimalPrimitive()
                 )
@@ -178,7 +184,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "degC",
+                    code: "Cel",
+                    system: "http://unitsofmeasure.org",
+                    unit: "C",
                     value: 37.asFHIRDecimalPrimitive()
                 )
             )
@@ -188,7 +196,7 @@ class HealthKitOnFHIRTests: XCTestCase {
     func testHeightSample() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.height),
-            quantity: HKQuantity(unit: .meter(), doubleValue: 1.77)
+            quantity: HKQuantity(unit: .inch(), doubleValue: 64)
         )
         
         XCTAssertEqual(
@@ -205,8 +213,10 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "m",
-                    value: 1.77.asFHIRDecimalPrimitive()
+                    code: "[in_i]",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "in",
+                    value: 64.asFHIRDecimalPrimitive()
                 )
             )
         )
@@ -215,7 +225,7 @@ class HealthKitOnFHIRTests: XCTestCase {
     func testBodyMassSample() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyMass),
-            quantity: HKQuantity(unit: .gramUnit(with: .kilo), doubleValue: 60)
+            quantity: HKQuantity(unit: .pound(), doubleValue: 60)
         )
         
         XCTAssertEqual(
@@ -232,7 +242,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "kg",
+                    code: "[lb_av]",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "lbs",
                     value: 60.asFHIRDecimalPrimitive()
                 )
             )
@@ -259,7 +271,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "count/min",
+                    code: "/min",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "breaths/minute",
                     value: 18.asFHIRDecimalPrimitive()
                 )
             )
@@ -293,6 +307,8 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(1, observation.component?.filter {
             $0.value == .quantity(
                 Quantity(
+                    code: "mm[Hg]",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
                     unit: "mmHg",
                     value: 120.asFHIRDecimalPrimitive()
                 )
@@ -302,6 +318,8 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(1, observation.component?.filter {
             $0.value == .quantity(
                 Quantity(
+                    code: "mm[Hg]",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
                     unit: "mmHg",
                     value: 80.asFHIRDecimalPrimitive()
                 )

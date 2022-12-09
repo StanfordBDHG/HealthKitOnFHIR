@@ -34,7 +34,9 @@ final class CustomMappingsTests: XCTestCase {
                 ],
                 unit: MappedUnit(
                     hkunit: "oz",
-                    unitAlias: "ounces"
+                    unit: "oz",
+                    system: URL(string: "http://unitsofmeasure.org")!,
+                    code: "[oz_av]"
                 )
             )
         ]
@@ -71,7 +73,9 @@ final class CustomMappingsTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "ounces",
+                    code: "[oz_av]",
+                    system: "http://unitsofmeasure.org",
+                    unit: "oz",
                     value: 2116.43771697482496.asFHIRDecimalPrimitive()
                 )
             )
