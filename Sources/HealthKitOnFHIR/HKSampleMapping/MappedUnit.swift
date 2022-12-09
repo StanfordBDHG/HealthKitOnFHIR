@@ -11,33 +11,52 @@
 public struct MappedUnit: Decodable {
     private enum CodingKeys: String, CodingKey {
         case hkunit
-        case unitAlias
+        case unit
+        case system
+        case code
     }
     
     
     /// The specified `HKUnit` that should be mapped.
     public var hkunit: HKUnit
-    /// The unit alias that is used for the FHIR obseration.
-    public var unitAlias: String?
+    /// <#Description#>
+    public let unit: String
+    /// <#Description#>
+    public let system: URL?
+    /// <#Description#>
+    public let code: String?
     
     
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let hkunit = try HKUnit(from: values.decode(String.self, forKey: .hkunit))
-        let unitAlias = try values.decodeIfPresent(String.self, forKey: .unitAlias)
+        let unit = try values.decode(String.self, forKey: .unit)
+        let system = try values.decodeIfPresent(URL.self, forKey: .system)
+        let code = try values.decodeIfPresent(String.self, forKey: .code)
         
-        self.init(hkunit: hkunit, unitAlias: unitAlias)
+        self.init(
+            hkunit: hkunit,
+            unit: unit,
+            system: system,
+            code: code
+        )
     }
     
     /// A ``MappedUnit`` instance is used to specify a unit mapping for FHIR observations mapped from HealthKit's `HKUnit`s.
     /// - Parameters:
     ///   - hkunit: The specified `HKUnit` that should be mapped.
-    ///   - unitAlias: The unit alias that is used for the FHIR obseration.
+    ///   - unit: <#unit description#>
+    ///   - system: <#system description#>
+    ///   - code: <#code description#>
     public init(
         hkunit: HKUnit,
-        unitAlias: String?
+        unit: String,
+        system: URL?,
+        code: String?
     ) {
         self.hkunit = hkunit
-        self.unitAlias = unitAlias
+        self.unit = unit
+        self.system = system
+        self.code = code
     }
 }

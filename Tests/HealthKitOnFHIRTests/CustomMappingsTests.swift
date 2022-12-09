@@ -22,6 +22,10 @@ final class CustomMappingsTests: XCTestCase {
             end: Date()
         )
 
+        guard let ucumSystem = URL(string: "http://unitsofmeasure.org") else {
+            return
+        }
+
         let customMapping = [
             HKQuantityType(.bodyMass):
             HKQuantitySampleMapping(
@@ -34,7 +38,9 @@ final class CustomMappingsTests: XCTestCase {
                 ],
                 unit: MappedUnit(
                     hkunit: .ounce(),
-                    unitAlias: "ounces"
+                    unit: "oz",
+                    system: ucumSystem,
+                    code: "[oz_av]"
                 )
             )
         ]
@@ -71,7 +77,9 @@ final class CustomMappingsTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
-                    unit: "ounces",
+                    code: "[oz_av]",
+                    system: "http://unitsofmeasure.org",
+                    unit: "oz",
                     value: 2116.43771697482496.asFHIRDecimalPrimitive()
                 )
             )
