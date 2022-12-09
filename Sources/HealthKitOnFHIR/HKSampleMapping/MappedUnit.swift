@@ -26,10 +26,12 @@ public struct MappedUnit: Codable {
         let system = try values.decodeIfPresent(URL.self, forKey: .system)
         let code = try values.decodeIfPresent(String.self, forKey: .code)
 
-        self.init(hkunit: hkunit,
-                  unit: unit,
-                  system: system,
-                  code: code)
+        self.init(
+            hkunit: hkunit,
+            unit: unit,
+            system: system,
+            code: code
+        )
     }
 
     public init(
