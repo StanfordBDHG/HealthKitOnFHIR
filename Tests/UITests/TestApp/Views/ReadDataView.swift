@@ -42,8 +42,7 @@ struct ReadDataView: View {
             .compactMap { sample in
                 try? sample.observation
             }
-        
-        // Print out JSON
+
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         
