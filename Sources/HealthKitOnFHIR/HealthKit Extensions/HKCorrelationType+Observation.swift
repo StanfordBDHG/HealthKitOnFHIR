@@ -15,7 +15,7 @@ extension HKCorrelation {
         _ observation: inout Observation,
         mappings: HKSampleMapping = HKSampleMapping.default
     ) throws {
-        guard let mapping = mappings.correlationMapping[self.correlationType.identifier] else {
+        guard let mapping = mappings.correlationMapping[self.correlationType] else {
             throw HealthKitOnFHIRError.notSupported
         }
         

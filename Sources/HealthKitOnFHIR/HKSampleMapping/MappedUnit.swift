@@ -8,15 +8,15 @@
 
 
 /// A ``MappedUnit`` instance is used to specify a unit mapping for FHIR observations mapped from HealthKit's `HKUnit`s.
-public struct MappedUnit: Codable {
+public struct MappedUnit: Decodable {
     private enum CodingKeys: String, CodingKey {
         case hkunit
         case unitAlias
     }
     
     
-    /// The specified `HKUnit`'s string value that should be mapped.
-    public var hkunit: String
+    /// The specified `HKUnit` that should be mapped.
+    public var hkunit: HKUnit
     /// The unit alias that is used for the FHIR obseration.
     public var unitAlias: String?
     
@@ -24,7 +24,7 @@ public struct MappedUnit: Codable {
     
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        let hkunit = try values.decode(String.self, forKey: .hkunit)
+        let hkunit = try HKUnit(from: values.decode(String.self, forKey: .hkunit))
         let unitAlias = try values.decodeIfPresent(String.self, forKey: .unitAlias)
         
         self.init(hkunit: hkunit, unitAlias: unitAlias)
@@ -32,15 +32,12 @@ public struct MappedUnit: Codable {
     
     /// A ``MappedUnit`` instance is used to specify a unit mapping for FHIR observations mapped from HealthKit's `HKUnit`s.
     /// - Parameters:
-    ///   - hkunit: The specified `HKUnit`'s string value that should be mapped.
+    ///   - hkunit: The specified `HKUnit` that should be mapped.
     ///   - unitAlias: The unit alias that is used for the FHIR obseration.
     public init(
-        hkunit: String,
+        hkunit: HKUnit,
         unitAlias: String?
     ) {
-        // Unfortunately this method throws an Objective-C exception when an error occurs, we can not catch this here.
-        _ = HKUnit(from: hkunit)
-        
         self.hkunit = hkunit
         self.unitAlias = unitAlias
     }

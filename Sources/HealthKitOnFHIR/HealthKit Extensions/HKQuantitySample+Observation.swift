@@ -15,7 +15,7 @@ extension HKQuantitySample {
         _ observation: inout Observation,
         mappings: HKSampleMapping = HKSampleMapping.default
     ) throws {
-        guard let mapping: HKQuantitySampleMapping = mappings.quantitySampleMapping[self.quantityType.identifier] else {
+        guard let mapping = mappings.quantitySampleMapping[self.quantityType] else {
             throw HealthKitOnFHIRError.notSupported
         }
         
@@ -28,9 +28,9 @@ extension HKQuantitySample {
     
     func buildQuantitySampleObservationComponent(
         _ observation: inout Observation,
-        mappings: [String: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
+        mappings: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
     ) throws {
-        guard let mapping = mappings[self.quantityType.identifier] else {
+        guard let mapping = mappings[self.quantityType] else {
             throw HealthKitOnFHIRError.notSupported
         }
         
@@ -41,8 +41,8 @@ extension HKQuantitySample {
     
     private func buildQuantity(_ mapping: HKQuantitySampleMapping) -> Quantity {
         Quantity(
-            unit: (mapping.unit.unitAlias ?? mapping.unit.hkunit).asFHIRStringPrimitive(),
-            value: self.quantity.doubleValue(for: HKUnit(from: mapping.unit.hkunit)).asFHIRDecimalPrimitive()
+            unit: (mapping.unit.unitAlias ?? mapping.unit.hkunit.unitString).asFHIRStringPrimitive(),
+            value: self.quantity.doubleValue(for: mapping.unit.hkunit).asFHIRDecimalPrimitive()
         )
     }
 }

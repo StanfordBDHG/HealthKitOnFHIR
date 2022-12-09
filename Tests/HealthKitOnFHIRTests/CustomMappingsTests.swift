@@ -23,7 +23,7 @@ final class CustomMappingsTests: XCTestCase {
         )
 
         let customMapping = [
-            "HKQuantityTypeIdentifierBodyMass":
+            HKQuantityType(.bodyMass):
             HKQuantitySampleMapping(
                 codings: [
                     MappedCode(
@@ -33,7 +33,7 @@ final class CustomMappingsTests: XCTestCase {
                     )
                 ],
                 unit: MappedUnit(
-                    hkunit: "oz",
+                    hkunit: .ounce(),
                     unitAlias: "ounces"
                 )
             )
