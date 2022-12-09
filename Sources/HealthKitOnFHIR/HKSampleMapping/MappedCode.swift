@@ -11,32 +11,32 @@ import ModelsR4
 
 /// A ``MappedCode`` instance is used to specify codings for FHIR observations mapped from HealthKit's `HKSample`s.
 public struct MappedCode: Decodable {
-    /// The identifying code.
+    /// Symbol in syntax defined by the system.
     public var code: String
-    /// A display value for the code.
+    /// Representation defined by the system.
     public var display: String
-    /// The coding system.
-    public var system: String
+    /// Identity of the terminology system.
+    public var system: URL
     
     
     var coding: Coding {
         Coding(
             code: code.asFHIRStringPrimitive(),
             display: display.asFHIRStringPrimitive(),
-            system: FHIRPrimitive(FHIRURI(stringLiteral: system))
+            system: FHIRPrimitive(FHIRURI(system))
         )
     }
-    
+
     
     /// A ``MappedCode`` instance is used to specify codings for FHIR observations mapped from HealthKit's `HKSample`s.
     /// - Parameters:
-    ///   - code: The identifying code.
-    ///   - display: A display value for the code.
-    ///   - system: The coding system.
+    ///   - code: Symbol in syntax defined by the system.
+    ///   - display: Representation defined by the system.
+    ///   - system: Identity of the terminology system.
     public init(
         code: String,
         display: String,
-        system: String
+        system: URL
     ) {
         self.code = code
         self.display = display
