@@ -21,7 +21,6 @@ public struct MappedUnit: Decodable {
     public var unitAlias: String?
     
     
-    
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let hkunit = try HKUnit(from: values.decode(String.self, forKey: .hkunit))

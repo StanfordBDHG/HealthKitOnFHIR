@@ -51,7 +51,8 @@ public struct HKSampleMapping: Decodable {
         
         let correlationMapping = Dictionary(
             uniqueKeysWithValues: correlationStringBasedMapping.map { mapping in
-                guard let hkcorrelationType = HKCorrelationType.correlationType(forIdentifier: HKCorrelationTypeIdentifier(rawValue: mapping.key)) else {
+                let hkcorrelationTypeIdentifier = HKCorrelationTypeIdentifier(rawValue: mapping.key)
+                guard let hkcorrelationType = HKCorrelationType.correlationType(forIdentifier: hkcorrelationTypeIdentifier) else {
                     fatalError("HKCorrelationType for the String value \(mapping.key) does not exist. Please inspect your configuration.")
                 }
                 return (hkcorrelationType, mapping.value)

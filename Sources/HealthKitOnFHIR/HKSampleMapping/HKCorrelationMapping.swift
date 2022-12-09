@@ -21,7 +21,6 @@ public struct HKCorrelationMapping: Decodable {
     public var categories: [MappedCode]
     
     
-    
     /// An ``HKCorrelationMapping`` allows developers to customize the mapping of `HKCorrelation`s to an FHIR Observations.
     /// - Parameters:
     ///   - codings: The FHIR codings defined as ``MappedCode``s used for the specified `HKCorrelation` type
