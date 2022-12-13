@@ -21,16 +21,26 @@ SPDX-License-Identifier: MIT
 - HKCorrelationType
     - BloodPressure
 - HKQuantityType
+    - ActiveEnergyBurned
+    - AppleExerciseTime
+    - AppleMoveTime
+    - AppleStandTime
     - BloodGlucose
-    - BodyMass
     - BloodPressureDiastolic
     - BloodPressureSystolic
+    - BodyMass
     - BodyTemperature
+    - DietaryEnergyConsumed
+    - EnvironmentalAudioExposure
+    - HeadphoneAudioExposure
     - HeartRate
+    - HeartRateVariabilitySDNN
     - Height
     - OxygenSaturation
     - RespiratoryRate
+    - RestingHeartRate
     - StepCount
+    - WalkingHeartRateAverage
 
 ## Installation
 HealthKitOnFHIR can be installed into your Xcode project using [Swift Package Manager](https://github.com/apple/swift-package-manager).
