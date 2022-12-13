@@ -9,7 +9,8 @@
 @testable import HealthKitOnFHIR
 import XCTest
 
-
+// swiftlint:disable file_length
+// We disable the file length rule as this is a test class
 class HealthKitOnFHIRTests: XCTestCase {
     // swiftlint:disable:previous type_body_length
     // We disable the type body length as this is a test class
