@@ -9,7 +9,8 @@
 @testable import HealthKitOnFHIR
 import XCTest
 
-
+// swiftlint:disable file_length
+// We disable the file length rule as this is a test class
 class HealthKitOnFHIRTests: XCTestCase {
     // swiftlint:disable:previous type_body_length
     // We disable the type body length as this is a test class
@@ -47,6 +48,14 @@ class HealthKitOnFHIRTests: XCTestCase {
             code: FHIRPrimitive(stringLiteral: code),
             display: FHIRPrimitive(stringLiteral: display),
             system: FHIRPrimitive(FHIRURI(stringLiteral: "http://loinc.org"))
+        )
+    }
+
+    func appleCode(code: String, display: String) -> Coding {
+        Coding(
+            code: FHIRPrimitive(stringLiteral: code),
+            display: FHIRPrimitive(stringLiteral: display),
+            system: FHIRPrimitive(FHIRURI(stringLiteral: "https://developer.apple.com/documentation/healthkit"))
         )
     }
     
@@ -130,6 +139,93 @@ class HealthKitOnFHIRTests: XCTestCase {
                     system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
                     unit: "beats/minute",
                     value: 84.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testRestingHeartRateSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.restingHeartRate),
+            quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "40443-4",
+                    display: "Heart rate --resting"
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "/min",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "beats/minute",
+                    value: 84.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testWalkingHeartRateAverage() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.walkingHeartRateAverage),
+            quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                appleCode(
+                    code: "HKQuantityTypeIdentifierWalkingHeartRateAverage",
+                    display: "Walking Heart Rate Average"
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "/min",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "beats/minute",
+                    value: 84.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testHeartRateVariabilitySDNNSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.heartRateVariabilitySDNN),
+            quantity: HKQuantity(unit: .secondUnit(with: .milli), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "80404-7",
+                    display: "R-R interval.standard deviation (Heart rate variability)"
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "ms",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "ms",
+                    value: 100.asFHIRDecimalPrimitive()
                 )
             )
         )
@@ -275,6 +371,180 @@ class HealthKitOnFHIRTests: XCTestCase {
                     system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
                     unit: "breaths/minute",
                     value: 18.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testActiveEnergyBurnedSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.activeEnergyBurned),
+            quantity: HKQuantity(unit: .largeCalorie(), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                loincCode(
+                    code: "41981-2",
+                    display: "Calories burned"
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "kcal",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "kcal",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testAppleExerciseTimeSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.appleExerciseTime),
+            quantity: HKQuantity(unit: .minute(), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                appleCode(
+                    code: "HKQuantityTypeIdentifierAppleExerciseTime",
+                    display: "Apple Exercise Time"
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "min",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "min",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testAppleMoveTimeSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.appleMoveTime),
+            quantity: HKQuantity(unit: .minute(), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                appleCode(
+                    code: "HKQuantityTypeIdentifierAppleMoveTime",
+                    display: "Apple Move Time"
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "min",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "min",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testAppleStandTimeSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.appleStandTime),
+            quantity: HKQuantity(unit: .minute(), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                appleCode(
+                    code: "HKQuantityTypeIdentifierAppleStandTime",
+                    display: "Apple Stand Time"
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "min",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "min",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testEnvironmentalAudioExposureSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.environmentalAudioExposure),
+            quantity: HKQuantity(unit: .decibelAWeightedSoundPressureLevel(), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                appleCode(
+                    code: "HKQuantityTypeIdentifierEnvironmentalAudioExposure",
+                    display: "Environmental Audio Exposure"
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "dB(SPL)",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "dB(SPL)",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testHeadphoneAudioExposureSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.headphoneAudioExposure),
+            quantity: HKQuantity(unit: .decibelAWeightedSoundPressureLevel(), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                appleCode(
+                    code: "HKQuantityTypeIdentifierHeadphoneAudioExposure",
+                    display: "Headphone Audio Exposure"
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "dB(SPL)",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "dB(SPL)",
+                    value: 100.asFHIRDecimalPrimitive()
                 )
             )
         )

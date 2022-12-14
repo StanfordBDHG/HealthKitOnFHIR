@@ -14,6 +14,66 @@
         }
     },
     "HKQuantitySamples": {
+        "HKQuantityTypeIdentifierActiveEnergyBurned": {
+            "codings": [
+                {
+                    "system": "http://loinc.org",
+                    "code": "41981-2",
+                    "display": "Calories burned"
+                }
+            ],
+            "unit": {
+                "hkunit": "kcal",
+                "unit": "kcal",
+                "system": "http://unitsofmeasure.org",
+                "code": "kcal"
+            }
+        },
+        "HKQuantityTypeIdentifierAppleExerciseTime" : {
+            "codings": [
+                {
+                    "system": "https://developer.apple.com/documentation/healthkit",
+                    "code": "HKQuantityTypeIdentifierAppleExerciseTime",
+                    "display": "Apple Exercise Time"
+                }
+            ],
+            "unit": {
+                "hkunit": "min",
+                "unit": "min",
+                "system": "http://unitsofmeasure.org",
+                "code": "min"
+            }
+        },
+        "HKQuantityTypeIdentifierAppleMoveTime" : {
+            "codings": [
+                {
+                    "system": "https://developer.apple.com/documentation/healthkit",
+                    "code": "HKQuantityTypeIdentifierAppleMoveTime",
+                    "display": "Apple Move Time"
+                }
+            ],
+            "unit": {
+                "hkunit": "min",
+                "unit": "min",
+                "system": "http://unitsofmeasure.org",
+                "code": "min"
+            }
+        },
+        "HKQuantityTypeIdentifierAppleStandTime" : {
+            "codings": [
+                {
+                    "system": "https://developer.apple.com/documentation/healthkit",
+                    "code": "HKQuantityTypeIdentifierAppleStandTime",
+                    "display": "Apple Stand Time"
+                }
+            ],
+            "unit": {
+                "hkunit": "min",
+                "unit": "min",
+                "system": "http://unitsofmeasure.org",
+                "code": "min"
+            }
+        },
         "HKQuantityTypeIdentifierBloodGlucose": {
             "codings": [
                 {
@@ -89,6 +149,51 @@
                 "code": "Cel"
             }
         },
+        "HKQuantityTypeIdentifierDietaryEnergyConsumed": {
+            "codings": [
+                {
+                    "code": "9052-2",
+                    "display": "Calorie intake total",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "kcal",
+                "unit": "kcal",
+                "system": "http://unitsofmeasure.org",
+                "code": "kcal"
+            }
+        },
+        "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierEnvironmentalAudioExposure",
+                    "display": "Environmental Audio Exposure",
+                    "system": "https://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "dBASPL",
+                "unit": "dB(SPL)",
+                "system": "http://unitsofmeasure.org",
+                "code": "dB(SPL)"
+            }
+        },
+        "HKQuantityTypeIdentifierHeadphoneAudioExposure": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierHeadphoneAudioExposure",
+                    "display": "Headphone Audio Exposure",
+                    "system": "https://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "dBASPL",
+                "unit": "dB(SPL)",
+                "system": "http://unitsofmeasure.org",
+                "code": "dB(SPL)"
+            }
+        },
         "HKQuantityTypeIdentifierHeartRate": {
             "codings": [
                 {
@@ -102,6 +207,21 @@
                 "unit": "beats/minute",
                 "system": "http://unitsofmeasure.org",
                 "code": "/min"
+            }
+        },
+        "HKQuantityTypeIdentifierHeartRateVariabilitySDNN": {
+            "codings": [
+                {
+                    "code": "80404-7",
+                    "display": "R-R interval.standard deviation (Heart rate variability)",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "ms",
+                "unit": "ms",
+                "system": "http://unitsofmeasure.org",
+                "code": "ms"
             }
         },
         "HKQuantityTypeIdentifierHeight": {
@@ -149,6 +269,21 @@
                 "code": "/min"
             }
         },
+        "HKQuantityTypeIdentifierRestingHeartRate": {
+            "codings": [
+                {
+                    "code": "40443-4",
+                    "display": "Heart rate --resting",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "count/min",
+                "unit": "beats/minute",
+                "system": "http://unitsofmeasure.org",
+                "code": "/min"
+            }
+        },
         "HKQuantityTypeIdentifierStepCount": {
             "codings": [
                 {
@@ -160,6 +295,21 @@
             "unit": {
                 "hkunit": "count",
                 "unit": "steps"
+            }
+        },
+        "HKQuantityTypeIdentifierWalkingHeartRateAverage": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierWalkingHeartRateAverage",
+                    "display": "Walking Heart Rate Average",
+                    "system": "https://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count/min",
+                "unit": "beats/minute",
+                "system": "http://unitsofmeasure.org",
+                "code": "/min"
             }
         }
     }
