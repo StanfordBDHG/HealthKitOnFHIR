@@ -122,7 +122,13 @@ for type in quantity_types:
     
     code = quantity_types[type]['codings'][0]['code']
     code_system = quantity_types[type]['codings'][0]['system']
-    linked_code = '[{}]({})'.format(code, code_system)
+
+    if code_system == "http://loinc.org":
+        code_url = '{}/{}'.format(code_system, code)
+    else:
+        code_url = code_system
+
+    linked_code = '[{}]({})'.format(code, code_url)
 
     unit = quantity_types[type]['unit']['unit']
     
