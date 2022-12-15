@@ -18,7 +18,7 @@ SPDX-License-Identifier: MIT
 - Customizable mappings between HealthKit data types and standardized codes (e.g., LOINC)
 
 ## Supported HealthKit Data Types
-- Please refer to the [HKObject Support Table](SUPPORT_TABLE.md) for a complete list of supported types.
+- Please refer to the [HKObject Support Table](Documentation/SUPPORT_TABLE.md) for a complete list of supported types.
 
 ## Installation
 HealthKitOnFHIR can be installed into your Xcode project using [Swift Package Manager](https://github.com/apple/swift-package-manager).
