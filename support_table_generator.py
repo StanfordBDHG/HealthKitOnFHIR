@@ -113,11 +113,10 @@ SPDX-License-Identifier: MIT
 """
 markdown_file.write(reuse_header + '\n\n' + '# HKObject Support Table ' + '\n\n')
 
+# Add all the supported types
 quantity_types = data['HKQuantitySamples']
-
 rows = []
 
-# Add all the supported types
 for type in quantity_types:
     formatted_type = type.removeprefix('HKQuantityTypeIdentifier')
     
@@ -137,11 +136,11 @@ for type in all_quantity_types:
         rows.append([formatted_type, ":x:", "-", "-"])
 
 # Sort the rows alphabetically
-stats = 'HealthKitOnFHIR supports {} of {} quantity types.'.format(len(quantity_types), len(all_quantity_types))
-markdown_file.write(stats + '\n\n')
+rows = sorted(rows, key=itemgetter(0))
 
 # Write the statistics
-quantity_types[type]['unit']['unit']
+stats = 'HealthKitOnFHIR supports {} of {} quantity types.'.format(len(quantity_types), len(all_quantity_types))
+markdown_file.write(stats + '\n\n')
 
 # Write the table header
 markdown_file.write('|HKQuantityType|Supported|Code|Unit|' + '\n' + '|----|----|----|----|' + '\n')
