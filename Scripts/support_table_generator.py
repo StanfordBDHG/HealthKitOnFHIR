@@ -210,7 +210,7 @@ def create_correlation_types_table():
 
     # Link all the HealthKit types to Apple docs
     for type in rows:
-        type[0] = '[{}]({})'.format(type[0].removeprefix('HKCorrelationTypeIdentifier'), HEALTHKIT_URL + type[0])
+        type[0] = '[{}]({})'.format(type[0].removeprefix('HKCorrelationTypeIdentifier'), HEALTHKIT_URL + '/' + type[0])
 
     # Add the statistics
     stats = 'HealthKitOnFHIR supports {} of {} correlation types.'.format(len(correlation_types), len(ALL_CORRELATION_TYPES))
