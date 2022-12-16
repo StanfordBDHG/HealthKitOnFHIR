@@ -134,6 +134,36 @@
                 "code": "mm[Hg]"
             }
         },
+        "HKQuantityTypeIdentifierBasalBodyTemperature": {
+            "codings": [
+                {
+                    "code": "300076005",
+                    "display": "Basal body temperature (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "degC",
+                "unit": "C",
+                "system": "http://unitsofmeasure.org",
+                "code": "Cel"
+            }
+        },
+        "HKQuantityTypeIdentifierBloodAlcoholContent": {
+            "codings": [
+                {
+                    "code": "74859-0",
+                    "display": "Ethanol [Mass/volume] in Blood Estimated from serum or plasma level",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "%",
+                "unit": "%",
+                "system": "http://unitsofmeasure.org",
+                "code": "%"
+            }
+        },
         "HKQuantityTypeIdentifierBodyTemperature": {
             "codings": [
                 {

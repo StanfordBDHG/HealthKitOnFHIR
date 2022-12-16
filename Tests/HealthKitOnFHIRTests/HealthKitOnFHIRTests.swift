@@ -42,20 +42,18 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
         return try quantitySample.observation
     }
-    
-    func loincCode(code: String, display: String) -> Coding {
-        Coding(
-            code: FHIRPrimitive(stringLiteral: code),
-            display: FHIRPrimitive(stringLiteral: display),
-            system: FHIRPrimitive(FHIRURI(stringLiteral: "http://loinc.org"))
-        )
+
+    enum codeSystem: String {
+        case loinc = "http://loinc.org"
+        case apple = "https://developer.apple.com/documentation/healthkit"
+        case snomedCT = "http://snomed.info/sct"
     }
 
-    func appleCode(code: String, display: String) -> Coding {
+    func createCoding(code: String, display: String, system: codeSystem) -> Coding {
         Coding(
             code: FHIRPrimitive(stringLiteral: code),
             display: FHIRPrimitive(stringLiteral: display),
-            system: FHIRPrimitive(FHIRURI(stringLiteral: "https://developer.apple.com/documentation/healthkit"))
+            system: FHIRPrimitive(FHIRURI(stringLiteral: system.rawValue))
         )
     }
     
@@ -68,9 +66,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "41653-7",
-                    display: "Glucose Glucometer (BldC) [Mass/Vol]"
+                    display: "Glucose Glucometer (BldC) [Mass/Vol]",
+                    system: .loinc
                 )
             ]
         )
@@ -97,9 +96,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "55423-8",
-                    display: "Number of steps in unspecified time Pedometer"
+                    display: "Number of steps in unspecified time Pedometer",
+                    system: .loinc
                 )
             ]
         )
@@ -124,9 +124,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "8867-4",
-                    display: "Heart rate"
+                    display: "Heart rate",
+                    system: .loinc
                 )
             ]
         )
@@ -153,9 +154,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "40443-4",
-                    display: "Heart rate --resting"
+                    display: "Heart rate --resting",
+                    system: .loinc
                 )
             ]
         )
@@ -182,9 +184,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                appleCode(
+                createCoding(
                     code: "HKQuantityTypeIdentifierWalkingHeartRateAverage",
-                    display: "Walking Heart Rate Average"
+                    display: "Walking Heart Rate Average",
+                    system: .apple
                 )
             ]
         )
@@ -211,9 +214,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "80404-7",
-                    display: "R-R interval.standard deviation (Heart rate variability)"
+                    display: "R-R interval.standard deviation (Heart rate variability)",
+                    system: .loinc
                 )
             ]
         )
@@ -240,9 +244,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "59408-5",
-                    display: "Oxygen saturation in Arterial blood by Pulse oximetry"
+                    display: "Oxygen saturation in Arterial blood by Pulse oximetry",
+                    system: .loinc
                 )
             ]
         )
@@ -269,9 +274,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "8310-5",
-                    display: "Body temperature"
+                    display: "Body temperature",
+                    system: .loinc
                 )
             ]
         )
@@ -288,6 +294,66 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testBasalBodyTemperatureSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.basalBodyTemperature),
+            quantity: HKQuantity(unit: .degreeCelsius(), doubleValue: 37)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "300076005",
+                    display: "Basal body temperature (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "Cel",
+                    system: "http://unitsofmeasure.org",
+                    unit: "C",
+                    value: 37.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testBloodAlcoholContentSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.bloodAlcoholContent),
+            quantity: HKQuantity(unit: .percent(), doubleValue: 0.0)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "74859-0",
+                    display: "Ethanol [Mass/volume] in Blood Estimated from serum or plasma level",
+                    system: .loinc
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "%",
+                    system: "http://unitsofmeasure.org",
+                    unit: "%",
+                    value: 0.0.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testHeightSample() throws {
         let observation = try createObservationFrom(
@@ -298,9 +364,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "8302-2",
-                    display: "Body height"
+                    display: "Body height",
+                    system: .loinc
                 )
             ]
         )
@@ -327,9 +394,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "29463-7",
-                    display: "Body weight"
+                    display: "Body weight",
+                    system: .loinc
                 )
             ]
         )
@@ -356,9 +424,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "9279-1",
-                    display: "Respiratory rate"
+                    display: "Respiratory rate",
+                    system: .loinc
                 )
             ]
         )
@@ -385,9 +454,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                loincCode(
+                createCoding(
                     code: "41981-2",
-                    display: "Calories burned"
+                    display: "Calories burned",
+                    system: .loinc
                 )
             ]
         )
@@ -414,9 +484,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                appleCode(
+                createCoding(
                     code: "HKQuantityTypeIdentifierAppleExerciseTime",
-                    display: "Apple Exercise Time"
+                    display: "Apple Exercise Time",
+                    system: .apple
                 )
             ]
         )
@@ -443,9 +514,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                appleCode(
+                createCoding(
                     code: "HKQuantityTypeIdentifierAppleMoveTime",
-                    display: "Apple Move Time"
+                    display: "Apple Move Time",
+                    system: .apple
                 )
             ]
         )
@@ -472,9 +544,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                appleCode(
+                createCoding(
                     code: "HKQuantityTypeIdentifierAppleStandTime",
-                    display: "Apple Stand Time"
+                    display: "Apple Stand Time",
+                    system: .apple
                 )
             ]
         )
@@ -501,9 +574,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                appleCode(
+                createCoding(
                     code: "HKQuantityTypeIdentifierEnvironmentalAudioExposure",
-                    display: "Environmental Audio Exposure"
+                    display: "Environmental Audio Exposure",
+                    system: .apple
                 )
             ]
         )
@@ -530,9 +604,10 @@ class HealthKitOnFHIRTests: XCTestCase {
         XCTAssertEqual(
             observation.code.coding,
             [
-                appleCode(
+                createCoding(
                     code: "HKQuantityTypeIdentifierHeadphoneAudioExposure",
-                    display: "Headphone Audio Exposure"
+                    display: "Headphone Audio Exposure",
+                    system: .apple
                 )
             ]
         )
