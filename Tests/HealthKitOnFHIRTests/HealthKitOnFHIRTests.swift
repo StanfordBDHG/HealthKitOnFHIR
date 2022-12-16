@@ -326,6 +326,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testDietaryFatMonounsaturated() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryFatMonounsaturated),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 35)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "226329008",
+                    display: "Monounsaturated fat intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "g",
+                    system: "http://unitsofmeasure.org",
+                    unit: "g",
+                    value: 35.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testStepCount() throws {
         let observation = try createObservationFrom(

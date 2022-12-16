@@ -359,6 +359,21 @@
                 "code": "ug"
             }
         },
+        "HKQuantityTypeIdentifierDietaryFatMonounsaturated": {
+            "codings": [
+                {
+                    "code": "226329008",
+                    "display": "Monounsaturated fat intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "g",
+                "unit": "g",
+                "system": "http://unitsofmeasure.org",
+                "code": "g"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
