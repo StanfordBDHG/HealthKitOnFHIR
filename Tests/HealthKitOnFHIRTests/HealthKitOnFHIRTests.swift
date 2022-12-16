@@ -1224,6 +1224,34 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testFlightsClimbed() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.flightsClimbed),
+            quantity: HKQuantity(unit: .count(), doubleValue: 10)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "100304-5",
+                    display: "Flights climbed [#] Reporting Period",
+                    system: .loinc
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "flights",
+                    value: 10.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testHeartRateSample() throws {
         let observation = try createObservationFrom(

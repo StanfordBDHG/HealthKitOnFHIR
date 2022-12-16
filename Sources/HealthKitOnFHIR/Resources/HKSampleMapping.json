@@ -884,6 +884,19 @@
                 "code": "dB(SPL)"
             }
         },
+        "HKQuantityTypeIdentifierFlightsClimbed": {
+            "codings": [
+                {
+                    "code": "100304-5",
+                    "display": "Flights climbed [#] Reporting Period",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "flights"
+            }
+        },
         "HKQuantityTypeIdentifierHeadphoneAudioExposure": {
             "codings": [
                 {
