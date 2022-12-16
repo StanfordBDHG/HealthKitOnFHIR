@@ -299,6 +299,21 @@
                 "code": "g"
             }
         },
+        "HKQuantityTypeIdentifierDietaryChloride": {
+            "codings": [
+                {
+                    "code": "1148944005",
+                    "display": "Chloride salt intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {

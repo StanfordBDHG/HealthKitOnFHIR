@@ -206,6 +206,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testDietaryChloride() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryChloride),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 2300)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "1148944005",
+                    display: "Chloride salt intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 2300.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testStepCount() throws {
         let observation = try createObservationFrom(
