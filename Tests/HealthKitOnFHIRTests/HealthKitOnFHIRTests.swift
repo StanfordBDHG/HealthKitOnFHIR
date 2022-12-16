@@ -596,6 +596,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testDietaryMolybdenum() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryMolybdenum),
+            quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 45)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "890200004",
+                    display: "Molybdenum intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "ug",
+                    system: "http://unitsofmeasure.org",
+                    unit: "ug",
+                    value: 45.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testStepCount() throws {
         let observation = try createObservationFrom(

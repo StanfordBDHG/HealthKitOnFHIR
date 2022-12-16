@@ -494,6 +494,21 @@
                 "code": "mg"
             }
         },
+        "HKQuantityTypeIdentifierDietaryMolybdenum": {
+            "codings": [
+                {
+                    "code": "890200004",
+                    "display": "Molybdenum intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
