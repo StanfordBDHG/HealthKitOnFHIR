@@ -1226,6 +1226,66 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testForcedExpiratoryVolume1() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.forcedExpiratoryVolume1),
+            quantity: HKQuantity(unit: .liter(), doubleValue: 3.5)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "20150-9",
+                    display: "FEV1",
+                    system: .loinc
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "L",
+                    system: "http://unitsofmeasure.org",
+                    unit: "liters",
+                    value: 3.5.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testForcedVitalCapacity() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.forcedVitalCapacity),
+            quantity: HKQuantity(unit: .liter(), doubleValue: 5.5)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "19870-5",
+                    display: "Forced vital capacity [Volume] Respiratory system",
+                    system: .loinc
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "L",
+                    system: "http://unitsofmeasure.org",
+                    unit: "liters",
+                    value: 5.5.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
 
     func testStepCount() throws {
         let observation = try createObservationFrom(

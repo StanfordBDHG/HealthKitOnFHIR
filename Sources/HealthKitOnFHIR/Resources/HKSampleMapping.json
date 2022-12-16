@@ -912,6 +912,36 @@
                 "code": "S"
             }
         },
+        "HKQuantityTypeIdentifierForcedExpiratoryVolume1": {
+            "codings": [
+                {
+                    "code": "20150-9",
+                    "display": "FEV1",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "l",
+                "unit": "liters",
+                "system": "http://unitsofmeasure.org",
+                "code": "L"
+            }
+        },
+        "HKQuantityTypeIdentifierForcedVitalCapacity": {
+            "codings": [
+                {
+                    "code": "19870-5",
+                    "display": "Forced vital capacity [Volume] Respiratory system",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "l",
+                "unit": "liters",
+                "system": "http://unitsofmeasure.org",
+                "code": "L"
+            }
+        },
         "HKQuantityTypeIdentifierHeadphoneAudioExposure": {
             "codings": [
                 {
