@@ -179,6 +179,21 @@
                 "code": "%"
             }
         },
+        "HKQuantityTypeIdentifierBodyFatPercentage": {
+            "codings": [
+                {
+                    "code": "41982-0",
+                    "display": "Percentage of body fat Measured",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "%",
+                "unit": "%",
+                "system": "http://unitsofmeasure.org",
+                "code": "%"
+            }
+        },
         "HKQuantityTypeIdentifierBodyTemperature": {
             "codings": [
                 {

@@ -384,6 +384,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testBodyFatAlcoholPercentageSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.bodyFatPercentage),
+            quantity: HKQuantity(unit: .percent(), doubleValue: 21)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "41982-0",
+                    display: "Percentage of body fat Measured",
+                    system: .loinc
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "%",
+                    system: "http://unitsofmeasure.org",
+                    unit: "%",
+                    value: 21.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testHeightSample() throws {
         let observation = try createObservationFrom(
