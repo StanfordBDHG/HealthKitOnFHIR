@@ -404,6 +404,21 @@
                 "code": "g"
             }
         },
+        "HKQuantityTypeIdentifierDietaryFatTotal": {
+            "codings": [
+                {
+                    "code": "897147002",
+                    "display": "Measured quantity of fat and oil intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "g",
+                "unit": "g",
+                "system": "http://unitsofmeasure.org",
+                "code": "g"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {

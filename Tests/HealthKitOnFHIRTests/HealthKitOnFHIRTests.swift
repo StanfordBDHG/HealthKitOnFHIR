@@ -416,6 +416,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testDietaryFatTotal() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryFatTotal),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 66)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "897147002",
+                    display: "Measured quantity of fat and oil intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "g",
+                    system: "http://unitsofmeasure.org",
+                    unit: "g",
+                    value: 66.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testStepCount() throws {
         let observation = try createObservationFrom(
