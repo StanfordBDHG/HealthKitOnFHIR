@@ -434,6 +434,21 @@
                 "code": "g"
             }
         },
+        "HKQuantityTypeIdentifierDietaryFolate": {
+            "codings": [
+                {
+                    "code": "792806007",
+                    "display": "Folate and/or folate derivative intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {

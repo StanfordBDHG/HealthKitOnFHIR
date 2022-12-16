@@ -476,6 +476,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testDietaryFolate() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryFolate),
+            quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 400)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "792806007",
+                    display: "Folate and/or folate derivative intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "ug",
+                    system: "http://unitsofmeasure.org",
+                    unit: "ug",
+                    value: 400.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testStepCount() throws {
         let observation = try createObservationFrom(
