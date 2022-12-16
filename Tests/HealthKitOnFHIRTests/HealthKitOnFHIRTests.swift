@@ -146,6 +146,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testDietaryCalcium() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryCalcium),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1000)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "230122008",
+                    display: "Calcium intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 1000.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testStepCount() throws {
         let observation = try createObservationFrom(
