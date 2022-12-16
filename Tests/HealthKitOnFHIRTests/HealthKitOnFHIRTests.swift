@@ -16,7 +16,7 @@ class HealthKitOnFHIRTests: XCTestCase {
     // We disable the type body length as this is a test class
     enum CodeSystem: String {
         case loinc = "http://loinc.org"
-        case apple = "https://developer.apple.com/documentation/healthkit"
+        case apple = "http://developer.apple.com/documentation/healthkit"
         case snomedCT = "http://snomed.info/sct"
     }
 
@@ -1759,6 +1759,156 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "min",
                     system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
                     unit: "min",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDistanceCyclingSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.distanceCycling),
+            quantity: HKQuantity(unit: .meter(), doubleValue: 1000)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierDistanceCycling",
+                    display: "Distance Cycling",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "m",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "m",
+                    value: 1000.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDistanceDownhillSnowSports() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.distanceDownhillSnowSports),
+            quantity: HKQuantity(unit: .meter(), doubleValue: 1000)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierDistanceDownhillSnowSports",
+                    display: "Distance Downhill Snow Sports",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "m",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "m",
+                    value: 1000.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDistanceSwimming() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.distanceSwimming),
+            quantity: HKQuantity(unit: .meter(), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "93816-7",
+                    display: "Swimming distance unspecified time",
+                    system: .loinc
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "m",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "m",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDistanceWalkingRunning() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.distanceWalkingRunning),
+            quantity: HKQuantity(unit: .meter(), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierDistanceWalkingRunning",
+                    display: "Distance Walking or Running",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "m",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "m",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDistanceWheelchair() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.distanceWheelchair),
+            quantity: HKQuantity(unit: .meter(), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierDistanceWheelchair",
+                    display: "Distance in a Wheelchair",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "m",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "m",
                     value: 100.asFHIRDecimalPrimitive()
                 )
             )

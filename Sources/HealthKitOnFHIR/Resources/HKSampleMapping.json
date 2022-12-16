@@ -32,7 +32,7 @@
         "HKQuantityTypeIdentifierAppleExerciseTime" : {
             "codings": [
                 {
-                    "system": "https://developer.apple.com/documentation/healthkit",
+                    "system": "http://developer.apple.com/documentation/healthkit",
                     "code": "HKQuantityTypeIdentifierAppleExerciseTime",
                     "display": "Apple Exercise Time"
                 }
@@ -47,7 +47,7 @@
         "HKQuantityTypeIdentifierAppleMoveTime" : {
             "codings": [
                 {
-                    "system": "https://developer.apple.com/documentation/healthkit",
+                    "system": "http://developer.apple.com/documentation/healthkit",
                     "code": "HKQuantityTypeIdentifierAppleMoveTime",
                     "display": "Apple Move Time"
                 }
@@ -62,7 +62,7 @@
         "HKQuantityTypeIdentifierAppleStandTime" : {
             "codings": [
                 {
-                    "system": "https://developer.apple.com/documentation/healthkit",
+                    "system": "http://developer.apple.com/documentation/healthkit",
                     "code": "HKQuantityTypeIdentifierAppleStandTime",
                     "display": "Apple Stand Time"
                 }
@@ -154,7 +154,7 @@
                 {
                     "code": "HKQuantityTypeIdentifierBasalEnergyBurned",
                     "display": "Basal energy burned",
-                    "system": "https://developer.apple.com/documentation/healthkit"
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -319,7 +319,7 @@
                 {
                     "code": "HKQuantityTypeIdentifierDietaryCholesterol",
                     "display": "Dietary Cholesterol",
-                    "system": "https://developer.apple.com/documentation/healthkit"
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -794,13 +794,87 @@
                 "code": "mg"
             }
         },
-
+        "HKQuantityTypeIdentifierDistanceCycling": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDistanceCycling",
+                    "display": "Distance Cycling",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "m",
+                "unit": "m",
+                "system": "http://unitsofmeasure.org",
+                "code": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierDistanceDownhillSnowSports": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDistanceDownhillSnowSports",
+                    "display": "Distance Downhill Snow Sports",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "m",
+                "unit": "m",
+                "system": "http://unitsofmeasure.org",
+                "code": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierDistanceWalkingRunning": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDistanceWalkingRunning",
+                    "display": "Distance Walking or Running",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "m",
+                "unit": "m",
+                "system": "http://unitsofmeasure.org",
+                "code": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierDistanceSwimming": {
+            "codings": [
+                {
+                    "code": "93816-7",
+                    "display": "Swimming distance unspecified time",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "m",
+                "unit": "m",
+                "system": "http://unitsofmeasure.org",
+                "code": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierDistanceWheelchair": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDistanceWheelchair",
+                    "display": "Distance in a Wheelchair",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "m",
+                "unit": "m",
+                "system": "http://unitsofmeasure.org",
+                "code": "m"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
                     "code": "HKQuantityTypeIdentifierEnvironmentalAudioExposure",
                     "display": "Environmental Audio Exposure",
-                    "system": "https://developer.apple.com/documentation/healthkit"
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -815,7 +889,7 @@
                 {
                     "code": "HKQuantityTypeIdentifierHeadphoneAudioExposure",
                     "display": "Headphone Audio Exposure",
-                    "system": "https://developer.apple.com/documentation/healthkit"
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -933,7 +1007,7 @@
                 {
                     "code": "HKQuantityTypeIdentifierWalkingHeartRateAverage",
                     "display": "Walking Heart Rate Average",
-                    "system": "https://developer.apple.com/documentation/healthkit"
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
