@@ -419,6 +419,21 @@
                 "code": "g"
             }
         },
+        "HKQuantityTypeIdentifierDietaryFiber": {
+            "codings": [
+                {
+                    "code": "LP203183-1",
+                    "display": "Fiber intake",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "g",
+                "unit": "g",
+                "system": "http://unitsofmeasure.org",
+                "code": "g"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
