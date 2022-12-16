@@ -1136,6 +1136,67 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testDietaryWater() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryWater),
+            quantity: HKQuantity(unit: .liter(), doubleValue: 2)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "226354008",
+                    display: "Water intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "l",
+                    system: "http://unitsofmeasure.org",
+                    unit: "l",
+                    value: 2.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryZinc() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryZinc),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 11)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "286617004",
+                    display: "Zinc intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 11.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+
     func testStepCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),

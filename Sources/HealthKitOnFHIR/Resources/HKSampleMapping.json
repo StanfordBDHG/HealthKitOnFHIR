@@ -764,6 +764,37 @@
                 "code": "ug"
             }
         },
+        "HKQuantityTypeIdentifierDietaryWater": {
+            "codings": [
+                {
+                    "code": "226354008",
+                    "display": "Water intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "l",
+                "unit": "l",
+                "system": "http://unitsofmeasure.org",
+                "code": "l"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryZinc": {
+            "codings": [
+                {
+                    "code": "286617004",
+                    "display": "Zinc intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
+
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
