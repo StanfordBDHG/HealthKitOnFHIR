@@ -329,6 +329,21 @@
                 "code": "mg"
             }
         },
+        "HKQuantityTypeIdentifierDietaryChromium": {
+            "codings": [
+                {
+                    "code": "890196009",
+                    "display": "Chromium intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {

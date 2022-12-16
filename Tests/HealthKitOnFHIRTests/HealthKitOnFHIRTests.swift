@@ -266,6 +266,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testDietaryChromium() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryChromium),
+            quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 25)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "890196009",
+                    display: "Chromium intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "ug",
+                    system: "http://unitsofmeasure.org",
+                    unit: "ug",
+                    value: 25.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testStepCount() throws {
         let observation = try createObservationFrom(
