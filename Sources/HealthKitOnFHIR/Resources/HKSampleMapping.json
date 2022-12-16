@@ -942,6 +942,19 @@
                 "code": "L"
             }
         },
+        "HKQuantityTypeIdentifierInhalerUsage": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierInhalerUsage",
+                    "display": "Inhaler Usage",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "count"
+            }
+        },
         "HKQuantityTypeIdentifierHeadphoneAudioExposure": {
             "codings": [
                 {

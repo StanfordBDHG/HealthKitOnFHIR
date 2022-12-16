@@ -1286,6 +1286,34 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testInhalerUsage() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.inhalerUsage),
+            quantity: HKQuantity(unit: .count(), doubleValue: 3)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierInhalerUsage",
+                    display: "Inhaler Usage",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "count",
+                    value: 3.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
 
     func testStepCount() throws {
         let observation = try createObservationFrom(
