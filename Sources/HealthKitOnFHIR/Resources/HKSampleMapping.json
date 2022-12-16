@@ -389,6 +389,21 @@
                 "code": "g"
             }
         },
+        "HKQuantityTypeIdentifierDietaryFatSaturated": {
+            "codings": [
+                {
+                    "code": "226328000",
+                    "display": "Saturated fat intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "g",
+                "unit": "g",
+                "system": "http://unitsofmeasure.org",
+                "code": "g"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {

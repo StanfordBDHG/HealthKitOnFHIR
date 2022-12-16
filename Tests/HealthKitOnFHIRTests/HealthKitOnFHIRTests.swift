@@ -330,7 +330,7 @@ class HealthKitOnFHIRTests: XCTestCase {
     func testDietaryFatMonounsaturated() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryFatMonounsaturated),
-            quantity: HKQuantity(unit: .gram(), doubleValue: 900)
+            quantity: HKQuantity(unit: .gram(), doubleValue: 22)
         )
 
         XCTAssertEqual(
@@ -351,7 +351,7 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "g",
                     system: "http://unitsofmeasure.org",
                     unit: "g",
-                    value: 900.asFHIRDecimalPrimitive()
+                    value: 22.asFHIRDecimalPrimitive()
                 )
             )
         )
@@ -369,6 +369,36 @@ class HealthKitOnFHIRTests: XCTestCase {
                 createCoding(
                     code: "226330003",
                     display: "Polyunsaturated fat intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "g",
+                    system: "http://unitsofmeasure.org",
+                    unit: "g",
+                    value: 30.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryFatSaturated() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryFatSaturated),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 30)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "226328000",
+                    display: "Saturated fat intake (observable entity)",
                     system: .snomedCT
                 )
             ]
