@@ -236,6 +236,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testDietaryCholesterol() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryCholesterol),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 100)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierDietaryCholesterol",
+                    display: "Dietary Cholesterol",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testStepCount() throws {
         let observation = try createObservationFrom(

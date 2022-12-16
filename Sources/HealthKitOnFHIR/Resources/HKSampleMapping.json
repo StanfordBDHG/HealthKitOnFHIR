@@ -314,6 +314,21 @@
                 "code": "mg"
             }
         },
+        "HKQuantityTypeIdentifierDietaryCholesterol": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryCholesterol",
+                    "display": "Dietary Cholesterol",
+                    "system": "https://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
