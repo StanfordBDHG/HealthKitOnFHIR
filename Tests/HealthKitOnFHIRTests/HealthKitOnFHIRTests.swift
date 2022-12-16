@@ -14,6 +14,11 @@ import XCTest
 class HealthKitOnFHIRTests: XCTestCase {
     // swiftlint:disable:previous type_body_length
     // We disable the type body length as this is a test class
+    enum CodeSystem: String {
+        case loinc = "http://loinc.org"
+        case apple = "https://developer.apple.com/documentation/healthkit"
+        case snomedCT = "http://snomed.info/sct"
+    }
 
     var startDate: Date {
         get throws {
@@ -43,13 +48,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         return try quantitySample.observation
     }
 
-    enum codeSystem: String {
-        case loinc = "http://loinc.org"
-        case apple = "https://developer.apple.com/documentation/healthkit"
-        case snomedCT = "http://snomed.info/sct"
-    }
-
-    func createCoding(code: String, display: String, system: codeSystem) -> Coding {
+    func createCoding(code: String, display: String, system: CodeSystem) -> Coding {
         Coding(
             code: FHIRPrimitive(stringLiteral: code),
             display: FHIRPrimitive(stringLiteral: display),
