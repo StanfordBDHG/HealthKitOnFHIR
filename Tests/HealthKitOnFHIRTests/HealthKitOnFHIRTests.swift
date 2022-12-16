@@ -697,7 +697,7 @@ class HealthKitOnFHIRTests: XCTestCase {
             [
                 createCoding(
                     code: "1148504005",
-                    display: "1148504005",
+                    display: "Sodium intake (observable entity)",
                     system: .snomedCT
                 )
             ]
@@ -775,7 +775,127 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
-    
+
+    func testDietaryProtein() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryProtein),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 40)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "1179049004",
+                    display: "Measured quantity of intake of protein and/or protein derivative (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "g",
+                    system: "http://unitsofmeasure.org",
+                    unit: "g",
+                    value: 40.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryRiboflavin() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryRiboflavin),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1.3)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "286581000",
+                    display: "Vitamin B2 intake (observable entity)", // Riboflavin is a synonym for Vitamin B2
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 1.3.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietarySelenium() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietarySelenium),
+            quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 55)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "286616008",
+                    display: "Selenium intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "ug",
+                    system: "http://unitsofmeasure.org",
+                    unit: "ug",
+                    value: 55.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietarySugar() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietarySugar),
+            quantity: HKQuantity(unit: .gram(), doubleValue: 30)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "226459004",
+                    display: "Sugar intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "g",
+                    system: "http://unitsofmeasure.org",
+                    unit: "g",
+                    value: 30.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
     func testStepCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),

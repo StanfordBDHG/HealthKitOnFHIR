@@ -554,6 +554,66 @@
                 "code": "mg"
             }
         },
+        "HKQuantityTypeIdentifierDietaryProtein": {
+            "codings": [
+                {
+                    "code": "1179049004",
+                    "display": "Measured quantity of intake of protein and/or protein derivative (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "g",
+                "unit": "g",
+                "system": "http://unitsofmeasure.org",
+                "code": "g"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryRiboflavin": {
+            "codings": [
+                {
+                    "code": "286581000",
+                    "display": "Vitamin B2 intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietarySelenium": {
+            "codings": [
+                {
+                    "code": "286616008",
+                    "display": "Selenium intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
+        "HKQuantityTypeIdentifierDietarySugar": {
+            "codings": [
+                {
+                    "code": "226459004",
+                    "display": "Sugar intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "g",
+                "unit": "g",
+                "system": "http://unitsofmeasure.org",
+                "code": "g"
+            }
+        },
         "HKQuantityTypeIdentifierDietaryPotassium": {
             "codings": [
                 {
@@ -573,7 +633,7 @@
             "codings": [
                 {
                     "code": "1148504005",
-                    "display": "1148504005",
+                    "display": "Sodium intake (observable entity)",
                     "system": "http://snomed.info/sct"
                 }
             ],
