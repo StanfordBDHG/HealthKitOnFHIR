@@ -449,6 +449,21 @@
                 "code": "ug"
             }
         },
+        "HKQuantityTypeIdentifierDietaryIodine": {
+            "codings": [
+                {
+                    "code": "890199002",
+                    "display": "Iodine intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
