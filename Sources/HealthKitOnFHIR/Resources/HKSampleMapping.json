@@ -149,6 +149,21 @@
                 "code": "Cel"
             }
         },
+        "HKQuantityTypeIdentifierBasalEnergyBurned": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierBasalEnergyBurned",
+                    "display": "Basal energy burned",
+                    "system": "https://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "kcal",
+                "unit": "kcal",
+                "system": "http://unitsofmeasure.org",
+                "code": "kcal"
+            }
+        },
         "HKQuantityTypeIdentifierBloodAlcoholContent": {
             "codings": [
                 {

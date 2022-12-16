@@ -325,6 +325,36 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testBasalEnergyBurnedSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.basalEnergyBurned),
+            quantity: HKQuantity(unit: HKUnit(from: "kcal"), doubleValue: 1200)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierBasalEnergyBurned",
+                    display: "Basal energy burned",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "kcal",
+                    system: "http://unitsofmeasure.org",
+                    unit: "kcal",
+                    value: 1200.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
     func testBloodAlcoholContentSample() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bloodAlcoholContent),
