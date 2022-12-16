@@ -464,6 +464,21 @@
                 "code": "ug"
             }
         },
+        "HKQuantityTypeIdentifierDietaryMagnesium": {
+            "codings": [
+                {
+                    "code": "230124009",
+                    "display": "Magnesium intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
