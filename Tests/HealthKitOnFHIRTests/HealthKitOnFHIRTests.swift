@@ -1196,6 +1196,36 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testElectrodermalActivity() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.electrodermalActivity),
+            quantity: HKQuantity(unit: .siemen(), doubleValue: 0.000001)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierElectrodermalActivity",
+                    display: "Electrodermal Activity",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "S",
+                    system: "http://unitsofmeasure.org",
+                    unit: "siemens",
+                    value: 0.000001.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
 
     func testStepCount() throws {
         let observation = try createObservationFrom(

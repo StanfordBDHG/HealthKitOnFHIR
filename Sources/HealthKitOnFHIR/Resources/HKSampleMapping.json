@@ -897,6 +897,21 @@
                 "unit": "flights"
             }
         },
+        "HKQuantityTypeIdentifierElectrodermalActivity": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierElectrodermalActivity",
+                    "display": "Electrodermal Activity",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "S",
+                "unit": "siemens",
+                "system": "http://unitsofmeasure.org",
+                "code": "S"
+            }
+        },
         "HKQuantityTypeIdentifierHeadphoneAudioExposure": {
             "codings": [
                 {
