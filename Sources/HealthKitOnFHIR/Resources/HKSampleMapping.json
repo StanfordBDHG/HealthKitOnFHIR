@@ -509,6 +509,21 @@
                 "code": "ug"
             }
         },
+        "HKQuantityTypeIdentifierDietaryNiacin": {
+            "codings": [
+                {
+                    "code": "286583002",
+                    "display": "Niacin intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
