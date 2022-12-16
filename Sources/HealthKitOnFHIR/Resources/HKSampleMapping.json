@@ -539,6 +539,51 @@
                 "code": "mg"
             }
         },
+        "HKQuantityTypeIdentifierDietaryPhosphorus": {
+            "codings": [
+                {
+                    "code": "230123003",
+                    "display": "Phosphorus intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryPotassium": {
+            "codings": [
+                {
+                    "code": "788479004",
+                    "display": "Potassium intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietarySodium": {
+            "codings": [
+                {
+                    "code": "1148504005",
+                    "display": "1148504005",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {

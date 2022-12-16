@@ -626,6 +626,96 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testDietaryPhosphorus() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryPhosphorus),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1000)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "230123003",
+                    display: "Phosphorus intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 1000.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryPotassium() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryPotassium),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1000)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "788479004",
+                    display: "Potassium intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 1000.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietarySodium() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietarySodium),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1000)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "1148504005",
+                    display: "1148504005",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 1000.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
     func testDietaryNiacin() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryNiacin),
