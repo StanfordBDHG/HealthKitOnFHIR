@@ -344,6 +344,21 @@
                 "code": "ug"
             }
         },
+        "HKQuantityTypeIdentifierDietaryCopper": {
+            "codings": [
+                {
+                    "code": "286615007",
+                    "display": "Copper intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
