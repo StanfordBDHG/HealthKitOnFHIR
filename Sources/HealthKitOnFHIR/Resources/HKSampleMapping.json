@@ -194,6 +194,21 @@
                 "code": "%"
             }
         },
+        "HKQuantityTypeIdentifierBodyMassIndex": {
+            "codings": [
+                {
+                    "code": "39156-5",
+                    "display": "Body mass index (BMI) [Ratio]",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "kg/m^2",
+                "system": "http://unitsofmeasure.org",
+                "code": "kg/m2"
+            }
+        },
         "HKQuantityTypeIdentifierBodyTemperature": {
             "codings": [
                 {

@@ -385,7 +385,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testBodyFatAlcoholPercentageSample() throws {
+    func testBodyFatPercentageSample() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyFatPercentage),
             quantity: HKQuantity(unit: .percent(), doubleValue: 21)
@@ -410,6 +410,36 @@ class HealthKitOnFHIRTests: XCTestCase {
                     system: "http://unitsofmeasure.org",
                     unit: "%",
                     value: 21.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testBodyMassIndexSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.bodyMassIndex),
+            quantity: HKQuantity(unit: .count(), doubleValue: 20)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "39156-5",
+                    display: "Body mass index (BMI) [Ratio]",
+                    system: .loinc
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "kg/m2",
+                    system: "http://unitsofmeasure.org",
+                    unit: "kg/m^2",
+                    value: 20.asFHIRDecimalPrimitive()
                 )
             )
         )
