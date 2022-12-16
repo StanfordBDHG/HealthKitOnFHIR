@@ -896,6 +896,246 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testDietaryThiamin() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryThiamin),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1.2)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "286579002",
+                    display: "Vitamin B1 intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 1.2.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryVitaminA() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryVitaminA),
+            quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 900)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "286604002",
+                    display: "Vitamin A intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "ug",
+                    system: "http://unitsofmeasure.org",
+                    unit: "ug",
+                    value: 900.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryVitaminB12() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryVitaminB12),
+            quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 2.4)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "1144896002",
+                    display: "Vitamin B12 and/or vitamin B12 derivative intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "ug",
+                    system: "http://unitsofmeasure.org",
+                    unit: "ug",
+                    value: 2.4.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryVitaminB6() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryVitaminB6),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1.5)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "1144810007",
+                    display: "Vitamin B6 and/or vitamin B6 derivative intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 1.5.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryVitaminC() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryVitaminC),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 90)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "286586005",
+                    display: "Vitamin C intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 90.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryVitaminD() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryVitaminD),
+            quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 20)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "286607009",
+                    display: "Vitamin D intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "ug",
+                    system: "http://unitsofmeasure.org",
+                    unit: "ug",
+                    value: 20.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryVitaminE() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryVitaminE),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 15)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "286606000",
+                    display: "Vitamin E intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 15.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testDietaryVitaminK() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryVitaminK),
+            quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 15)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "430195004",
+                    display: "Vitamin K intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "ug",
+                    system: "http://unitsofmeasure.org",
+                    unit: "ug",
+                    value: 15.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
     func testStepCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),
@@ -1570,12 +1810,13 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         }.count)
     }
-    
+
+
     func testUnsupportedTypeSample() throws {
         XCTAssertThrowsError(
             try createObservationFrom(
-                type: HKQuantityType(.dietaryVitaminC),
-                quantity: HKQuantity(unit: .gram(), doubleValue: 1)
+                type: HKQuantityType(.nikeFuel),
+                quantity: HKQuantity(unit: .count(), doubleValue: 1)
             )
         )
     }
@@ -1599,9 +1840,9 @@ class HealthKitOnFHIRTests: XCTestCase {
     }
 
     func testInvalidComponent() throws {
-        let vitaminC = HKQuantitySample(
-            type: HKQuantityType(.dietaryVitaminC),
-            quantity: HKQuantity(unit: .gram(), doubleValue: 1),
+        let nikeFuel = HKQuantitySample(
+            type: HKQuantityType(.nikeFuel),
+            quantity: HKQuantity(unit: .count(), doubleValue: 1),
             start: try startDate,
             end: try endDate
         )
@@ -1610,7 +1851,7 @@ class HealthKitOnFHIRTests: XCTestCase {
             type: HKCorrelationType(.bloodPressure),
             start: try startDate,
             end: try endDate,
-            objects: [vitaminC]
+            objects: [nikeFuel]
         )
 
         XCTAssertThrowsError(try correlation.observation)
@@ -1624,8 +1865,8 @@ class HealthKitOnFHIRTests: XCTestCase {
 
     func testUnsupportedMapping() throws {
         let sample = HKQuantitySample(
-            type: HKQuantityType(.dietaryVitaminC),
-            quantity: HKQuantity(unit: .gram(), doubleValue: 1),
+            type: HKQuantityType(.nikeFuel),
+            quantity: HKQuantity(unit: .count(), doubleValue: 1),
             start: try startDate,
             end: try endDate
         )

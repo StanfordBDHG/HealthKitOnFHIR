@@ -644,6 +644,126 @@
                 "code": "mg"
             }
         },
+        "HKQuantityTypeIdentifierDietaryThiamin": {
+            "codings": [
+                {
+                    "code": "286579002",
+                    "display": "Vitamin B1 intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryVitaminA": {
+            "codings": [
+                {
+                    "code": "286604002",
+                    "display": "Vitamin A intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryVitaminB12": {
+            "codings": [
+                {
+                    "code": "1144896002",
+                    "display": "Vitamin B12 and/or vitamin B12 derivative intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryVitaminB6": {
+            "codings": [
+                {
+                    "code": "1144810007",
+                    "display": "Vitamin B6 and/or vitamin B6 derivative intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryVitaminC": {
+            "codings": [
+                {
+                    "code": "286586005",
+                    "display": "Vitamin C intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryVitaminD": {
+            "codings": [
+                {
+                    "code": "286607009",
+                    "display": "Vitamin D intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryVitaminE": {
+            "codings": [
+                {
+                    "code": "286606000",
+                    "display": "Vitamin E intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryVitaminK": {
+            "codings": [
+                {
+                    "code": "430195004",
+                    "display": "Vitamin K intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
