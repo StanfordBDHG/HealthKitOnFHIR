@@ -170,7 +170,8 @@ def create_quantity_types_table():
 
     # Link all the HealthKit types to Apple docs
     for type in rows:
-        type[0] = '[{}]({})'.format(type[0].removeprefix('HKQuantityTypeIdentifier'), HEALTHKIT_URL + type[0])
+        url = '{}/{}'.format(HEALTHKIT_URL, type[0])
+        type[0] = '[{}]({})'.format(type[0].removeprefix('HKQuantityTypeIdentifier'), url)
 
     # Add the statistics
     stats = 'HealthKitOnFHIR supports {} of {} quantity types.'.format(len(quantity_types), len(ALL_QUANTITY_TYPES))
@@ -186,8 +187,6 @@ def create_quantity_types_table():
     return markdown
 
 def create_correlation_types_table():
-
-
     markdown = '\n\n## HKCorrelationType\n\n'
 
     correlation_types = data['HKCorrelations']
@@ -210,7 +209,8 @@ def create_correlation_types_table():
 
     # Link all the HealthKit types to Apple docs
     for type in rows:
-        type[0] = '[{}]({})'.format(type[0].removeprefix('HKCorrelationTypeIdentifier'), HEALTHKIT_URL + '/' + type[0])
+        url = '{}/{}'.format(HEALTHKIT_URL, type[0])
+        type[0] = '[{}]({})'.format(type[0].removeprefix('HKCorrelationTypeIdentifier'), url)
 
     # Add the statistics
     stats = 'HealthKitOnFHIR supports {} of {} correlation types.'.format(len(correlation_types), len(ALL_CORRELATION_TYPES))
