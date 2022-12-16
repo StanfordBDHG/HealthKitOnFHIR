@@ -656,6 +656,36 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testDietaryPantothenicAcid() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryPantothenicAcid),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 5)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "286600006",
+                    display: "Pantothenic acid intake (observable entity)",
+                    system: .snomedCT
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 5.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testStepCount() throws {
         let observation = try createObservationFrom(
