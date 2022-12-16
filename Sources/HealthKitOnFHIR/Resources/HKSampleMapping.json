@@ -479,6 +479,21 @@
                 "code": "mg"
             }
         },
+        "HKQuantityTypeIdentifierDietaryManganese": {
+            "codings": [
+                {
+                    "code": "890198005",
+                    "display": "Manganese intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
