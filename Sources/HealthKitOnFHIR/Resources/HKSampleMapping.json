@@ -374,6 +374,21 @@
                 "code": "g"
             }
         },
+        "HKQuantityTypeIdentifierDietaryFatPolyunsaturated": {
+            "codings": [
+                {
+                    "code": "226330003",
+                    "display": "Polyunsaturated fat intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "g",
+                "unit": "g",
+                "system": "http://unitsofmeasure.org",
+                "code": "g"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
