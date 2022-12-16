@@ -284,6 +284,21 @@
                 "code": "mg"
             }
         },
+        "HKQuantityTypeIdentifierDietaryCarbohydrates": {
+            "codings": [
+                {
+                    "code": "788472008",
+                    "display": "Carbohydrate intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "g",
+                "unit": "g",
+                "system": "http://unitsofmeasure.org",
+                "code": "g"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
