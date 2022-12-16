@@ -254,6 +254,21 @@
                 "code": "ug"
             }
         },
+        "HKQuantityTypeIdentifierDietaryCaffeine": {
+            "codings": [
+                {
+                    "code": "1208604004",
+                    "display": "Caffeine intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
