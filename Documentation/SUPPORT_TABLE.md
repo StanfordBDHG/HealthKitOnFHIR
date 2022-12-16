@@ -108,5 +108,5 @@ HealthKitOnFHIR supports 1 of 2 correlation types.
 
 |HKCorrelationType|Supported|Code|
 |----|----|----|
-|[BloodPressure](https://developer.apple.com/documentation/healthkitHKCorrelationTypeIdentifierBloodPressure)|:white_check_mark:|[85354-9](http://loinc.org/85354-9)|
-|[Food](https://developer.apple.com/documentation/healthkitHKCorrelationTypeIdentifierFood)|:x:|-|
+|[BloodPressure](https://developer.apple.com/documentation/healthkit/HKCorrelationTypeIdentifierBloodPressure)|:white_check_mark:|[85354-9](http://loinc.org/85354-9)|
+|[Food](https://developer.apple.com/documentation/healthkit/HKCorrelationTypeIdentifierFood)|:x:|-|
