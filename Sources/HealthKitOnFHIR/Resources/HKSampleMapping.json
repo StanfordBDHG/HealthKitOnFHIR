@@ -239,6 +239,21 @@
                 "code": "kcal"
             }
         },
+        "HKQuantityTypeIdentifierDietaryBiotin": {
+            "codings": [
+                {
+                    "code": "700183008",
+                    "display": "Biotin intake (observable entity)",
+                    "system": "http://snomed.info/sct"
+                }
+            ],
+            "unit": {
+                "hkunit": "mcg",
+                "unit": "ug",
+                "system": "http://unitsofmeasure.org",
+                "code": "ug"
+            }
+        },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
             "codings": [
                 {
