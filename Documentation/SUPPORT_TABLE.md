@@ -13,7 +13,7 @@ SPDX-License-Identifier: MIT
 
 ## HKQuantityType
 
-HealthKitOnFHIR supports 72 of 80 quantity types.
+HealthKitOnFHIR supports 74 of 80 quantity types.
 
 |HKQuantityType|Supported|Code|Unit|
 |----|----|----|----|
@@ -47,7 +47,7 @@ HealthKitOnFHIR supports 72 of 80 quantity types.
 |[DietaryFiber](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryFiber)|:white_check_mark:|[LP203183-1](http://loinc.org/LP203183-1)|[g](http://unitsofmeasure.org)|
 |[DietaryFolate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryFolate)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryFolate](http://developer.apple.com/documentation/healthkit)|[ug](http://unitsofmeasure.org)|
 |[DietaryIodine](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryIodine)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryIodine](http://developer.apple.com/documentation/healthkit)|[ug](http://unitsofmeasure.org)|
-|[DietaryIron](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryIron)|:x:|-|-|
+|[DietaryIron](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryIron)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryIron](http://developer.apple.com/documentation/healthkit)|[mg](http://unitsofmeasure.org)|
 |[DietaryMagnesium](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryMagnesium)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryMagnesium](http://developer.apple.com/documentation/healthkit)|[mg](http://unitsofmeasure.org)|
 |[DietaryManganese](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryManganese)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryManganese](http://developer.apple.com/documentation/healthkit)|[mg](http://unitsofmeasure.org)|
 |[DietaryMolybdenum](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryMolybdenum)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryMolybdenum](http://developer.apple.com/documentation/healthkit)|[ug](http://unitsofmeasure.org)|
@@ -86,7 +86,7 @@ HealthKitOnFHIR supports 72 of 80 quantity types.
 |[Height](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierHeight)|:white_check_mark:|[8302-2](http://loinc.org/8302-2)|[in](http://unitsofmeasure.org)|
 |[InhalerUsage](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierInhalerUsage)|:white_check_mark:|[HKQuantityTypeIdentifierInhalerUsage](http://developer.apple.com/documentation/healthkit)|count|
 |[InsulinDelivery](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierInsulinDelivery)|:x:|-|-|
-|[LeanBodyMass](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierLeanBodyMass)|:x:|-|-|
+|[LeanBodyMass](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierLeanBodyMass)|:white_check_mark:|[91557-9](http://loinc.org/91557-9)|[lbs](http://unitsofmeasure.org)|
 |[NikeFuel](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierNikeFuel)|:x:|-|-|
 |[NumberOfTimesFallen](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierNumberOfTimesFallen)|:x:|-|-|
 |[OxygenSaturation](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierOxygenSaturation)|:white_check_mark:|[59408-5](http://loinc.org/59408-5)|[%](http://unitsofmeasure.org)|

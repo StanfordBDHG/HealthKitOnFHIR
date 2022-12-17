@@ -1871,6 +1871,41 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testLeanBodyMassSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.leanBodyMass),
+            quantity: HKQuantity(unit: .pound(), doubleValue: 60)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "91557-9",
+                    display: "Lean body weight",
+                    system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierLeanBodyMass",
+                    display: "Lean Body Mass",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "[lb_av]",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "lbs",
+                    value: 60.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testRespiratoryRateSample() throws {
         let observation = try createObservationFrom(

@@ -1,16 +1,20 @@
 {
     "HKCorrelations": {
         "HKCorrelationTypeIdentifierBloodPressure": {
-            "codings": [{
-                "code": "85354-9",
-                "display": "Blood pressure panel",
-                "system": "http://loinc.org"
-            }],
-            "categories": [{
-                "code": "vital-signs",
-                "display": "Vital Signs",
-                "system": "http://terminology.hl7.org/CodeSystem/observation-category"
-            }]
+            "codings": [
+                {
+                    "code": "85354-9",
+                    "display": "Blood pressure panel",
+                    "system": "http://loinc.org"
+                }
+            ],
+            "categories": [
+                {
+                    "code": "vital-signs",
+                    "display": "Vital Signs",
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category"
+                }
+            ]
         }
     },
     "HKQuantitySamples": {
@@ -34,7 +38,7 @@
                 "code": "kcal"
             }
         },
-        "HKQuantityTypeIdentifierAppleExerciseTime" : {
+        "HKQuantityTypeIdentifierAppleExerciseTime": {
             "codings": [
                 {
                     "system": "http://developer.apple.com/documentation/healthkit",
@@ -49,7 +53,7 @@
                 "code": "min"
             }
         },
-        "HKQuantityTypeIdentifierAppleMoveTime" : {
+        "HKQuantityTypeIdentifierAppleMoveTime": {
             "codings": [
                 {
                     "system": "http://developer.apple.com/documentation/healthkit",
@@ -64,7 +68,7 @@
                 "code": "min"
             }
         },
-        "HKQuantityTypeIdentifierAppleStandTime" : {
+        "HKQuantityTypeIdentifierAppleStandTime": {
             "codings": [
                 {
                     "system": "http://developer.apple.com/documentation/healthkit",
@@ -1211,6 +1215,26 @@
                 "unit": "beats/minute",
                 "system": "http://unitsofmeasure.org",
                 "code": "/min"
+            }
+        },
+        "HKQuantityTypeIdentifierLeanBodyMass": {
+            "codings": [
+                {
+                    "code": "91557-9",
+                    "display": "Lean body weight",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierLeanBodyMass",
+                    "display": "Lean Body Mass",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "lb",
+                "unit": "lbs",
+                "system": "http://unitsofmeasure.org",
+                "code": "[lb_av]"
             }
         }
     }
