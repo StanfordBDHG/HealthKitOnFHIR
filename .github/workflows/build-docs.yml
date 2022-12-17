@@ -23,7 +23,9 @@ jobs:
       with:
         python-version: '3.10'
     - name: Run python script
-      run: python Scripts/support_table_generator.py
+      run: |
+        cd Scripts
+        python support_table_generator.py
     - name: Commit updated files
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
