@@ -1296,7 +1296,7 @@ class HealthKitOnFHIRTests: XCTestCase {
                 Quantity(
                     code: "L",
                     system: "http://unitsofmeasure.org",
-                    unit: "liters",
+                    unit: "L",
                     value: 3.5.asFHIRDecimalPrimitive()
                 )
             )
@@ -1331,7 +1331,7 @@ class HealthKitOnFHIRTests: XCTestCase {
                 Quantity(
                     code: "L",
                     system: "http://unitsofmeasure.org",
-                    unit: "liters",
+                    unit: "L",
                     value: 5.5.asFHIRDecimalPrimitive()
                 )
             )
