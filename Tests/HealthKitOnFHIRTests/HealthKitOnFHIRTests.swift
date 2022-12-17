@@ -38,7 +38,7 @@ class HealthKitOnFHIRTests: XCTestCase {
     func createObservationFrom(
         type quantityType: HKQuantityType,
         quantity: HKQuantity,
-        metadata: [String: Any]? = nil
+        metadata: [String: Any] = [:]
     ) throws -> Observation {
         let quantitySample = HKQuantitySample(
             type: quantityType,
