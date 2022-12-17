@@ -44,7 +44,7 @@ ALL_QUANTITY_TYPES = [
     "HKQuantityTypeIdentifierDietaryFatMonounsaturated",
     "HKQuantityTypeIdentifierDietaryFatPolyunsaturated",
     "HKQuantityTypeIdentifierDietaryFatSaturated",
-    "HKQuantityTypeIdentifierDietaryFatTotal"
+    "HKQuantityTypeIdentifierDietaryFatTotal",
     "HKQuantityTypeIdentifierDietaryFiber",
     "HKQuantityTypeIdentifierDietaryFolate",
     "HKQuantityTypeIdentifierDietaryIodine",

@@ -13,7 +13,7 @@ SPDX-License-Identifier: MIT
 
 ## HKQuantityType
 
-HealthKitOnFHIR supports 72 of 79 quantity types.
+HealthKitOnFHIR supports 72 of 80 quantity types.
 
 |HKQuantityType|Supported|Code|Unit|
 |----|----|----|----|
@@ -44,7 +44,6 @@ HealthKitOnFHIR supports 72 of 79 quantity types.
 |[DietaryFatPolyunsaturated](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryFatPolyunsaturated)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryFatPolyunsaturated](http://developer.apple.com/documentation/healthkit)|[g](http://unitsofmeasure.org)|
 |[DietaryFatSaturated](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryFatSaturated)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryFatSaturated](http://developer.apple.com/documentation/healthkit)|[g](http://unitsofmeasure.org)|
 |[DietaryFatTotal](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryFatTotal)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryFatTotal](http://developer.apple.com/documentation/healthkit)|[g](http://unitsofmeasure.org)|
-|[DietaryFatTotalHKQuantityTypeIdentifierDietaryFiber](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryFatTotalHKQuantityTypeIdentifierDietaryFiber)|:x:|-|-|
 |[DietaryFiber](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryFiber)|:white_check_mark:|[LP203183-1](http://loinc.org/LP203183-1)|[g](http://unitsofmeasure.org)|
 |[DietaryFolate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryFolate)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryFolate](http://developer.apple.com/documentation/healthkit)|[ug](http://unitsofmeasure.org)|
 |[DietaryIodine](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierDietaryIodine)|:white_check_mark:|[HKQuantityTypeIdentifierDietaryIodine](http://developer.apple.com/documentation/healthkit)|[ug](http://unitsofmeasure.org)|
