@@ -13,7 +13,7 @@ SPDX-License-Identifier: MIT
 
 ## HKQuantityType
 
-HealthKitOnFHIR supports 76 of 80 quantity types.
+HealthKitOnFHIR supports 82 of 84 quantity types.
 
 |HKQuantityType|Supported|Code|Unit|
 |----|----|----|----|
@@ -90,16 +90,16 @@ HealthKitOnFHIR supports 76 of 80 quantity types.
 |[NikeFuel](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierNikeFuel)|:x:|-|-|
 |[NumberOfTimesFallen](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierNumberOfTimesFallen)|:white_check_mark:|[HKQuantityTypeIdentifierNumberOfTimesFallen](http://developer.apple.com/documentation/healthkit)|falls|
 |[OxygenSaturation](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierOxygenSaturation)|:white_check_mark:|[59408-5](http://loinc.org/59408-5)|[%](http://unitsofmeasure.org)|
-|[PeakExpiratoryFlowRate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPeakExpiratoryFlowRate)|:x:|-|-|
-|[PeripheralPerfusionIndex](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPeripheralPerfusionIndex)|:x:|-|-|
-|[PushCount](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPushCount)|:x:|-|-|
+|[PeakExpiratoryFlowRate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPeakExpiratoryFlowRate)|:white_check_mark:|[19935-6](http://loinc.org/19935-6)|[L/min](http://unitsofmeasure.org)|
+|[PeripheralPerfusionIndex](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPeripheralPerfusionIndex)|:white_check_mark:|[61006-3](http://loinc.org/61006-3)|[%](http://unitsofmeasure.org)|
+|[PushCount](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPushCount)|:white_check_mark:|[96502-0](http://loinc.org/96502-0)|wheelchair pushes|
 |[RespiratoryRate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierRespiratoryRate)|:white_check_mark:|[9279-1](http://loinc.org/9279-1)|[breaths/minute](http://unitsofmeasure.org)|
 |[RestingHeartRate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierRestingHeartRate)|:white_check_mark:|[40443-4](http://loinc.org/40443-4)|[beats/minute](http://unitsofmeasure.org)|
 |[StepCount](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierStepCount)|:white_check_mark:|[55423-8](http://loinc.org/55423-8)|steps|
 |[SwimmingStrokeCount](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierSwimmingStrokeCount)|:white_check_mark:|[HKQuantityTypeIdentifierSwimmingStrokeCount](http://developer.apple.com/documentation/healthkit)|strokes|
-|[UVExposure](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierUVExposure)|:x:|-|-|
-|[VO2Max](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierVO2Max)|:x:|-|-|
-|[WaistCircumference](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWaistCircumference)|:x:|-|-|
+|[UVExposure](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierUVExposure)|:white_check_mark:|[HKQuantityTypeIdentifierUVExposure](http://developer.apple.com/documentation/healthkit)|count|
+|[VO2Max](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierVO2Max)|:white_check_mark:|[HKQuantityTypeIdentifierVO2Max](http://developer.apple.com/documentation/healthkit)|[mL/kg/min](http://unitsofmeasure.org)|
+|[WaistCircumference](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWaistCircumference)|:white_check_mark:|[8280-0](http://loinc.org/8280-0)|[in](http://unitsofmeasure.org)|
 |[WalkingHeartRateAverage](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWalkingHeartRateAverage)|:white_check_mark:|[HKQuantityTypeIdentifierWalkingHeartRateAverage](http://developer.apple.com/documentation/healthkit)|[beats/minute](http://unitsofmeasure.org)|
 
 

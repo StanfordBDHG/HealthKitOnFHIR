@@ -174,7 +174,7 @@ def create_quantity_types_table():
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKQuantityTypeIdentifier'), url)
 
     # Add the statistics
-    stats = 'HealthKitOnFHIR supports {} of {} quantity types.'.format(len(quantity_types), len(ALL_QUANTITY_TYPES))
+    stats = 'HealthKitOnFHIR supports {} of {} quantity types.'.format(len(quantity_types), len(rows))
     markdown += stats + '\n\n'
 
     # Add the table header
@@ -213,7 +213,7 @@ def create_correlation_types_table():
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKCorrelationTypeIdentifier'), url)
 
     # Add the statistics
-    stats = 'HealthKitOnFHIR supports {} of {} correlation types.'.format(len(correlation_types), len(ALL_CORRELATION_TYPES))
+    stats = 'HealthKitOnFHIR supports {} of {} correlation types.'.format(len(correlation_types), len(rows))
     markdown += stats + '\n\n'
 
     # Add the table header
