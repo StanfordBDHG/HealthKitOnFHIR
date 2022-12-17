@@ -1432,7 +1432,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
     
-    func testHeartRateSample() throws {
+    func testHeartRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.heartRate),
             quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
@@ -1467,7 +1467,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testRestingHeartRateSample() throws {
+    func testRestingHeartRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.restingHeartRate),
             quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
@@ -1532,7 +1532,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testHeartRateVariabilitySDNNSample() throws {
+    func testHeartRateVariabilitySDNN() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.heartRateVariabilitySDNN),
             quantity: HKQuantity(unit: .secondUnit(with: .milli), doubleValue: 100)
@@ -1567,7 +1567,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
     
-    func testOxygenSaturationSample() throws {
+    func testOxygenSaturation() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.oxygenSaturation),
             quantity: HKQuantity(unit: .percent(), doubleValue: 99)
@@ -1602,7 +1602,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testPeakExpiratoryFlowRateSample() throws {
+    func testPeakExpiratoryFlowRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.peakExpiratoryFlowRate),
             quantity: HKQuantity(unit: .liter().unitDivided(by: .minute()), doubleValue: 600)
@@ -1637,7 +1637,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testPeripheralPerfusionIndexSample() throws {
+    func testPeripheralPerfusionIndex() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.peripheralPerfusionIndex),
             quantity: HKQuantity(unit: .percent(), doubleValue: 5)
@@ -1672,7 +1672,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testPushCountSample() throws {
+    func testPushCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.pushCount),
             quantity: HKQuantity(unit: .count(), doubleValue: 5)
@@ -1798,7 +1798,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
     
-    func testBodyTemperatureSample() throws {
+    func testBodyTemperature() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyTemperature),
             quantity: HKQuantity(unit: .degreeCelsius(), doubleValue: 37)
@@ -1833,7 +1833,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testBasalBodyTemperatureSample() throws {
+    func testBasalBodyTemperature() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.basalBodyTemperature),
             quantity: HKQuantity(unit: .degreeCelsius(), doubleValue: 37)
@@ -1863,7 +1863,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testBasalEnergyBurnedSample() throws {
+    func testBasalEnergyBurned() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.basalEnergyBurned),
             quantity: HKQuantity(unit: HKUnit(from: "kcal"), doubleValue: 1200)
@@ -1893,7 +1893,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testBloodAlcoholContentSample() throws {
+    func testBloodAlcoholContent() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bloodAlcoholContent),
             quantity: HKQuantity(unit: .percent(), doubleValue: 0.0)
@@ -1928,7 +1928,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testBodyFatPercentageSample() throws {
+    func testBodyFatPercentage() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyFatPercentage),
             quantity: HKQuantity(unit: .percent(), doubleValue: 21)
@@ -1963,7 +1963,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testBodyMassIndexSample() throws {
+    func testBodyMassIndex() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyMassIndex),
             quantity: HKQuantity(unit: .count(), doubleValue: 20)
@@ -1998,7 +1998,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
     
-    func testHeightSample() throws {
+    func testHeight() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.height),
             quantity: HKQuantity(unit: .inch(), doubleValue: 64)
@@ -2033,7 +2033,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
     
-    func testBodyMassSample() throws {
+    func testBodyMass() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyMass),
             quantity: HKQuantity(unit: .pound(), doubleValue: 60)
@@ -2068,7 +2068,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testLeanBodyMassSample() throws {
+    func testLeanBodyMass() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.leanBodyMass),
             quantity: HKQuantity(unit: .pound(), doubleValue: 60)
@@ -2103,7 +2103,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testNumberOfTimesFallenSample() throws {
+    func testNumberOfTimesFallen() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.numberOfTimesFallen),
             quantity: HKQuantity(unit: .count(), doubleValue: 0)
@@ -2131,7 +2131,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testSwimmingStrokeCountSample() throws {
+    func testSwimmingStrokeCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.swimmingStrokeCount),
             quantity: HKQuantity(unit: .count(), doubleValue: 10)
@@ -2159,7 +2159,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
     
-    func testRespiratoryRateSample() throws {
+    func testRespiratoryRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.respiratoryRate),
             quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 18)
@@ -2194,7 +2194,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testActiveEnergyBurnedSample() throws {
+    func testActiveEnergyBurned() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.activeEnergyBurned),
             quantity: HKQuantity(unit: .largeCalorie(), doubleValue: 100)
@@ -2229,7 +2229,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testAppleExerciseTimeSample() throws {
+    func testAppleExerciseTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleExerciseTime),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
@@ -2259,7 +2259,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testAppleMoveTimeSample() throws {
+    func testAppleMoveTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleMoveTime),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
@@ -2289,7 +2289,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testAppleStandTimeSample() throws {
+    func testAppleStandTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleStandTime),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
@@ -2319,7 +2319,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testDistanceCyclingSample() throws {
+    func testDistanceCycling() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceCycling),
             quantity: HKQuantity(unit: .meter(), doubleValue: 1000)
@@ -2474,7 +2474,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testEnvironmentalAudioExposureSample() throws {
+    func testEnvironmentalAudioExposure() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.environmentalAudioExposure),
             quantity: HKQuantity(unit: .decibelAWeightedSoundPressureLevel(), doubleValue: 100)
@@ -2504,7 +2504,7 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-    func testHeadphoneAudioExposureSample() throws {
+    func testHeadphoneAudioExposure() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.headphoneAudioExposure),
             quantity: HKQuantity(unit: .decibelAWeightedSoundPressureLevel(), doubleValue: 100)
