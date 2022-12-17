@@ -519,6 +519,21 @@
                 "code": "ug"
             }
         },
+        "HKQuantityTypeIdentifierDietaryIron": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryIron",
+                    "display": "Dietary Iron",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "mg",
+                "unit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "code": "mg"
+            }
+        },
         "HKQuantityTypeIdentifierDietaryMagnesium": {
             "codings": [
                 {

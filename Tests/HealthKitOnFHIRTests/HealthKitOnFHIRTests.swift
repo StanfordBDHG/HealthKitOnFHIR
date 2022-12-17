@@ -548,6 +548,36 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
+    func testDietaryIron() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.dietaryIron),
+            quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 16)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierDietaryIron",
+                    display: "Dietary Iron",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mg",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mg",
+                    value: 16.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
     func testDietaryMagnesium() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryMagnesium),
