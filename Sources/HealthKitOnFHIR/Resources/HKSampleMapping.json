@@ -1,18 +1,18 @@
 {
     "HKCorrelations": {
         "HKCorrelationTypeIdentifierBloodPressure": {
-            "codings": [
-                {
-                    "code": "85354-9",
-                    "display": "Blood pressure panel",
-                    "system": "http://loinc.org"
-                }
-            ],
             "categories": [
                 {
                     "code": "vital-signs",
                     "display": "Vital Signs",
                     "system": "http://terminology.hl7.org/CodeSystem/observation-category"
+                }
+            ],
+            "codings": [
+                {
+                    "code": "85354-9",
+                    "display": "Blood pressure panel",
+                    "system": "http://loinc.org"
                 }
             ]
         }
@@ -21,9 +21,9 @@
         "HKQuantityTypeIdentifierActiveEnergyBurned": {
             "codings": [
                 {
-                    "system": "http://loinc.org",
                     "code": "41981-2",
-                    "display": "Calories burned"
+                    "display": "Calories burned",
+                    "system": "http://loinc.org"
                 },
                 {
                     "code": "HKQuantityTypeIdentifierActiveEnergyBurned",
@@ -32,135 +32,55 @@
                 }
             ],
             "unit": {
+                "code": "kcal",
                 "hkunit": "kcal",
-                "unit": "kcal",
                 "system": "http://unitsofmeasure.org",
-                "code": "kcal"
+                "unit": "kcal"
             }
         },
         "HKQuantityTypeIdentifierAppleExerciseTime": {
             "codings": [
                 {
-                    "system": "http://developer.apple.com/documentation/healthkit",
                     "code": "HKQuantityTypeIdentifierAppleExerciseTime",
-                    "display": "Apple Exercise Time"
+                    "display": "Apple Exercise Time",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
+                "code": "min",
                 "hkunit": "min",
-                "unit": "min",
                 "system": "http://unitsofmeasure.org",
-                "code": "min"
+                "unit": "min"
             }
         },
         "HKQuantityTypeIdentifierAppleMoveTime": {
             "codings": [
                 {
-                    "system": "http://developer.apple.com/documentation/healthkit",
                     "code": "HKQuantityTypeIdentifierAppleMoveTime",
-                    "display": "Apple Move Time"
+                    "display": "Apple Move Time",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
+                "code": "min",
                 "hkunit": "min",
-                "unit": "min",
                 "system": "http://unitsofmeasure.org",
-                "code": "min"
+                "unit": "min"
             }
         },
         "HKQuantityTypeIdentifierAppleStandTime": {
             "codings": [
                 {
-                    "system": "http://developer.apple.com/documentation/healthkit",
                     "code": "HKQuantityTypeIdentifierAppleStandTime",
-                    "display": "Apple Stand Time"
+                    "display": "Apple Stand Time",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
+                "code": "min",
                 "hkunit": "min",
-                "unit": "min",
                 "system": "http://unitsofmeasure.org",
-                "code": "min"
-            }
-        },
-        "HKQuantityTypeIdentifierBloodGlucose": {
-            "codings": [
-                {
-                    "code": "41653-7",
-                    "display": "Glucose Glucometer (BldC) [Mass/Vol]",
-                    "system": "http://loinc.org"
-                },
-                {
-                    "code": "HKQuantityTypeIdentifierBloodGlucose",
-                    "display": "Blood Glucose",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mg/dL",
-                "unit": "mg/dL",
-                "system": "http://unitsofmeasure.org",
-                "code": "mg/dL"
-            }
-        },
-        "HKQuantityTypeIdentifierBodyMass": {
-            "codings": [
-                {
-                    "code": "29463-7",
-                    "display": "Body weight",
-                    "system": "http://loinc.org"
-                },
-                {
-                    "code": "HKQuantityTypeIdentifierBodyMass",
-                    "display": "Body Mass",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "lb",
-                "unit": "lbs",
-                "system": "http://unitsofmeasure.org",
-                "code": "[lb_av]"
-            }
-        },
-        "HKQuantityTypeIdentifierBloodPressureDiastolic": {
-            "codings": [
-                {
-                    "code": "8867-4",
-                    "display": "Diastolic blood pressure",
-                    "system": "http://loinc.org"
-                },
-                {
-                    "code": "HKQuantityTypeIdentifierBloodPressureDiastolic",
-                    "display": "Blood Pressure Diastolic",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mmHg",
-                "unit": "mmHg",
-                "system": "http://unitsofmeasure.org",
-                "code": "mm[Hg]"
-            }
-        },
-        "HKQuantityTypeIdentifierBloodPressureSystolic": {
-            "codings": [
-                {
-                    "code": "8480-6",
-                    "display": "Systolic blood pressure",
-                    "system": "http://loinc.org"
-                },
-                {
-                    "code": "HKQuantityTypeIdentifierBloodPressureSystolic",
-                    "display": "Blood Pressure Systolic",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mmHg",
-                "unit": "mmHg",
-                "system": "http://unitsofmeasure.org",
-                "code": "mm[Hg]"
+                "unit": "min"
             }
         },
         "HKQuantityTypeIdentifierBasalBodyTemperature": {
@@ -172,10 +92,10 @@
                 }
             ],
             "unit": {
+                "code": "Cel",
                 "hkunit": "degC",
-                "unit": "C",
                 "system": "http://unitsofmeasure.org",
-                "code": "Cel"
+                "unit": "C"
             }
         },
         "HKQuantityTypeIdentifierBasalEnergyBurned": {
@@ -187,10 +107,10 @@
                 }
             ],
             "unit": {
+                "code": "kcal",
                 "hkunit": "kcal",
-                "unit": "kcal",
                 "system": "http://unitsofmeasure.org",
-                "code": "kcal"
+                "unit": "kcal"
             }
         },
         "HKQuantityTypeIdentifierBloodAlcoholContent": {
@@ -207,10 +127,70 @@
                 }
             ],
             "unit": {
+                "code": "%",
                 "hkunit": "%",
-                "unit": "%",
                 "system": "http://unitsofmeasure.org",
-                "code": "%"
+                "unit": "%"
+            }
+        },
+        "HKQuantityTypeIdentifierBloodGlucose": {
+            "codings": [
+                {
+                    "code": "41653-7",
+                    "display": "Glucose Glucometer (BldC) [Mass/Vol]",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBloodGlucose",
+                    "display": "Blood Glucose",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "mg/dL",
+                "hkunit": "mg/dL",
+                "system": "http://unitsofmeasure.org",
+                "unit": "mg/dL"
+            }
+        },
+        "HKQuantityTypeIdentifierBloodPressureDiastolic": {
+            "codings": [
+                {
+                    "code": "8867-4",
+                    "display": "Diastolic blood pressure",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBloodPressureDiastolic",
+                    "display": "Blood Pressure Diastolic",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "mm[Hg]",
+                "hkunit": "mmHg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "mmHg"
+            }
+        },
+        "HKQuantityTypeIdentifierBloodPressureSystolic": {
+            "codings": [
+                {
+                    "code": "8480-6",
+                    "display": "Systolic blood pressure",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBloodPressureSystolic",
+                    "display": "Blood Pressure Systolic",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "mm[Hg]",
+                "hkunit": "mmHg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "mmHg"
             }
         },
         "HKQuantityTypeIdentifierBodyFatPercentage": {
@@ -227,10 +207,30 @@
                 }
             ],
             "unit": {
+                "code": "%",
                 "hkunit": "%",
-                "unit": "%",
                 "system": "http://unitsofmeasure.org",
-                "code": "%"
+                "unit": "%"
+            }
+        },
+        "HKQuantityTypeIdentifierBodyMass": {
+            "codings": [
+                {
+                    "code": "29463-7",
+                    "display": "Body weight",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBodyMass",
+                    "display": "Body Mass",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "[lb_av]",
+                "hkunit": "lb",
+                "system": "http://unitsofmeasure.org",
+                "unit": "lbs"
             }
         },
         "HKQuantityTypeIdentifierBodyMassIndex": {
@@ -247,10 +247,10 @@
                 }
             ],
             "unit": {
+                "code": "kg/m2",
                 "hkunit": "count",
-                "unit": "kg/m^2",
                 "system": "http://unitsofmeasure.org",
-                "code": "kg/m2"
+                "unit": "kg/m^2"
             }
         },
         "HKQuantityTypeIdentifierBodyTemperature": {
@@ -267,10 +267,130 @@
                 }
             ],
             "unit": {
+                "code": "Cel",
                 "hkunit": "degC",
-                "unit": "C",
                 "system": "http://unitsofmeasure.org",
-                "code": "Cel"
+                "unit": "C"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryBiotin": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryBiotin",
+                    "display": "Dietary Biotin",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "ug",
+                "hkunit": "mcg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "ug"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryCaffeine": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryCaffeine",
+                    "display": "Dietary Caffeine",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "mg",
+                "hkunit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryCalcium": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryCalcium",
+                    "display": "Dietary Calcium",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "mg",
+                "hkunit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryCarbohydrates": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryCarbohydates",
+                    "display": "Dietary Carbohydates",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "g",
+                "hkunit": "g",
+                "system": "http://unitsofmeasure.org",
+                "unit": "g"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryChloride": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryChloride",
+                    "display": "Dietary Chloride",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "mg",
+                "hkunit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryCholesterol": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryCholesterol",
+                    "display": "Dietary Cholesterol",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "mg",
+                "hkunit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryChromium": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryChromium",
+                    "display": "Dietary Chromium",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "ug",
+                "hkunit": "mcg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "ug"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryCopper": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryCopper",
+                    "display": "Dietary Copper",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "ug",
+                "hkunit": "mcg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "ug"
             }
         },
         "HKQuantityTypeIdentifierDietaryEnergyConsumed": {
@@ -287,130 +407,10 @@
                 }
             ],
             "unit": {
+                "code": "kcal",
                 "hkunit": "kcal",
-                "unit": "kcal",
                 "system": "http://unitsofmeasure.org",
-                "code": "kcal"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryBiotin": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryBiotin",
-                    "display": "Dietary Biotin",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mcg",
-                "unit": "ug",
-                "system": "http://unitsofmeasure.org",
-                "code": "ug"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryCaffeine": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryCaffeine",
-                    "display": "Dietary Caffeine",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mg",
-                "unit": "mg",
-                "system": "http://unitsofmeasure.org",
-                "code": "mg"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryCalcium": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryCalcium",
-                    "display": "Dietary Calcium",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mg",
-                "unit": "mg",
-                "system": "http://unitsofmeasure.org",
-                "code": "mg"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryCarbohydrates": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryCarbohydates",
-                    "display": "Dietary Carbohydates",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "g",
-                "unit": "g",
-                "system": "http://unitsofmeasure.org",
-                "code": "g"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryChloride": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryChloride",
-                    "display": "Dietary Chloride",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mg",
-                "unit": "mg",
-                "system": "http://unitsofmeasure.org",
-                "code": "mg"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryCholesterol": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryCholesterol",
-                    "display": "Dietary Cholesterol",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mg",
-                "unit": "mg",
-                "system": "http://unitsofmeasure.org",
-                "code": "mg"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryChromium": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryChromium",
-                    "display": "Dietary Chromium",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mcg",
-                "unit": "ug",
-                "system": "http://unitsofmeasure.org",
-                "code": "ug"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryCopper": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryCopper",
-                    "display": "Dietary Copper",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mcg",
-                "unit": "ug",
-                "system": "http://unitsofmeasure.org",
-                "code": "ug"
+                "unit": "kcal"
             }
         },
         "HKQuantityTypeIdentifierDietaryFatMonounsaturated": {
@@ -422,10 +422,10 @@
                 }
             ],
             "unit": {
+                "code": "g",
                 "hkunit": "g",
-                "unit": "g",
                 "system": "http://unitsofmeasure.org",
-                "code": "g"
+                "unit": "g"
             }
         },
         "HKQuantityTypeIdentifierDietaryFatPolyunsaturated": {
@@ -437,10 +437,10 @@
                 }
             ],
             "unit": {
+                "code": "g",
                 "hkunit": "g",
-                "unit": "g",
                 "system": "http://unitsofmeasure.org",
-                "code": "g"
+                "unit": "g"
             }
         },
         "HKQuantityTypeIdentifierDietaryFatSaturated": {
@@ -452,10 +452,10 @@
                 }
             ],
             "unit": {
+                "code": "g",
                 "hkunit": "g",
-                "unit": "g",
                 "system": "http://unitsofmeasure.org",
-                "code": "g"
+                "unit": "g"
             }
         },
         "HKQuantityTypeIdentifierDietaryFatTotal": {
@@ -467,10 +467,10 @@
                 }
             ],
             "unit": {
+                "code": "g",
                 "hkunit": "g",
-                "unit": "g",
                 "system": "http://unitsofmeasure.org",
-                "code": "g"
+                "unit": "g"
             }
         },
         "HKQuantityTypeIdentifierDietaryFiber": {
@@ -487,10 +487,10 @@
                 }
             ],
             "unit": {
+                "code": "g",
                 "hkunit": "g",
-                "unit": "g",
                 "system": "http://unitsofmeasure.org",
-                "code": "g"
+                "unit": "g"
             }
         },
         "HKQuantityTypeIdentifierDietaryFolate": {
@@ -502,10 +502,10 @@
                 }
             ],
             "unit": {
+                "code": "ug",
                 "hkunit": "mcg",
-                "unit": "ug",
                 "system": "http://unitsofmeasure.org",
-                "code": "ug"
+                "unit": "ug"
             }
         },
         "HKQuantityTypeIdentifierDietaryIodine": {
@@ -517,10 +517,10 @@
                 }
             ],
             "unit": {
+                "code": "ug",
                 "hkunit": "mcg",
-                "unit": "ug",
                 "system": "http://unitsofmeasure.org",
-                "code": "ug"
+                "unit": "ug"
             }
         },
         "HKQuantityTypeIdentifierDietaryIron": {
@@ -532,10 +532,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryMagnesium": {
@@ -547,10 +547,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryManganese": {
@@ -562,10 +562,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryMolybdenum": {
@@ -577,10 +577,10 @@
                 }
             ],
             "unit": {
+                "code": "ug",
                 "hkunit": "mcg",
-                "unit": "ug",
                 "system": "http://unitsofmeasure.org",
-                "code": "ug"
+                "unit": "ug"
             }
         },
         "HKQuantityTypeIdentifierDietaryNiacin": {
@@ -592,10 +592,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryPantothenicAcid": {
@@ -607,10 +607,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryPhosphorus": {
@@ -622,70 +622,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryProtein": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryProtein",
-                    "display": "Dietary Protein",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "g",
-                "unit": "g",
-                "system": "http://unitsofmeasure.org",
-                "code": "g"
-            }
-        },
-        "HKQuantityTypeIdentifierDietaryRiboflavin": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietaryRiboflavin",
-                    "display": "Dietary Riboflavin",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mg",
-                "unit": "mg",
-                "system": "http://unitsofmeasure.org",
-                "code": "mg"
-            }
-        },
-        "HKQuantityTypeIdentifierDietarySelenium": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietarySelenium",
-                    "display": "Dietary Selenium",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "mcg",
-                "unit": "ug",
-                "system": "http://unitsofmeasure.org",
-                "code": "ug"
-            }
-        },
-        "HKQuantityTypeIdentifierDietarySugar": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDietarySugar",
-                    "display": "Dietary Sugar",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "g",
-                "unit": "g",
-                "system": "http://unitsofmeasure.org",
-                "code": "g"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryPotassium": {
@@ -697,10 +637,55 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryProtein": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryProtein",
+                    "display": "Dietary Protein",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "g",
+                "hkunit": "g",
+                "system": "http://unitsofmeasure.org",
+                "unit": "g"
+            }
+        },
+        "HKQuantityTypeIdentifierDietaryRiboflavin": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryRiboflavin",
+                    "display": "Dietary Riboflavin",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "mg",
+                "hkunit": "mg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietarySelenium": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietarySelenium",
+                    "display": "Dietary Selenium",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "ug",
+                "hkunit": "mcg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "ug"
             }
         },
         "HKQuantityTypeIdentifierDietarySodium": {
@@ -712,10 +697,25 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
+            }
+        },
+        "HKQuantityTypeIdentifierDietarySugar": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDietarySugar",
+                    "display": "Dietary Sugar",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "g",
+                "hkunit": "g",
+                "system": "http://unitsofmeasure.org",
+                "unit": "g"
             }
         },
         "HKQuantityTypeIdentifierDietaryThiamin": {
@@ -727,10 +727,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryVitaminA": {
@@ -742,10 +742,10 @@
                 }
             ],
             "unit": {
+                "code": "ug",
                 "hkunit": "mcg",
-                "unit": "ug",
                 "system": "http://unitsofmeasure.org",
-                "code": "ug"
+                "unit": "ug"
             }
         },
         "HKQuantityTypeIdentifierDietaryVitaminB12": {
@@ -757,10 +757,10 @@
                 }
             ],
             "unit": {
+                "code": "ug",
                 "hkunit": "mcg",
-                "unit": "ug",
                 "system": "http://unitsofmeasure.org",
-                "code": "ug"
+                "unit": "ug"
             }
         },
         "HKQuantityTypeIdentifierDietaryVitaminB6": {
@@ -772,10 +772,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryVitaminC": {
@@ -787,10 +787,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryVitaminD": {
@@ -802,10 +802,10 @@
                 }
             ],
             "unit": {
+                "code": "ug",
                 "hkunit": "mcg",
-                "unit": "ug",
                 "system": "http://unitsofmeasure.org",
-                "code": "ug"
+                "unit": "ug"
             }
         },
         "HKQuantityTypeIdentifierDietaryVitaminE": {
@@ -817,10 +817,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDietaryVitaminK": {
@@ -832,10 +832,10 @@
                 }
             ],
             "unit": {
+                "code": "ug",
                 "hkunit": "mcg",
-                "unit": "ug",
                 "system": "http://unitsofmeasure.org",
-                "code": "ug"
+                "unit": "ug"
             }
         },
         "HKQuantityTypeIdentifierDietaryWater": {
@@ -847,10 +847,10 @@
                 }
             ],
             "unit": {
+                "code": "l",
                 "hkunit": "l",
-                "unit": "l",
                 "system": "http://unitsofmeasure.org",
-                "code": "l"
+                "unit": "l"
             }
         },
         "HKQuantityTypeIdentifierDietaryZinc": {
@@ -862,10 +862,10 @@
                 }
             ],
             "unit": {
+                "code": "mg",
                 "hkunit": "mg",
-                "unit": "mg",
                 "system": "http://unitsofmeasure.org",
-                "code": "mg"
+                "unit": "mg"
             }
         },
         "HKQuantityTypeIdentifierDistanceCycling": {
@@ -877,10 +877,10 @@
                 }
             ],
             "unit": {
+                "code": "m",
                 "hkunit": "m",
-                "unit": "m",
                 "system": "http://unitsofmeasure.org",
-                "code": "m"
+                "unit": "m"
             }
         },
         "HKQuantityTypeIdentifierDistanceDownhillSnowSports": {
@@ -892,25 +892,10 @@
                 }
             ],
             "unit": {
+                "code": "m",
                 "hkunit": "m",
-                "unit": "m",
                 "system": "http://unitsofmeasure.org",
-                "code": "m"
-            }
-        },
-        "HKQuantityTypeIdentifierDistanceWalkingRunning": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierDistanceWalkingRunning",
-                    "display": "Distance Walking or Running",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "m",
-                "unit": "m",
-                "system": "http://unitsofmeasure.org",
-                "code": "m"
+                "unit": "m"
             }
         },
         "HKQuantityTypeIdentifierDistanceSwimming": {
@@ -927,10 +912,25 @@
                 }
             ],
             "unit": {
+                "code": "m",
                 "hkunit": "m",
-                "unit": "m",
                 "system": "http://unitsofmeasure.org",
-                "code": "m"
+                "unit": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierDistanceWalkingRunning": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDistanceWalkingRunning",
+                    "display": "Distance Walking or Running",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m"
             }
         },
         "HKQuantityTypeIdentifierDistanceWheelchair": {
@@ -942,10 +942,25 @@
                 }
             ],
             "unit": {
+                "code": "m",
                 "hkunit": "m",
-                "unit": "m",
                 "system": "http://unitsofmeasure.org",
-                "code": "m"
+                "unit": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierElectrodermalActivity": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierElectrodermalActivity",
+                    "display": "Electrodermal Activity",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "S",
+                "hkunit": "S",
+                "system": "http://unitsofmeasure.org",
+                "unit": "siemens"
             }
         },
         "HKQuantityTypeIdentifierEnvironmentalAudioExposure": {
@@ -957,10 +972,10 @@
                 }
             ],
             "unit": {
+                "code": "dB(SPL)",
                 "hkunit": "dBASPL",
-                "unit": "dB(SPL)",
                 "system": "http://unitsofmeasure.org",
-                "code": "dB(SPL)"
+                "unit": "dB(SPL)"
             }
         },
         "HKQuantityTypeIdentifierFlightsClimbed": {
@@ -981,21 +996,6 @@
                 "unit": "flights"
             }
         },
-        "HKQuantityTypeIdentifierElectrodermalActivity": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierElectrodermalActivity",
-                    "display": "Electrodermal Activity",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "S",
-                "unit": "siemens",
-                "system": "http://unitsofmeasure.org",
-                "code": "S"
-            }
-        },
         "HKQuantityTypeIdentifierForcedExpiratoryVolume1": {
             "codings": [
                 {
@@ -1010,10 +1010,10 @@
                 }
             ],
             "unit": {
+                "code": "L",
                 "hkunit": "l",
-                "unit": "liters",
                 "system": "http://unitsofmeasure.org",
-                "code": "L"
+                "unit": "liters"
             }
         },
         "HKQuantityTypeIdentifierForcedVitalCapacity": {
@@ -1030,23 +1030,10 @@
                 }
             ],
             "unit": {
+                "code": "L",
                 "hkunit": "l",
-                "unit": "liters",
                 "system": "http://unitsofmeasure.org",
-                "code": "L"
-            }
-        },
-        "HKQuantityTypeIdentifierInhalerUsage": {
-            "codings": [
-                {
-                    "code": "HKQuantityTypeIdentifierInhalerUsage",
-                    "display": "Inhaler Usage",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "count",
-                "unit": "count"
+                "unit": "liters"
             }
         },
         "HKQuantityTypeIdentifierHeadphoneAudioExposure": {
@@ -1058,10 +1045,10 @@
                 }
             ],
             "unit": {
+                "code": "dB(SPL)",
                 "hkunit": "dBASPL",
-                "unit": "dB(SPL)",
                 "system": "http://unitsofmeasure.org",
-                "code": "dB(SPL)"
+                "unit": "dB(SPL)"
             }
         },
         "HKQuantityTypeIdentifierHeartRate": {
@@ -1078,10 +1065,10 @@
                 }
             ],
             "unit": {
+                "code": "/min",
                 "hkunit": "count/min",
-                "unit": "beats/minute",
                 "system": "http://unitsofmeasure.org",
-                "code": "/min"
+                "unit": "beats/minute"
             }
         },
         "HKQuantityTypeIdentifierHeartRateVariabilitySDNN": {
@@ -1098,10 +1085,10 @@
                 }
             ],
             "unit": {
+                "code": "ms",
                 "hkunit": "ms",
-                "unit": "ms",
                 "system": "http://unitsofmeasure.org",
-                "code": "ms"
+                "unit": "ms"
             }
         },
         "HKQuantityTypeIdentifierHeight": {
@@ -1118,10 +1105,56 @@
                 }
             ],
             "unit": {
+                "code": "[in_i]",
                 "hkunit": "in",
-                "unit": "in",
                 "system": "http://unitsofmeasure.org",
-                "code": "[in_i]"
+                "unit": "in"
+            }
+        },
+        "HKQuantityTypeIdentifierInhalerUsage": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierInhalerUsage",
+                    "display": "Inhaler Usage",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "count"
+            }
+        },
+        "HKQuantityTypeIdentifierLeanBodyMass": {
+            "codings": [
+                {
+                    "code": "91557-9",
+                    "display": "Lean body weight",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierLeanBodyMass",
+                    "display": "Lean Body Mass",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "[lb_av]",
+                "hkunit": "lb",
+                "system": "http://unitsofmeasure.org",
+                "unit": "lbs"
+            }
+        },
+        "HKQuantityTypeIdentifierNumberOfTimesFallen": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierNumberOfTimesFallen",
+                    "display": "Number Of Times Fallen",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "falls"
             }
         },
         "HKQuantityTypeIdentifierOxygenSaturation": {
@@ -1138,10 +1171,10 @@
                 }
             ],
             "unit": {
+                "code": "%",
                 "hkunit": "%",
-                "unit": "%",
                 "system": "http://unitsofmeasure.org",
-                "code": "%"
+                "unit": "%"
             }
         },
         "HKQuantityTypeIdentifierRespiratoryRate": {
@@ -1158,10 +1191,10 @@
                 }
             ],
             "unit": {
+                "code": "/min",
                 "hkunit": "count/min",
-                "unit": "breaths/minute",
                 "system": "http://unitsofmeasure.org",
-                "code": "/min"
+                "unit": "breaths/minute"
             }
         },
         "HKQuantityTypeIdentifierRestingHeartRate": {
@@ -1178,10 +1211,10 @@
                 }
             ],
             "unit": {
+                "code": "/min",
                 "hkunit": "count/min",
-                "unit": "beats/minute",
                 "system": "http://unitsofmeasure.org",
-                "code": "/min"
+                "unit": "beats/minute"
             }
         },
         "HKQuantityTypeIdentifierStepCount": {
@@ -1202,6 +1235,19 @@
                 "unit": "steps"
             }
         },
+        "HKQuantityTypeIdentifierSwimmingStrokeCount": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierSwimmingStrokeCount",
+                    "display": "Swimming Stroke Count",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "strokes"
+            }
+        },
         "HKQuantityTypeIdentifierWalkingHeartRateAverage": {
             "codings": [
                 {
@@ -1211,30 +1257,10 @@
                 }
             ],
             "unit": {
+                "code": "/min",
                 "hkunit": "count/min",
-                "unit": "beats/minute",
                 "system": "http://unitsofmeasure.org",
-                "code": "/min"
-            }
-        },
-        "HKQuantityTypeIdentifierLeanBodyMass": {
-            "codings": [
-                {
-                    "code": "91557-9",
-                    "display": "Lean body weight",
-                    "system": "http://loinc.org"
-                },
-                {
-                    "code": "HKQuantityTypeIdentifierLeanBodyMass",
-                    "display": "Lean Body Mass",
-                    "system": "http://developer.apple.com/documentation/healthkit"
-                }
-            ],
-            "unit": {
-                "hkunit": "lb",
-                "unit": "lbs",
-                "system": "http://unitsofmeasure.org",
-                "code": "[lb_av]"
+                "unit": "beats/minute"
             }
         }
     }

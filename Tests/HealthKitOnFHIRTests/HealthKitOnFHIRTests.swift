@@ -1906,6 +1906,62 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testNumberOfTimesFallenSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.numberOfTimesFallen),
+            quantity: HKQuantity(unit: .count(), doubleValue: 0)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierNumberOfTimesFallen",
+                    display: "Number Of Times Fallen",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "falls",
+                    value: 0.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testSwimmingStrokeCountSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.swimmingStrokeCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 10)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierSwimmingStrokeCount",
+                    display: "Swimming Stroke Count",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "strokes",
+                    value: 10.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testRespiratoryRateSample() throws {
         let observation = try createObservationFrom(
