@@ -67,6 +67,11 @@ final class CustomMappingsTests: XCTestCase {
                     code: "29463-7",
                     display: "Body weight",
                     system: FHIRPrimitive(FHIRURI(stringLiteral: "http://loinc.org"))
+                ),
+                Coding(
+                    code: "HKQuantityTypeIdentifierBodyMass",
+                    display: "Body Mass",
+                    system: FHIRPrimitive(FHIRURI(stringLiteral: "http://developer.apple.com/documentation/healthkit"))
                 )
             ]
         )

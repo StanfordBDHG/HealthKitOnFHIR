@@ -17,7 +17,7 @@ class HealthKitOnFHIRTests: XCTestCase {
     enum CodeSystem: String {
         case loinc = "http://loinc.org"
         case apple = "http://developer.apple.com/documentation/healthkit"
-        case snomedCT = "http://snomed.info/sct"
+        case ucum = "http://unitsofmeasure.org"
     }
 
     var startDate: Date {
@@ -37,13 +37,15 @@ class HealthKitOnFHIRTests: XCTestCase {
     
     func createObservationFrom(
         type quantityType: HKQuantityType,
-        quantity: HKQuantity
+        quantity: HKQuantity,
+        metadata: [String: Any]? = nil
     ) throws -> Observation {
         let quantitySample = HKQuantitySample(
             type: quantityType,
             quantity: quantity,
             start: try startDate,
-            end: try endDate
+            end: try endDate,
+            metadata: metadata
         )
         return try quantitySample.observation
     }
@@ -69,6 +71,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "41653-7",
                     display: "Glucose Glucometer (BldC) [Mass/Vol]",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierBloodGlucose",
+                    display: "Blood Glucose",
+                    system: .apple
                 )
             ]
         )
@@ -96,9 +103,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "700183008",
-                    display: "Biotin intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryBiotin",
+                    display: "Dietary Biotin",
+                    system: .apple
                 )
             ]
         )
@@ -126,9 +133,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "1208604004",
-                    display: "Caffeine intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryCaffeine",
+                    display: "Dietary Caffeine",
+                    system: .apple
                 )
             ]
         )
@@ -156,9 +163,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "230122008",
-                    display: "Calcium intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryCalcium",
+                    display: "Dietary Calcium",
+                    system: .apple
                 )
             ]
         )
@@ -186,9 +193,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "788472008",
-                    display: "Carbohydrate intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryCarbohydates",
+                    display: "Dietary Carbohydates",
+                    system: .apple
                 )
             ]
         )
@@ -216,9 +223,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "1148944005",
-                    display: "Chloride salt intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryChloride",
+                    display: "Dietary Chloride",
+                    system: .apple
                 )
             ]
         )
@@ -276,9 +283,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "890196009",
-                    display: "Chromium intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryChromium",
+                    display: "Dietary Chromium",
+                    system: .apple
                 )
             ]
         )
@@ -306,9 +313,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286615007",
-                    display: "Copper intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryCopper",
+                    display: "Dietary Copper",
+                    system: .apple
                 )
             ]
         )
@@ -336,9 +343,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "226329008",
-                    display: "Monounsaturated fat intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryFatMonounsaturated",
+                    display: "Dietary Fat Monounsaturated",
+                    system: .apple
                 )
             ]
         )
@@ -366,9 +373,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "226330003",
-                    display: "Polyunsaturated fat intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryFatPolyunsaturated",
+                    display: "Dietary Fat Polyunsaturated",
+                    system: .apple
                 )
             ]
         )
@@ -396,9 +403,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "226328000",
-                    display: "Saturated fat intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryFatSaturated",
+                    display: "Dietary Fat Saturated",
+                    system: .apple
                 )
             ]
         )
@@ -426,9 +433,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "897147002",
-                    display: "Measured quantity of fat and oil intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryFatTotal",
+                    display: "Dietary Fat Total",
+                    system: .apple
                 )
             ]
         )
@@ -459,6 +466,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "LP203183-1",
                     display: "Fiber intake",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierDietaryFiber",
+                    display: "Dietary Fiber",
+                    system: .apple
                 )
             ]
         )
@@ -486,9 +498,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "792806007",
-                    display: "Folate and/or folate derivative intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryFolate",
+                    display: "Dietary Folate",
+                    system: .apple
                 )
             ]
         )
@@ -516,9 +528,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "890199002",
-                    display: "Iodine intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryIodine",
+                    display: "Dietary Iodine",
+                    system: .apple
                 )
             ]
         )
@@ -546,9 +558,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "230124009",
-                    display: "Magnesium intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryMagnesium",
+                    display: "Dietary Magnesium",
+                    system: .apple
                 )
             ]
         )
@@ -576,9 +588,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "890198005",
-                    display: "Manganese intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryManganese",
+                    display: "Dietary Manganese",
+                    system: .apple
                 )
             ]
         )
@@ -606,9 +618,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "890200004",
-                    display: "Molybdenum intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryMolybdenum",
+                    display: "Dietary Molybdenum",
+                    system: .apple
                 )
             ]
         )
@@ -636,9 +648,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "230123003",
-                    display: "Phosphorus intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryPhosphorus",
+                    display: "Dietary Phosphorus",
+                    system: .apple
                 )
             ]
         )
@@ -666,9 +678,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "788479004",
-                    display: "Potassium intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryPotassium",
+                    display: "Dietary Potassium",
+                    system: .apple
                 )
             ]
         )
@@ -696,9 +708,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "1148504005",
-                    display: "Sodium intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietarySodium",
+                    display: "Dietary Sodium",
+                    system: .apple
                 )
             ]
         )
@@ -726,9 +738,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286583002",
-                    display: "Niacin intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryNiacin",
+                    display: "Dietary Niacin",
+                    system: .apple
                 )
             ]
         )
@@ -756,9 +768,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286600006",
-                    display: "Pantothenic acid intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryPantothenicAcid",
+                    display: "Dietary Pantothenic Acid",
+                    system: .apple
                 )
             ]
         )
@@ -786,9 +798,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "1179049004",
-                    display: "Measured quantity of intake of protein and/or protein derivative (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryProtein",
+                    display: "Dietary Protein",
+                    system: .apple
                 )
             ]
         )
@@ -816,9 +828,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286581000",
-                    display: "Vitamin B2 intake (observable entity)", // Riboflavin is a synonym for Vitamin B2
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryRiboflavin",
+                    display: "Dietary Riboflavin",
+                    system: .apple
                 )
             ]
         )
@@ -846,9 +858,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286616008",
-                    display: "Selenium intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietarySelenium",
+                    display: "Dietary Selenium",
+                    system: .apple
                 )
             ]
         )
@@ -876,9 +888,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "226459004",
-                    display: "Sugar intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietarySugar",
+                    display: "Dietary Sugar",
+                    system: .apple
                 )
             ]
         )
@@ -906,9 +918,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286579002",
-                    display: "Vitamin B1 intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryThiamin",
+                    display: "Dietary Thiamin",
+                    system: .apple
                 )
             ]
         )
@@ -936,9 +948,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286604002",
-                    display: "Vitamin A intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryVitaminA",
+                    display: "Dietary Vitamin A",
+                    system: .apple
                 )
             ]
         )
@@ -966,9 +978,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "1144896002",
-                    display: "Vitamin B12 and/or vitamin B12 derivative intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryVitaminB12",
+                    display: "Dietary Vitamin B12",
+                    system: .apple
                 )
             ]
         )
@@ -996,9 +1008,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "1144810007",
-                    display: "Vitamin B6 and/or vitamin B6 derivative intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryVitaminB6",
+                    display: "Dietary Vitamin B6",
+                    system: .apple
                 )
             ]
         )
@@ -1026,9 +1038,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286586005",
-                    display: "Vitamin C intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryVitaminC",
+                    display: "Dietary Vitamin C",
+                    system: .apple
                 )
             ]
         )
@@ -1056,9 +1068,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286607009",
-                    display: "Vitamin D intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryVitaminD",
+                    display: "Dietary Vitamin D",
+                    system: .apple
                 )
             ]
         )
@@ -1086,9 +1098,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286606000",
-                    display: "Vitamin E intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryVitaminE",
+                    display: "Dietary Vitamin E",
+                    system: .apple
                 )
             ]
         )
@@ -1116,9 +1128,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "430195004",
-                    display: "Vitamin K intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryVitaminK",
+                    display: "Dietary Vitamin K",
+                    system: .apple
                 )
             ]
         )
@@ -1146,9 +1158,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "226354008",
-                    display: "Water intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryWater",
+                    display: "Dietary Water",
+                    system: .apple
                 )
             ]
         )
@@ -1176,9 +1188,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "286617004",
-                    display: "Zinc intake (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierDietaryZinc",
+                    display: "Dietary Zinc",
+                    system: .apple
                 )
             ]
         )
@@ -1239,6 +1251,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "20150-9",
                     display: "FEV1",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierForcedExpiratoryVolume1",
+                    display: "Forced Expiratory Volume 1",
+                    system: .apple
                 )
             ]
         )
@@ -1269,6 +1286,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "19870-5",
                     display: "Forced vital capacity [Volume] Respiratory system",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierForcedVitalCapacity",
+                    display: "Forced Vital Capacity",
+                    system: .apple
                 )
             ]
         )
@@ -1314,7 +1336,6 @@ class HealthKitOnFHIRTests: XCTestCase {
         )
     }
 
-
     func testStepCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),
@@ -1328,6 +1349,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "55423-8",
                     display: "Number of steps in unspecified time Pedometer",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierStepCount",
+                    display: "Step Count",
+                    system: .apple
                 )
             ]
         )
@@ -1356,6 +1382,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "100304-5",
                     display: "Flights climbed [#] Reporting Period",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierFlightsClimbed",
+                    display: "Flights Climbed",
+                    system: .apple
                 )
             ]
         )
@@ -1384,6 +1415,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "8867-4",
                     display: "Heart rate",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierHeartRate",
+                    display: "Heart Rate",
+                    system: .apple
                 )
             ]
         )
@@ -1414,6 +1450,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "40443-4",
                     display: "Heart rate --resting",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierRestingHeartRate",
+                    display: "Resting Heart Rate",
+                    system: .apple
                 )
             ]
         )
@@ -1474,6 +1515,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "80404-7",
                     display: "R-R interval.standard deviation (Heart rate variability)",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierHeartRateVariabilitySDNN",
+                    display: "Heart Rate Variability SDNN",
+                    system: .apple
                 )
             ]
         )
@@ -1504,6 +1550,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "59408-5",
                     display: "Oxygen saturation in Arterial blood by Pulse oximetry",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierOxygenSaturation",
+                    display: "Oxygen Saturation",
+                    system: .apple
                 )
             ]
         )
@@ -1534,6 +1585,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "8310-5",
                     display: "Body temperature",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierBodyTemperature",
+                    display: "Body Temperature",
+                    system: .apple
                 )
             ]
         )
@@ -1561,9 +1617,9 @@ class HealthKitOnFHIRTests: XCTestCase {
             observation.code.coding,
             [
                 createCoding(
-                    code: "300076005",
-                    display: "Basal body temperature (observable entity)",
-                    system: .snomedCT
+                    code: "HKQuantityTypeIdentifierBasalBodyTemperature",
+                    display: "Basal Body Temperature",
+                    system: .apple
                 )
             ]
         )
@@ -1624,6 +1680,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "74859-0",
                     display: "Ethanol [Mass/volume] in Blood Estimated from serum or plasma level",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierBloodAlcoholContent",
+                    display: "Blood Alcohol Content",
+                    system: .apple
                 )
             ]
         )
@@ -1654,6 +1715,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "41982-0",
                     display: "Percentage of body fat Measured",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierBodyFatPercentage",
+                    display: "Body Fat Percentage",
+                    system: .apple
                 )
             ]
         )
@@ -1684,6 +1750,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "39156-5",
                     display: "Body mass index (BMI) [Ratio]",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierBodyMassIndex",
+                    display: "Body Mass Index",
+                    system: .apple
                 )
             ]
         )
@@ -1714,6 +1785,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "8302-2",
                     display: "Body height",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierHeight",
+                    display: "Height",
+                    system: .apple
                 )
             ]
         )
@@ -1744,6 +1820,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "29463-7",
                     display: "Body weight",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierBodyMass",
+                    display: "Body Mass",
+                    system: .apple
                 )
             ]
         )
@@ -1774,6 +1855,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "9279-1",
                     display: "Respiratory rate",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierRespiratoryRate",
+                    display: "Respiratory Rate",
+                    system: .apple
                 )
             ]
         )
@@ -1804,6 +1890,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "41981-2",
                     display: "Calories burned",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierActiveEnergyBurned",
+                    display: "Active Energy Burned",
+                    system: .apple
                 )
             ]
         )
@@ -1984,6 +2075,11 @@ class HealthKitOnFHIRTests: XCTestCase {
                     code: "93816-7",
                     display: "Swimming distance unspecified time",
                     system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierDistanceSwimming",
+                    display: "Distance Swimming",
+                    system: .apple
                 )
             ]
         )

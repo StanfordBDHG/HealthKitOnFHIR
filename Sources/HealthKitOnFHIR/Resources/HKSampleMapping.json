@@ -20,6 +20,11 @@
                     "system": "http://loinc.org",
                     "code": "41981-2",
                     "display": "Calories burned"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierActiveEnergyBurned",
+                    "display": "Active Energy Burned",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -80,6 +85,11 @@
                     "code": "41653-7",
                     "display": "Glucose Glucometer (BldC) [Mass/Vol]",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBloodGlucose",
+                    "display": "Blood Glucose",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -95,6 +105,11 @@
                     "code": "29463-7",
                     "display": "Body weight",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBodyMass",
+                    "display": "Body Mass",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -110,6 +125,11 @@
                     "code": "8867-4",
                     "display": "Diastolic blood pressure",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBloodPressureDiastolic",
+                    "display": "Blood Pressure Diastolic",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -125,6 +145,11 @@
                     "code": "8480-6",
                     "display": "Systolic blood pressure",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBloodPressureSystolic",
+                    "display": "Blood Pressure Systolic",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -137,9 +162,9 @@
         "HKQuantityTypeIdentifierBasalBodyTemperature": {
             "codings": [
                 {
-                    "code": "300076005",
-                    "display": "Basal body temperature (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierBasalBodyTemperature",
+                    "display": "Basal Body Temperature",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -170,6 +195,11 @@
                     "code": "74859-0",
                     "display": "Ethanol [Mass/volume] in Blood Estimated from serum or plasma level",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBloodAlcoholContent",
+                    "display": "Blood Alcohol Content",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -185,6 +215,11 @@
                     "code": "41982-0",
                     "display": "Percentage of body fat Measured",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBodyFatPercentage",
+                    "display": "Body Fat Percentage",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -200,6 +235,11 @@
                     "code": "39156-5",
                     "display": "Body mass index (BMI) [Ratio]",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBodyMassIndex",
+                    "display": "Body Mass Index",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -215,6 +255,11 @@
                     "code": "8310-5",
                     "display": "Body temperature",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierBodyTemperature",
+                    "display": "Body Temperature",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -230,6 +275,11 @@
                     "code": "9052-2",
                     "display": "Calorie intake total",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryEnergyConsumed",
+                    "display": "Dietary Energy Consumed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -242,9 +292,9 @@
         "HKQuantityTypeIdentifierDietaryBiotin": {
             "codings": [
                 {
-                    "code": "700183008",
-                    "display": "Biotin intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryBiotin",
+                    "display": "Dietary Biotin",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -257,9 +307,9 @@
         "HKQuantityTypeIdentifierDietaryCaffeine": {
             "codings": [
                 {
-                    "code": "1208604004",
-                    "display": "Caffeine intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryCaffeine",
+                    "display": "Dietary Caffeine",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -272,9 +322,9 @@
         "HKQuantityTypeIdentifierDietaryCalcium": {
             "codings": [
                 {
-                    "code": "230122008",
-                    "display": "Calcium intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryCalcium",
+                    "display": "Dietary Calcium",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -287,9 +337,9 @@
         "HKQuantityTypeIdentifierDietaryCarbohydrates": {
             "codings": [
                 {
-                    "code": "788472008",
-                    "display": "Carbohydrate intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryCarbohydates",
+                    "display": "Dietary Carbohydates",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -302,9 +352,9 @@
         "HKQuantityTypeIdentifierDietaryChloride": {
             "codings": [
                 {
-                    "code": "1148944005",
-                    "display": "Chloride salt intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryChloride",
+                    "display": "Dietary Chloride",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -332,9 +382,9 @@
         "HKQuantityTypeIdentifierDietaryChromium": {
             "codings": [
                 {
-                    "code": "890196009",
-                    "display": "Chromium intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryChromium",
+                    "display": "Dietary Chromium",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -347,9 +397,9 @@
         "HKQuantityTypeIdentifierDietaryCopper": {
             "codings": [
                 {
-                    "code": "286615007",
-                    "display": "Copper intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryCopper",
+                    "display": "Dietary Copper",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -362,9 +412,9 @@
         "HKQuantityTypeIdentifierDietaryFatMonounsaturated": {
             "codings": [
                 {
-                    "code": "226329008",
-                    "display": "Monounsaturated fat intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryFatMonounsaturated",
+                    "display": "Dietary Fat Monounsaturated",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -377,9 +427,9 @@
         "HKQuantityTypeIdentifierDietaryFatPolyunsaturated": {
             "codings": [
                 {
-                    "code": "226330003",
-                    "display": "Polyunsaturated fat intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryFatPolyunsaturated",
+                    "display": "Dietary Fat Polyunsaturated",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -392,9 +442,9 @@
         "HKQuantityTypeIdentifierDietaryFatSaturated": {
             "codings": [
                 {
-                    "code": "226328000",
-                    "display": "Saturated fat intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryFatSaturated",
+                    "display": "Dietary Fat Saturated",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -407,9 +457,9 @@
         "HKQuantityTypeIdentifierDietaryFatTotal": {
             "codings": [
                 {
-                    "code": "897147002",
-                    "display": "Measured quantity of fat and oil intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryFatTotal",
+                    "display": "Dietary Fat Total",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -425,6 +475,11 @@
                     "code": "LP203183-1",
                     "display": "Fiber intake",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierDietaryFiber",
+                    "display": "Dietary Fiber",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -437,9 +492,9 @@
         "HKQuantityTypeIdentifierDietaryFolate": {
             "codings": [
                 {
-                    "code": "792806007",
-                    "display": "Folate and/or folate derivative intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryFolate",
+                    "display": "Dietary Folate",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -452,9 +507,9 @@
         "HKQuantityTypeIdentifierDietaryIodine": {
             "codings": [
                 {
-                    "code": "890199002",
-                    "display": "Iodine intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryIodine",
+                    "display": "Dietary Iodine",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -467,9 +522,9 @@
         "HKQuantityTypeIdentifierDietaryMagnesium": {
             "codings": [
                 {
-                    "code": "230124009",
-                    "display": "Magnesium intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryMagnesium",
+                    "display": "Dietary Magnesium",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -482,9 +537,9 @@
         "HKQuantityTypeIdentifierDietaryManganese": {
             "codings": [
                 {
-                    "code": "890198005",
-                    "display": "Manganese intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryManganese",
+                    "display": "Dietary Manganese",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -497,9 +552,9 @@
         "HKQuantityTypeIdentifierDietaryMolybdenum": {
             "codings": [
                 {
-                    "code": "890200004",
-                    "display": "Molybdenum intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryMolybdenum",
+                    "display": "Dietary Molybdenum",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -512,9 +567,9 @@
         "HKQuantityTypeIdentifierDietaryNiacin": {
             "codings": [
                 {
-                    "code": "286583002",
-                    "display": "Niacin intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryNiacin",
+                    "display": "Dietary Niacin",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -527,9 +582,9 @@
         "HKQuantityTypeIdentifierDietaryPantothenicAcid": {
             "codings": [
                 {
-                    "code": "286600006",
-                    "display": "Pantothenic acid intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryPantothenicAcid",
+                    "display": "Dietary Pantothenic Acid",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -542,9 +597,9 @@
         "HKQuantityTypeIdentifierDietaryPhosphorus": {
             "codings": [
                 {
-                    "code": "230123003",
-                    "display": "Phosphorus intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryPhosphorus",
+                    "display": "Dietary Phosphorus",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -557,9 +612,9 @@
         "HKQuantityTypeIdentifierDietaryProtein": {
             "codings": [
                 {
-                    "code": "1179049004",
-                    "display": "Measured quantity of intake of protein and/or protein derivative (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryProtein",
+                    "display": "Dietary Protein",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -572,9 +627,9 @@
         "HKQuantityTypeIdentifierDietaryRiboflavin": {
             "codings": [
                 {
-                    "code": "286581000",
-                    "display": "Vitamin B2 intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryRiboflavin",
+                    "display": "Dietary Riboflavin",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -587,9 +642,9 @@
         "HKQuantityTypeIdentifierDietarySelenium": {
             "codings": [
                 {
-                    "code": "286616008",
-                    "display": "Selenium intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietarySelenium",
+                    "display": "Dietary Selenium",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -602,9 +657,9 @@
         "HKQuantityTypeIdentifierDietarySugar": {
             "codings": [
                 {
-                    "code": "226459004",
-                    "display": "Sugar intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietarySugar",
+                    "display": "Dietary Sugar",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -617,9 +672,9 @@
         "HKQuantityTypeIdentifierDietaryPotassium": {
             "codings": [
                 {
-                    "code": "788479004",
-                    "display": "Potassium intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryPotassium",
+                    "display": "Dietary Potassium",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -632,9 +687,9 @@
         "HKQuantityTypeIdentifierDietarySodium": {
             "codings": [
                 {
-                    "code": "1148504005",
-                    "display": "Sodium intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietarySodium",
+                    "display": "Dietary Sodium",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -647,9 +702,9 @@
         "HKQuantityTypeIdentifierDietaryThiamin": {
             "codings": [
                 {
-                    "code": "286579002",
-                    "display": "Vitamin B1 intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryThiamin",
+                    "display": "Dietary Thiamin",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -662,9 +717,9 @@
         "HKQuantityTypeIdentifierDietaryVitaminA": {
             "codings": [
                 {
-                    "code": "286604002",
-                    "display": "Vitamin A intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryVitaminA",
+                    "display": "Dietary Vitamin A",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -677,9 +732,9 @@
         "HKQuantityTypeIdentifierDietaryVitaminB12": {
             "codings": [
                 {
-                    "code": "1144896002",
-                    "display": "Vitamin B12 and/or vitamin B12 derivative intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryVitaminB12",
+                    "display": "Dietary Vitamin B12",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -692,9 +747,9 @@
         "HKQuantityTypeIdentifierDietaryVitaminB6": {
             "codings": [
                 {
-                    "code": "1144810007",
-                    "display": "Vitamin B6 and/or vitamin B6 derivative intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryVitaminB6",
+                    "display": "Dietary Vitamin B6",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -707,9 +762,9 @@
         "HKQuantityTypeIdentifierDietaryVitaminC": {
             "codings": [
                 {
-                    "code": "286586005",
-                    "display": "Vitamin C intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryVitaminC",
+                    "display": "Dietary Vitamin C",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -722,9 +777,9 @@
         "HKQuantityTypeIdentifierDietaryVitaminD": {
             "codings": [
                 {
-                    "code": "286607009",
-                    "display": "Vitamin D intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryVitaminD",
+                    "display": "Dietary Vitamin D",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -737,9 +792,9 @@
         "HKQuantityTypeIdentifierDietaryVitaminE": {
             "codings": [
                 {
-                    "code": "286606000",
-                    "display": "Vitamin E intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryVitaminE",
+                    "display": "Dietary Vitamin E",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -752,9 +807,9 @@
         "HKQuantityTypeIdentifierDietaryVitaminK": {
             "codings": [
                 {
-                    "code": "430195004",
-                    "display": "Vitamin K intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryVitaminK",
+                    "display": "Dietary Vitamin K",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -767,9 +822,9 @@
         "HKQuantityTypeIdentifierDietaryWater": {
             "codings": [
                 {
-                    "code": "226354008",
-                    "display": "Water intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryWater",
+                    "display": "Dietary Water",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -782,9 +837,9 @@
         "HKQuantityTypeIdentifierDietaryZinc": {
             "codings": [
                 {
-                    "code": "286617004",
-                    "display": "Zinc intake (observable entity)",
-                    "system": "http://snomed.info/sct"
+                    "code": "HKQuantityTypeIdentifierDietaryZinc",
+                    "display": "Dietary Zinc",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -845,6 +900,11 @@
                     "code": "93816-7",
                     "display": "Swimming distance unspecified time",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierDistanceSwimming",
+                    "display": "Distance Swimming",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -890,6 +950,11 @@
                     "code": "100304-5",
                     "display": "Flights climbed [#] Reporting Period",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierFlightsClimbed",
+                    "display": "Flights Climbed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -918,6 +983,11 @@
                     "code": "20150-9",
                     "display": "FEV1",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierForcedExpiratoryVolume1",
+                    "display": "Forced Expiratory Volume 1",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -933,6 +1003,11 @@
                     "code": "19870-5",
                     "display": "Forced vital capacity [Volume] Respiratory system",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierForcedVitalCapacity",
+                    "display": "Forced Vital Capacity",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -976,6 +1051,11 @@
                     "code": "8867-4",
                     "display": "Heart rate",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierHeartRate",
+                    "display": "Heart Rate",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -991,6 +1071,11 @@
                     "code": "80404-7",
                     "display": "R-R interval.standard deviation (Heart rate variability)",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierHeartRateVariabilitySDNN",
+                    "display": "Heart Rate Variability SDNN",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -1006,6 +1091,11 @@
                     "code": "8302-2",
                     "display": "Body height",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierHeight",
+                    "display": "Height",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -1021,6 +1111,11 @@
                     "code": "59408-5",
                     "display": "Oxygen saturation in Arterial blood by Pulse oximetry",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierOxygenSaturation",
+                    "display": "Oxygen Saturation",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -1036,6 +1131,11 @@
                     "code": "9279-1",
                     "display": "Respiratory rate",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierRespiratoryRate",
+                    "display": "Respiratory Rate",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -1051,6 +1151,11 @@
                     "code": "40443-4",
                     "display": "Heart rate --resting",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierRestingHeartRate",
+                    "display": "Resting Heart Rate",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
@@ -1066,6 +1171,11 @@
                     "code": "55423-8",
                     "display": "Number of steps in unspecified time Pedometer",
                     "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierStepCount",
+                    "display": "Step Count",
+                    "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
             "unit": {
