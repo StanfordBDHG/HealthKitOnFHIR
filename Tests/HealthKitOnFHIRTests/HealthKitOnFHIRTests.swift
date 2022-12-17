@@ -1601,6 +1601,202 @@ class HealthKitOnFHIRTests: XCTestCase {
             )
         )
     }
+
+    func testPeakExpiratoryFlowRateSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.peakExpiratoryFlowRate),
+            quantity: HKQuantity(unit: .liter().unitDivided(by: .minute()), doubleValue: 600)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "19935-6",
+                    display: "Maximum expiratory gas flow Respiratory system airway by Peak flow meter",
+                    system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierPeakExpiratoryFlowRate",
+                    display: "Peak Expiratory Flow Rate",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "L/min",
+                    system: "http://unitsofmeasure.org",
+                    unit: "L/min",
+                    value: 600.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testPeripheralPerfusionIndexSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.peripheralPerfusionIndex),
+            quantity: HKQuantity(unit: .percent(), doubleValue: 5)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "61006-3",
+                    display: "Perfusion index Tissue by Pulse oximetry",
+                    system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierPeripheralPerfusionIndex",
+                    display: "Peripheral Perfusion Index",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "%",
+                    system: "http://unitsofmeasure.org",
+                    unit: "%",
+                    value: 5.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testPushCountSample() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.pushCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 5)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "96502-0",
+                    display: "Number of wheelchair pushes per time period",
+                    system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierPushCount",
+                    display: "Push Count",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "wheelchair pushes",
+                    value: 5.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testUVExposure() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.uvExposure),
+            quantity: HKQuantity(unit: .count(), doubleValue: 5)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierUVExposure",
+                    display: "UV Exposure",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    unit: "count",
+                    value: 5.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testVO2Max() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.vo2Max),
+            quantity: HKQuantity(unit: HKUnit(from: "mL/kg*min"), doubleValue: 31)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierVO2Max",
+                    display: "VO2 Max",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "mL/kg/min",
+                    system: "http://unitsofmeasure.org",
+                    unit: "mL/kg/min",
+                    value: 31.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+
+    func testWaistCircumference() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.waistCircumference),
+            quantity: HKQuantity(unit: HKUnit(from: "in"), doubleValue: 38.7)
+        )
+
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "8280-0",
+                    display: "Waist Circumference at umbilicus by Tape measure",
+                    system: .loinc
+                ),
+                createCoding(
+                    code: "HKQuantityTypeIdentifierWaistCircumference",
+                    display: "Waist Circumference",
+                    system: .apple
+                )
+            ]
+        )
+
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "in",
+                    system: "http://unitsofmeasure.org",
+                    unit: "in",
+                    value: 38.7.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
     
     func testBodyTemperatureSample() throws {
         let observation = try createObservationFrom(

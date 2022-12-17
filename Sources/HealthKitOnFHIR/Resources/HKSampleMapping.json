@@ -484,7 +484,7 @@
                     "code": "HKQuantityTypeIdentifierDietaryFiber",
                     "display": "Dietary Fiber",
                     "system": "http://developer.apple.com/documentation/healthkit"
-                }
+                },
             ],
             "unit": {
                 "code": "g",
@@ -1177,6 +1177,64 @@
                 "unit": "%"
             }
         },
+        "HKQuantityTypeIdentifierPeakExpiratoryFlowRate": {
+            "codings": [
+                {
+                    "code": "19935-6",
+                    "display": "Maximum expiratory gas flow Respiratory system airway by Peak flow meter",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierPeakExpiratoryFlowRate",
+                    "display": "Peak Expiratory Flow Rate",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "L/min",
+                "hkunit": "L/min",
+                "system": "http://unitsofmeasure.org",
+                "unit": "L/min"
+            }
+        },
+        "HKQuantityTypeIdentifierPeripheralPerfusionIndex": {
+            "codings": [
+                {
+                    "code": "61006-3",
+                    "display": "Perfusion index Tissue by Pulse oximetry",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierPeripheralPerfusionIndex",
+                    "display": "Peripheral Perfusion Index",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "%",
+                "hkunit": "%",
+                "system": "http://unitsofmeasure.org",
+                "unit": "%"
+            }
+        },
+        "HKQuantityTypeIdentifierPushCount": {
+            "codings": [
+                {
+                    "code": "96502-0",
+                    "display": "Number of wheelchair pushes per time period",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierPushCount",
+                    "display": "Push Count",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "wheelchair pushes"
+            }
+        },
         "HKQuantityTypeIdentifierRespiratoryRate": {
             "codings": [
                 {
@@ -1246,6 +1304,54 @@
             "unit": {
                 "hkunit": "count",
                 "unit": "strokes"
+            }
+        },
+        "HKQuantityTypeIdentifierUVExposure": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierUVExposure",
+                    "display": "UV Exposure",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "count"
+            }
+        },
+        "HKQuantityTypeIdentifierVO2Max": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierVO2Max",
+                    "display": "VO2 Max",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "mL/kg/min",
+                "hkunit": "mL/kg*min",
+                "system": "http://unitsofmeasure.org",
+                "unit": "mL/kg/min"
+            }
+        },
+        "HKQuantityTypeIdentifierWaistCircumference": {
+            "codings": [
+                {
+                    "code": "8280-0",
+                    "display": "Waist Circumference at umbilicus by Tape measure",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierWaistCircumference",
+                    "display": "Waist Circumference",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "in",
+                "hkunit": "in",
+                "system": "http://unitsofmeasure.org",
+                "unit": "in"
             }
         },
         "HKQuantityTypeIdentifierWalkingHeartRateAverage": {
