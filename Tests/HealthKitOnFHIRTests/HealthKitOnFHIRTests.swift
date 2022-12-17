@@ -658,4 +658,15 @@ class HealthKitOnFHIRTests: XCTestCase {
 
         XCTAssertEqual(sample.quantityType.codes, [])
     }
+
+    func testCervicalMucusQuality() throws {
+        let sample = HKCategorySample(
+            type: HKCategoryType(.cervicalMucusQuality),
+            value: 1,
+            start: try startDate,
+            end: try endDate
+        )
+
+        let observation = try sample.observation
+    }
 }
