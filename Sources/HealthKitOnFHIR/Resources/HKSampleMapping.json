@@ -1013,7 +1013,7 @@
             "code":"L",
             "hkunit":"l",
             "system":"http://unitsofmeasure.org",
-            "unit":"liters"
+            "unit":"L"
          }
       },
       "HKQuantityTypeIdentifierForcedVitalCapacity":{
@@ -1033,7 +1033,7 @@
             "code":"L",
             "hkunit":"l",
             "system":"http://unitsofmeasure.org",
-            "unit":"liters"
+            "unit":"L"
          }
       },
       "HKQuantityTypeIdentifierHeadphoneAudioExposure":{
