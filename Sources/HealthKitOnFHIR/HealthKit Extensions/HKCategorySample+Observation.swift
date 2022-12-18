@@ -11,63 +11,70 @@ import ModelsR4
 
 
 extension HKCategorySample {
+    // Disabled the following rules as this function is readable
+    // swiftlint:disable:next cyclomatic_complexity function_body_length
     func buildCategoryObservation(_ observation: inout Observation) throws {
-        var valueString = ""
+        let categoryTypeString = self.categoryType.description
+        
+        var valueString: String?
         switch self.categoryType {
-        case HKCategoryType(.cervicalMucusQuality):
-            switch self.value {
-            case 1:
-                valueString = "dry"
-            case 2:
-                valueString = "sticky"
-            case 3:
-                valueString = "creamy"
-            case 4:
-                valueString = "watery"
-            case 5:
-                valueString = "eggWhite"
-            default:
-                throw HealthKitOnFHIRError.notSupported
-            }
-        case HKCategoryType(.menstrualFlow):
-            switch self.value {
-            case 1:
-                valueString = "unspecified"
-            case 2:
-                valueString = "none"
-            case 3:
-                valueString = "light"
-            case 4:
-                valueString = "medium"
-            case 5:
-                valueString = "heavy"
-            default:
-                throw HealthKitOnFHIRError.notSupported
-            }
-        case HKCategoryType(.ovulationTestResult):
-            throw HealthKitOnFHIRError.notSupported
-        case HKCategoryType(.contraceptive):
-            throw HealthKitOnFHIRError.notSupported
-        case HKCategoryType(.sleepAnalysis):
-            throw HealthKitOnFHIRError.notSupported
         case HKCategoryType(.appetiteChanges):
-            throw HealthKitOnFHIRError.notSupported
-        case HKCategoryType(.environmentalAudioExposureEvent):
-            throw HealthKitOnFHIRError.notSupported
-        case HKCategoryType(.headphoneAudioExposureEvent):
-            throw HealthKitOnFHIRError.notSupported
-        case HKCategoryType(.lowCardioFitnessEvent):
-            throw HealthKitOnFHIRError.notSupported
+            valueString = HKCategoryValueAppetiteChanges(rawValue: self.value)?.description
+        case HKCategoryType(.appleStandHour):
+            valueString = HKCategoryValueAppleStandHour(rawValue: self.value)?.description
         case HKCategoryType(.appleWalkingSteadinessEvent):
-            throw HealthKitOnFHIRError.notSupported
+            valueString = HKCategoryValueAppleWalkingSteadinessEvent(rawValue: self.value)?.description
+        case HKCategoryType(.cervicalMucusQuality):
+            valueString = HKCategoryValueCervicalMucusQuality(rawValue: self.value)?.description
+        case HKCategoryType(.contraceptive):
+            valueString = HKCategoryValueContraceptive(rawValue: self.value)?.description
+        case HKCategoryType(.environmentalAudioExposureEvent):
+            valueString = HKCategoryValueEnvironmentalAudioExposureEvent(rawValue: self.value)?.description
+        case HKCategoryType(.headphoneAudioExposureEvent):
+            valueString = HKCategoryValueHeadphoneAudioExposureEvent(rawValue: self.value)?.description
+        case HKCategoryType(.lowCardioFitnessEvent):
+            valueString = HKCategoryValueLowCardioFitnessEvent(rawValue: self.value)?.description
+        case HKCategoryType(.menstrualFlow):
+            valueString = HKCategoryValueMenstrualFlow(rawValue: self.value)?.description
+        case HKCategoryType(.ovulationTestResult):
+            valueString = HKCategoryValueOvulationTestResult(rawValue: self.value)?.description
         case HKCategoryType(.pregnancyTestResult):
-            throw HealthKitOnFHIRError.notSupported
+            valueString = HKCategoryValuePregnancyTestResult(rawValue: self.value)?.description
         case HKCategoryType(.progesteroneTestResult):
-            throw HealthKitOnFHIRError.notSupported
+            valueString = HKCategoryValueProgesteroneTestResult(rawValue: self.value)?.description
+        case HKCategoryType(.sleepAnalysis):
+            valueString = HKCategoryValueSleepAnalysis(rawValue: self.value)?.description
+        case
+            HKCategoryType(.irregularHeartRhythmEvent),
+            HKCategoryType(.lowHeartRateEvent),
+            HKCategoryType(.highHeartRateEvent),
+            HKCategoryType(.mindfulSession),
+            HKCategoryType(.toothbrushingEvent),
+            HKCategoryType(.handwashingEvent),
+            HKCategoryType(.sexualActivity),
+            HKCategoryType(.intermenstrualBleeding),
+            HKCategoryType(.infrequentMenstrualCycles),
+            HKCategoryType(.irregularMenstrualCycles),
+            HKCategoryType(.persistentIntermenstrualBleeding),
+            HKCategoryType(.prolongedMenstrualPeriods),
+            HKCategoryType(.lactation):
+            // Samples of these types do not carry any value,
+            // nor associated metadata, so we use the category
+            // identifier as the value.
+            valueString = categoryTypeString
         default:
             throw HealthKitOnFHIRError.notSupported
         }
-
-        observation.value = .string(valueString.asFHIRStringPrimitive())
+        
+        guard let valueString else { throw HealthKitOnFHIRError.notSupported }
+        
+        let coding = Coding(
+            code: categoryTypeString.asFHIRStringPrimitive(),
+            display: categoryTypeString.asFHIRStringPrimitive(),
+            system: FHIRPrimitive(FHIRURI(stringLiteral: SupportedCodeSystem.apple.rawValue))
+        )
+        
+        observation.appendCoding(coding)
+        observation.setValue(valueString)
     }
 }
