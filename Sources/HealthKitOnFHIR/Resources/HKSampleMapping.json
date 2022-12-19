@@ -45,10 +45,10 @@
                 }
             ]
         },
-        "HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent": {
+        "HKCategoryTypeIdentifierAudioExposureEvent": {
             "codings": [
                 {
-                    "code": "HKCategoryTypeIdentifierEnvironmentalAudioExposureEvent",
+                    "code": "HKCategoryTypeIdentifierAudioExposureEvent",
                     "display": "Environmental Audio Exposure Event",
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
