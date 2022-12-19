@@ -41,11 +41,12 @@ class HKCategorySampleTests: XCTestCase {
     }
 
     func createCategoryCoding(
-        categoryType: String
+        categoryType: String,
+        display: String
     ) -> Coding {
-        Coding(
+        return Coding(
             code: FHIRPrimitive(stringLiteral: categoryType),
-            display: FHIRPrimitive(stringLiteral: categoryType),
+            display: FHIRPrimitive(stringLiteral: display),
             system: FHIRPrimitive(FHIRURI(stringLiteral: SupportedCodeSystem.apple.rawValue))
         )
     }
@@ -59,7 +60,13 @@ class HKCategorySampleTests: XCTestCase {
                 value: value.rawValue
             )
 
-            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.cervicalMucusQuality).description))
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.cervicalMucusQuality).description,
+                    display: "Cervical Mucus Quality"
+                )
+            )
             XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
         }
     }
@@ -74,8 +81,15 @@ class HKCategorySampleTests: XCTestCase {
                 metadata: [HKMetadataKeyMenstrualCycleStart: true]
             )
 
-            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.menstrualFlow).description))
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.menstrualFlow).description,
+                    display: "Menstrual Flow"
+                )
+            )
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive())
+            )
         }
     }
 
@@ -88,7 +102,13 @@ class HKCategorySampleTests: XCTestCase {
                 value: value.rawValue
             )
 
-            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.ovulationTestResult).description))
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.ovulationTestResult).description,
+                    display: "Ovulation Test Result"
+                )
+            )
             XCTAssertEqual(
                 observation.value, .string(value.description.asFHIRStringPrimitive())
             )
@@ -104,8 +124,15 @@ class HKCategorySampleTests: XCTestCase {
                 value: value.rawValue
             )
 
-            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.contraceptive).description))
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.contraceptive).description,
+                    display: "Contraceptive"
+                )
+            )
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive())
+            )
         }
     }
 
@@ -118,7 +145,13 @@ class HKCategorySampleTests: XCTestCase {
                 value: value.rawValue
             )
 
-            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.sleepAnalysis).description))
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.sleepAnalysis).description,
+                    display: "Sleep Analysis"
+                )
+            )
             XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
         }
     }
@@ -132,19 +165,29 @@ class HKCategorySampleTests: XCTestCase {
                 value: value.rawValue
             )
 
-            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.appetiteChanges).description))
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.appetiteChanges).description,
+                    display: "Appetite Changes"
+                )
+            )
             XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
         }
     }
 
-    func testEnvironmentAudioExposureEvent() throws {
+    func testEnvironmentalAudioExposureEvent() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.environmentalAudioExposureEvent),
+            type: HKCategoryType(.audioExposureEvent),
             value: HKCategoryValueEnvironmentalAudioExposureEvent.momentaryLimit.rawValue
         )
 
         XCTAssertEqual(
-            observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.environmentalAudioExposureEvent).description)
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.audioExposureEvent).description,
+                display: "Environmental Audio Exposure Event"
+            )
         )
         XCTAssertEqual(observation.value, .string("momentary limit".asFHIRStringPrimitive()))
     }
@@ -155,7 +198,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValueHeadphoneAudioExposureEvent.sevenDayLimit.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.headphoneAudioExposureEvent).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.headphoneAudioExposureEvent).description,
+                display: "Headphone Audio Exposure Event"
+            )
+        )
         XCTAssertEqual(observation.value, .string("seven day limit".asFHIRStringPrimitive()))
     }
 
@@ -165,7 +214,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValueLowCardioFitnessEvent.lowFitness.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.lowCardioFitnessEvent).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.lowCardioFitnessEvent).description,
+                display: "Low Cardio Fitness Event"
+            )
+        )
         XCTAssertEqual(observation.value, .string("low fitness".asFHIRStringPrimitive()))
     }
 
@@ -175,7 +230,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValueAppleWalkingSteadinessEvent.initialLow.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.appleWalkingSteadinessEvent).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.appleWalkingSteadinessEvent).description,
+                display: "Apple Walking Steadiness Event"
+            )
+        )
         XCTAssertEqual(observation.value, .string("initial low".asFHIRStringPrimitive()))
     }
 
@@ -188,7 +249,13 @@ class HKCategorySampleTests: XCTestCase {
                 value: value.rawValue
             )
 
-            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.pregnancyTestResult).description))
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.pregnancyTestResult).description,
+                    display: "Pregnancy Test Result"
+                )
+            )
             XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
         }
     }
@@ -202,7 +269,13 @@ class HKCategorySampleTests: XCTestCase {
                 value: value.rawValue
             )
 
-            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.progesteroneTestResult).description))
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.progesteroneTestResult).description,
+                    display: "Progesterone Test Result"
+                )
+            )
             XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
         }
     }
@@ -216,7 +289,13 @@ class HKCategorySampleTests: XCTestCase {
                 value: value.rawValue
             )
 
-            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.appleStandHour).description))
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.appleStandHour).description,
+                    display: "Apple Stand Hour"
+                )
+            )
             XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
         }
     }
@@ -227,7 +306,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValue.notApplicable.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.intermenstrualBleeding).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.intermenstrualBleeding).description,
+                display: "Intermenstrual Bleeding"
+            )
+        )
         XCTAssertEqual(
             observation.value,
             .string("HKCategoryTypeIdentifierIntermenstrualBleeding".asFHIRStringPrimitive())
@@ -240,7 +325,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValue.notApplicable.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.infrequentMenstrualCycles).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.infrequentMenstrualCycles).description,
+                display: "Infrequent Menstrual Cycles"
+            )
+        )
         XCTAssertEqual(
             observation.value,
             .string("HKCategoryTypeIdentifierInfrequentMenstrualCycles".asFHIRStringPrimitive())
@@ -253,7 +344,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValue.notApplicable.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.irregularMenstrualCycles).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.irregularMenstrualCycles).description,
+                display: "Irregular Menstrual Cycles"
+            )
+        )
         XCTAssertEqual(
             observation.value,
             .string("HKCategoryTypeIdentifierIrregularMenstrualCycles".asFHIRStringPrimitive())
@@ -267,7 +364,11 @@ class HKCategorySampleTests: XCTestCase {
         )
 
         XCTAssertEqual(
-            observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.persistentIntermenstrualBleeding).description)
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.persistentIntermenstrualBleeding).description,
+                display: "Persistent Intermenstrual Bleeding"
+            )
         )
         XCTAssertEqual(
             observation.value,
@@ -281,7 +382,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValue.notApplicable.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.prolongedMenstrualPeriods).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.prolongedMenstrualPeriods).description,
+                display: "Prolonged Menstrual Periods"
+            )
+        )
         XCTAssertEqual(
             observation.value,
             .string("HKCategoryTypeIdentifierProlongedMenstrualPeriods".asFHIRStringPrimitive())
@@ -294,7 +401,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValue.notApplicable.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.lactation).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.lactation).description,
+                display: "Lactation"
+            )
+        )
         XCTAssertEqual(
             observation.value,
             .string("HKCategoryTypeIdentifierLactation".asFHIRStringPrimitive())
@@ -307,7 +420,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValue.notApplicable.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.handwashingEvent).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.handwashingEvent).description,
+                display: "Handwashing Event"
+            )
+        )
         XCTAssertEqual(
             observation.value,
             .string("HKCategoryTypeIdentifierHandwashingEvent".asFHIRStringPrimitive())
@@ -320,7 +439,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValue.notApplicable.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.toothbrushingEvent).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.toothbrushingEvent).description,
+                display: "Toothbrushing Event"
+            )
+        )
         XCTAssertEqual(
             observation.value,
             .string("HKCategoryTypeIdentifierToothbrushingEvent".asFHIRStringPrimitive())
@@ -333,7 +458,13 @@ class HKCategorySampleTests: XCTestCase {
             value: HKCategoryValue.notApplicable.rawValue
         )
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.mindfulSession).description))
+        XCTAssertEqual(
+            observation.code.coding?.first,
+            createCategoryCoding(
+                categoryType: HKCategoryType(.mindfulSession).description,
+                display: "Mindful Session"
+            )
+        )
         XCTAssertEqual(
             observation.value,
             .string("HKCategoryTypeIdentifierMindfulSession".asFHIRStringPrimitive())

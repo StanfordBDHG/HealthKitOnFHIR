@@ -13,7 +13,14 @@ import ModelsR4
 extension HKCategorySample {
     // Disabled the following rules as this function is readable
     // swiftlint:disable:next cyclomatic_complexity function_body_length
-    func buildCategoryObservation(_ observation: inout Observation) throws {
+    func buildCategoryObservation(
+        _ observation: inout Observation,
+        mappings: HKSampleMapping = HKSampleMapping.default
+    ) throws {
+        guard let mapping = mappings.categorySampleMapping[self.categoryType] else {
+            throw HealthKitOnFHIRError.notSupported
+        }
+
         let categoryTypeString = self.categoryType.description
         
         var valueString: String?
@@ -67,14 +74,11 @@ extension HKCategorySample {
         }
         
         guard let valueString else { throw HealthKitOnFHIRError.notSupported }
-        
-        let coding = Coding(
-            code: categoryTypeString.asFHIRStringPrimitive(),
-            display: categoryTypeString.asFHIRStringPrimitive(),
-            system: FHIRPrimitive(FHIRURI(stringLiteral: SupportedCodeSystem.apple.rawValue))
-        )
-        
-        observation.appendCoding(coding)
+
+        for code in mapping.codings {
+            observation.appendCoding(code.coding)
+        }
+
         observation.setValue(valueString)
     }
 }
