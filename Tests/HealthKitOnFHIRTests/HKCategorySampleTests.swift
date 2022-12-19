@@ -65,7 +65,7 @@ class HKCategorySampleTests: XCTestCase {
     }
 
     func testMenstrualFlow() throws {
-        let values: [HKCategoryValueMenstrualFlow]  = [.unspecified, .light, .medium, .heavy, .none]
+        let values: [HKCategoryValueMenstrualFlow] = [.unspecified, .light, .medium, .heavy, .none]
 
         for value in values {
             let observation = try createObservationFrom(
