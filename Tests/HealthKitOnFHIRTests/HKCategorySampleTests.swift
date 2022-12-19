@@ -11,6 +11,8 @@ import XCTest
 
 
 class HKCategorySampleTests: XCTestCase {
+    // swiftlint:disable:previous type_body_length
+    // We disable the type body length as this is a test class
     var startDate: Date {
         get throws {
             let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 0) // Date Stanford University opened (https://www.stanford.edu/about/history/)
@@ -44,7 +46,7 @@ class HKCategorySampleTests: XCTestCase {
         categoryType: String,
         display: String
     ) -> Coding {
-        return Coding(
+        Coding(
             code: FHIRPrimitive(stringLiteral: categoryType),
             display: FHIRPrimitive(stringLiteral: display),
             system: FHIRPrimitive(FHIRURI(stringLiteral: SupportedCodeSystem.apple.rawValue))
@@ -84,12 +86,10 @@ class HKCategorySampleTests: XCTestCase {
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.menstrualFlow).description,
-                    display: "Menstrual Flow"
+                    categoryType: HKCategoryType(.menstrualFlow).description, display: "Menstrual Flow"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive())
-            )
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
         }
     }
 
@@ -131,8 +131,7 @@ class HKCategorySampleTests: XCTestCase {
                     display: "Contraceptive"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive())
-            )
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
         }
     }
 
