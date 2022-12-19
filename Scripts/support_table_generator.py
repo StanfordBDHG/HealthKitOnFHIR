@@ -225,8 +225,39 @@ def create_correlation_types_table():
 
     return markdown
 
+def create_category_types_table():
+    markdown = '\n\n## HKCategoryType\n\n'
+
+    category_types = data['HKCategorySamples']
+    rows = []
+
+    for type in category_types:
+        row = [type, SUPPORTED_SYMBOL]
+        rows.append(row)
+
+    # Sort the rows alphabetically
+    rows = sorted(rows, key=itemgetter(0))
+
+    # Link all the HealthKit types to Apple docs
+    for type in rows:
+        url = '{}/{}'.format(HEALTHKIT_URL, type[0])
+        type[0] = '[{}]({})'.format(type[0].removeprefix('HKCategoryTypeIdentifier'), url)
+
+    # Add the statistics
+    stats = 'HealthKitOnFHIR supports {} category types.'.format(len(rows))
+    markdown += stats + '\n\n'
+
+    # Add the table header
+    markdown += '|HKCategoryType|Supported|' + '\n' + '|----|----|----|' + '\n'
+
+    # Add all rows
+    for row in rows:
+        markdown += '|' + '|'.join(row) + '|\n'
+
+    return markdown
+
 def main():
-    document = create_header() + create_quantity_types_table() + create_correlation_types_table()
+    document = create_header() + create_quantity_types_table() + create_correlation_types_table() + create_category_types_table()
     markdown_file.write(document)
 
 if __name__ == "__main__":
