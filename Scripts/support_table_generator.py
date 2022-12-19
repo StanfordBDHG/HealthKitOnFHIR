@@ -11,6 +11,7 @@ from operator import itemgetter
 
 # Constants
 MAPPING_FILE_PATH = '../Sources/HealthKitOnFHIR/Resources/HKSampleMapping.json'
+TOC_PATH = '../Documentation/SUPPORT_TABLE.md'
 QUANTITY_TABLE_PATH = '../Documentation/QUANTITY_TABLE.md'
 CATEGORY_TABLE_PATH = '../Documentation/CATEGORY_TABLE.md'
 CORRELATION_TABLE_PATH = '../Documentation/CORRELATION_TABLE.md'
@@ -112,6 +113,7 @@ ALL_CORRELATION_TYPES = [
 # Load data
 mapping_file = open(MAPPING_FILE_PATH)
 data = json.load(mapping_file)
+toc_file = open(TOC_PATH, 'w')
 quantity_file = open(QUANTITY_TABLE_PATH, 'w')
 category_file = open(CATEGORY_TABLE_PATH, 'w')
 correlation_file = open(CORRELATION_TABLE_PATH, 'w')
@@ -262,14 +264,15 @@ def create_toc():
     markdown = '# HKObject Support Tables \n\n'
 
     markdown += """
-    - [HKCategoryType](CATEGORY_TABLE.md) \n
-    - [HKCorrelation](CORRELATION_TABLE.md) \n
-    - [HKQuantityType](QUANTITY_TABLE.md)
+- [HKCategoryType](CATEGORY_TABLE.md)
+- [HKCorrelation](CORRELATION_TABLE.md)
+- [HKQuantityType](QUANTITY_TABLE.md)
     """
 
     return markdown
 
 def main():
+    toc_file.write(create_header() + create_toc())
     category_file.write(create_header() + create_category_types_table())
     quantity_file.write(create_header() + create_quantity_types_table())
     correlation_file.write(create_header() + create_correlation_types_table())

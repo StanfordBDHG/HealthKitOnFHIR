@@ -9,7 +9,8 @@ SPDX-License-Identifier: MIT
 -->
 # HKObject Support Tables 
 
-- [HKCategoryType](CATEGORY_TABLE.md) 
-- [HKCorrelation](CORRELATION_TABLE.md) 
+
+- [HKCategoryType](CATEGORY_TABLE.md)
+- [HKCorrelation](CORRELATION_TABLE.md)
 - [HKQuantityType](QUANTITY_TABLE.md)
     
