@@ -51,66 +51,90 @@ class HKCategorySampleTests: XCTestCase {
     }
 
     func testCervicalMucusQuality() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.cervicalMucusQuality),
-            value: HKCategoryValueCervicalMucusQuality.dry.rawValue
-        )
+        let values: [HKCategoryValueCervicalMucusQuality] = [.dry, .sticky, .creamy, .watery, .eggWhite]
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.cervicalMucusQuality).description))
-        XCTAssertEqual(observation.value, .string("dry".asFHIRStringPrimitive()))
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.cervicalMucusQuality),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.cervicalMucusQuality).description))
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+        }
     }
 
     func testMenstrualFlow() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.menstrualFlow),
-            value: HKCategoryValueMenstrualFlow.light.rawValue,
-            metadata: [HKMetadataKeyMenstrualCycleStart: true]
-        )
+        let values: [HKCategoryValueMenstrualFlow]  = [.unspecified, .light, .medium, .heavy, .none]
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.menstrualFlow).description))
-        XCTAssertEqual(observation.value, .string("light".asFHIRStringPrimitive()))
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.menstrualFlow),
+                value: value.rawValue,
+                metadata: [HKMetadataKeyMenstrualCycleStart: true]
+            )
+
+            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.menstrualFlow).description))
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+        }
     }
 
     func testOvulationTestResult() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.ovulationTestResult),
-            value: HKCategoryValueOvulationTestResult.luteinizingHormoneSurge.rawValue
-        )
+        let values: [HKCategoryValueOvulationTestResult] = [.negative, .indeterminate, .luteinizingHormoneSurge, .estrogenSurge]
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.ovulationTestResult).description))
-        XCTAssertEqual(
-            observation.value, .string("luteinizing hormone surge".asFHIRStringPrimitive())
-        )
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.ovulationTestResult),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.ovulationTestResult).description))
+            XCTAssertEqual(
+                observation.value, .string(value.description.asFHIRStringPrimitive())
+            )
+        }
     }
 
     func testContraceptive() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.contraceptive),
-            value: HKCategoryValueContraceptive.implant.rawValue
-        )
+        let values: [HKCategoryValueContraceptive] = [.unspecified, .implant, .injection, .intrauterineDevice, .intravaginalRing, .oral, .patch]
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.contraceptive).description))
-        XCTAssertEqual(observation.value, .string("implant".asFHIRStringPrimitive()))
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.contraceptive),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.contraceptive).description))
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+        }
     }
 
     func testSleepAnalysis() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.sleepAnalysis),
-            value: HKCategoryValueSleepAnalysis.inBed.rawValue
-        )
+        let values: [HKCategoryValueSleepAnalysis] = [.inBed, .asleepUnspecified, .awake, .asleepCore, .asleepDeep, .asleepREM]
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.sleepAnalysis).description))
-        XCTAssertEqual(observation.value, .string("in bed".asFHIRStringPrimitive()))
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.sleepAnalysis),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.sleepAnalysis).description))
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+        }
     }
 
     func testAppetiteChanges() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.appetiteChanges),
-            value: HKCategoryValueAppetiteChanges.increased.rawValue
-        )
+        let values: [HKCategoryValueAppetiteChanges] = [.unspecified, .noChange, .decreased, .increased]
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.appetiteChanges).description))
-        XCTAssertEqual(observation.value, .string("increased".asFHIRStringPrimitive()))
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.appetiteChanges),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.appetiteChanges).description))
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+        }
     }
 
     func testEnvironmentAudioExposureEvent() throws {
@@ -156,33 +180,45 @@ class HKCategorySampleTests: XCTestCase {
     }
 
     func testPregnancyTestResult() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.pregnancyTestResult),
-            value: HKCategoryValuePregnancyTestResult.positive.rawValue
-        )
+        let values: [HKCategoryValuePregnancyTestResult] = [.negative, .positive, .indeterminate]
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.pregnancyTestResult).description))
-        XCTAssertEqual(observation.value, .string("positive".asFHIRStringPrimitive()))
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.pregnancyTestResult),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.pregnancyTestResult).description))
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+        }
     }
 
     func testProgesteroneTestResult() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.progesteroneTestResult),
-            value: HKCategoryValueProgesteroneTestResult.positive.rawValue
-        )
+        let values: [HKCategoryValueProgesteroneTestResult] = [.indeterminate, .positive, .negative]
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.progesteroneTestResult).description))
-        XCTAssertEqual(observation.value, .string("positive".asFHIRStringPrimitive()))
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.progesteroneTestResult),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.progesteroneTestResult).description))
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+        }
     }
 
     func testAppleStandHour() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.appleStandHour),
-            value: HKCategoryValueAppleStandHour.stood.rawValue
-        )
+        let values: [HKCategoryValueAppleStandHour] = [.stood, .idle]
 
-        XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.appleStandHour).description))
-        XCTAssertEqual(observation.value, .string("stood".asFHIRStringPrimitive()))
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.appleStandHour),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(observation.code.coding?.first, createCategoryCoding(categoryType: HKCategoryType(.appleStandHour).description))
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+        }
     }
 
     func testIntermenstrualBleeding() throws {
