@@ -20,10 +20,8 @@ extension HKCategorySample {
         guard let mapping = mappings.categorySampleMapping[self.categoryType] else {
             throw HealthKitOnFHIRError.notSupported
         }
-
-        let categoryTypeString = self.categoryType.description
         
-        var valueString: String?
+        let valueString: String?
         switch self.categoryType {
         case HKCategoryType(.appetiteChanges):
             valueString = HKCategoryValueAppetiteChanges(rawValue: self.value)?.description
@@ -68,12 +66,14 @@ extension HKCategorySample {
             // Samples of these types do not carry any value,
             // nor associated metadata, so we use the category
             // identifier as the value.
-            valueString = categoryTypeString
+            valueString = self.categoryType.description
         default:
             throw HealthKitOnFHIRError.notSupported
         }
         
-        guard let valueString else { throw HealthKitOnFHIRError.notSupported }
+        guard let valueString else {
+            throw HealthKitOnFHIRError.notSupported
+        }
 
         for code in mapping.codings {
             observation.appendCoding(code.coding)
