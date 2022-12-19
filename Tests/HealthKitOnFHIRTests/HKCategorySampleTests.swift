@@ -177,14 +177,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testEnvironmentalAudioExposureEvent() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.audioExposureEvent),
+            type: HKCategoryType(.environmentalAudioExposureEvent),
             value: HKCategoryValueEnvironmentalAudioExposureEvent.momentaryLimit.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.audioExposureEvent).description,
+                categoryType: HKCategoryType(.environmentalAudioExposureEvent).description,
                 display: "Environmental Audio Exposure Event"
             )
         )
