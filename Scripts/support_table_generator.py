@@ -110,6 +110,71 @@ ALL_CORRELATION_TYPES = [
     "HKCorrelationTypeIdentifierFood"
 ]
 
+ALL_CATEGORY_TYPES = [
+    "AppetiteChanges",
+    "AppleStandHour",
+    "AppleWalkingSteadinessEvent",
+    "CervicalMucusQuality",
+    "Contraceptive",
+    "AudioExposureEvent",
+    "HeadphoneAudioExposureEvent",
+    "LowCardioFitnessEvent",
+    "MenstrualFlow",
+    "OvulationTestResult",
+    "PregnancyTestResult",
+    "ProgesteroneTestResult",
+    "SleepAnalysis",
+    "AbdominalCramps",
+    "Acne",
+    "BladderIncontinence",
+    "Bloating",
+    "BreastPain",
+    "ChestTightnessOrPain",
+    "Chills",
+    "Constipation",
+    "Coughing",
+    "Dizziness",
+    "DrySkin",
+    "Fainting",
+    "Fever",
+    "GeneralizedBodyAche",
+    "HairLoss",
+    "Headache",
+    "Heartburn",
+    "HotFlashes",
+    "LossOfSmell",
+    "LossOfTaste",
+    "LowerBackPain",
+    "MemoryLapse",
+    "Nausea",
+    "NightSweats",
+    "PelvicPain",
+    "RapidPoundingOrFlutteringHeartbeat",
+    "RunnyNose",
+    "ShortnessOfBreath",
+    "SinusCongestion",
+    "SkippedHeartbeat",
+    "SoreThroat",
+    "VaginalDryness",
+    "Vomiting",
+    "Wheezing",
+    "MoodChanges",
+    "SleepChanges",
+    "IrregularHeartRhythmEvent",
+    "LowHeartRateEvent",
+    "HighHeartRateEvent",
+    "MindfulSession",
+    "ToothbrushingEvent",
+    "HandwashingEvent",
+    "SexualActivity",
+    "IntermenstrualBleeding",
+    "InfrequentMenstrualCycles",
+    "IrregularMenstrualCycles",
+    "PersistentIntermenstrualBleeding",
+    "ProlongedMenstrualPeriods",
+    "Lactation"
+]
+
 # Load data
 mapping_file = open(MAPPING_FILE_PATH)
 data = json.load(mapping_file)
@@ -117,6 +182,10 @@ toc_file = open(TOC_PATH, 'w')
 quantity_file = open(QUANTITY_TABLE_PATH, 'w')
 category_file = open(CATEGORY_TABLE_PATH, 'w')
 correlation_file = open(CORRELATION_TABLE_PATH, 'w')
+
+quantity_stats_string = ""
+category_stats_string = ""
+correlation_stats_string = ""
 
 def create_header():
     return """<!--
@@ -178,8 +247,9 @@ def create_quantity_types_table():
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKQuantityTypeIdentifier'), url)
 
     # Add the statistics
-    stats = 'HealthKitOnFHIR supports {} of {} quantity types.'.format(len(quantity_types), len(rows))
-    markdown += stats + '\n\n'
+    global quantity_stats_string
+    quantity_stats_string = 'HealthKitOnFHIR supports {} of {} quantity types.'.format(len(quantity_types), len(rows))
+    markdown += quantity_stats_string + '\n\n'
 
     # Add the table header
     markdown += '|HKQuantityType|Supported|Code|Unit|' + '\n' + '|----|----|----|----|' + '\n'
@@ -217,8 +287,9 @@ def create_correlation_types_table():
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKCorrelationTypeIdentifier'), url)
 
     # Add the statistics
-    stats = 'HealthKitOnFHIR supports {} of {} correlation types.'.format(len(correlation_types), len(rows))
-    markdown += stats + '\n\n'
+    global correlation_stats_string
+    correlation_stats_string = 'HealthKitOnFHIR supports {} of {} correlation types.'.format(len(correlation_types), len(rows))
+    markdown += correlation_stats_string + '\n\n'
 
     # Add the table header
     markdown += '|HKCorrelationType|Supported|Code|' + '\n' + '|----|----|----|' + '\n'
@@ -239,6 +310,11 @@ def create_category_types_table():
         row = [type, SUPPORTED_SYMBOL]
         rows.append(row)
 
+    # Add all the unsupported types
+    for type in ALL_CATEGORY_TYPES:
+        if type not in category_types:
+            rows.append([type, UNSUPPORTED_SYMBOL, "-"])
+
     # Sort the rows alphabetically
     rows = sorted(rows, key=itemgetter(0))
 
@@ -248,8 +324,9 @@ def create_category_types_table():
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKCategoryTypeIdentifier'), url)
 
     # Add the statistics
-    stats = 'HealthKitOnFHIR supports {} category types.'.format(len(rows))
-    markdown += stats + '\n\n'
+    global category_stats_string
+    category_stats_string = 'HealthKitOnFHIR supports {} of {} category types.'.format(len(category_types), len(rows))
+    markdown += category_stats_string + '\n\n'
 
     # Add the table header
     markdown += '|HKCategoryType|Supported|' + '\n' + '|----|----|' + '\n'
@@ -265,17 +342,20 @@ def create_toc():
 
     markdown += """
 - [HKCategoryType](CATEGORY_TABLE.md)
+    - {}
 - [HKCorrelation](CORRELATION_TABLE.md)
+    - {}
 - [HKQuantityType](QUANTITY_TABLE.md)
-    """
+    - {}
+    """.format(category_stats_string, correlation_stats_string, quantity_stats_string)
 
     return markdown
 
 def main():
-    toc_file.write(create_header() + create_toc())
     category_file.write(create_header() + create_category_types_table())
     quantity_file.write(create_header() + create_quantity_types_table())
     correlation_file.write(create_header() + create_correlation_types_table())
+    toc_file.write(create_header() + create_toc())
 
 if __name__ == "__main__":
     main()
