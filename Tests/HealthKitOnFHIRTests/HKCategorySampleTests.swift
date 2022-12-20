@@ -469,4 +469,869 @@ class HKCategorySampleTests: XCTestCase {
             .string("HKCategoryTypeIdentifierMindfulSession".asFHIRStringPrimitive())
         )
     }
+
+    func testAbdominalCramps() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.abdominalCramps),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.abdominalCramps).description,
+                    display: "Abdominal Cramps"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testAcne() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.acne),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.acne).description,
+                    display: "Acne"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testBladderIncontinence() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.bladderIncontinence),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.bladderIncontinence).description,
+                    display: "Bladder Incontinence"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testBloating() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.bloating),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.bloating).description,
+                    display: "Bloating"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testBreastPain() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.breastPain),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.breastPain).description,
+                    display: "Breast Pain"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testChestTightnessOrPain() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.chestTightnessOrPain),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.chestTightnessOrPain).description,
+                    display: "Chest Tightness Or Pain"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testChills() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.chills),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.chills).description,
+                    display: "Chills"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testConstipation() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.constipation),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.constipation).description,
+                    display: "Constipation"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testCoughing() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.coughing),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.coughing).description,
+                    display: "Coughing"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testDizziness() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.dizziness),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.dizziness).description,
+                    display: "Dizziness"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testDrySkin() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.drySkin),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.drySkin).description,
+                    display: "Dry Skin"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testFainting() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.fainting),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.fainting).description,
+                    display: "Fainting"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testFever() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.fever),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.fever).description,
+                    display: "Fever"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testGeneralizedBodyAche() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.generalizedBodyAche),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.generalizedBodyAche).description,
+                    display: "Generalized Body Ache"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testHairLoss() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.hairLoss),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.hairLoss).description,
+                    display: "Hair Loss"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testHeadache() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.headache),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.headache).description,
+                    display: "Headache"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testHeartburn() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.heartburn),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.heartburn).description,
+                    display: "Heartburn"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testHotFlashes() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.hotFlashes),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.hotFlashes).description,
+                    display: "Hot Flashes"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testLossOfSmell() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.lossOfSmell),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.lossOfSmell).description,
+                    display: "Loss Of Smell"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testLossOfTaste() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.lossOfTaste),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.lossOfTaste).description,
+                    display: "Loss Of Taste"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testLowerBackPain() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.lowerBackPain),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.lowerBackPain).description,
+                    display: "Lower Back Pain"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testMemoryLapse() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.memoryLapse),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.memoryLapse).description,
+                    display: "Memory Lapse"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testMoodChanges() throws {
+        let values: [HKCategoryValuePresence] = [.notPresent, .present]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.moodChanges),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.moodChanges).description,
+                    display: "Mood Changes"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testSleepChanges() throws {
+        let values: [HKCategoryValuePresence] = [.notPresent, .present]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.sleepChanges),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.sleepChanges).description,
+                    display: "Sleep Changes"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testNausea() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.nausea),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.nausea).description,
+                    display: "Nausea"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testNightSweats() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.nightSweats),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.nightSweats).description,
+                    display: "Night Sweats"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testPelvicPain() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.pelvicPain),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.pelvicPain).description,
+                    display: "Pelvic Pain"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testRapidPoundingOrFlutteringHeartbeat() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.rapidPoundingOrFlutteringHeartbeat),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.rapidPoundingOrFlutteringHeartbeat).description,
+                    display: "Rapid Pounding Or Fluttering Heartbeat"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testRunnyNose() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.runnyNose),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.runnyNose).description,
+                    display: "Runny Nose"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testShortnessOfBreath() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.shortnessOfBreath),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.shortnessOfBreath).description,
+                    display: "Shortness Of Breath"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testSinusCongestion() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.sinusCongestion),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.sinusCongestion).description,
+                    display: "Sinus Congestion"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testSkippedHeartbeat() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.skippedHeartbeat),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.skippedHeartbeat).description,
+                    display: "Skipped Heartbeat"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testSoreThroat() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.soreThroat),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.soreThroat).description,
+                    display: "Sore Throat"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testVaginalDryness() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.vaginalDryness),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.vaginalDryness).description,
+                    display: "Vaginal Dryness"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testVomiting() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.vomiting),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.vomiting).description,
+                    display: "Vomiting"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
+    func testWheezing() throws {
+        let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
+
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.wheezing),
+                value: value.rawValue
+            )
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.wheezing).description,
+                    display: "Wheezing"
+                )
+            )
+
+            XCTAssertEqual(
+                observation.value,
+                .string(value.description.asFHIRStringPrimitive())
+            )
+        }
+    }
+
 }

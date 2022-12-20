@@ -441,6 +441,15 @@
                 }
             ]
         },
+        "HKCategoryTypeIdentifierSleepChanges": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierSleepChanges",
+                    "display": "Sleep Changes",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
         "HKCategoryTypeIdentifierNausea": {
             "codings": [
                 {

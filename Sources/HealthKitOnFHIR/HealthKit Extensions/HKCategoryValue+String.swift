@@ -249,3 +249,16 @@ extension HKCategoryValueSeverity: CustomStringConvertible {
         }
     }
 }
+
+extension HKCategoryValuePresence: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .present:
+            return "present"
+        case .notPresent:
+            return "not present"
+        @unknown default:
+            return "unknown"
+        }
+    }
+}

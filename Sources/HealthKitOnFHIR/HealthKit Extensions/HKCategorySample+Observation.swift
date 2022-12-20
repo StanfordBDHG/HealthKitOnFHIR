@@ -21,7 +21,6 @@ extension HKCategorySample {
             throw HealthKitOnFHIRError.notSupported
         }
 
-
         let valueString: String?
         switch self.categoryType {
         case HKCategoryType(.appetiteChanges):
@@ -73,7 +72,6 @@ extension HKCategorySample {
             HKCategoryType(.lossOfTaste),
             HKCategoryType(.lowerBackPain),
             HKCategoryType(.memoryLapse),
-            HKCategoryType(.moodChanges),
             HKCategoryType(.nausea),
             HKCategoryType(.nightSweats),
             HKCategoryType(.pelvicPain),
@@ -89,8 +87,12 @@ extension HKCategorySample {
             // Samples of these types carry values of
             // HKCategoryValueSeverity
             valueString = HKCategoryValueSeverity(rawValue: self.value)?.description
-
-
+        case
+            HKCategoryType(.moodChanges),
+            HKCategoryType(.sleepChanges):
+            // Samples of these types carry values of
+            // HKCategoryValuePresence
+            valueString = HKCategoryValuePresence(rawValue: self.value)?.description
         case
             HKCategoryType(.irregularHeartRhythmEvent),
             HKCategoryType(.lowHeartRateEvent),
