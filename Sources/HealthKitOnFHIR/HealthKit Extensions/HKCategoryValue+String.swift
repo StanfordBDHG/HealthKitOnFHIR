@@ -230,3 +230,22 @@ extension HKCategoryValueAppleStandHour: CustomStringConvertible {
         }
     }
 }
+
+extension HKCategoryValueSeverity: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .unspecified:
+            return "unspecified"
+        case .notPresent:
+            return "not present"
+        case .mild:
+            return "mild"
+        case .moderate:
+            return "moderate"
+        case .severe:
+            return "severe"
+        @unknown default:
+            return "unknown"
+        }
+    }
+}

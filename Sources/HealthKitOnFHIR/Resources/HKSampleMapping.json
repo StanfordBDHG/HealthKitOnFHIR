@@ -233,6 +233,321 @@
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ]
+        },
+        "HKCategoryTypeIdentifierAbdominalCramps": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierAbdominalCramps",
+                    "display": "Abdominal Cramps",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierAcne": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierAcne",
+                    "display": "Acne",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierBladderIncontinence": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierBladderIncontinence",
+                    "display": "Bladder Incontinence",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierBloating": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierBloating",
+                    "display": "Bloating",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierBreastPain": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierBreastPain",
+                    "display": "Breast Pain",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierChestTightnessOrPain": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierChestTightnessOrPain",
+                    "display": "Chest Tightness Or Pain",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierChills": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierChills",
+                    "display": "Chills",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierConstipation": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierConstipation",
+                    "display": "Constipation",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierCoughing": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierCoughing",
+                    "display": "Coughing",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierDizziness": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierDizziness",
+                    "display": "Dizziness",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierDrySkin": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierDrySkin",
+                    "display": "Dry Skin",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierFainting": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierFainting",
+                    "display": "Fainting",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierFever": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierFever",
+                    "display": "Fever",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierGeneralizedBodyAche": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierGeneralizedBodyAche",
+                    "display": "Generalized Body Ache",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierHairLoss": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierHairLoss",
+                    "display": "Hair Loss",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierHeadache": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierHeadache",
+                    "display": "Headache",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierHeartburn": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierHeartburn",
+                    "display": "Heartburn",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierHotFlashes": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierHotFlashes",
+                    "display": "Hot Flashes",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierLossOfSmell": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierLossOfSmell",
+                    "display": "Loss Of Smell",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierLossOfTaste": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierLossOfTaste",
+                    "display": "Loss Of Taste",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierLowerBackPain": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierLowerBackPain",
+                    "display": "Lower Back Pain",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierMemoryLapse": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierMemoryLapse",
+                    "display": "Memory Lapse",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierMoodChanges": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierMoodChanges",
+                    "display": "Mood Changes",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierNausea": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierNausea",
+                    "display": "Nausea",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierNightSweats": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierNightSweats",
+                    "display": "Night Sweats",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierPelvicPain": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierPelvicPain",
+                    "display": "Pelvic Pain",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat",
+                    "display": "Rapid Pounding Or Fluttering Heartbeat",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierRunnyNose": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierRunnyNose",
+                    "display": "Runny Nose",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierShortnessOfBreath": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierShortnessOfBreath",
+                    "display": "Shortness Of Breath",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierSinusCongestion": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierSinusCongestion",
+                    "display": "Sinus Congestion",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierSkippedHeartbeat": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierSkippedHeartbeat",
+                    "display": "Skipped Heartbeat",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierSoreThroat": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierSoreThroat",
+                    "display": "Sore Throat",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierVaginalDryness": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierVaginalDryness",
+                    "display": "Vaginal Dryness",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierVomiting": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierVomiting",
+                    "display": "Vomiting",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierWheezing": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierWheezing",
+                    "display": "Wheezing",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
         }
     },
     "HKCorrelations": {

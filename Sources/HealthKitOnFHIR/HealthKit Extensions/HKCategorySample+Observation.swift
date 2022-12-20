@@ -20,7 +20,8 @@ extension HKCategorySample {
         guard let mapping = mappings.categorySampleMapping[self.categoryType] else {
             throw HealthKitOnFHIRError.notSupported
         }
-        
+
+
         let valueString: String?
         switch self.categoryType {
         case HKCategoryType(.appetiteChanges):
@@ -49,6 +50,47 @@ extension HKCategorySample {
             valueString = HKCategoryValueProgesteroneTestResult(rawValue: self.value)?.description
         case HKCategoryType(.sleepAnalysis):
             valueString = HKCategoryValueSleepAnalysis(rawValue: self.value)?.description
+        case
+            HKCategoryType(.abdominalCramps),
+            HKCategoryType(.acne),
+            HKCategoryType(.bladderIncontinence),
+            HKCategoryType(.bloating),
+            HKCategoryType(.breastPain),
+            HKCategoryType(.chestTightnessOrPain),
+            HKCategoryType(.chills),
+            HKCategoryType(.constipation),
+            HKCategoryType(.coughing),
+            HKCategoryType(.dizziness),
+            HKCategoryType(.drySkin),
+            HKCategoryType(.fainting),
+            HKCategoryType(.fever),
+            HKCategoryType(.generalizedBodyAche),
+            HKCategoryType(.hairLoss),
+            HKCategoryType(.headache),
+            HKCategoryType(.heartburn),
+            HKCategoryType(.hotFlashes),
+            HKCategoryType(.lossOfSmell),
+            HKCategoryType(.lossOfTaste),
+            HKCategoryType(.lowerBackPain),
+            HKCategoryType(.memoryLapse),
+            HKCategoryType(.moodChanges),
+            HKCategoryType(.nausea),
+            HKCategoryType(.nightSweats),
+            HKCategoryType(.pelvicPain),
+            HKCategoryType(.rapidPoundingOrFlutteringHeartbeat),
+            HKCategoryType(.runnyNose),
+            HKCategoryType(.shortnessOfBreath),
+            HKCategoryType(.sinusCongestion),
+            HKCategoryType(.skippedHeartbeat),
+            HKCategoryType(.soreThroat),
+            HKCategoryType(.vaginalDryness),
+            HKCategoryType(.vomiting),
+            HKCategoryType(.wheezing):
+            // Samples of these types carry values of
+            // HKCategoryValueSeverity
+            valueString = HKCategoryValueSeverity(rawValue: self.value)?.description
+
+
         case
             HKCategoryType(.irregularHeartRhythmEvent),
             HKCategoryType(.lowHeartRateEvent),
