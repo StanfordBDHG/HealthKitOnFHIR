@@ -11,6 +11,7 @@
 public struct HKSampleMapping: Decodable {
     private enum CodingKeys: String, CodingKey {
         case quantitySampleMapping = "HKQuantitySamples"
+        case categorySampleMapping = "HKCategorySamples"
         case correlationMapping = "HKCorrelations"
     }
     
@@ -25,6 +26,8 @@ public struct HKSampleMapping: Decodable {
     
     /// The ``HKSampleMapping/quantitySampleMapping`` property defines the mapping of `HKQuantityType`s to FHIR observations.
     public var quantitySampleMapping: [HKQuantityType: HKQuantitySampleMapping]
+    /// The ``HKSampleMapping/categorySampleMapping`` property defines the mapping of `HKCategoryType`s to FHIR observations.
+    public var categorySampleMapping: [HKCategoryType: HKCategorySampleMapping]
     /// The ``HKSampleMapping/correlationMapping`` property defines the mapping of `HKCorrelationType`s to FHIR observations.
     public var correlationMapping: [HKCorrelationType: HKCorrelationMapping]
     
@@ -41,6 +44,20 @@ public struct HKSampleMapping: Decodable {
                     fatalError("HKQuantityType for the String value \(mapping.key) does not exist. Please inspect your configuration.")
                 }
                 return (hkquantityType, mapping.value)
+            }
+        )
+
+        let categoryStringBasedSampleMapping = try mappings.decode(
+            [String: HKCategorySampleMapping].self,
+            forKey: .categorySampleMapping
+        )
+
+        let categorySampleMapping = Dictionary(
+            uniqueKeysWithValues: categoryStringBasedSampleMapping.map { mapping in
+                guard let hkcategorytype = HKCategoryType.categoryType(forIdentifier: HKCategoryTypeIdentifier(rawValue: mapping.key)) else {
+                    fatalError("HKCategoryType for the String value \(mapping.key) does not exist. Please inspect your configuration.")
+                }
+                return (hkcategorytype, mapping.value)
             }
         )
         
@@ -61,6 +78,7 @@ public struct HKSampleMapping: Decodable {
         
         self.init(
             quantitySampleMapping: quantitySampleMapping,
+            categorySampleMapping: categorySampleMapping,
             correlationMapping: correlationMapping
         )
     }
@@ -71,9 +89,11 @@ public struct HKSampleMapping: Decodable {
     ///   - correlationMapping: The ``HKSampleMapping/correlationMapping`` property defines the mapping of `HKCorrelationType`s to FHIR observations.
     public init(
         quantitySampleMapping: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
+        categorySampleMapping: [HKCategoryType: HKCategorySampleMapping] = HKCategorySampleMapping.default,
         correlationMapping: [HKCorrelationType: HKCorrelationMapping] = HKCorrelationMapping.default
     ) {
         self.quantitySampleMapping = quantitySampleMapping
+        self.categorySampleMapping = categorySampleMapping
         self.correlationMapping = correlationMapping
     }
 }

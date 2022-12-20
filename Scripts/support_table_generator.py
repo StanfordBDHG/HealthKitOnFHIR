@@ -11,7 +11,10 @@ from operator import itemgetter
 
 # Constants
 MAPPING_FILE_PATH = '../Sources/HealthKitOnFHIR/Resources/HKSampleMapping.json'
-OUTPUT_PATH = '../Documentation/SUPPORT_TABLE.md'
+TOC_PATH = '../Documentation/SUPPORT_TABLE.md'
+QUANTITY_TABLE_PATH = '../Documentation/QUANTITY_TABLE.md'
+CATEGORY_TABLE_PATH = '../Documentation/CATEGORY_TABLE.md'
+CORRELATION_TABLE_PATH = '../Documentation/CORRELATION_TABLE.md'
 
 HEALTHKIT_URL = 'https://developer.apple.com/documentation/healthkit'
 LOINC_URL = 'http://loinc.org'
@@ -107,13 +110,85 @@ ALL_CORRELATION_TYPES = [
     "HKCorrelationTypeIdentifierFood"
 ]
 
+ALL_CATEGORY_TYPES = [
+    "HKCategoryTypeIdentifierAppetiteChanges",
+    "HKCategoryTypeIdentifierAppleStandHour",
+    "HKCategoryTypeIdentifierAppleWalkingSteadinessEvent",
+    "HKCategoryTypeIdentifierCervicalMucusQuality",
+    "HKCategoryTypeIdentifierContraceptive",
+    "HKCategoryTypeIdentifierAudioExposureEvent",
+    "HKCategoryTypeIdentifierHeadphoneAudioExposureEvent",
+    "HKCategoryTypeIdentifierLowCardioFitnessEvent",
+    "HKCategoryTypeIdentifierMenstrualFlow",
+    "HKCategoryTypeIdentifierOvulationTestResult",
+    "HKCategoryTypeIdentifierPregnancyTestResult",
+    "HKCategoryTypeIdentifierProgesteroneTestResult",
+    "HKCategoryTypeIdentifierSleepAnalysis",
+    "HKCategoryTypeIdentifierAbdominalCramps",
+    "HKCategoryTypeIdentifierAcne",
+    "HKCategoryTypeIdentifierBladderIncontinence",
+    "HKCategoryTypeIdentifierBloating",
+    "HKCategoryTypeIdentifierBreastPain",
+    "HKCategoryTypeIdentifierChestTightnessOrPain",
+    "HKCategoryTypeIdentifierChills",
+    "HKCategoryTypeIdentifierConstipation",
+    "HKCategoryTypeIdentifierCoughing",
+    "HKCategoryTypeIdentifierDizziness",
+    "HKCategoryTypeIdentifierDrySkin",
+    "HKCategoryTypeIdentifierFainting",
+    "HKCategoryTypeIdentifierFever",
+    "HKCategoryTypeIdentifierGeneralizedBodyAche",
+    "HKCategoryTypeIdentifierHairLoss",
+    "HKCategoryTypeIdentifierHeadache",
+    "HKCategoryTypeIdentifierHeartburn",
+    "HKCategoryTypeIdentifierHotFlashes",
+    "HKCategoryTypeIdentifierLossOfSmell",
+    "HKCategoryTypeIdentifierLossOfTaste",
+    "HKCategoryTypeIdentifierLowerBackPain",
+    "HKCategoryTypeIdentifierMemoryLapse",
+    "HKCategoryTypeIdentifierNausea",
+    "HKCategoryTypeIdentifierNightSweats",
+    "HKCategoryTypeIdentifierPelvicPain",
+    "HKCategoryTypeIdentifierRapidPoundingOrFlutteringHeartbeat",
+    "HKCategoryTypeIdentifierRunnyNose",
+    "HKCategoryTypeIdentifierShortnessOfBreath",
+    "HKCategoryTypeIdentifierSinusCongestion",
+    "HKCategoryTypeIdentifierSkippedHeartbeat",
+    "HKCategoryTypeIdentifierSoreThroat",
+    "HKCategoryTypeIdentifierVaginalDryness",
+    "HKCategoryTypeIdentifierVomiting",
+    "HKCategoryTypeIdentifierWheezing",
+    "HKCategoryTypeIdentifierMoodChanges",
+    "HKCategoryTypeIdentifierSleepChanges",
+    "HKCategoryTypeIdentifierIrregularHeartRhythmEvent",
+    "HKCategoryTypeIdentifierLowHeartRateEvent",
+    "HKCategoryTypeIdentifierHighHeartRateEvent",
+    "HKCategoryTypeIdentifierMindfulSession",
+    "HKCategoryTypeIdentifierToothbrushingEvent",
+    "HKCategoryTypeIdentifierHandwashingEvent",
+    "HKCategoryTypeIdentifierSexualActivity",
+    "HKCategoryTypeIdentifierIntermenstrualBleeding",
+    "HKCategoryTypeIdentifierInfrequentMenstrualCycles",
+    "HKCategoryTypeIdentifierIrregularMenstrualCycles",
+    "HKCategoryTypeIdentifierPersistentIntermenstrualBleeding",
+    "HKCategoryTypeIdentifierProlongedMenstrualPeriods",
+    "HKCategoryTypeIdentifierLactation"
+]
+
 # Load data
 mapping_file = open(MAPPING_FILE_PATH)
 data = json.load(mapping_file)
-markdown_file = open(OUTPUT_PATH, 'w')
+toc_file = open(TOC_PATH, 'w')
+quantity_file = open(QUANTITY_TABLE_PATH, 'w')
+category_file = open(CATEGORY_TABLE_PATH, 'w')
+correlation_file = open(CORRELATION_TABLE_PATH, 'w')
+
+quantity_stats_string = ""
+category_stats_string = ""
+correlation_stats_string = ""
 
 def create_header():
-    reuse_header = """<!--
+    return """<!--
                   
 This source file is part of the HealthKitOnFHIR open source project
 
@@ -123,8 +198,6 @@ SPDX-License-Identifier: MIT
              
 -->
 """
-    document_title = '# HKObject Support Table '
-    return reuse_header + '\n\n' + document_title
 
 def create_code_links(type, types):
         coding = types[type]['codings'][0]
@@ -140,7 +213,7 @@ def create_code_links(type, types):
         return '[{}]({})'.format(code, code_url)
 
 def create_quantity_types_table():
-    markdown = '\n\n## HKQuantityType\n\n'
+    markdown = '# HKQuantityType\n\n'
 
     quantity_types = data['HKQuantitySamples']
     rows = []
@@ -174,8 +247,9 @@ def create_quantity_types_table():
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKQuantityTypeIdentifier'), url)
 
     # Add the statistics
-    stats = 'HealthKitOnFHIR supports {} of {} quantity types.'.format(len(quantity_types), len(rows))
-    markdown += stats + '\n\n'
+    global quantity_stats_string
+    quantity_stats_string = 'HealthKitOnFHIR supports {} of {} quantity types.'.format(len(quantity_types), len(rows))
+    markdown += quantity_stats_string + '\n\n'
 
     # Add the table header
     markdown += '|HKQuantityType|Supported|Code|Unit|' + '\n' + '|----|----|----|----|' + '\n'
@@ -187,7 +261,7 @@ def create_quantity_types_table():
     return markdown
 
 def create_correlation_types_table():
-    markdown = '\n\n## HKCorrelationType\n\n'
+    markdown = '# HKCorrelationType\n\n'
 
     correlation_types = data['HKCorrelations']
     rows = []
@@ -213,8 +287,9 @@ def create_correlation_types_table():
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKCorrelationTypeIdentifier'), url)
 
     # Add the statistics
-    stats = 'HealthKitOnFHIR supports {} of {} correlation types.'.format(len(correlation_types), len(rows))
-    markdown += stats + '\n\n'
+    global correlation_stats_string
+    correlation_stats_string = 'HealthKitOnFHIR supports {} of {} correlation types.'.format(len(correlation_types), len(rows))
+    markdown += correlation_stats_string + '\n\n'
 
     # Add the table header
     markdown += '|HKCorrelationType|Supported|Code|' + '\n' + '|----|----|----|' + '\n'
@@ -225,9 +300,62 @@ def create_correlation_types_table():
 
     return markdown
 
+def create_category_types_table():
+    markdown = '# HKCategoryType\n\n'
+
+    category_types = data['HKCategorySamples']
+    rows = []
+
+    for type in category_types:
+        row = [type, SUPPORTED_SYMBOL]
+        rows.append(row)
+
+    # Add all the unsupported types
+    for type in ALL_CATEGORY_TYPES:
+        if type not in category_types:
+            rows.append([type, UNSUPPORTED_SYMBOL, "-"])
+
+    # Sort the rows alphabetically
+    rows = sorted(rows, key=itemgetter(0))
+
+    # Link all the HealthKit types to Apple docs
+    for type in rows:
+        url = '{}/{}'.format(HEALTHKIT_URL, type[0])
+        type[0] = '[{}]({})'.format(type[0].removeprefix('HKCategoryTypeIdentifier'), url)
+
+    # Add the statistics
+    global category_stats_string
+    category_stats_string = 'HealthKitOnFHIR supports {} of {} category types.'.format(len(category_types), len(rows))
+    markdown += category_stats_string + '\n\n'
+
+    # Add the table header
+    markdown += '|HKCategoryType|Supported|' + '\n' + '|----|----|' + '\n'
+
+    # Add all rows
+    for row in rows:
+        markdown += '|' + '|'.join(row) + '|\n'
+
+    return markdown
+
+def create_toc():
+    markdown = '# HKObject Support Tables \n\n'
+
+    markdown += """
+- [HKCategoryType](CATEGORY_TABLE.md)
+    - {}
+- [HKCorrelation](CORRELATION_TABLE.md)
+    - {}
+- [HKQuantityType](QUANTITY_TABLE.md)
+    - {}
+    """.format(category_stats_string, correlation_stats_string, quantity_stats_string)
+
+    return markdown
+
 def main():
-    document = create_header() + create_quantity_types_table() + create_correlation_types_table()
-    markdown_file.write(document)
+    category_file.write(create_header() + create_category_types_table())
+    quantity_file.write(create_header() + create_quantity_types_table())
+    correlation_file.write(create_header() + create_correlation_types_table())
+    toc_file.write(create_header() + create_toc())
 
 if __name__ == "__main__":
     main()

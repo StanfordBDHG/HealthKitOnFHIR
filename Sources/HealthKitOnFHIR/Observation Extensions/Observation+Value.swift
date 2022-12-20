@@ -15,4 +15,8 @@ extension Observation {
     func setValue(_ quantity: Quantity) {
         value = .quantity(quantity)
     }
+
+    func setValue(_ string: String) {
+        value = .string(string.asFHIRStringPrimitive())
+    }
 }
