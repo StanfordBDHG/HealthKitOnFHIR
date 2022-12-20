@@ -242,13 +242,19 @@ class HKCategorySampleTests: XCTestCase {
     }
 
     func testAppleWalkingSteadinessClassification() throws {
-        let okClassification = try HKAppleWalkingSteadinessClassification(rawValue: HKAppleWalkingSteadinessClassification.ok.rawValue)?.categoryValueDescription
+        let okClassification = try HKAppleWalkingSteadinessClassification(
+            rawValue: HKAppleWalkingSteadinessClassification.ok.rawValue
+        )?.categoryValueDescription
         XCTAssertEqual(okClassification, "ok")
 
-        let lowClassification = try HKAppleWalkingSteadinessClassification(rawValue: HKAppleWalkingSteadinessClassification.low.rawValue)?.categoryValueDescription
+        let lowClassification = try HKAppleWalkingSteadinessClassification(
+            rawValue: HKAppleWalkingSteadinessClassification.low.rawValue
+        )?.categoryValueDescription
         XCTAssertEqual(lowClassification, "low")
 
-        let veryLowClassification = try HKAppleWalkingSteadinessClassification(rawValue: HKAppleWalkingSteadinessClassification.veryLow.rawValue)?.categoryValueDescription
+        let veryLowClassification = try HKAppleWalkingSteadinessClassification(
+            rawValue: HKAppleWalkingSteadinessClassification.veryLow.rawValue
+        )?.categoryValueDescription
         XCTAssertEqual(veryLowClassification, "very low")
     }
 
