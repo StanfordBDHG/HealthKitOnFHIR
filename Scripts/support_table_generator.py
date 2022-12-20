@@ -136,6 +136,7 @@ ALL_CATEGORY_TYPES = [
     "HKCategoryTypeIdentifierDizziness",
     "HKCategoryTypeIdentifierDrySkin",
     "HKCategoryTypeIdentifierFainting",
+    "HKCategoryTypeIdentifierFatigue",
     "HKCategoryTypeIdentifierFever",
     "HKCategoryTypeIdentifierGeneralizedBodyAche",
     "HKCategoryTypeIdentifierHairLoss",

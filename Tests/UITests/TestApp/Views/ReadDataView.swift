@@ -27,7 +27,7 @@ struct ReadDataView: View {
                     }
                 }
                     .sheet(isPresented: $showingSheet) {
-                        JSONView(data: self.$json)
+                        JSONView(json: $json)
                     }
             }
         }
@@ -36,7 +36,7 @@ struct ReadDataView: View {
     
     
     private func readSteps() async throws {
-        try await manager.requestAuthorization()
+        try await manager.requestStepAuthorization()
         
         let observations = try await manager.readStepCount()
             .compactMap { sample in
@@ -44,7 +44,7 @@ struct ReadDataView: View {
             }
 
         let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
         
         guard let data = try? encoder.encode(observations) else {
             return

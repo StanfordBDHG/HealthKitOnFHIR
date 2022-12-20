@@ -11,18 +11,21 @@ import SwiftUI
 
 struct JSONView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var data: String
+    @Binding var json: String
     
     
     var body: some View {
-        VStack {
+        NavigationStack {
             ScrollView {
-                Text(data)
+                Text(json)
             }
-                .padding()
-            Button("Dismiss") {
-                dismiss()
-            }
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Dismiss") {
+                            dismiss()
+                        }
+                    }
+                }
         }
     }
 }

@@ -43,7 +43,7 @@ struct WriteDataView: View {
             return
         }
         
-        try await manager.requestAuthorization()
+        try await manager.requestStepAuthorization()
         
         try await manager.writeSteps(
             startDate: Date() - 60 * 60,

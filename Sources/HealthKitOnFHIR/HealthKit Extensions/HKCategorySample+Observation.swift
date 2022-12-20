@@ -62,6 +62,7 @@ extension HKCategorySample {
             HKCategoryType(.dizziness),
             HKCategoryType(.drySkin),
             HKCategoryType(.fainting),
+            HKCategoryType(.fatigue),
             HKCategoryType(.fever),
             HKCategoryType(.generalizedBodyAche),
             HKCategoryType(.hairLoss),

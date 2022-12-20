@@ -12,6 +12,9 @@
 		276501762931A58700644064 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276501752931A58700644064 /* ContentView.swift */; };
 		276501782931A82F00644064 /* ReadDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276501772931A82F00644064 /* ReadDataView.swift */; };
 		2790F40A29326CE90024213F /* JSONView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790F40929326CE90024213F /* JSONView.swift */; };
+		2F5425F12951A9F300B5DAC2 /* XCTTestCase+HealthDataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5425F02951A9F200B5DAC2 /* XCTTestCase+HealthDataType.swift */; };
+		2F5425F32951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5425F22951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift */; };
+		2F5425F62951AE2600B5DAC2 /* HKElectrocardiogram+Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5425F42951AD1D00B5DAC2 /* HKElectrocardiogram+Context.swift */; };
 		2F68C3C8292EA52000B3E12C /* HealthKitOnFHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 2F68C3C7292EA52000B3E12C /* HealthKitOnFHIR */; };
 		2F6D139A28F5F386007C25D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F6D139928F5F386007C25D6 /* Assets.xcassets */; };
 		2F8A431329130A8C005D2B8F /* TestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8A431229130A8C005D2B8F /* TestAppUITests.swift */; };
@@ -36,6 +39,9 @@
 		2790F40929326CE90024213F /* JSONView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONView.swift; sourceTree = "<group>"; };
 		2F01E8CD291490B80089C46B /* TestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestApp.entitlements; sourceTree = "<group>"; };
 		2F01E8CE291493560089C46B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F5425F02951A9F200B5DAC2 /* XCTTestCase+HealthDataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTTestCase+HealthDataType.swift"; sourceTree = "<group>"; };
+		2F5425F22951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectrocardiogramTestView.swift; sourceTree = "<group>"; };
+		2F5425F42951AD1D00B5DAC2 /* HKElectrocardiogram+Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKElectrocardiogram+Context.swift"; sourceTree = "<group>"; };
 		2F68C3C6292E9F8F00B3E12C /* HealthKitOnFHIR */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HealthKitOnFHIR; path = ../..; sourceTree = "<group>"; };
 		2F6D139228F5F384007C25D6 /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F6D139928F5F386007C25D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,6 +94,7 @@
 			children = (
 				2FA7382B290ADFAA007ACEB9 /* TestApp.swift */,
 				2765016F29319B2100644064 /* HealthKitManager.swift */,
+				2F5425F42951AD1D00B5DAC2 /* HKElectrocardiogram+Context.swift */,
 				2FBE356C29399F37002EE0D5 /* Views */,
 				2FBE356B29399ED1002EE0D5 /* Support Files */,
 			);
@@ -97,6 +104,7 @@
 		2F6D13AF28F5F386007C25D6 /* TestAppUITests */ = {
 			isa = PBXGroup;
 			children = (
+				2F5425F02951A9F200B5DAC2 /* XCTTestCase+HealthDataType.swift */,
 				2F8A431229130A8C005D2B8F /* TestAppUITests.swift */,
 			);
 			path = TestAppUITests;
@@ -126,6 +134,7 @@
 				2765017129319E3000644064 /* WriteDataView.swift */,
 				276501772931A82F00644064 /* ReadDataView.swift */,
 				2790F40929326CE90024213F /* JSONView.swift */,
+				2F5425F22951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,6 +243,8 @@
 			files = (
 				2790F40A29326CE90024213F /* JSONView.swift in Sources */,
 				2765017029319B2100644064 /* HealthKitManager.swift in Sources */,
+				2F5425F62951AE2600B5DAC2 /* HKElectrocardiogram+Context.swift in Sources */,
+				2F5425F32951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift in Sources */,
 				276501762931A58700644064 /* ContentView.swift in Sources */,
 				2FA7382C290ADFAA007ACEB9 /* TestApp.swift in Sources */,
 				276501782931A82F00644064 /* ReadDataView.swift in Sources */,
@@ -245,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F5425F12951A9F300B5DAC2 /* XCTTestCase+HealthDataType.swift in Sources */,
 				2F8A431329130A8C005D2B8F /* TestAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

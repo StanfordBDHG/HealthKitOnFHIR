@@ -31,11 +31,7 @@ class TestAppUITests: XCTestCase {
         app.collectionViews.buttons["Write Step Count"].tap()
         
         // Enable Apple Health Access if needed
-        _ = app.navigationBars["Health Access"].waitForExistence(timeout: 10)
-        if app.navigationBars["Health Access"].waitForExistence(timeout: 10) {
-            app.tables.staticTexts["Turn On All"].tap()
-            app.navigationBars["Health Access"].buttons["Allow"].tap()
-        }
+        try healthKitAccess()
         
         // Check that the data is written
         sleep(2)
@@ -50,5 +46,41 @@ class TestAppUITests: XCTestCase {
         
         // Dismiss results view
         app.swipeDown(velocity: XCUIGestureVelocity.fast)
+    }
+    
+    func testECGHealthKitMapping() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        try exitAppAndOpenHealth(.electrocardiograms)
+        
+        app.collectionViews.buttons["Electrocardiogram"].tap()
+        app.collectionViews.buttons["Read Electrocardiogram"].tap()
+        
+        // Enable Apple Health Access if needed
+        try healthKitAccess()
+        
+        XCTAssert(app.staticTexts["Passed"].waitForExistence(timeout: 2))
+        
+        app.collectionViews.buttons["See JSON"].tap()
+        
+        // Dismiss results view
+        app.swipeDown(velocity: XCUIGestureVelocity.fast)
+    }
+    
+    
+    private func healthKitAccess() throws {
+        let app = XCUIApplication()
+        
+        if app.navigationBars["Health Access"].waitForExistence(timeout: 10) {
+            app.tables.staticTexts["Turn On All"].tap()
+            app.navigationBars["Health Access"].buttons["Allow"].tap()
+            return
+        }
+        print("The HealthKit View did not load after 10 seconds ... give it a second try with a timeout of 20 seconds.")
+        if app.navigationBars["Health Access"].waitForExistence(timeout: 20) {
+            app.tables.staticTexts["Turn On All"].tap()
+            app.navigationBars["Health Access"].buttons["Allow"].tap()
+        }
     }
 }

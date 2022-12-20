@@ -431,6 +431,15 @@
                 }
             ]
         },
+        "HKCategoryTypeIdentifierFatigue": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierFatigue",
+                    "display": "Fatigue",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
         "HKCategoryTypeIdentifierFever": {
             "codings": [
                 {

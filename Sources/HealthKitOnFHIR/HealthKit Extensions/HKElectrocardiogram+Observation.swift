@@ -56,21 +56,18 @@ extension HKElectrocardiogram.SymptomsStatus: HKCategoryValueDescription {
 
 
 extension HKElectrocardiogram {
-    /// <#Description#>
+    /// The `Symptoms` contain related `HKCategoryType` instances coded as `HKCategoryValueSeverity` enums related to an `HKElectrocardiogram`.
     public typealias Symptoms = [HKCategoryType: HKCategoryValueSeverity]
-    /// <#Description#>
-    public typealias VoltageMeasurements = [(time: TimeInterval, value: HKQuantity)]
     
     
-    /// <#Description#>
+    /// Creates a FHIR observation incorporating additional `Symptoms` and a `URL` pointing to the `voltageMeasurements` collected in HealthKit.
     /// - Parameters:
-    ///   - symptoms: <#symptoms description#>
-    ///   - voltageMeasurements: <#voltageMeasurements description#>
-    ///   - mapping: <#mapping description#>
-    /// - Returns: <#description#>
+    ///   - symptoms: The `Symptoms` that should be encoded in the FHIR observation.
+    ///   - voltageMeasurements: The URL pointing to the raw voltage measurement data corrolated ot the FHIR observation.
+    ///   - mapping: The `HKSampleMapping` used to populate the FHIR observation.
     public func observation(
         symptoms: Symptoms,
-        voltageMeasurements: VoltageMeasurements,
+        voltageMeasurements: URL? = nil,
         withMapping mapping: HKSampleMapping = HKSampleMapping.default
     ) throws -> Observation {
         var observation = try observation(withMapping: mapping)
@@ -79,7 +76,7 @@ extension HKElectrocardiogram {
             try appendSymptomsComponent(&observation, symptoms: symptoms, mappings: mapping)
         }
         
-        if !voltageMeasurements.isEmpty {
+        if let voltageMeasurements {
             try appendVoltageMeasurementsComponent(&observation, voltageMeasurements: voltageMeasurements, mappings: mapping)
         }
         
@@ -210,20 +207,14 @@ extension HKElectrocardiogram {
     
     private func appendVoltageMeasurementsComponent(
         _ observation: inout Observation,
-        voltageMeasurements: VoltageMeasurements,
+        voltageMeasurements: URL,
         mappings: HKSampleMapping
     ) throws {
         let mapping = mappings.electrocardiogramMapping
-        let voltageMeasurementsString = voltageMeasurements
-            .map { voltageMeasurement in
-                #""\#(voltageMeasurement.time)": "\#(voltageMeasurement.value)""#
-            }
-            .joined(separator: ",\n")
-        
         let voltageMeasurementsComponent = ObservationComponent(
             code: CodeableConcept(coding: mapping.voltageMeasurements.map(\.coding))
         )
-        voltageMeasurementsComponent.value = .string(voltageMeasurementsString.asFHIRStringPrimitive())
+        voltageMeasurementsComponent.value = .string(voltageMeasurements.absoluteString.asFHIRStringPrimitive())
         observation.appendComponent(voltageMeasurementsComponent)
     }
 }
