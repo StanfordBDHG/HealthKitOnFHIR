@@ -222,19 +222,34 @@ class HKCategorySampleTests: XCTestCase {
     }
 
     func testAppleWalkingSteadinessEvent() throws {
-        let observation = try createObservationFrom(
-            type: HKCategoryType(.appleWalkingSteadinessEvent),
-            value: HKCategoryValueAppleWalkingSteadinessEvent.initialLow.rawValue
-        )
+        let values: [HKCategoryValueAppleWalkingSteadinessEvent] = [.initialLow, .initialVeryLow, .repeatLow, .repeatVeryLow]
 
-        XCTAssertEqual(
-            observation.code.coding?.first,
-            createCategoryCoding(
-                categoryType: HKCategoryType(.appleWalkingSteadinessEvent).description,
-                display: "Apple Walking Steadiness Event"
+        for value in values {
+            let observation = try createObservationFrom(
+                type: HKCategoryType(.appleWalkingSteadinessEvent),
+                value: value.rawValue
             )
-        )
-        XCTAssertEqual(observation.value, .string("initial low".asFHIRStringPrimitive()))
+
+            XCTAssertEqual(
+                observation.code.coding?.first,
+                createCategoryCoding(
+                    categoryType: HKCategoryType(.appleWalkingSteadinessEvent).description,
+                    display: "Apple Walking Steadiness Event"
+                )
+            )
+            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+        }
+    }
+
+    func testAppleWalkingSteadinessClassification() throws {
+        let okClassification = try HKAppleWalkingSteadinessClassification(rawValue: HKAppleWalkingSteadinessClassification.ok.rawValue)?.categoryValueDescription
+        XCTAssertEqual(okClassification, "ok")
+
+        let lowClassification = try HKAppleWalkingSteadinessClassification(rawValue: HKAppleWalkingSteadinessClassification.low.rawValue)?.categoryValueDescription
+        XCTAssertEqual(lowClassification, "low")
+
+        let veryLowClassification = try HKAppleWalkingSteadinessClassification(rawValue: HKAppleWalkingSteadinessClassification.veryLow.rawValue)?.categoryValueDescription
+        XCTAssertEqual(veryLowClassification, "very low")
     }
 
     func testPregnancyTestResult() throws {
