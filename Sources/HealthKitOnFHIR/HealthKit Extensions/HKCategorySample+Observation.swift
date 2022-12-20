@@ -24,31 +24,31 @@ extension HKCategorySample {
         let valueString: String?
         switch self.categoryType {
         case HKCategoryType(.appetiteChanges):
-            valueString = HKCategoryValueAppetiteChanges(rawValue: self.value)?.description
+            valueString = try HKCategoryValueAppetiteChanges(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.appleStandHour):
-            valueString = HKCategoryValueAppleStandHour(rawValue: self.value)?.description
+            valueString = try HKCategoryValueAppleStandHour(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.appleWalkingSteadinessEvent):
-            valueString = HKCategoryValueAppleWalkingSteadinessEvent(rawValue: self.value)?.description
+            valueString = try HKCategoryValueAppleWalkingSteadinessEvent(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.cervicalMucusQuality):
-            valueString = HKCategoryValueCervicalMucusQuality(rawValue: self.value)?.description
+            valueString = try HKCategoryValueCervicalMucusQuality(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.contraceptive):
-            valueString = HKCategoryValueContraceptive(rawValue: self.value)?.description
+            valueString = try HKCategoryValueContraceptive(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.environmentalAudioExposureEvent):
-            valueString = HKCategoryValueEnvironmentalAudioExposureEvent(rawValue: self.value)?.description
+            valueString = try HKCategoryValueEnvironmentalAudioExposureEvent(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.headphoneAudioExposureEvent):
-            valueString = HKCategoryValueHeadphoneAudioExposureEvent(rawValue: self.value)?.description
+            valueString = try HKCategoryValueHeadphoneAudioExposureEvent(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.lowCardioFitnessEvent):
-            valueString = HKCategoryValueLowCardioFitnessEvent(rawValue: self.value)?.description
+            valueString = try HKCategoryValueLowCardioFitnessEvent(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.menstrualFlow):
-            valueString = HKCategoryValueMenstrualFlow(rawValue: self.value)?.description
+            valueString = try HKCategoryValueMenstrualFlow(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.ovulationTestResult):
-            valueString = HKCategoryValueOvulationTestResult(rawValue: self.value)?.description
+            valueString = try HKCategoryValueOvulationTestResult(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.pregnancyTestResult):
-            valueString = HKCategoryValuePregnancyTestResult(rawValue: self.value)?.description
+            valueString = try HKCategoryValuePregnancyTestResult(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.progesteroneTestResult):
-            valueString = HKCategoryValueProgesteroneTestResult(rawValue: self.value)?.description
+            valueString = try HKCategoryValueProgesteroneTestResult(rawValue: self.value)?.categoryValueDescription
         case HKCategoryType(.sleepAnalysis):
-            valueString = HKCategoryValueSleepAnalysis(rawValue: self.value)?.description
+            valueString = try HKCategoryValueSleepAnalysis(rawValue: self.value)?.categoryValueDescription
         case
             HKCategoryType(.abdominalCramps),
             HKCategoryType(.acne),
@@ -86,13 +86,13 @@ extension HKCategorySample {
             HKCategoryType(.wheezing):
             // Samples of these types carry values of
             // HKCategoryValueSeverity
-            valueString = HKCategoryValueSeverity(rawValue: self.value)?.description
+            valueString = try HKCategoryValueSeverity(rawValue: self.value)?.categoryValueDescription
         case
             HKCategoryType(.moodChanges),
             HKCategoryType(.sleepChanges):
             // Samples of these types carry values of
             // HKCategoryValuePresence
-            valueString = HKCategoryValuePresence(rawValue: self.value)?.description
+            valueString = try HKCategoryValuePresence(rawValue: self.value)?.categoryValueDescription
         case
             HKCategoryType(.irregularHeartRhythmEvent),
             HKCategoryType(.lowHeartRateEvent),
