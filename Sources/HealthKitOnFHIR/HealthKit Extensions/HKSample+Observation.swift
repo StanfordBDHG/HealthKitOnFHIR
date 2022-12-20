@@ -45,6 +45,8 @@ extension HKSample {
             try correlation.buildCorrelationObservation(&observation, mappings: mapping)
         case let categorySample as HKCategorySample:
             try categorySample.buildCategoryObservation(&observation)
+        case let electrocardiogram as HKElectrocardiogram:
+            try electrocardiogram.buildObservation(&observation, mappings: mapping)
         default:
             throw HealthKitOnFHIRError.notSupported
         }
