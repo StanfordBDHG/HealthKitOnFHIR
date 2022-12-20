@@ -11,7 +11,7 @@ SPDX-License-Identifier: MIT
 
 
 - [HKCategoryType](CATEGORY_TABLE.md)
-    - HealthKitOnFHIR supports 62 of 124 category types.
+    - HealthKitOnFHIR supports 62 of 62 category types.
 - [HKCorrelation](CORRELATION_TABLE.md)
     - HealthKitOnFHIR supports 1 of 2 correlation types.
 - [HKQuantityType](QUANTITY_TABLE.md)

@@ -9,30 +9,10 @@ SPDX-License-Identifier: MIT
 -->
 # HKCategoryType
 
-HealthKitOnFHIR supports 62 of 124 category types.
+HealthKitOnFHIR supports 62 of 62 category types.
 
 |HKCategoryType|Supported|
 |----|----|
-|[AbdominalCramps](https://developer.apple.com/documentation/healthkit/AbdominalCramps)|:x:|-|
-|[Acne](https://developer.apple.com/documentation/healthkit/Acne)|:x:|-|
-|[AppetiteChanges](https://developer.apple.com/documentation/healthkit/AppetiteChanges)|:x:|-|
-|[AppleStandHour](https://developer.apple.com/documentation/healthkit/AppleStandHour)|:x:|-|
-|[AppleWalkingSteadinessEvent](https://developer.apple.com/documentation/healthkit/AppleWalkingSteadinessEvent)|:x:|-|
-|[AudioExposureEvent](https://developer.apple.com/documentation/healthkit/AudioExposureEvent)|:x:|-|
-|[BladderIncontinence](https://developer.apple.com/documentation/healthkit/BladderIncontinence)|:x:|-|
-|[Bloating](https://developer.apple.com/documentation/healthkit/Bloating)|:x:|-|
-|[BreastPain](https://developer.apple.com/documentation/healthkit/BreastPain)|:x:|-|
-|[CervicalMucusQuality](https://developer.apple.com/documentation/healthkit/CervicalMucusQuality)|:x:|-|
-|[ChestTightnessOrPain](https://developer.apple.com/documentation/healthkit/ChestTightnessOrPain)|:x:|-|
-|[Chills](https://developer.apple.com/documentation/healthkit/Chills)|:x:|-|
-|[Constipation](https://developer.apple.com/documentation/healthkit/Constipation)|:x:|-|
-|[Contraceptive](https://developer.apple.com/documentation/healthkit/Contraceptive)|:x:|-|
-|[Coughing](https://developer.apple.com/documentation/healthkit/Coughing)|:x:|-|
-|[Dizziness](https://developer.apple.com/documentation/healthkit/Dizziness)|:x:|-|
-|[DrySkin](https://developer.apple.com/documentation/healthkit/DrySkin)|:x:|-|
-|[Fainting](https://developer.apple.com/documentation/healthkit/Fainting)|:x:|-|
-|[Fever](https://developer.apple.com/documentation/healthkit/Fever)|:x:|-|
-|[GeneralizedBodyAche](https://developer.apple.com/documentation/healthkit/GeneralizedBodyAche)|:x:|-|
 |[AbdominalCramps](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierAbdominalCramps)|:white_check_mark:|
 |[Acne](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierAcne)|:white_check_mark:|
 |[AppetiteChanges](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierAppetiteChanges)|:white_check_mark:|
@@ -95,45 +75,3 @@ HealthKitOnFHIR supports 62 of 124 category types.
 |[VaginalDryness](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierVaginalDryness)|:white_check_mark:|
 |[Vomiting](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierVomiting)|:white_check_mark:|
 |[Wheezing](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierWheezing)|:white_check_mark:|
-|[HairLoss](https://developer.apple.com/documentation/healthkit/HairLoss)|:x:|-|
-|[HandwashingEvent](https://developer.apple.com/documentation/healthkit/HandwashingEvent)|:x:|-|
-|[Headache](https://developer.apple.com/documentation/healthkit/Headache)|:x:|-|
-|[HeadphoneAudioExposureEvent](https://developer.apple.com/documentation/healthkit/HeadphoneAudioExposureEvent)|:x:|-|
-|[Heartburn](https://developer.apple.com/documentation/healthkit/Heartburn)|:x:|-|
-|[HighHeartRateEvent](https://developer.apple.com/documentation/healthkit/HighHeartRateEvent)|:x:|-|
-|[HotFlashes](https://developer.apple.com/documentation/healthkit/HotFlashes)|:x:|-|
-|[InfrequentMenstrualCycles](https://developer.apple.com/documentation/healthkit/InfrequentMenstrualCycles)|:x:|-|
-|[IntermenstrualBleeding](https://developer.apple.com/documentation/healthkit/IntermenstrualBleeding)|:x:|-|
-|[IrregularHeartRhythmEvent](https://developer.apple.com/documentation/healthkit/IrregularHeartRhythmEvent)|:x:|-|
-|[IrregularMenstrualCycles](https://developer.apple.com/documentation/healthkit/IrregularMenstrualCycles)|:x:|-|
-|[Lactation](https://developer.apple.com/documentation/healthkit/Lactation)|:x:|-|
-|[LossOfSmell](https://developer.apple.com/documentation/healthkit/LossOfSmell)|:x:|-|
-|[LossOfTaste](https://developer.apple.com/documentation/healthkit/LossOfTaste)|:x:|-|
-|[LowCardioFitnessEvent](https://developer.apple.com/documentation/healthkit/LowCardioFitnessEvent)|:x:|-|
-|[LowHeartRateEvent](https://developer.apple.com/documentation/healthkit/LowHeartRateEvent)|:x:|-|
-|[LowerBackPain](https://developer.apple.com/documentation/healthkit/LowerBackPain)|:x:|-|
-|[MemoryLapse](https://developer.apple.com/documentation/healthkit/MemoryLapse)|:x:|-|
-|[MenstrualFlow](https://developer.apple.com/documentation/healthkit/MenstrualFlow)|:x:|-|
-|[MindfulSession](https://developer.apple.com/documentation/healthkit/MindfulSession)|:x:|-|
-|[MoodChanges](https://developer.apple.com/documentation/healthkit/MoodChanges)|:x:|-|
-|[Nausea](https://developer.apple.com/documentation/healthkit/Nausea)|:x:|-|
-|[NightSweats](https://developer.apple.com/documentation/healthkit/NightSweats)|:x:|-|
-|[OvulationTestResult](https://developer.apple.com/documentation/healthkit/OvulationTestResult)|:x:|-|
-|[PelvicPain](https://developer.apple.com/documentation/healthkit/PelvicPain)|:x:|-|
-|[PersistentIntermenstrualBleeding](https://developer.apple.com/documentation/healthkit/PersistentIntermenstrualBleeding)|:x:|-|
-|[PregnancyTestResult](https://developer.apple.com/documentation/healthkit/PregnancyTestResult)|:x:|-|
-|[ProgesteroneTestResult](https://developer.apple.com/documentation/healthkit/ProgesteroneTestResult)|:x:|-|
-|[ProlongedMenstrualPeriods](https://developer.apple.com/documentation/healthkit/ProlongedMenstrualPeriods)|:x:|-|
-|[RapidPoundingOrFlutteringHeartbeat](https://developer.apple.com/documentation/healthkit/RapidPoundingOrFlutteringHeartbeat)|:x:|-|
-|[RunnyNose](https://developer.apple.com/documentation/healthkit/RunnyNose)|:x:|-|
-|[SexualActivity](https://developer.apple.com/documentation/healthkit/SexualActivity)|:x:|-|
-|[ShortnessOfBreath](https://developer.apple.com/documentation/healthkit/ShortnessOfBreath)|:x:|-|
-|[SinusCongestion](https://developer.apple.com/documentation/healthkit/SinusCongestion)|:x:|-|
-|[SkippedHeartbeat](https://developer.apple.com/documentation/healthkit/SkippedHeartbeat)|:x:|-|
-|[SleepAnalysis](https://developer.apple.com/documentation/healthkit/SleepAnalysis)|:x:|-|
-|[SleepChanges](https://developer.apple.com/documentation/healthkit/SleepChanges)|:x:|-|
-|[SoreThroat](https://developer.apple.com/documentation/healthkit/SoreThroat)|:x:|-|
-|[ToothbrushingEvent](https://developer.apple.com/documentation/healthkit/ToothbrushingEvent)|:x:|-|
-|[VaginalDryness](https://developer.apple.com/documentation/healthkit/VaginalDryness)|:x:|-|
-|[Vomiting](https://developer.apple.com/documentation/healthkit/Vomiting)|:x:|-|
-|[Wheezing](https://developer.apple.com/documentation/healthkit/Wheezing)|:x:|-|
