@@ -34,6 +34,7 @@ struct JSONView: View {
                 }
                 .onAppear {
                     var lineNumber = 0
+                    print(json)
                     json.enumerateLines { line, _ in
                         lines.append((lineNumber, line))
                         lineNumber += 1

@@ -222,7 +222,7 @@ extension HKElectrocardiogram {
         
         // Batch the measurements in 10 Second Intervals
         let voltageMeasurementBatches = voltageMeasurements
-            .split(whereSeparator: { (time: TimeInterval, value: HKQuantity) in
+            .split(whereSeparator: { time, _ in
                 let remainder = time.remainder(dividingBy: 10.0)
                 return remainder <= period / 2
             })
