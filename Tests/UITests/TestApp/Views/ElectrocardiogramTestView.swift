@@ -63,6 +63,36 @@ struct ElectrocardiogramTestView: View {
             voltageMeasurements: voltageMeasurements
         )
         
+        let expectedCoding = Coding(
+            code: "procedure".asFHIRStringPrimitive(),
+            display: "Procedure".asFHIRStringPrimitive(),
+            system: "http://terminology.hl7.org/CodeSystem/observation-category".asFHIRURIPrimitive()
+        )
+        guard observation?.category?.count == 1,
+              observation?.category?.first?.coding == [expectedCoding] else {
+            return
+        }
+        
+        let expectedCodes = [
+            Coding(
+                code: "HKElectrocardiogram".asFHIRStringPrimitive(),
+                display: "Electrocardiogram".asFHIRStringPrimitive(),
+                system: "http://developer.apple.com/documentation/healthkit".asFHIRURIPrimitive()
+            ),
+            Coding(
+                code: "131329".asFHIRStringPrimitive(),
+                display: "MDC_ECG_ELEC_POTL_I".asFHIRStringPrimitive(),
+                system: "urn:oid:2.16.840.1.113883.6.24".asFHIRURIPrimitive()
+            )
+        ]
+        guard observation?.code.coding == expectedCodes else {
+            return
+        }
+        
+        guard observation?.component?.count == 12 else {
+            return
+        }
+
         self.passed = true
     }
     

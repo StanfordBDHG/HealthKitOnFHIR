@@ -58,13 +58,15 @@ extension HKElectrocardiogram.SymptomsStatus: HKCategoryValueDescription {
 extension HKElectrocardiogram {
     /// The `Symptoms` contain related `HKCategoryType` instances coded as `HKCategoryValueSeverity` enums related to an `HKElectrocardiogram`.
     public typealias Symptoms = [HKCategoryType: HKCategoryValueSeverity]
-    /// <#Description#>
+    /// The raw voltage measurements are defined as `HKQuantity` samples that are correlating to a specific measurement time.
     ///
     /// The voltage measurements must be sorted by time interval.
     public typealias VoltageMeasurements = [(time: TimeInterval, value: HKQuantity)]
     
     
-    /// Creates a FHIR observation incorporating additional `Symptoms` and a `URL` pointing to the `voltageMeasurements` collected in HealthKit.
+    /// Creates a FHIR observation incorporating additional `Symptoms` and`VoltageMeasurements` collected in HealthKit.
+    /// If you do not need `HKElectrocardiogram` specific context added you can use the generic `observation` extension on `HKSample`.
+    ///
     /// - Parameters:
     ///   - symptoms: The `Symptoms` that should be encoded in the FHIR observation.
     ///   - voltageMeasurements: The URL pointing to the raw voltage measurement data corrolated ot the FHIR observation.
@@ -218,14 +220,19 @@ extension HKElectrocardiogram {
         let voltageMeasurements = voltageMeasurements.sorted(by: { $0.time < $1.time })
         
         // Number of milliseconds between samples
-        let period = (voltageMeasurements.last?.time ?? 0.0) / Double(voltageMeasurements.count)
+        let period: Double
+        if let samplingFrequency {
+            period = 1.0 / samplingFrequency.doubleValue(for: HKUnit.hertz())
+        } else {
+            period = (voltageMeasurements.last?.time ?? 0.0) / Double(voltageMeasurements.count)
+        }
         
         // Batch the measurements in 10 Second Intervals
         let voltageMeasurementBatches = voltageMeasurements
-            .split(whereSeparator: { time, _ in
+            .split { time, _ in
                 let remainder = time.remainder(dividingBy: 10.0)
                 return remainder <= period / 2
-            })
+            }
         
         for voltageMeasurementBatch in voltageMeasurementBatches {
             // Create a space separated string of all the measurement values as defined by the mapping unit

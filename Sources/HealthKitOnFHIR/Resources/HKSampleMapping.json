@@ -1,105 +1,105 @@
 {
     "HKElectrocardiogram": {
-      "categories": [
-        {
-          "code": "procedure",
-          "display": "Procedure",
-          "system": "http://terminology.hl7.org/CodeSystem/observation-category"
+        "categories": [
+            {
+                "code": "procedure",
+                "display": "Procedure",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category"
+            }
+        ],
+        "codings": [
+            {
+                "code": "HKElectrocardiogram",
+                "display": "Electrocardiogram",
+                "system": "http://developer.apple.com/documentation/healthkit"
+            },
+            {
+                "code": "131329",
+                "display": "MDC_ECG_ELEC_POTL_I",
+                "system": "urn:oid:2.16.840.1.113883.6.24"
+            }
+        ],
+        "classification": {
+            "codings": [
+                {
+                    "code": "HKElectrocardiogram.Classification",
+                    "display": "Electrocardiogram Classification",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "symptomsStatus": {
+            "codings": [
+                {
+                    "code": "HKElectrocardiogram.SymptomsStatus",
+                    "display": "Electrocardiogram Symptoms Status",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "numberOfVoltageMeasurements": {
+            "codings": [
+                {
+                    "code": "HKElectrocardiogram.NumberOfVoltageMeasurements",
+                    "display": "Electrocardiogram Number of Voltage Measurements",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "measurements"
+            }
+        },
+        "samplingFrequency": {
+            "codings": [
+                {
+                    "code": "HKElectrocardiogram.SamplingFrequency",
+                    "display": "Sampling Frequency",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "hertz",
+                "hkunit": "Hz",
+                "system": "http://unitsofmeasure.org",
+                "unit": "hertz"
+            }
+        },
+        "averageHeartRate": {
+            "codings": [
+                {
+                    "code": "8867-4",
+                    "display": "Heart rate",
+                    "system": "http://loinc.org"
+                },
+                {
+                    "code": "HKQuantityTypeIdentifierHeartRate",
+                    "display": "Heart Rate",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "/min",
+                "hkunit": "count/min",
+                "system": "http://unitsofmeasure.org",
+                "unit": "beats/minute"
+            }
+        },
+        "voltageMeasurements": {
+            "codings": [
+                {
+                    "code": "131329",
+                    "system": "urn:oid:2.16.840.1.113883.6.24",
+                    "display": "MDC_ECG_ELEC_POTL_I"
+                }
+            ],
+            "unit": {
+                "code": "uV",
+                "hkunit": "mcV",
+                "system": "http://unitsofmeasure.org",
+                "unit": "uV"
+            }
         }
-      ],
-      "codings": [
-          {
-              "code": "HKElectrocardiogram",
-              "display": "Electrocardiogram",
-              "system": "http://developer.apple.com/documentation/healthkit"
-          },
-          {
-              "system": "urn:oid:2.16.840.1.113883.6.24",
-              "code": "131329",
-              "display": "MDC_ECG_ELEC_POTL_I"
-          }
-      ],
-      "classification": {
-          "codings": [
-              {
-                  "code": "HKElectrocardiogram.Classification",
-                  "display": "Electrocardiogram Classification",
-                  "system": "http://developer.apple.com/documentation/healthkit"
-              }
-          ]
-      },
-      "symptomsStatus": {
-          "codings": [
-              {
-                  "code": "HKElectrocardiogram.SymptomsStatus",
-                  "display": "Electrocardiogram Symptoms Status",
-                  "system": "http://developer.apple.com/documentation/healthkit"
-              }
-          ]
-      },
-      "numberOfVoltageMeasurements": {
-          "codings": [
-              {
-                  "code": "HKElectrocardiogram.NumberOfVoltageMeasurements",
-                  "display": "Electrocardiogram Number of Voltage Measurements",
-                  "system": "http://developer.apple.com/documentation/healthkit"
-              }
-          ],
-          "unit": {
-              "hkunit": "count",
-              "unit": "measurements"
-          }
-      },
-      "samplingFrequency": {
-          "codings": [
-              {
-                  "code": "HKElectrocardiogram.SamplingFrequency",
-                  "display": "Sampling Frequency",
-                  "system": "http://developer.apple.com/documentation/healthkit"
-              }
-          ],
-          "unit": {
-              "code": "hertz",
-              "hkunit": "Hz",
-              "system": "http://unitsofmeasure.org",
-              "unit": "hertz"
-          }
-      },
-      "averageHeartRate": {
-          "codings": [
-              {
-                  "code": "8867-4",
-                  "display": "Heart rate",
-                  "system": "http://loinc.org"
-              },
-              {
-                  "code": "HKQuantityTypeIdentifierHeartRate",
-                  "display": "Heart Rate",
-                  "system": "http://developer.apple.com/documentation/healthkit"
-              }
-          ],
-          "unit": {
-              "code": "/min",
-              "hkunit": "count/min",
-              "system": "http://unitsofmeasure.org",
-              "unit": "beats/minute"
-          }
-      },
-      "voltageMeasurements": {
-          "codings": [
-              {
-                  "code": "131329",
-                  "system": "urn:oid:2.16.840.1.113883.6.24",
-                  "display": "MDC_ECG_ELEC_POTL_I"
-              }
-          ],
-          "unit": {
-              "code": "uV",
-              "hkunit": "mcV",
-              "system": "http://unitsofmeasure.org",
-              "unit": "uV"
-          }
-      }
     },
     "HKCategorySamples": {
         "HKCategoryTypeIdentifierAppetiteChanges": {
