@@ -56,10 +56,11 @@ struct ElectrocardiogramTestView: View {
             return
         }
         let symptoms = try await manager.readSymptoms(for: electrocardiogram)
+        let voltageMeasurements = try await manager.readVoltageMeasurements(for: electrocardiogram)
 
         self.observation = try electrocardiogram.observation(
             symptoms: symptoms,
-            voltageMeasurements: URL(string: "https://stanford.edu/ecgMeasurement")
+            voltageMeasurements: voltageMeasurements
         )
         
         self.passed = true

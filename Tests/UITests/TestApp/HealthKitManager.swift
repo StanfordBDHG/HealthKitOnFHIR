@@ -93,4 +93,11 @@ class HealthKitManager: ObservableObject {
         }
         return try await electrocardiogram.symptoms(from: healthStore)
     }
+    
+    func readVoltageMeasurements(for electrocardiogram: HKElectrocardiogram) async throws -> HKElectrocardiogram.VoltageMeasurements {
+        guard let healthStore else {
+            throw HKError(.errorHealthDataUnavailable)
+        }
+        return try await electrocardiogram.voltageMeasurements(from: healthStore)
+    }
 }

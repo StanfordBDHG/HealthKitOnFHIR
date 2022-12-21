@@ -57,4 +57,19 @@ extension HKElectrocardiogram {
         
         return symptoms
     }
+    
+    func voltageMeasurements(from healthStore: HKHealthStore) async throws -> VoltageMeasurements {
+        var voltageMeasurements: VoltageMeasurements = []
+        voltageMeasurements.reserveCapacity(numberOfVoltageMeasurements)
+        
+        let electrocardiogramQueryDescriptor = HKElectrocardiogramQueryDescriptor(self)
+        
+        for try await measurement in electrocardiogramQueryDescriptor.results(for: healthStore) {
+            if let voltageQuantity = measurement.quantity(for: .appleWatchSimilarToLeadI) {
+                voltageMeasurements.append((measurement.timeSinceSampleStart, voltageQuantity))
+            }
+        }
+        
+        return voltageMeasurements
+    }
 }

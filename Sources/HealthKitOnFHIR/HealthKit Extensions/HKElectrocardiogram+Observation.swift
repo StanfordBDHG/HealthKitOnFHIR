@@ -58,6 +58,10 @@ extension HKElectrocardiogram.SymptomsStatus: HKCategoryValueDescription {
 extension HKElectrocardiogram {
     /// The `Symptoms` contain related `HKCategoryType` instances coded as `HKCategoryValueSeverity` enums related to an `HKElectrocardiogram`.
     public typealias Symptoms = [HKCategoryType: HKCategoryValueSeverity]
+    /// <#Description#>
+    ///
+    /// The voltage measurements must be sorted by time interval.
+    public typealias VoltageMeasurements = [(time: TimeInterval, value: HKQuantity)]
     
     
     /// Creates a FHIR observation incorporating additional `Symptoms` and a `URL` pointing to the `voltageMeasurements` collected in HealthKit.
@@ -67,7 +71,7 @@ extension HKElectrocardiogram {
     ///   - mapping: The `HKSampleMapping` used to populate the FHIR observation.
     public func observation(
         symptoms: Symptoms,
-        voltageMeasurements: URL? = nil,
+        voltageMeasurements: VoltageMeasurements,
         withMapping mapping: HKSampleMapping = HKSampleMapping.default
     ) throws -> Observation {
         var observation = try observation(withMapping: mapping)
@@ -76,7 +80,7 @@ extension HKElectrocardiogram {
             try appendSymptomsComponent(&observation, symptoms: symptoms, mappings: mapping)
         }
         
-        if let voltageMeasurements {
+        if !voltageMeasurements.isEmpty {
             try appendVoltageMeasurementsComponent(&observation, voltageMeasurements: voltageMeasurements, mappings: mapping)
         }
         
@@ -207,14 +211,47 @@ extension HKElectrocardiogram {
     
     private func appendVoltageMeasurementsComponent(
         _ observation: inout Observation,
-        voltageMeasurements: URL,
+        voltageMeasurements: VoltageMeasurements,
         mappings: HKSampleMapping
     ) throws {
-        let mapping = mappings.electrocardiogramMapping
-        let voltageMeasurementsComponent = ObservationComponent(
-            code: CodeableConcept(coding: mapping.voltageMeasurements.map(\.coding))
-        )
-        voltageMeasurementsComponent.value = .string(voltageMeasurements.absoluteString.asFHIRStringPrimitive())
-        observation.appendComponent(voltageMeasurementsComponent)
+        let mapping = mappings.electrocardiogramMapping.voltageMeasurements
+        let voltageMeasurements = voltageMeasurements.sorted(by: { $0.time < $1.time })
+        
+        // Number of milliseconds between samples
+        let period = (voltageMeasurements.last?.time ?? 0.0) / Double(voltageMeasurements.count)
+        
+        // Batch the measurements in 10 Second Intervals
+        let voltageMeasurementBatches = voltageMeasurements
+            .split(whereSeparator: { (time: TimeInterval, value: HKQuantity) in
+                let remainder = time.remainder(dividingBy: 10.0)
+                return remainder <= period / 2
+            })
+        
+        for voltageMeasurementBatch in voltageMeasurementBatches {
+            // Create a space separated string of all the measurement values as defined by the mapping unit
+            let data = voltageMeasurementBatch
+                .map {
+                    $0.value.doubleValue(for: mapping.unit.hkunit).description
+                }
+                .joined(separator: " ")
+            
+            let voltageMeasurementBatchComponent = ObservationComponent(
+                code: CodeableConcept(coding: mapping.codings.map(\.coding))
+            )
+            voltageMeasurementBatchComponent.value = .sampledData(
+                SampledData(
+                    data: data.asFHIRStringPrimitive(),
+                    dimensions: 1,
+                    origin: Quantity(
+                        code: mapping.unit.code?.asFHIRStringPrimitive(),
+                        system: mapping.unit.system?.asFHIRURIPrimitive(),
+                        unit: mapping.unit.unit.asFHIRStringPrimitive(),
+                        value: 0.asFHIRDecimalPrimitive()
+                    ),
+                    period: period.asFHIRDecimalPrimitive()
+                )
+            )
+            observation.appendComponent(voltageMeasurementBatchComponent)
+        }
     }
 }

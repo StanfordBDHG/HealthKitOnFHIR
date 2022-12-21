@@ -2,8 +2,8 @@
     "HKElectrocardiogram": {
       "categories": [
         {
-          "code": "vital-signs",
-          "display": "Vital Signs",
+          "code": "procedure",
+          "display": "Procedure",
           "system": "http://terminology.hl7.org/CodeSystem/observation-category"
         }
       ],
@@ -12,6 +12,11 @@
               "code": "HKElectrocardiogram",
               "display": "Electrocardiogram",
               "system": "http://developer.apple.com/documentation/healthkit"
+          },
+          {
+              "system": "urn:oid:2.16.840.1.113883.6.24",
+              "code": "131329",
+              "display": "MDC_ECG_ELEC_POTL_I"
           }
       ],
       "classification": {
@@ -68,8 +73,8 @@
                   "system": "http://loinc.org"
               },
               {
-                  "code": "HKElectrocardiogram.NumberOfVoltageMeasurements",
-                  "display": "Average Heart Rate",
+                  "code": "HKQuantityTypeIdentifierHeartRate",
+                  "display": "Heart Rate",
                   "system": "http://developer.apple.com/documentation/healthkit"
               }
           ],
@@ -80,13 +85,21 @@
               "unit": "beats/minute"
           }
       },
-      "voltageMeasurements": [
-          {
-              "code": "HKElectrocardiogram.VoltageMeasurements",
-              "display": "Raw Voltage Measurements",
-              "system": "http://developer.apple.com/documentation/healthkit"
+      "voltageMeasurements": {
+          "codings": [
+              {
+                  "code": "131329",
+                  "system": "urn:oid:2.16.840.1.113883.6.24",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+              }
+          ],
+          "unit": {
+              "code": "uV",
+              "hkunit": "mcV",
+              "system": "http://unitsofmeasure.org",
+              "unit": "uV"
           }
-      ]
+      }
     },
     "HKCategorySamples": {
         "HKCategoryTypeIdentifierAppetiteChanges": {
@@ -814,7 +827,7 @@
         "HKQuantityTypeIdentifierBloodPressureDiastolic": {
             "codings": [
                 {
-                    "code": "8867-4",
+                    "code": "8462-4",
                     "display": "Diastolic blood pressure",
                     "system": "http://loinc.org"
                 },

@@ -29,8 +29,8 @@ public struct HKElectrocardiogramMapping: Decodable {
     public var samplingFrequency: HKQuantitySampleMapping
     /// Defines the mapping of the `averageHeartRate` quantity property of an `HKElectrocardiogram` to a FHIR observation.
     public var averageHeartRate: HKQuantitySampleMapping
-    /// Defines the the `voltageMeasurements`'s mapping codes of an `HKElectrocardiogram`'s voltage measurements
-    public var voltageMeasurements: [MappedCode]
+    /// Defines the mapping of the `voltageMeasurements` of an `HKElectrocardiogram` to a FHIR observation.
+    public var voltageMeasurements: HKQuantitySampleMapping
     
     
     /// An ``HKCorrelationMapping`` allows developers to customize the mapping of an`HKElectrocardiogram` to a FHIR observation.
@@ -42,7 +42,7 @@ public struct HKElectrocardiogramMapping: Decodable {
     ///   - numberOfVoltageMeasurements: efines the mapping of the `numberOfVoltageMeasurements` quantity property of an `HKElectrocardiogram` to a FHIR observation.
     ///   - samplingFrequency: Defines the mapping of the `samplingFrequency` quantity property of an `HKElectrocardiogram` to a FHIR observation.
     ///   - averageHeartRate: Defines the mapping of the `averageHeartRate` quantity property of an `HKElectrocardiogram` to a FHIR observation.
-    ///   - voltageMeasurements: Defines the the `voltageMeasurements`'s mapping codes of an `HKElectrocardiogram`'s voltage measurements
+    ///   - voltageMeasurements: Defines the mapping of the `voltageMeasurements` of an `HKElectrocardiogram` to a FHIR observation.
     public init(
         codings: [MappedCode],
         categories: [MappedCode],
@@ -51,7 +51,7 @@ public struct HKElectrocardiogramMapping: Decodable {
         numberOfVoltageMeasurements: HKQuantitySampleMapping,
         samplingFrequency: HKQuantitySampleMapping,
         averageHeartRate: HKQuantitySampleMapping,
-        voltageMeasurements: [MappedCode]
+        voltageMeasurements: HKQuantitySampleMapping
     ) {
         self.codings = codings
         self.categories = categories
