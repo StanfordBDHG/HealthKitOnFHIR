@@ -22,7 +22,7 @@ class HealthKitManager: ObservableObject {
     }
     
     
-    func requestAuthorization() async throws {
+    func requestStepAuthorization() async throws {
         guard let healthStore,
               let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
             throw HKError(.errorHealthDataUnavailable)
@@ -33,7 +33,7 @@ class HealthKitManager: ObservableObject {
     
     func readStepCount() async throws -> [HKQuantitySample] {
         guard let healthStore else {
-            return []
+            throw HKError(.errorHealthDataUnavailable)
         }
         
         let query = HKSampleQueryDescriptor(
@@ -59,5 +59,45 @@ class HealthKitManager: ObservableObject {
         )
         
         try await healthStore.save(stepsSample)
+    }
+    
+    // MARK: - Electrocardiogram
+    
+    func requestElectrocardiogramAuthorization() async throws {
+        guard let healthStore else {
+            throw HKError(.errorHealthDataUnavailable)
+        }
+        
+        var readTypes: [HKObjectType] = HKElectrocardiogram.correlatedSymptomTypes
+        readTypes.append(HKQuantityType.electrocardiogramType())
+        try await healthStore.requestAuthorization(toShare: [], read: Set(readTypes))
+    }
+    
+    func readElectrocardiogram() async throws -> HKElectrocardiogram? {
+        guard let healthStore else {
+            throw HKError(.errorHealthDataUnavailable)
+        }
+        
+        let query = HKSampleQueryDescriptor(
+            predicates: [.electrocardiogram()],
+            sortDescriptors: [],
+            limit: 1
+        )
+        
+        return try await query.result(for: healthStore).first
+    }
+    
+    func readSymptoms(for electrocardiogram: HKElectrocardiogram) async throws -> HKElectrocardiogram.Symptoms {
+        guard let healthStore else {
+            throw HKError(.errorHealthDataUnavailable)
+        }
+        return try await electrocardiogram.symptoms(from: healthStore)
+    }
+    
+    func readVoltageMeasurements(for electrocardiogram: HKElectrocardiogram) async throws -> HKElectrocardiogram.VoltageMeasurements {
+        guard let healthStore else {
+            throw HKError(.errorHealthDataUnavailable)
+        }
+        return try await electrocardiogram.voltageMeasurements(from: healthStore)
     }
 }

@@ -13,6 +13,7 @@ public struct HKSampleMapping: Decodable {
         case quantitySampleMapping = "HKQuantitySamples"
         case categorySampleMapping = "HKCategorySamples"
         case correlationMapping = "HKCorrelations"
+        case electrocardiogramMapping = "HKElectrocardiogram"
     }
     
     
@@ -30,6 +31,8 @@ public struct HKSampleMapping: Decodable {
     public var categorySampleMapping: [HKCategoryType: HKCategorySampleMapping]
     /// The ``HKSampleMapping/correlationMapping`` property defines the mapping of `HKCorrelationType`s to FHIR observations.
     public var correlationMapping: [HKCorrelationType: HKCorrelationMapping]
+    /// The ``HKSampleMapping/electrocardiogramMapping`` property defines the mapping of  an`HKElectrocardiogramMapping` to a FHIR observation.
+    public var electrocardiogramMapping: HKElectrocardiogramMapping
     
     
     public init(from decoder: Decoder) throws {
@@ -76,10 +79,13 @@ public struct HKSampleMapping: Decodable {
             }
         )
         
+        let electrocardiogramMapping = try mappings.decode(HKElectrocardiogramMapping.self, forKey: .electrocardiogramMapping)
+        
         self.init(
             quantitySampleMapping: quantitySampleMapping,
             categorySampleMapping: categorySampleMapping,
-            correlationMapping: correlationMapping
+            correlationMapping: correlationMapping,
+            electrocardiogramMapping: electrocardiogramMapping
         )
     }
     
@@ -90,10 +96,12 @@ public struct HKSampleMapping: Decodable {
     public init(
         quantitySampleMapping: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
         categorySampleMapping: [HKCategoryType: HKCategorySampleMapping] = HKCategorySampleMapping.default,
-        correlationMapping: [HKCorrelationType: HKCorrelationMapping] = HKCorrelationMapping.default
+        correlationMapping: [HKCorrelationType: HKCorrelationMapping] = HKCorrelationMapping.default,
+        electrocardiogramMapping: HKElectrocardiogramMapping = HKElectrocardiogramMapping.default
     ) {
         self.quantitySampleMapping = quantitySampleMapping
         self.categorySampleMapping = categorySampleMapping
         self.correlationMapping = correlationMapping
+        self.electrocardiogramMapping = electrocardiogramMapping
     }
 }

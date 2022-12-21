@@ -34,7 +34,7 @@ extension HKQuantitySample {
             throw HealthKitOnFHIRError.notSupported
         }
         
-        let component = ObservationComponent(code: CodeableConcept(coding: mapping.codings as? [Coding]))
+        let component = ObservationComponent(code: CodeableConcept(coding: mapping.codings.map(\.coding)))
         component.value = .quantity(buildQuantity(mapping))
         observation.appendComponent(component)
     }

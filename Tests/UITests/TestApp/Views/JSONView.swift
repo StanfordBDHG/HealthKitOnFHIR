@@ -11,18 +11,35 @@ import SwiftUI
 
 struct JSONView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var data: String
+    @Binding var json: String
+    @State var lines: [(linenumber: Int, text: String)] = []
     
     
     var body: some View {
-        VStack {
+        NavigationStack {
             ScrollView {
-                Text(data)
+                LazyVStack(alignment: .leading) {
+                    ForEach(lines, id: \.linenumber) { line in
+                        Text(line.text)
+                            .multilineTextAlignment(.leading)
+                    }
+                }
             }
-                .padding()
-            Button("Dismiss") {
-                dismiss()
-            }
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Dismiss") {
+                            dismiss()
+                        }
+                    }
+                }
+                .onAppear {
+                    var lineNumber = 0
+                    print(json)
+                    json.enumerateLines { line, _ in
+                        lines.append((lineNumber, line))
+                        lineNumber += 1
+                    }
+                }
         }
     }
 }

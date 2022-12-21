@@ -16,6 +16,7 @@ struct ContentView: View {
                 Section {
                     NavigationLink("Write Data", destination: WriteDataView())
                     NavigationLink("Read Data", destination: ReadDataView())
+                    NavigationLink("Electrocardiogram", destination: ElectrocardiogramTestView())
                 }
             }
             .navigationBarTitle("HealthKitOnFHIR Tests")
