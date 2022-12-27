@@ -13,4 +13,8 @@ enum HealthKitOnFHIRError: Error {
     case notSupported
     /// Indicates that a specific value is not valid
     case invalidValue
+    /// Indicates that the given FHIR resource uses an unsupported version
+    case unsupportedFHIRVersion
+    /// Indicates an invalid FHIR resource
+    case invalidFHIRResource
 }
