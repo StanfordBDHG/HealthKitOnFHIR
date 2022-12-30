@@ -22,16 +22,20 @@ struct HealthRecordsTestView: View {
             Section {
                 Button("Read Allergies") {
                     Task {
-                        try await readAllergies()
+                        do {
+                            try await readAllergies()
+                        } catch {
+                            print(error)
+                        }
                         showingSheet.toggle()
                     }
                 }
-                    .sheet(isPresented: $showingSheet) {
-                        JSONView(json: $json)
-                    }
+                .sheet(isPresented: $showingSheet) {
+                    JSONView(json: $json)
+                }
             }
         }
-            .navigationBarTitle("Read Data")
+        .navigationBarTitle("Read Data")
     }
 
 
@@ -40,7 +44,12 @@ struct HealthRecordsTestView: View {
 
         let resources = try await manager.readHealthRecords(type: .allergyRecord)
             .compactMap { sample in
-                try sample.allergyIntolerance
+                do {
+                    return try sample.allergyIntolerance
+                } catch {
+                    print(error)
+                }
+                return nil
             }
 
         let encoder = JSONEncoder()
