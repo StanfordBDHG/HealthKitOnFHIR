@@ -91,5 +91,4 @@ extension HKSample {
             return try clinicalRecord.convert(to: Procedure.self)
         }
     }
-
 }
