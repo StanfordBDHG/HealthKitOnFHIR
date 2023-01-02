@@ -7,8 +7,8 @@
 //
 
 @preconcurrency import HealthKit
-import SwiftUI
 import ModelsR4
+import SwiftUI
 
 
 struct HealthRecordsTestView: View {
@@ -25,7 +25,7 @@ struct HealthRecordsTestView: View {
         "HKClinicalTypeIdentifierLabResultRecord": "Lab Results",
         "HKClinicalTypeIdentifierMedicationRecord": "Medications",
         "HKClinicalTypeIdentifierProcedureRecord": "Procedures",
-        "HKClinicalTypeIdentifierVitalSignRecord": "Vital Signs",
+        "HKClinicalTypeIdentifierVitalSignRecord": "Vital Signs"
     ]
 
     var body: some View {
@@ -52,7 +52,7 @@ struct HealthRecordsTestView: View {
         .navigationBarTitle("Read Data")
     }
 
-
+    // swiftlint:disable:next cyclomatic_complexity
     private func readHealthRecords(type: HKClinicalTypeIdentifier) async throws {
         try await manager.requestHealthRecordsAuthorization()
 
