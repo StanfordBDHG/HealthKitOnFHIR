@@ -8,6 +8,7 @@
 
 @preconcurrency import HealthKit
 import SwiftUI
+import ModelsR4
 
 
 struct HealthRecordsTestView: View {
@@ -16,22 +17,35 @@ struct HealthRecordsTestView: View {
     @State private var json = ""
     @State private var showingSheet = false
 
+    let recordTypes = [
+        "HKClinicalTypeIdentifierAllergyRecord": "Allergies",
+        "HKClinicalTypeIdentifierConditionRecord": "Conditions",
+        "HKClinicalTypeIdentifierCoverageRecord": "Coverage",
+        "HKClinicalTypeIdentifierImmunizationRecord": "Immunizations",
+        "HKClinicalTypeIdentifierLabResultRecord": "Lab Results",
+        "HKClinicalTypeIdentifierMedicationRecord": "Medications",
+        "HKClinicalTypeIdentifierProcedureRecord": "Procedures",
+        "HKClinicalTypeIdentifierVitalSignRecord": "Vital Signs",
+    ]
 
     var body: some View {
         Form {
             Section {
-                Button("Read Allergies") {
-                    Task {
-                        do {
-                            try await readAllergies()
-                        } catch {
-                            print(error)
+                ForEach(recordTypes.sorted(by: <), id: \.key) { key, value in
+                    Button("Read \(value)") {
+                        _Concurrency.Task { // Models.R4 also has a `Task`
+                            do {
+                                let type = HKClinicalTypeIdentifier(rawValue: key)
+                                try await readHealthRecords(type: type)
+                            } catch {
+                                print(error)
+                            }
+                            showingSheet.toggle()
                         }
-                        showingSheet.toggle()
                     }
-                }
-                .sheet(isPresented: $showingSheet) {
-                    JSONView(json: $json)
+                    .sheet(isPresented: $showingSheet) {
+                        JSONView(json: $json)
+                    }
                 }
             }
         }
@@ -39,15 +53,39 @@ struct HealthRecordsTestView: View {
     }
 
 
-    private func readAllergies() async throws {
+    private func readHealthRecords(type: HKClinicalTypeIdentifier) async throws {
         try await manager.requestHealthRecordsAuthorization()
 
-        let resources = try await manager.readHealthRecords(type: .allergyRecord)
+        let resources: [Resource] = try await manager.readHealthRecords(type: type)
             .compactMap { sample in
                 do {
-                    return try sample.allergyIntolerance
+                    guard let resource = sample.fhirResource else {
+                        return nil
+                    }
+                    switch resource.resourceType {
+                    case .allergyIntolerance:
+                        return try sample.allergyIntolerance
+                    case .condition:
+                        return try sample.condition
+                    case .coverage:
+                        return try sample.coverage
+                    case .immunization:
+                        return try sample.immunization
+                    case .medicationDispense:
+                        return try sample.medicationDispense
+                    case .medicationOrder:
+                        return nil // This is a DSTU2 resource and is not supported
+                    case .medicationRequest:
+                        return try sample.medicationRequest
+                    case .medicationStatement:
+                        return try sample.medicationStatement
+                    case .procedure:
+                        return try sample.procedure
+                    default:
+                        return nil
+                    }
                 } catch {
-                    print(error)
+                    print("An error occurred: \(error)")
                 }
                 return nil
             }
