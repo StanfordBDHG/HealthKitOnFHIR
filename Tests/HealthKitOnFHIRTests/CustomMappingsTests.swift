@@ -56,9 +56,9 @@ final class CustomMappingsTests: XCTestCase {
 
         let hkSampleMapping = HKSampleMapping(quantitySampleMapping: customMapping)
         
-        let observation = try quantitySample.observation(
-            withMapping: hkSampleMapping
-        )
+        let observation = try quantitySample
+            .resource(withMapping: hkSampleMapping)
+            .get(if: Observation.self)
         
         XCTAssertEqual(
             quantitySample.quantityType.codes,
@@ -77,7 +77,7 @@ final class CustomMappingsTests: XCTestCase {
         )
         
         XCTAssertEqual(
-            observation.code.coding,
+            observation?.code.coding,
             [
                 Coding(
                     code: "SU-01",
@@ -88,7 +88,7 @@ final class CustomMappingsTests: XCTestCase {
         )
         
         XCTAssertEqual(
-            observation.value,
+            observation?.value,
             .quantity(
                 Quantity(
                     code: "[oz_av]",

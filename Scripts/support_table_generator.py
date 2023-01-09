@@ -15,6 +15,7 @@ TOC_PATH = '../Documentation/SUPPORT_TABLE.md'
 QUANTITY_TABLE_PATH = '../Documentation/QUANTITY_TABLE.md'
 CATEGORY_TABLE_PATH = '../Documentation/CATEGORY_TABLE.md'
 CORRELATION_TABLE_PATH = '../Documentation/CORRELATION_TABLE.md'
+CLINICAL_TABLE_PATH = '../Documentation/CLINICAL_TABLE.md'
 
 HEALTHKIT_URL = 'https://developer.apple.com/documentation/healthkit'
 LOINC_URL = 'http://loinc.org'
@@ -176,6 +177,17 @@ ALL_CATEGORY_TYPES = [
     "HKCategoryTypeIdentifierLactation"
 ]
 
+ALL_CLINICAL_TYPES = [
+    "HKClinicalTypeIdentifierAllergyRecord",
+    "HKClinicalTypeIdentifierConditionRecord",
+    "HKClinicalTypeIdentifierCoverageRecord",
+    "HKClinicalTypeIdentifierImmunizationRecord",
+    "HKClinicalTypeIdentifierLabResultRecord",
+    "HKClinicalTypeIdentifierMedicationRecord",
+    "HKClinicalTypeIdentifierProcedureRecord",
+    "HKClinicalTypeIdentifierVitalSignRecord"
+]
+
 # Load data
 mapping_file = open(MAPPING_FILE_PATH)
 data = json.load(mapping_file)
@@ -183,10 +195,12 @@ toc_file = open(TOC_PATH, 'w')
 quantity_file = open(QUANTITY_TABLE_PATH, 'w')
 category_file = open(CATEGORY_TABLE_PATH, 'w')
 correlation_file = open(CORRELATION_TABLE_PATH, 'w')
+clinical_file = open(CLINICAL_TABLE_PATH, 'w')
 
 quantity_stats_string = ""
 category_stats_string = ""
 correlation_stats_string = ""
+clinical_stats_string = ""
 
 def create_header():
     return """<!--
@@ -338,6 +352,45 @@ def create_category_types_table():
 
     return markdown
 
+def create_clinical_types_table():
+    markdown = '# HKClinicalType\n\n'
+
+    clinical_types = [
+        "HKClinicalTypeIdentifierAllergyRecord",
+        "HKClinicalTypeIdentifierConditionRecord",
+        "HKClinicalTypeIdentifierCoverageRecord",
+        "HKClinicalTypeIdentifierImmunizationRecord",
+        "HKClinicalTypeIdentifierLabResultRecord",
+        "HKClinicalTypeIdentifierMedicationRecord",
+        "HKClinicalTypeIdentifierProcedureRecord",
+        "HKClinicalTypeIdentifierVitalSignRecord"
+    ]
+    rows = []
+
+    # Add all the supported types
+    for type in clinical_types:
+        row = [type, SUPPORTED_SYMBOL]
+        rows.append(row)
+
+    # Link all the HealthKit types to Apple docs
+    for type in rows:
+        url = '{}/{}'.format(HEALTHKIT_URL, type[0])
+        type[0] = '[{}]({})'.format(type[0].removeprefix('HKClinicalTypeIdentifier'), url)
+
+    # Add the statistics
+    global clinical_stats_string
+    clinical_stats_string = 'HealthKitOnFHIR supports {} of {} clinical types.'.format(len(clinical_types), len(rows))
+    markdown += clinical_stats_string + '\n\n'
+
+    # Add the table header
+    markdown += '|HKClinicalType|Supported|' + '\n' + '|----|----|' + '\n'
+
+    # Add all rows
+    for row in rows:
+        markdown += '|' + '|'.join(row) + '|\n'
+
+    return markdown
+
 def create_toc():
     markdown = '# HKObject Support Tables \n\n'
 
@@ -346,9 +399,16 @@ def create_toc():
     - {}
 - [HKCorrelation](CORRELATION_TABLE.md)
     - {}
+- [HKClinicalType](CLINICAL_TABLE.md)
+    - {}
 - [HKQuantityType](QUANTITY_TABLE.md)
     - {}
-    """.format(category_stats_string, correlation_stats_string, quantity_stats_string)
+    """.format(
+    category_stats_string,
+    correlation_stats_string,
+    clinical_stats_string,
+    quantity_stats_string
+    )
 
     return markdown
 
@@ -356,6 +416,7 @@ def main():
     category_file.write(create_header() + create_category_types_table())
     quantity_file.write(create_header() + create_quantity_types_table())
     correlation_file.write(create_header() + create_correlation_types_table())
+    clinical_file.write(create_header() + create_clinical_types_table())
     toc_file.write(create_header() + create_toc())
 
 if __name__ == "__main__":

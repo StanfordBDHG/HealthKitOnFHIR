@@ -75,8 +75,10 @@ extension HKElectrocardiogram {
         symptoms: Symptoms,
         voltageMeasurements: VoltageMeasurements,
         withMapping mapping: HKSampleMapping = HKSampleMapping.default
-    ) throws -> Observation {
-        var observation = try observation(withMapping: mapping)
+    ) throws -> Observation? {
+        guard var observation = try resource(withMapping: mapping).get(if: Observation.self) else {
+            return nil
+        }
         
         if !symptoms.isEmpty {
             try appendSymptomsComponent(&observation, symptoms: symptoms, mappings: mapping)

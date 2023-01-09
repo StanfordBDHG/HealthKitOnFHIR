@@ -21,7 +21,7 @@ HealthKitOnFHIR supports 82 of 84 quantity types.
 |[BasalEnergyBurned](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBasalEnergyBurned)|:white_check_mark:|[HKQuantityTypeIdentifierBasalEnergyBurned](http://developer.apple.com/documentation/healthkit)|[kcal](http://unitsofmeasure.org)|
 |[BloodAlcoholContent](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBloodAlcoholContent)|:white_check_mark:|[74859-0](http://loinc.org/74859-0)|[%](http://unitsofmeasure.org)|
 |[BloodGlucose](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBloodGlucose)|:white_check_mark:|[41653-7](http://loinc.org/41653-7)|[mg/dL](http://unitsofmeasure.org)|
-|[BloodPressureDiastolic](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBloodPressureDiastolic)|:white_check_mark:|[8867-4](http://loinc.org/8867-4)|[mmHg](http://unitsofmeasure.org)|
+|[BloodPressureDiastolic](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBloodPressureDiastolic)|:white_check_mark:|[8462-4](http://loinc.org/8462-4)|[mmHg](http://unitsofmeasure.org)|
 |[BloodPressureSystolic](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBloodPressureSystolic)|:white_check_mark:|[8480-6](http://loinc.org/8480-6)|[mmHg](http://unitsofmeasure.org)|
 |[BodyFatPercentage](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBodyFatPercentage)|:white_check_mark:|[41982-0](http://loinc.org/41982-0)|[%](http://unitsofmeasure.org)|
 |[BodyMass](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBodyMass)|:white_check_mark:|[29463-7](http://loinc.org/29463-7)|[lbs](http://unitsofmeasure.org)|

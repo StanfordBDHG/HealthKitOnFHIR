@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
 -->
 # HKCategoryType
 
-HealthKitOnFHIR supports 62 of 62 category types.
+HealthKitOnFHIR supports 63 of 63 category types.
 
 |HKCategoryType|Supported|
 |----|----|
@@ -31,6 +31,7 @@ HealthKitOnFHIR supports 62 of 62 category types.
 |[Dizziness](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierDizziness)|:white_check_mark:|
 |[DrySkin](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierDrySkin)|:white_check_mark:|
 |[Fainting](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierFainting)|:white_check_mark:|
+|[Fatigue](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierFatigue)|:white_check_mark:|
 |[Fever](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierFever)|:white_check_mark:|
 |[GeneralizedBodyAche](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierGeneralizedBodyAche)|:white_check_mark:|
 |[HairLoss](https://developer.apple.com/documentation/healthkit/HKCategoryTypeIdentifierHairLoss)|:white_check_mark:|

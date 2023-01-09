@@ -40,7 +40,10 @@ class HKQuantitySampleTests: XCTestCase {
             end: try endDate,
             metadata: metadata
         )
-        return try quantitySample.observation
+        return try quantitySample.resource.get(if: Observation.self) ?? Observation(
+            code: CodeableConcept(),
+            status: FHIRPrimitive(.final)
+        )
     }
 
     func createCoding(
@@ -2555,12 +2558,18 @@ class HKQuantitySampleTests: XCTestCase {
             objects: [nikeFuel]
         )
 
-        XCTAssertThrowsError(try correlation.observation)
+        XCTAssertThrowsError(
+            try correlation.resource
+        )
     }
     
     func testUnsupportedType() throws {
         XCTAssertThrowsError(
-            try HKWorkout(activityType: .running, start: Date(), end: Date()).observation
+            try HKWorkout(
+                activityType: .running,
+                start: Date(),
+                end: Date()
+            ).resource
         )
     }
 
