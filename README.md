@@ -28,9 +28,9 @@ HealthKitOnFHIR can be installed into your Xcode project using [Swift Package Ma
 
 ## Usage
 
-The HealthKitOnFHIR library provides extensions that convert supported HealthKit samples to corresponding FHIR resources.
+The HealthKitOnFHIR library provides extensions that convert supported HealthKit samples to corresponding FHIR resources using [FHIRModels](https://github.com/apple/FHIRModels).
 
-`HKQuantitySample`, `HKCategorySample`, `HKCorrelationSample`, and `HKElectrocardiogram` will be converted into FHIR [Observation](https://hl7.org/fhir/R4/observation.html) resources.
+`HKQuantitySample`, `HKCategorySample`, `HKCorrelationSample`, and `HKElectrocardiogram` will be converted into FHIR [Observation](https://hl7.org/fhir/R4/observation.html) resources encapsulated in a [ResourceProxy](https://github.com/apple/FHIRModels/blob/main/HowTo/Instantiation.md#1-use-resourceproxy).
 
 ```swift
 let sample: HKQuantitySample = // ...
@@ -39,7 +39,7 @@ let observation = try sample.resource.get(if: Observation.self)
 
 `HKClinicalRecord` will be converted to FHIR resources based on the type of its underlying data. (Only records encoded in FHIR R4 are supported at this time.)
 
-``swift
+```swift
 let allergyRecord: HKClinicalRecord = // ...
 let allergyIntolerance = try allergyRecord.resource.get(if: AllergyIntolerance.self)
 ```
