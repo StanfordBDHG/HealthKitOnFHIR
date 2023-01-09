@@ -44,12 +44,12 @@ let allergyRecord: HKClinicalRecord = // ...
 let allergyIntolerance = try allergyRecord.resource.get(if: AllergyIntolerance.self)
 ```
 
-Codes and units can be customized by passing in a custom HKSampleMapping instance to the `observation(withMapping:)` method.
+Codes and units can be customized by passing in a custom HKSampleMapping instance to the `resource(withMapping:)` method.
 
 ```swift
 let sample: HKQuantitySample = // ...
 let hksampleMapping: HKSampleMapping = // ...
-let observation = try sample.observation(withMapping: hksampleMapping)
+let observation = try sample.resource(withMapping: hksampleMapping).get(if: Observation.self)
 ```
 
 ## Example
