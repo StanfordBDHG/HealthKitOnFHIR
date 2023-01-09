@@ -47,7 +47,11 @@ class HKCorrelationTests: XCTestCase {
             objects: [systolicBloodPressure, diastolicBloodPressure]
         )
 
-        let observation = try correlation.observation
+        let proxy = try correlation.resource
+        let observation = proxy.get(if: Observation.self) ?? Observation(
+            code: CodeableConcept(),
+            status: FHIRPrimitive(.final)
+        )
 
         XCTAssertEqual(1, observation.component?.filter {
             $0.value == .quantity(
@@ -87,6 +91,6 @@ class HKCorrelationTests: XCTestCase {
             end: try endDate,
             objects: [vitaminC]
         )
-        XCTAssertThrowsError(try correlation.observation)
+        XCTAssertThrowsError(try correlation.resource)
     }
 }

@@ -12,9 +12,7 @@ import ModelsR4
 
 extension HKClinicalRecord {
     /// Converts an `HKClinicalRecord` into a corresponding FHIR resource
-    func convert<T: Resource>(
-        to type: T.Type = T.self
-    ) throws -> T {
+    func convert() throws -> ResourceProxy {
         guard let fhirResource = self.fhirResource else {
             throw HealthKitOnFHIRError.invalidFHIRResource
         }
@@ -25,9 +23,7 @@ extension HKClinicalRecord {
 
         let decoder = JSONDecoder()
         do {
-            return try decoder.decode(T.self, from: fhirResource.data)
-        } catch {
-            throw HealthKitOnFHIRError.notSupported
+            return try decoder.decode(ResourceProxy.self, from: fhirResource.data)
         }
     }
 }

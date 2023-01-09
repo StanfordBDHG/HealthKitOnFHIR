@@ -11,12 +11,20 @@
 
 
 extension HKSample {
-    /// A FHIR observation based on the concrete subclass of `HKSample`.
-    ///
-    /// If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
-    public var observation: Observation {
+    /// Converts an `HKSample` into a FHIR `ResourceProxy`
+    public var resource: ResourceProxy {
         get throws {
-            try observation()
+            switch self {
+            case is HKQuantitySample,
+                 is HKCorrelation,
+                 is HKCategorySample,
+                 is HKElectrocardiogram:
+                return try ResourceProxy(with: observation())
+            case let clinicalRecord as HKClinicalRecord:
+                return try clinicalRecord.convert()
+            default:
+                throw HealthKitOnFHIRError.notSupported
+            }
         }
     }
 
@@ -46,8 +54,6 @@ extension HKSample {
             try categorySample.buildCategoryObservation(&observation)
         case let electrocardiogram as HKElectrocardiogram:
             try electrocardiogram.buildObservation(&observation, mappings: mapping)
-        case let clinicalRecord as HKClinicalRecord:
-            return try clinicalRecord.convert(to: Observation.self)
         default:
             throw HealthKitOnFHIRError.notSupported
         }
