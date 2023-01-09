@@ -11,7 +11,7 @@ import ModelsR4
 
 
 extension HKClinicalRecord {
-    /// Converts an `HKClinicalRecord` into a corresponding FHIR resource
+    /// Converts an `HKClinicalRecord` into a corresponding FHIR resource, encapsulated in a `ResourceProxy`
     func convert() throws -> ResourceProxy {
         guard let fhirResource = self.fhirResource else {
             throw HealthKitOnFHIRError.invalidFHIRResource

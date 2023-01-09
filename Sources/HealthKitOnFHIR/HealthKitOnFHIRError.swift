@@ -7,14 +7,14 @@
 //
 
 
-/// Error thrown by the HealthKitOnFHIR module if transforming a specific `HKSample` type to a FHIR `Observation` was not possible.
+/// Error thrown by the HealthKitOnFHIR module if transforming a specific `HKSample` type to a FHIR resource was not possible.
 enum HealthKitOnFHIRError: Error {
     /// Indicates that a specific `HKSample` type is currently not supported by HealthKitOnFHIR.
     case notSupported
     /// Indicates that a specific value is not valid
     case invalidValue
-    /// Indicates that the given FHIR resource encoded in an `HKClinicalRecord`uses an unsupported version
+    /// Indicates that the given FHIR resource encoded in an `HKClinicalRecord` uses an unsupported version
     case unsupportedFHIRVersion
-    /// Indicates an invalid FHIR resource
+    /// Indicates that the fhirResource property of an `HKClinicalRecord` is nil
     case invalidFHIRResource
 }

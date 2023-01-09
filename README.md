@@ -28,17 +28,26 @@ HealthKitOnFHIR can be installed into your Xcode project using [Swift Package Ma
 
 ## Usage
 
-The HealthKitOnFHIR library provides extensions that convert supported HealthKit samples to FHIR [Observations](https://hl7.org/fhir/R4/observation.html) resources.
+The HealthKitOnFHIR library provides extensions that convert supported HealthKit samples to corresponding FHIR resources.
+
+`HKQuantitySample`, `HKCategorySample`, `HKCorrelationSample`, and `HKElectrocardiogram` will be converted into FHIR [Observation](https://hl7.org/fhir/R4/observation.html) resources.
 
 ```swift
-let sample: HKSample = // ...
-let observation = try sample.observation
+let sample: HKQuantitySample = // ...
+let observation = try sample.resource.get(if: Observation.self)
+```
+
+`HKClinicalRecord` will be converted to FHIR resources based on the type of its underlying data. (Only records encoded in FHIR R4 are supported at this time.)
+
+``swift
+let allergyRecord: HKClinicalRecord = // ...
+let allergyIntolerance = try allergyRecord.resource.get(if: AllergyIntolerance.self)
 ```
 
 Codes and units can be customized by passing in a custom HKSampleMapping instance to the `observation(withMapping:)` method.
 
 ```swift
-let sample: HKSample = // ...
+let sample: HKQuantitySample = // ...
 let hksampleMapping: HKSampleMapping = // ...
 let observation = try sample.observation(withMapping: hksampleMapping)
 ```
@@ -62,9 +71,9 @@ let sample = HKQuantitySample(
 )
 
 // Convert the results to FHIR observations
-let observation: Observation
+let observation: Observation?
 do {
-    try observation = sample.observation
+    try observation = sample.resource.get(if: Observation.self)
 } catch {
     // Handle any mapping errors here.
     // ...
@@ -74,9 +83,10 @@ do {
 let encoder = JSONEncoder()
 encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
 
-guard let data = try? encoder.encode(observation) else {
-    // Handle any encoding errors here.
-    // ...
+guard let observation, 
+      let data = try? encoder.encode(observation) else {
+        // Handle any encoding errors here.
+        // ...
 }
 
 // Print the resulting JSON

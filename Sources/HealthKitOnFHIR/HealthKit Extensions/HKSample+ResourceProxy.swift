@@ -11,7 +11,7 @@
 
 
 extension HKSample {
-    /// Converts an `HKSample` into a FHIR `ResourceProxy`
+    /// Converts an `HKSample` into a FHIR resource, encapsulated in a `ResourceProxy`
     public var resource: ResourceProxy {
         get throws {
             switch self {
