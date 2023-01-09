@@ -52,40 +52,15 @@ struct HealthRecordsTestView: View {
         .navigationBarTitle("Read Data")
     }
 
-    // swiftlint:disable:next cyclomatic_complexity
     private func readHealthRecords(type: HKClinicalTypeIdentifier) async throws {
         try await manager.requestHealthRecordsAuthorization()
 
         let resources: [Resource] = try await manager.readHealthRecords(type: type)
             .compactMap { sample in
                 do {
-                    guard let resource = sample.fhirResource else {
-                        return nil
-                    }
-                    switch resource.resourceType {
-                    case .allergyIntolerance:
-                        return try sample.allergyIntolerance
-                    case .condition:
-                        return try sample.condition
-                    case .coverage:
-                        return try sample.coverage
-                    case .immunization:
-                        return try sample.immunization
-                    case .medicationDispense:
-                        return try sample.medicationDispense
-                    case .medicationOrder:
-                        return nil // This is a DSTU2 resource and is not supported
-                    case .medicationRequest:
-                        return try sample.medicationRequest
-                    case .medicationStatement:
-                        return try sample.medicationStatement
-                    case .procedure:
-                        return try sample.procedure
-                    default:
-                        return nil
-                    }
+                    return try sample.resource.get()
                 } catch {
-                    print("An error occurred: \(error)")
+                    print(error.localizedDescription)
                 }
                 return nil
             }

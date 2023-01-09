@@ -40,7 +40,7 @@ struct ReadDataView: View {
         
         let observations = try await manager.readStepCount()
             .compactMap { sample in
-                try? sample.observation
+                try? sample.resource.get()
             }
 
         let encoder = JSONEncoder()
