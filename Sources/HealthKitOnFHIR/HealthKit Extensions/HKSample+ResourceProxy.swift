@@ -19,7 +19,7 @@ extension HKSample {
                  is HKCorrelation,
                  is HKCategorySample,
                  is HKElectrocardiogram:
-                return try ResourceProxy(with: observation())
+                return try resource()
             case let clinicalRecord as HKClinicalRecord:
                 return try clinicalRecord.convert()
             default:
@@ -28,12 +28,12 @@ extension HKSample {
         }
     }
 
-    /// A FHIR observation based on the concrete subclass of `HKSample`.
+    /// A `ResourceProxy` containing a FHIR `Observation` based on the concrete subclass of `HKSample`.
     ///
     /// If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
     /// - Parameter withMapping: A mapping to map `HKSample`s to corresponding FHIR observations allowing the customization of, e.g., codings and units. See ``HKSampleMapping``.
-    /// - Returns: A FHIR observation based on the concrete subclass of `HKSample`.
-    public func observation(withMapping mapping: HKSampleMapping = HKSampleMapping.default) throws -> Observation {
+    /// - Returns: A `ResourceProxy`containing a FHIR `Observation` based on the concrete subclass of `HKSample`.
+    public func resource(withMapping mapping: HKSampleMapping = HKSampleMapping.default) throws -> ResourceProxy {
         var observation = Observation(
             code: CodeableConcept(),
             status: FHIRPrimitive(.final)
@@ -58,6 +58,6 @@ extension HKSample {
             throw HealthKitOnFHIRError.notSupported
         }
         
-        return observation
+        return ResourceProxy(with: observation)
     }
 }
