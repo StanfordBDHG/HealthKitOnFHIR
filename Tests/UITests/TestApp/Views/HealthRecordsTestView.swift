@@ -13,10 +13,10 @@ import SwiftUI
 
 struct HealthRecordsTestView: View {
     @StateObject private var manager = HealthKitManager()
-
+    
     @State private var json = ""
     @State private var showingSheet = false
-
+    
     let recordTypes = [
         "HKClinicalTypeIdentifierAllergyRecord": "Allergies",
         "HKClinicalTypeIdentifierConditionRecord": "Conditions",
@@ -27,7 +27,8 @@ struct HealthRecordsTestView: View {
         "HKClinicalTypeIdentifierProcedureRecord": "Procedures",
         "HKClinicalTypeIdentifierVitalSignRecord": "Vital Signs"
     ]
-
+    
+    
     var body: some View {
         Form {
             Section {
@@ -51,10 +52,11 @@ struct HealthRecordsTestView: View {
         }
         .navigationBarTitle("Read Data")
     }
-
+    
+    
     private func readHealthRecords(type: HKClinicalTypeIdentifier) async throws {
         try await manager.requestHealthRecordsAuthorization()
-
+        
         let resources: [Resource] = try await manager.readHealthRecords(type: type)
             .compactMap { sample in
                 do {
@@ -64,17 +66,18 @@ struct HealthRecordsTestView: View {
                 }
                 return nil
             }
-
+        
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
-
+        
         guard let data = try? encoder.encode(resources) else {
             return
         }
-
+        
         self.json = String(decoding: data, as: UTF8.self)
     }
 }
+
 
 struct HealthRecordsTestView_Previews: PreviewProvider {
     static var previews: some View {

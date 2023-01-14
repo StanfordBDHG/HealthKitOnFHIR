@@ -27,7 +27,7 @@ class HKQuantitySampleTests: XCTestCase {
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }
     }
-
+    
     func createObservationFrom(
         type quantityType: HKQuantityType,
         quantity: HKQuantity,
@@ -40,12 +40,9 @@ class HKQuantitySampleTests: XCTestCase {
             end: try endDate,
             metadata: metadata
         )
-        return try quantitySample.resource.get(if: Observation.self) ?? Observation(
-            code: CodeableConcept(),
-            status: FHIRPrimitive(.final)
-        )
+        return try XCTUnwrap(quantitySample.resource.get(if: Observation.self))
     }
-
+    
     func createCoding(
         code: String,
         display: String,
@@ -92,13 +89,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryBiotin() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryBiotin),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -109,7 +106,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -122,13 +119,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryCaffeine() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryCaffeine),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -139,7 +136,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -152,13 +149,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryCalcium() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryCalcium),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1000)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -169,7 +166,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -182,13 +179,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryCarbohydrates() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryCarbohydrates),
             quantity: HKQuantity(unit: .gram(), doubleValue: 1000)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -199,7 +196,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -212,13 +209,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryChloride() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryChloride),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 2300)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -229,7 +226,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -242,13 +239,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryCholesterol() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryCholesterol),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -259,7 +256,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -272,13 +269,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryChromium() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryChromium),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 25)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -289,7 +286,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -302,13 +299,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryCopper() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryCopper),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 900)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -319,7 +316,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -332,13 +329,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryFatMonounsaturated() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryFatMonounsaturated),
             quantity: HKQuantity(unit: .gram(), doubleValue: 22)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -349,7 +346,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -362,13 +359,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryFatPolyunsaturated() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryFatPolyunsaturated),
             quantity: HKQuantity(unit: .gram(), doubleValue: 30)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -379,7 +376,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -392,13 +389,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryFatSaturated() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryFatSaturated),
             quantity: HKQuantity(unit: .gram(), doubleValue: 30)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -409,7 +406,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -422,13 +419,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryFatTotal() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryFatTotal),
             quantity: HKQuantity(unit: .gram(), doubleValue: 66)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -439,7 +436,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -452,13 +449,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryFiber() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryFiber),
             quantity: HKQuantity(unit: .gram(), doubleValue: 30)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -474,7 +471,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -487,13 +484,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryFolate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryFolate),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 400)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -504,7 +501,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -517,13 +514,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryIodine() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryIodine),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 140)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -534,7 +531,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -547,13 +544,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryIron() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryIron),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 16)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -564,7 +561,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -577,13 +574,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryMagnesium() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryMagnesium),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 400)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -594,7 +591,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -607,13 +604,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryManganese() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryManganese),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 2.3)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -624,7 +621,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -637,13 +634,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryMolybdenum() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryMolybdenum),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 45)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -654,7 +651,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -667,13 +664,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryPhosphorus() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryPhosphorus),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1000)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -684,7 +681,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -697,13 +694,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryPotassium() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryPotassium),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1000)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -714,7 +711,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -727,13 +724,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietarySodium() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietarySodium),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1000)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -744,7 +741,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -757,13 +754,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryNiacin() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryNiacin),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 16)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -774,7 +771,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -787,13 +784,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryPantothenicAcid() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryPantothenicAcid),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 5)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -804,7 +801,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -817,13 +814,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryProtein() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryProtein),
             quantity: HKQuantity(unit: .gram(), doubleValue: 40)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -834,7 +831,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -847,13 +844,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryRiboflavin() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryRiboflavin),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1.3)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -864,7 +861,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -877,13 +874,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietarySelenium() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietarySelenium),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 55)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -894,7 +891,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -907,13 +904,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietarySugar() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietarySugar),
             quantity: HKQuantity(unit: .gram(), doubleValue: 30)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -924,7 +921,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -937,13 +934,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryThiamin() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryThiamin),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1.2)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -954,7 +951,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -967,13 +964,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryVitaminA() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryVitaminA),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 900)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -984,7 +981,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -997,13 +994,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryVitaminB12() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryVitaminB12),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 2.4)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1014,7 +1011,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1027,13 +1024,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryVitaminB6() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryVitaminB6),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 1.5)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1044,7 +1041,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1057,13 +1054,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryVitaminC() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryVitaminC),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 90)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1074,7 +1071,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1087,13 +1084,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryVitaminD() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryVitaminD),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 20)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1104,7 +1101,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1117,13 +1114,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryVitaminE() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryVitaminE),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 15)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1134,7 +1131,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1147,13 +1144,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryVitaminK() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryVitaminK),
             quantity: HKQuantity(unit: .gramUnit(with: .micro), doubleValue: 15)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1164,7 +1161,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1177,13 +1174,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryWater() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryWater),
             quantity: HKQuantity(unit: .liter(), doubleValue: 2)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1194,7 +1191,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1207,13 +1204,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDietaryZinc() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.dietaryZinc),
             quantity: HKQuantity(unit: .gramUnit(with: .milli), doubleValue: 11)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1224,7 +1221,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1237,13 +1234,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testElectrodermalActivity() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.electrodermalActivity),
             quantity: HKQuantity(unit: .siemen(), doubleValue: 0.000001)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1254,7 +1251,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1267,13 +1264,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testForcedExpiratoryVolume1() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.forcedExpiratoryVolume1),
             quantity: HKQuantity(unit: .liter(), doubleValue: 3.5)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1289,7 +1286,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1302,13 +1299,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testForcedVitalCapacity() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.forcedVitalCapacity),
             quantity: HKQuantity(unit: .liter(), doubleValue: 5.5)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1324,7 +1321,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1337,13 +1334,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testInhalerUsage() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.inhalerUsage),
             quantity: HKQuantity(unit: .count(), doubleValue: 3)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1354,7 +1351,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1365,7 +1362,7 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testStepCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),
@@ -1398,13 +1395,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testFlightsClimbed() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.flightsClimbed),
             quantity: HKQuantity(unit: .count(), doubleValue: 10)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1420,7 +1417,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1466,13 +1463,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testRestingHeartRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.restingHeartRate),
             quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1488,7 +1485,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1501,13 +1498,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testWalkingHeartRateAverage() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.walkingHeartRateAverage),
             quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1518,7 +1515,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1531,13 +1528,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testHeartRateVariabilitySDNN() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.heartRateVariabilitySDNN),
             quantity: HKQuantity(unit: .secondUnit(with: .milli), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1553,7 +1550,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1601,13 +1598,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testPeakExpiratoryFlowRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.peakExpiratoryFlowRate),
             quantity: HKQuantity(unit: .liter().unitDivided(by: .minute()), doubleValue: 600)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1623,7 +1620,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1636,13 +1633,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testPeripheralPerfusionIndex() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.peripheralPerfusionIndex),
             quantity: HKQuantity(unit: .percent(), doubleValue: 5)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1658,7 +1655,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1671,13 +1668,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testPushCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.pushCount),
             quantity: HKQuantity(unit: .count(), doubleValue: 5)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1693,7 +1690,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1704,13 +1701,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testUVExposure() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.uvExposure),
             quantity: HKQuantity(unit: .count(), doubleValue: 5)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1721,7 +1718,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1732,13 +1729,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testVO2Max() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.vo2Max),
             quantity: HKQuantity(unit: HKUnit(from: "mL/kg*min"), doubleValue: 31)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1749,7 +1746,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1762,13 +1759,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testWaistCircumference() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.waistCircumference),
             quantity: HKQuantity(unit: HKUnit(from: "in"), doubleValue: 38.7)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1784,7 +1781,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1832,13 +1829,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testBasalBodyTemperature() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.basalBodyTemperature),
             quantity: HKQuantity(unit: .degreeCelsius(), doubleValue: 37)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1849,7 +1846,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1862,13 +1859,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testBasalEnergyBurned() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.basalEnergyBurned),
             quantity: HKQuantity(unit: HKUnit(from: "kcal"), doubleValue: 1200)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1879,7 +1876,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1892,13 +1889,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testBloodAlcoholContent() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bloodAlcoholContent),
             quantity: HKQuantity(unit: .percent(), doubleValue: 0.0)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1914,7 +1911,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1927,13 +1924,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testBodyFatPercentage() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyFatPercentage),
             quantity: HKQuantity(unit: .percent(), doubleValue: 21)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1949,7 +1946,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -1962,13 +1959,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testBodyMassIndex() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyMassIndex),
             quantity: HKQuantity(unit: .count(), doubleValue: 20)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -1984,7 +1981,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2067,13 +2064,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testLeanBodyMass() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.leanBodyMass),
             quantity: HKQuantity(unit: .pound(), doubleValue: 60)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2089,7 +2086,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2102,13 +2099,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testNumberOfTimesFallen() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.numberOfTimesFallen),
             quantity: HKQuantity(unit: .count(), doubleValue: 0)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2119,7 +2116,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2130,13 +2127,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testSwimmingStrokeCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.swimmingStrokeCount),
             quantity: HKQuantity(unit: .count(), doubleValue: 10)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2147,7 +2144,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2193,13 +2190,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testActiveEnergyBurned() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.activeEnergyBurned),
             quantity: HKQuantity(unit: .largeCalorie(), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2215,7 +2212,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2228,13 +2225,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testAppleExerciseTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleExerciseTime),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2245,7 +2242,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2258,13 +2255,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testAppleMoveTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleMoveTime),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2275,7 +2272,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2288,13 +2285,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testAppleStandTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleStandTime),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2305,7 +2302,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2318,13 +2315,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDistanceCycling() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceCycling),
             quantity: HKQuantity(unit: .meter(), doubleValue: 1000)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2335,7 +2332,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2348,13 +2345,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDistanceDownhillSnowSports() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceDownhillSnowSports),
             quantity: HKQuantity(unit: .meter(), doubleValue: 1000)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2365,7 +2362,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2378,13 +2375,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDistanceSwimming() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceSwimming),
             quantity: HKQuantity(unit: .meter(), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2400,7 +2397,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2413,13 +2410,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDistanceWalkingRunning() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceWalkingRunning),
             quantity: HKQuantity(unit: .meter(), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2430,7 +2427,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2443,13 +2440,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testDistanceWheelchair() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceWheelchair),
             quantity: HKQuantity(unit: .meter(), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2460,7 +2457,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2473,13 +2470,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testEnvironmentalAudioExposure() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.environmentalAudioExposure),
             quantity: HKQuantity(unit: .decibelAWeightedSoundPressureLevel(), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2490,7 +2487,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2503,13 +2500,13 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testHeadphoneAudioExposure() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.headphoneAudioExposure),
             quantity: HKQuantity(unit: .decibelAWeightedSoundPressureLevel(), doubleValue: 100)
         )
-
+        
         XCTAssertEqual(
             observation.code.coding,
             [
@@ -2520,7 +2517,7 @@ class HKQuantitySampleTests: XCTestCase {
                 )
             ]
         )
-
+        
         XCTAssertEqual(
             observation.value,
             .quantity(
@@ -2533,7 +2530,7 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testUnsupportedTypeSample() throws {
         XCTAssertThrowsError(
             try createObservationFrom(
@@ -2542,7 +2539,7 @@ class HKQuantitySampleTests: XCTestCase {
             )
         )
     }
-
+    
     func testInvalidComponent() throws {
         let nikeFuel = HKQuantitySample(
             type: HKQuantityType(.nikeFuel),
@@ -2550,14 +2547,14 @@ class HKQuantitySampleTests: XCTestCase {
             start: try startDate,
             end: try endDate
         )
-
+        
         let correlation = HKCorrelation(
             type: HKCorrelationType(.bloodPressure),
             start: try startDate,
             end: try endDate,
             objects: [nikeFuel]
         )
-
+        
         XCTAssertThrowsError(
             try correlation.resource
         )
@@ -2572,7 +2569,7 @@ class HKQuantitySampleTests: XCTestCase {
             ).resource
         )
     }
-
+    
     func testUnsupportedMapping() throws {
         let sample = HKQuantitySample(
             type: HKQuantityType(.nikeFuel),
@@ -2580,7 +2577,7 @@ class HKQuantitySampleTests: XCTestCase {
             start: try startDate,
             end: try endDate
         )
-
+        
         XCTAssertEqual(sample.quantityType.codes, [])
     }
 }

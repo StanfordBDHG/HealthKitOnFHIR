@@ -14,20 +14,11 @@ extension HKSample {
     /// Converts an `HKSample` into a FHIR resource, encapsulated in a `ResourceProxy`
     public var resource: ResourceProxy {
         get throws {
-            switch self {
-            case is HKQuantitySample,
-                 is HKCorrelation,
-                 is HKCategorySample,
-                 is HKElectrocardiogram:
-                return try resource()
-            case let clinicalRecord as HKClinicalRecord:
-                return try clinicalRecord.convert()
-            default:
-                throw HealthKitOnFHIRError.notSupported
-            }
+            try resource()
         }
     }
-
+    
+    
     /// A `ResourceProxy` containing a FHIR `Observation` based on the concrete subclass of `HKSample`.
     ///
     /// If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
@@ -54,6 +45,8 @@ extension HKSample {
             try categorySample.buildCategoryObservation(&observation)
         case let electrocardiogram as HKElectrocardiogram:
             try electrocardiogram.buildObservation(&observation, mappings: mapping)
+        case let clinicalRecord as HKClinicalRecord:
+            return try clinicalRecord.resource()
         default:
             throw HealthKitOnFHIRError.notSupported
         }

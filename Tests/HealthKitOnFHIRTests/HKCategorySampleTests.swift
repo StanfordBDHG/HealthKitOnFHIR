@@ -37,11 +37,7 @@ class HKCategorySampleTests: XCTestCase {
             end: try endDate,
             metadata: metadata
         )
-        let proxy = try categorySample.resource
-        return proxy.get(if: Observation.self) ?? Observation(
-            code: CodeableConcept(),
-            status: FHIRPrimitive(.final)
-        )
+        return try XCTUnwrap(categorySample.resource.get(if: Observation.self))
     }
 
     func createCategoryCoding(

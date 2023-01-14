@@ -75,9 +75,9 @@ extension HKElectrocardiogram {
         symptoms: Symptoms,
         voltageMeasurements: VoltageMeasurements,
         withMapping mapping: HKSampleMapping = HKSampleMapping.default
-    ) throws -> Observation? {
+    ) throws -> Observation {
         guard var observation = try resource(withMapping: mapping).get(if: Observation.self) else {
-            return nil
+            throw HealthKitOnFHIRError.notSupported
         }
         
         if !symptoms.isEmpty {
