@@ -11,17 +11,17 @@ from operator import itemgetter
 
 # Constants
 MAPPING_FILE_PATH = '../Sources/HealthKitOnFHIR/Resources/HKSampleMapping.json'
-TOC_PATH = '../Documentation/SUPPORT_TABLE.md'
-QUANTITY_TABLE_PATH = '../Documentation/QUANTITY_TABLE.md'
-CATEGORY_TABLE_PATH = '../Documentation/CATEGORY_TABLE.md'
-CORRELATION_TABLE_PATH = '../Documentation/CORRELATION_TABLE.md'
-CLINICAL_TABLE_PATH = '../Documentation/CLINICAL_TABLE.md'
+TOC_PATH = '../Sources/HealthKitOnFHIR/HealthKitOnFHIR.docc/HKSampleSupportTables.md'
+QUANTITY_TABLE_PATH = '../Sources/HealthKitOnFHIR/HealthKitOnFHIR.docc/SupportedHKQuantityTypes.md'
+CATEGORY_TABLE_PATH = '../Sources/HealthKitOnFHIR/HealthKitOnFHIR.docc/SupportedHKCategoryTypes.md'
+CORRELATION_TABLE_PATH = '../Sources/HealthKitOnFHIR/HealthKitOnFHIR.docc/SupportedHKCorrelationTypes.md'
+CLINICAL_TABLE_PATH = '../Sources/HealthKitOnFHIR/HealthKitOnFHIR.docc/SupportedHKClinicalTypes.md'
 
 HEALTHKIT_URL = 'https://developer.apple.com/documentation/healthkit'
 LOINC_URL = 'http://loinc.org'
 
-SUPPORTED_SYMBOL = ':white_check_mark:'
-UNSUPPORTED_SYMBOL = ':x:'
+SUPPORTED_SYMBOL = '✅'
+UNSUPPORTED_SYMBOL = '❌'
 
 ALL_QUANTITY_TYPES = [
     "HKQuantityTypeIdentifierActiveEnergyBurned",
@@ -203,7 +203,8 @@ correlation_stats_string = ""
 clinical_stats_string = ""
 
 def create_header():
-    return """<!--
+    return """
+<!--
                   
 This source file is part of the HealthKitOnFHIR open source project
 
@@ -212,6 +213,7 @@ SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CO
 SPDX-License-Identifier: MIT
              
 -->
+
 """
 
 def create_code_links(type, types):
@@ -228,7 +230,8 @@ def create_code_links(type, types):
         return '[{}]({})'.format(code, code_url)
 
 def create_quantity_types_table():
-    markdown = '# HKQuantityType\n\n'
+    markdown = '# Supported HKQuantityTypes'
+    markdown += create_header()
 
     quantity_types = data['HKQuantitySamples']
     rows = []
@@ -276,7 +279,8 @@ def create_quantity_types_table():
     return markdown
 
 def create_correlation_types_table():
-    markdown = '# HKCorrelationType\n\n'
+    markdown = '# Supported HKCorrelationTypes'
+    markdown += create_header()
 
     correlation_types = data['HKCorrelations']
     rows = []
@@ -316,7 +320,8 @@ def create_correlation_types_table():
     return markdown
 
 def create_category_types_table():
-    markdown = '# HKCategoryType\n\n'
+    markdown = '# Supported HKCategoryTypes'
+    markdown += create_header()
 
     category_types = data['HKCategorySamples']
     rows = []
@@ -353,7 +358,8 @@ def create_category_types_table():
     return markdown
 
 def create_clinical_types_table():
-    markdown = '# HKClinicalType\n\n'
+    markdown = '# Supported HKClinicalTypes'
+    markdown += create_header()
 
     clinical_types = [
         "HKClinicalTypeIdentifierAllergyRecord",
@@ -392,16 +398,17 @@ def create_clinical_types_table():
     return markdown
 
 def create_toc():
-    markdown = '# HKObject Support Tables \n\n'
+    markdown = '# HKSample Support Tables'
+    markdown += create_header()
 
     markdown += """
-- [HKCategoryType](CATEGORY_TABLE.md)
+- [HKCategoryType](<doc:SupportedHKCategoryTypes>)
     - {}
-- [HKCorrelation](CORRELATION_TABLE.md)
+- [HKCorrelation](<doc:SupportedHKCorrelationTypes>)
     - {}
-- [HKClinicalType](CLINICAL_TABLE.md)
+- [HKClinicalType](<doc:SupportedHKClinicalTypes>)
     - {}
-- [HKQuantityType](QUANTITY_TABLE.md)
+- [HKQuantityType](<doc:SupportedHKQuantityTypes>)
     - {}
     """.format(
     category_stats_string,
@@ -413,11 +420,11 @@ def create_toc():
     return markdown
 
 def main():
-    category_file.write(create_header() + create_category_types_table())
-    quantity_file.write(create_header() + create_quantity_types_table())
-    correlation_file.write(create_header() + create_correlation_types_table())
-    clinical_file.write(create_header() + create_clinical_types_table())
-    toc_file.write(create_header() + create_toc())
+    category_file.write(create_category_types_table())
+    quantity_file.write(create_quantity_types_table())
+    correlation_file.write(create_correlation_types_table())
+    clinical_file.write(create_clinical_types_table())
+    toc_file.write(create_toc())
 
 if __name__ == "__main__":
     main()

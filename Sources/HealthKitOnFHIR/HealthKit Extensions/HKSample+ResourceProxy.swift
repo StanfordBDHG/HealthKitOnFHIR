@@ -6,8 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
-@_exported import HealthKit
-@_exported import ModelsR4
+import HealthKit
+import ModelsR4
 
 
 extension HKSample {

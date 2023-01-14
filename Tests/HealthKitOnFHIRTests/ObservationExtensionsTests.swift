@@ -7,6 +7,7 @@
 //
 
 @testable import HealthKitOnFHIR
+import ModelsR4
 import XCTest
 
 

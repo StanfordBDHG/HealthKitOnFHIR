@@ -6,8 +6,10 @@
 // SPDX-License-Identifier: MIT
 //
 
+import HealthKit
 
-/// A ``HKSampleMapping`` instance is used to specify the mapping of ``HKSample``s to FHIR observations allowing the customization of, e.g., codings and units.
+
+/// A ``HKSampleMapping`` instance is used to specify the mapping of `HKSample`s to FHIR observations allowing the customization of, e.g., codings and units.
 public struct HKSampleMapping: Decodable {
     private enum CodingKeys: String, CodingKey {
         case quantitySampleMapping = "HKQuantitySamples"
@@ -89,7 +91,7 @@ public struct HKSampleMapping: Decodable {
         )
     }
     
-    /// A ``HKSampleMapping`` instance is used to specify the mapping of ``HKSample``s to FHIR observations allowing the customization of, e.g., codings and units.
+    /// A ``HKSampleMapping`` instance is used to specify the mapping of `HKSample`s to FHIR observations allowing the customization of, e.g., codings and units.
     /// - Parameters:
     ///   - quantitySampleMapping: The ``HKSampleMapping/quantitySampleMapping`` property defines the mapping of `HKQuantityType`s to FHIR observations.
     ///   - correlationMapping: The ``HKSampleMapping/correlationMapping`` property defines the mapping of `HKCorrelationType`s to FHIR observations.
