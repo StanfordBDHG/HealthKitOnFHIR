@@ -1,5 +1,4 @@
 # HKSample Support Tables
-
 <!--
                   
 This source file is part of the HealthKitOnFHIR open source project
@@ -9,6 +8,7 @@ SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CO
 SPDX-License-Identifier: MIT
              
 -->
+
 
 - [HKCategoryType](<doc:SupportedHKCategoryTypes>)
     - HealthKitOnFHIR supports 63 of 63 category types.

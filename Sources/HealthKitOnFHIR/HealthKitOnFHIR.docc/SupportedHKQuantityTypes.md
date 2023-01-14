@@ -1,5 +1,4 @@
 # Supported HKQuantityTypes
-
 <!--
                   
 This source file is part of the HealthKitOnFHIR open source project
