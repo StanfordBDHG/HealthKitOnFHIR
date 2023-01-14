@@ -9,6 +9,7 @@
 import Foundation
 @preconcurrency import HealthKit
 import HealthKitOnFHIR
+import ModelsR4
 import SwiftUI
 
 

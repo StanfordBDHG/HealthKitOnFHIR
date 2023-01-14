@@ -1,3 +1,5 @@
+# ``HealthKitOnFHIR``
+
 <!--
                   
 This source file is part of the HealthKitOnFHIR open source project
@@ -8,28 +10,21 @@ SPDX-License-Identifier: MIT
              
 -->
 
-# HealthKitOnFHIR
+Extensions that convert supported HealthKit samples to FHIR resources.
 
-[![Build and Test](https://github.com/StanfordBDHG/HealthKitOnFHIR/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/StanfordBDHG/HealthKitOnFHIR/actions/workflows/build-and-test.yml)
-[![codecov](https://codecov.io/gh/StanfordBDHG/HealthKitOnFHIR/branch/main/graph/badge.svg?token=17BMMYE3AC)](https://codecov.io/gh/StanfordBDHG/HealthKitOnFHIR)
+## Overview
 
-The HealthKitOnFHIR library provides extensions that convert supported HealthKit samples to corresponding FHIR resources using [FHIRModels](https://github.com/apple/FHIRModels) encapsulated in a [ResourceProxy](https://github.com/apple/FHIRModels/blob/main/HowTo/Instantiation.md#1-use-resourceproxy).
+The HealthKitOnFHIR framework provides extensions that convert supported HealthKit samples to FHIR resources.
 
 HealthKitOnFHIR supports:
 - Extensions to convert data from Apple HealthKit to HL7® FHIR® R4.
 - Customizable mappings between HealthKit data types and standardized codes (e.g., LOINC)
 
-Please refer to the [HKObject Support Table](Sources/HealthKitOnFHIR/HealthKitOnFHIR.docc/HKSampleSupportTables.md) for a complete list of supported types.
+Please refer to the [HKObject Support Table](<doc:HKSampleSupportTables>) for a complete list of supported types.
 
-## Installation
-HealthKitOnFHIR can be installed into your Xcode project using [Swift Package Manager](https://github.com/apple/swift-package-manager).
+## HealthKit Extensions
 
-1. In Xcode 14 and newer (requires Swift 5.7), go to “File” » “Add Packages...”
-2. Enter the URL to this GitHub repository, then select the `HealthKitOnFHIR` package to install.
-
-## Usage
-
-The HealthKitOnFHIR library provides extensions that convert supported HealthKit samples to corresponding FHIR resources using [FHIRModels](https://github.com/apple/FHIRModels) encapsulated in a [ResourceProxy](https://github.com/apple/FHIRModels/blob/main/HowTo/Instantiation.md#1-use-resourceproxy).
+The HealthKitOnFHIR framework provides extensions that convert supported HealthKit samples to FHIR resources using [FHIRModels](https://github.com/apple/FHIRModels) encapsulated in a [ResourceProxy](https://github.com/apple/FHIRModels/blob/main/HowTo/Instantiation.md#1-use-resourceproxy).
 
 ```swift
 let sample: HKSample = // ...
@@ -135,18 +130,10 @@ The following example generates the following FHIR observation:
 }
 ```
 
-## License
-This project is licensed under the MIT License. See [Licenses](https://github.com/StanfordBDHG/HealthKitOnFHIR/tree/main/LICENSES) for more information.
+## Supported HealthKit HKSample Types
 
-
-## Contributors
-This project is developed as part of the Stanford Biodesign for Digital Health projects at Stanford.
-See [CONTRIBUTORS.md](https://github.com/StanfordBDHG/HealthKitOnFHIR/tree/main/CONTRIBUTORS.md) for a full list of all HealthKitOnFHIR contributors.
-
-
-## Notices
-HealthKit is a registered trademark of Apple, Inc.
-FHIR is a registered trademark of Health Level Seven International.
-
-![Stanford Byers Center for Biodesign Logo](https://raw.githubusercontent.com/StanfordBDHG/.github/main/assets/biodesign-footer-light.png#gh-light-mode-only)
-![Stanford Byers Center for Biodesign Logo](https://raw.githubusercontent.com/StanfordBDHG/.github/main/assets/biodesign-footer-dark.png#gh-dark-mode-only)
+- <doc:HKSampleSupportTables>
+- <doc:SupportedHKQuantityTypes>
+- <doc:SupportedHKClinicalTypes>
+- <doc:SupportedHKCategoryTypes>
+- <doc:SupportedHKCorrelationTypes>

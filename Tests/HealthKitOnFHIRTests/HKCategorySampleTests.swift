@@ -6,7 +6,9 @@
 // SPDX-License-Identifier: MIT
 //
 
+import HealthKit
 @testable import HealthKitOnFHIR
+import ModelsR4
 import XCTest
 
 // swiftlint:disable file_length type_body_length

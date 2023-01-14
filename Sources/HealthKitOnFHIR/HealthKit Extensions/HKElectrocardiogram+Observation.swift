@@ -7,6 +7,7 @@
 //
 
 import HealthKit
+import ModelsR4
 
 
 extension HKElectrocardiogram.Classification: HKCategoryValueDescription {

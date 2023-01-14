@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import HealthKit
 @testable import HealthKitOnFHIR
 import XCTest
 
