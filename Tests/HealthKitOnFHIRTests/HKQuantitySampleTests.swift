@@ -2532,11 +2532,14 @@ class HKQuantitySampleTests: XCTestCase {
     }
     
     func testUnsupportedTypeSample() throws {
+        let quantitySample = HKQuantitySample(
+            type: HKQuantityType(.nikeFuel),
+            quantity: HKQuantity(unit: .count(), doubleValue: 1),
+            start: try startDate,
+            end: try endDate
+        )
         XCTAssertThrowsError(
-            try createObservationFrom(
-                type: HKQuantityType(.nikeFuel),
-                quantity: HKQuantity(unit: .count(), doubleValue: 1)
-            )
+            try quantitySample.resource.get(if: Observation.self)
         )
     }
     
