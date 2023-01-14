@@ -37,7 +37,7 @@ class HKCategorySampleTests: XCTestCase {
             end: try endDate,
             metadata: metadata
         )
-        return try categorySample.observation
+        return try XCTUnwrap(categorySample.resource.get(if: Observation.self))
     }
 
     func createCategoryCoding(

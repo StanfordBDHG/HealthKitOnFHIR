@@ -11,22 +11,20 @@
 
 
 extension HKSample {
-    /// A FHIR observation based on the concrete subclass of `HKSample`.
-    ///
-    /// If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
-    public var observation: Observation {
+    /// Converts an `HKSample` into a FHIR resource, encapsulated in a `ResourceProxy`
+    public var resource: ResourceProxy {
         get throws {
-            try observation()
+            try resource()
         }
     }
     
     
-    /// A FHIR observation based on the concrete subclass of `HKSample`.
+    /// A `ResourceProxy` containing a FHIR `Observation` based on the concrete subclass of `HKSample`.
     ///
     /// If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
     /// - Parameter withMapping: A mapping to map `HKSample`s to corresponding FHIR observations allowing the customization of, e.g., codings and units. See ``HKSampleMapping``.
-    /// - Returns: A FHIR observation based on the concrete subclass of `HKSample`.
-    public func observation(withMapping mapping: HKSampleMapping = HKSampleMapping.default) throws -> Observation {
+    /// - Returns: A `ResourceProxy`containing a FHIR `Observation` based on the concrete subclass of `HKSample`.
+    public func resource(withMapping mapping: HKSampleMapping = HKSampleMapping.default) throws -> ResourceProxy {
         var observation = Observation(
             code: CodeableConcept(),
             status: FHIRPrimitive(.final)
@@ -47,10 +45,12 @@ extension HKSample {
             try categorySample.buildCategoryObservation(&observation)
         case let electrocardiogram as HKElectrocardiogram:
             try electrocardiogram.buildObservation(&observation, mappings: mapping)
+        case let clinicalRecord as HKClinicalRecord:
+            return try clinicalRecord.resource()
         default:
             throw HealthKitOnFHIRError.notSupported
         }
         
-        return observation
+        return ResourceProxy(with: observation)
     }
 }

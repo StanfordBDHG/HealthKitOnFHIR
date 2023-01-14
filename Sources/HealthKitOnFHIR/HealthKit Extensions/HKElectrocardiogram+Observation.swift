@@ -76,7 +76,9 @@ extension HKElectrocardiogram {
         voltageMeasurements: VoltageMeasurements,
         withMapping mapping: HKSampleMapping = HKSampleMapping.default
     ) throws -> Observation {
-        var observation = try observation(withMapping: mapping)
+        guard var observation = try resource(withMapping: mapping).get(if: Observation.self) else {
+            throw HealthKitOnFHIRError.notSupported
+        }
         
         if !symptoms.isEmpty {
             try appendSymptomsComponent(&observation, symptoms: symptoms, mappings: mapping)

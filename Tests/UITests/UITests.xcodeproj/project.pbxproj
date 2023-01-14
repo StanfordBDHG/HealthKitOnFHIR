@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		273373FD295BA8B80062EB05 /* HealthRecordsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273373FC295BA8B80062EB05 /* HealthRecordsTestView.swift */; };
 		2765017029319B2100644064 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765016F29319B2100644064 /* HealthKitManager.swift */; };
 		2765017229319E3000644064 /* WriteDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765017129319E3000644064 /* WriteDataView.swift */; };
 		276501762931A58700644064 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276501752931A58700644064 /* ContentView.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		273373FC295BA8B80062EB05 /* HealthRecordsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecordsTestView.swift; sourceTree = "<group>"; };
 		2765016F29319B2100644064 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		2765017129319E3000644064 /* WriteDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDataView.swift; sourceTree = "<group>"; };
 		276501752931A58700644064 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				276501772931A82F00644064 /* ReadDataView.swift */,
 				2790F40929326CE90024213F /* JSONView.swift */,
 				2F5425F22951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift */,
+				273373FC295BA8B80062EB05 /* HealthRecordsTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				2765017029319B2100644064 /* HealthKitManager.swift in Sources */,
 				2F5425F62951AE2600B5DAC2 /* HKElectrocardiogram+Context.swift in Sources */,
 				2F5425F32951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift in Sources */,
+				273373FD295BA8B80062EB05 /* HealthRecordsTestView.swift in Sources */,
 				276501762931A58700644064 /* ContentView.swift in Sources */,
 				2FA7382C290ADFAA007ACEB9 /* TestApp.swift in Sources */,
 				276501782931A82F00644064 /* ReadDataView.swift in Sources */,
@@ -400,7 +404,9 @@
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestApp/Support Files/Info.plist";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "The TestApp accesses your HealthKit data to run the tests.";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Please provide health records access to test";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please provide read permission to test the module's functionality.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Please provide update permission to test the module's functionality.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -434,7 +440,9 @@
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "TestApp/Support Files/Info.plist";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "The TestApp accesses your HealthKit data to run the tests.";
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Please provide health records access to test";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Please provide read permission to test the module's functionality.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Please provide update permission to test the module's functionality.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
