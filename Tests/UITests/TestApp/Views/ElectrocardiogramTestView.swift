@@ -10,6 +10,7 @@ import Foundation
 @preconcurrency import HealthKit
 import HealthKitOnFHIR
 import SwiftUI
+import ModelsR4
 
 
 struct ElectrocardiogramTestView: View {
