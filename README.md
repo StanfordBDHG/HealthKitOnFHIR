@@ -12,8 +12,13 @@ SPDX-License-Identifier: MIT
 
 [![Build and Test](https://github.com/StanfordBDHG/HealthKitOnFHIR/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/StanfordBDHG/HealthKitOnFHIR/actions/workflows/build-and-test.yml)
 [![codecov](https://codecov.io/gh/StanfordBDHG/HealthKitOnFHIR/branch/main/graph/badge.svg?token=17BMMYE3AC)](https://codecov.io/gh/StanfordBDHG/HealthKitOnFHIR)
+[![DOI](https://zenodo.org/badge/569837859.svg)](https://zenodo.org/badge/latestdoi/569837859)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FStanfordBDHG%2FHealthKitOnFHIR%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/StanfordBDHG/HealthKitOnFHIR)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FStanfordBDHG%2FHealthKitOnFHIR%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/StanfordBDHG/HealthKitOnFHIR)
 
 The HealthKitOnFHIR library provides extensions that convert supported HealthKit samples to corresponding FHIR resources using [FHIRModels](https://github.com/apple/FHIRModels) encapsulated in a [ResourceProxy](https://github.com/apple/FHIRModels/blob/main/HowTo/Instantiation.md#1-use-resourceproxy).
+
+For more information, please refer to the [API documentation](https://swiftpackageindex.com/StanfordBDHG/HealthKitOnFHIR/documentation).
 
 HealthKitOnFHIR supports:
 - Extensions to convert data from Apple HealthKit to HL7® FHIR® R4.
@@ -21,11 +26,14 @@ HealthKitOnFHIR supports:
 
 Please refer to the [HKObject Support Table](Sources/HealthKitOnFHIR/HealthKitOnFHIR.docc/HKSampleSupportTables.md) for a complete list of supported types.
 
+
 ## Installation
+
 HealthKitOnFHIR can be installed into your Xcode project using [Swift Package Manager](https://github.com/apple/swift-package-manager).
 
 1. In Xcode 14 and newer (requires Swift 5.7), go to “File” » “Add Packages...”
 2. Enter the URL to this GitHub repository, then select the `HealthKitOnFHIR` package to install.
+
 
 ## Usage
 
@@ -61,6 +69,7 @@ let observation = try sample.resource(withMapping: sampleMapping).get(if: Observ
 let allergyRecord: HKClinicalRecord = // ...
 let allergyIntolerance = try allergyRecord.resource.get(if: AllergyIntolerance.self)
 ```
+
 
 ## Example
 
@@ -135,16 +144,20 @@ The following example generates the following FHIR observation:
 }
 ```
 
+
 ## License
+
 This project is licensed under the MIT License. See [Licenses](https://github.com/StanfordBDHG/HealthKitOnFHIR/tree/main/LICENSES) for more information.
 
 
 ## Contributors
+
 This project is developed as part of the Stanford Biodesign for Digital Health projects at Stanford.
 See [CONTRIBUTORS.md](https://github.com/StanfordBDHG/HealthKitOnFHIR/tree/main/CONTRIBUTORS.md) for a full list of all HealthKitOnFHIR contributors.
 
 
 ## Notices
+
 HealthKit is a registered trademark of Apple, Inc.
 FHIR is a registered trademark of Health Level Seven International.
 
