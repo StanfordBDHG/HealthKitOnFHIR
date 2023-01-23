@@ -17,8 +17,27 @@ extension HKSampleType {
             switch self {
             case is HKQuantityType, is HKCorrelationType, is HKCategoryType:
                 return ResourceType.observation
-            case is HKClinicalType:
-                return ResourceType.resource
+            case let clinicalType as HKClinicalType:
+                switch clinicalType {
+                case HKClinicalType(.allergyRecord):
+                    return ResourceType.allergyIntolerance
+                case HKClinicalType(.conditionRecord):
+                    return ResourceType.condition
+                case HKClinicalType(.coverageRecord):
+                    return ResourceType.coverage
+                case HKClinicalType(.immunizationRecord):
+                    return ResourceType.immunization
+                case HKClinicalType(.labResultRecord):
+                    return ResourceType.observation
+                case HKClinicalType(.medicationRecord):
+                    return ResourceType.medication
+                case HKClinicalType(.procedureRecord):
+                    return ResourceType.procedure
+                case HKClinicalType(.vitalSignRecord):
+                    return ResourceType.observation
+                default:
+                    throw HealthKitOnFHIRError.notSupported
+                }
             default:
                 throw HealthKitOnFHIRError.notSupported
             }
