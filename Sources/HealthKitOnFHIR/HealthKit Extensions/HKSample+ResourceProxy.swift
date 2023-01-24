@@ -31,7 +31,8 @@ extension HKSample {
         )
         
         // Set basic elements applicable to all observations
-        observation.appendIdentifier(Identifier(id: self.uuid.uuidString.asFHIRStringPrimitive()))
+        observation.id = self.uuid.uuidString.asFHIRStringPrimitive()
+        observation.appendIdentifier(Identifier(id: observation.id))
         observation.setEffective(startDate: self.startDate, endDate: self.endDate)
         observation.setIssued(on: Date())
         
