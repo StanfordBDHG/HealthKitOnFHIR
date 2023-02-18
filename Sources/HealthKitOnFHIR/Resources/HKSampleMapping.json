@@ -14,8 +14,8 @@
                 "system": "http://developer.apple.com/documentation/healthkit"
             },
             {
-                "code": "131329",
-                "display": "MDC_ECG_ELEC_POTL_I",
+                "code": "131328",
+                "display": "MDC_ECG_ELEC_POTL",
                 "system": "urn:oid:2.16.840.1.113883.6.24"
             }
         ],
