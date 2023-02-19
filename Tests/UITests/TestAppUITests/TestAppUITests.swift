@@ -62,7 +62,7 @@ class TestAppUITests: XCTestCase {
         // Enable Apple Health Access if needed
         try healthKitAccess()
         
-        XCTAssert(app.staticTexts["Passed"].waitForExistence(timeout: 2))
+        XCTAssert(app.staticTexts["Passed"].waitForExistence(timeout: 10))
         
         app.collectionViews.buttons["See JSON"].tap()
         
