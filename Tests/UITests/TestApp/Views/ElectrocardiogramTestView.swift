@@ -81,8 +81,8 @@ struct ElectrocardiogramTestView: View {
                 system: "http://developer.apple.com/documentation/healthkit".asFHIRURIPrimitive()
             ),
             Coding(
-                code: "131329".asFHIRStringPrimitive(),
-                display: "MDC_ECG_ELEC_POTL_I".asFHIRStringPrimitive(),
+                code: "131328".asFHIRStringPrimitive(),
+                display: "MDC_ECG_ELEC_POTL".asFHIRStringPrimitive(),
                 system: "urn:oid:2.16.840.1.113883.6.24".asFHIRURIPrimitive()
             )
         ]
