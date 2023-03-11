@@ -240,7 +240,7 @@ extension HKElectrocardiogram {
                 lastIndex = voltageMeasurement.offset
             }
         }
-        // Append the last elements that are left over (idelly exactly 10 seconds of data).
+        // Append the last elements that are left over (ideally exactly 10 seconds of data).
         voltageMeasurementBatches.append(Array(voltageMeasurements[lastIndex..<voltageMeasurements.count]))
         
         // Check that we did not loose any data in the batching process.
