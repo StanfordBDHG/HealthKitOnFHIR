@@ -6,6 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
+import HealthKit
+
 
 /// An ``HKQuantitySampleMapping`` allows developers to customize the mapping of `HKQuantitySample`s to an FHIR observations.
 public struct HKQuantitySampleMapping: Decodable {
