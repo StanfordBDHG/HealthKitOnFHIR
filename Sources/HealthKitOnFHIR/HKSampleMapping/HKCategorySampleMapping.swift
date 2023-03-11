@@ -6,6 +6,9 @@
 // SPDX-License-Identifier: MIT
 //
 
+import HealthKit
+
+
 /// An ``HKCategorySampleMapping`` allows developers to customize the mapping of `HKCategorySample`s to FHIR observations.
 public struct HKCategorySampleMapping: Decodable {
     /// A default instance of an ``HKCategorySampleMapping`` instance allowing developers to customize the ``HKCategorySampleMapping``.

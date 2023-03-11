@@ -6,6 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
+import HealthKit
+
 
 /// An ``HKCorrelationMapping`` allows developers to customize the mapping of `HKCorrelation`s to an FHIR observations.
 public struct HKCorrelationMapping: Decodable {

@@ -231,11 +231,20 @@ extension HKElectrocardiogram {
         }
         
         // Batch the measurements in 10 Second Intervals
-        let voltageMeasurementBatches = voltageMeasurements
-            .split { time, _ in
-                let remainder = time.remainder(dividingBy: 10.0)
-                return remainder <= period / 2
+        var lastIndex = 0
+        var voltageMeasurementBatches: [[(time: TimeInterval, value: HKQuantity)]] = []
+        for voltageMeasurement in voltageMeasurements.enumerated() {
+            let remainder = voltageMeasurement.element.time.truncatingRemainder(dividingBy: 10.0)
+            if remainder <= period / 2 && lastIndex < voltageMeasurement.offset {
+                voltageMeasurementBatches.append(Array(voltageMeasurements[lastIndex..<voltageMeasurement.offset]))
+                lastIndex = voltageMeasurement.offset
             }
+        }
+        // Append the last elements that are left over (ideally exactly 10 seconds of data).
+        voltageMeasurementBatches.append(Array(voltageMeasurements[lastIndex..<voltageMeasurements.count]))
+        
+        // Check that we did not loose any data in the batching process.
+        assert(voltageMeasurements.count == voltageMeasurementBatches.reduce(0, { $0 + $1.count }))
         
         for voltageMeasurementBatch in voltageMeasurementBatches {
             // Create a space separated string of all the measurement values as defined by the mapping unit
