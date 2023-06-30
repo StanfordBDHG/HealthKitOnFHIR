@@ -23,13 +23,25 @@ jobs:
       artifactname: HealthKitOnFHIR.xcresult
       runsonlabels: '["macOS", "self-hosted"]'
       scheme: HealthKitOnFHIR
+  build:
+    name: Build for CodeQL & Swift 5.7
+    permissions:
+      contents: read
+      security-events: write
+    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
+    with:
+      runsonlabels: '["macos-13"]'
+      xcodeversion: 14.2.0
+      scheme: HealthKitOnFHIR
+      test: false
+      codeql: true
   buildandtestuitests:
     name: Build and Test UI Tests
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
     with:
       artifactname: TestApp.xcresult
       runsonlabels: '["macOS", "self-hosted"]'
-      path: 'Tests/UITests'
+      path: Tests/UITests
       scheme: TestApp
   uploadcoveragereport:
     name: Upload Coverage Report
