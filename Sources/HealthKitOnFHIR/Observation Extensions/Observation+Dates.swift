@@ -18,8 +18,8 @@ extension Observation {
         } else {
             effective = .period(
                 Period(
-                    end: FHIRPrimitive(try? DateTime(date: startDate)),
-                    start: FHIRPrimitive(try? DateTime(date: endDate))
+                    end: FHIRPrimitive(try? DateTime(date: endDate)),
+                    start: FHIRPrimitive(try? DateTime(date: startDate))
                 )
             )
         }
