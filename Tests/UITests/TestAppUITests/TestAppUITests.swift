@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import XCTestExtensions
+import XCTHealthKit
 
 
 class TestAppUITests: XCTestCase {
@@ -22,19 +24,18 @@ class TestAppUITests: XCTestCase {
         app.launch()
         
         // Write Data
+        XCTAssert(app.collectionViews.buttons["Write Data"].waitForExistence(timeout: 2))
         app.collectionViews.buttons["Write Data"].tap()
         
-        let numberOfStepsTextField = app.collectionViews.textFields["Number of steps..."]
-        numberOfStepsTextField.tap()
-        numberOfStepsTextField.typeText("2")
+        XCTAssert(app.collectionViews.textFields["Number of steps..."].waitForExistence(timeout: 2))
+        try app.collectionViews.textFields["Number of steps..."].enter(value: "2")
         
         app.collectionViews.buttons["Write Step Count"].tap()
         
         // Enable Apple Health Access if needed
-        try healthKitAccess()
+        try app.handleHealthKitAuthorization()
         
         // Check that the data is written
-        sleep(2)
         XCTAssert(app.collectionViews.staticTexts["Data successfully written!"].waitForExistence(timeout: 5))
         
         // Return back to the main view
@@ -56,11 +57,11 @@ class TestAppUITests: XCTestCase {
         
         XCTAssert(app.buttons["Electrocardiogram"].waitForExistence(timeout: 2))
         app.buttons["Electrocardiogram"].tap()
-        XCTAssert(app.buttons["Read Electrocardiogram"].waitForExistence(timeout: 0.5))
+        XCTAssert(app.buttons["Read Electrocardiogram"].waitForExistence(timeout: 2))
         app.buttons["Read Electrocardiogram"].tap()
         
         // Enable Apple Health Access if needed
-        try healthKitAccess()
+        try app.handleHealthKitAuthorization()
         
         XCTAssert(app.staticTexts["Passed"].waitForExistence(timeout: 10))
         
@@ -68,21 +69,5 @@ class TestAppUITests: XCTestCase {
         
         // Dismiss results view
         app.swipeDown(velocity: XCUIGestureVelocity.fast)
-    }
-    
-    
-    private func healthKitAccess() throws {
-        let app = XCUIApplication()
-        
-        if app.navigationBars["Health Access"].waitForExistence(timeout: 10) {
-            app.tables.staticTexts["Turn On All"].tap()
-            app.navigationBars["Health Access"].buttons["Allow"].tap()
-            return
-        }
-        print("The HealthKit View did not load after 10 seconds ... give it a second try with a timeout of 20 seconds.")
-        if app.navigationBars["Health Access"].waitForExistence(timeout: 20) {
-            app.tables.staticTexts["Turn On All"].tap()
-            app.navigationBars["Health Access"].buttons["Allow"].tap()
-        }
     }
 }
