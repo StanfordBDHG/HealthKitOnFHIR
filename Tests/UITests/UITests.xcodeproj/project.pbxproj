@@ -42,6 +42,7 @@
 		2790F40929326CE90024213F /* JSONView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONView.swift; sourceTree = "<group>"; };
 		2F01E8CD291490B80089C46B /* TestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestApp.entitlements; sourceTree = "<group>"; };
 		2F01E8CE291493560089C46B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F1B52D82A4F7D93003AE151 /* TestApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestApp.xctestplan; sourceTree = "<group>"; };
 		2F5425F22951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectrocardiogramTestView.swift; sourceTree = "<group>"; };
 		2F5425F42951AD1D00B5DAC2 /* HKElectrocardiogram+Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKElectrocardiogram+Context.swift"; sourceTree = "<group>"; };
 		2F68C3C6292E9F8F00B3E12C /* HealthKitOnFHIR */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HealthKitOnFHIR; path = ../..; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 		2F6D138928F5F384007C25D6 = {
 			isa = PBXGroup;
 			children = (
+				2F1B52D82A4F7D93003AE151 /* TestApp.xctestplan */,
 				2F68C3C6292E9F8F00B3E12C /* HealthKitOnFHIR */,
 				2F6D139428F5F384007C25D6 /* TestApp */,
 				2F6D13AF28F5F386007C25D6 /* TestAppUITests */,
