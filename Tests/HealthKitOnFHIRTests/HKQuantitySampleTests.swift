@@ -2572,7 +2572,8 @@ class HKQuantitySampleTests: XCTestCase {
                 dateIssued: try startDate,
                 expirationDate: nil,
                 device: nil,
-                metadata: nil).resource
+                metadata: nil
+            ).resource
         )
     }
     
