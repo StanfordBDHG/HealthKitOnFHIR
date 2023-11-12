@@ -27,10 +27,24 @@ class HKWorkoutTests: XCTestCase {
         }
     }
 
+    func createCodeableConcept(
+        code: String,
+        system: String
+    ) -> CodeableConcept {
+        CodeableConcept(
+            coding: [
+                Coding(
+                    code: code.asFHIRStringPrimitive(),
+                    system: system.asFHIRURIPrimitive()
+                )
+            ]
+        )
+    }
+
     func testSingleWorkout() throws {
-        // This initializer is deprecated as of iOS 17 in favor of using `HKWorkoutBuilder`, but there
+        // The HKWorkout initializers are deprecated as of iOS 17 in favor of using `HKWorkoutBuilder`, but there
         // is currently no mechanism to use `HKWorkoutBuilder` inside unit tests without an authenticated
-        // `HKHealthStore`.
+        // `HKHealthStore`, so we use this approach.
         let workoutSample = HKWorkout(
             activityType: .americanFootball,
             start: try startDate,
@@ -38,16 +52,7 @@ class HKWorkoutTests: XCTestCase {
         )
 
         let observation = try XCTUnwrap(workoutSample.resource.get(if: Observation.self))
-
-        XCTAssertEqual(observation.value, .codeableConcept(
-            CodeableConcept(
-                coding: [
-                    Coding(
-                        code: "americanFootball".asFHIRStringPrimitive(),
-                        system: "http://developer.apple.com/documentation/healthkit".asFHIRURIPrimitive()
-                    )
-                ]
-            )
-        ))
+        let expectedValue = createCodeableConcept(code: "americanFootball", system: "http://developer.apple.com/documentation/healthkit")
+        XCTAssertEqual(observation.value, .codeableConcept(expectedValue))
     }
 }
