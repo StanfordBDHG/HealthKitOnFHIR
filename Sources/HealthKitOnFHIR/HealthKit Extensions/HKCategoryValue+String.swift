@@ -5,7 +5,9 @@
 //
 // SPDX-License-Identifier: MIT
 //
+
 import HealthKit
+
 
 protocol HKCategoryValueDescription: CustomStringConvertible {
     var categoryValueDescription: String { get throws }

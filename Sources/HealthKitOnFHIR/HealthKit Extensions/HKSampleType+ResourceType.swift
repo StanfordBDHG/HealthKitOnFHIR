@@ -12,7 +12,7 @@ import ModelsR4
 
 extension HKSampleType {
     /// Converts an `HKSampleType` into the corresponding FHIR resource type, defined as a `ResourceType`
-    public var resourceTyoe: ResourceType {
+    public var resourceType: ResourceType {
         get throws {
             switch self {
             case is HKQuantityType, is HKCorrelationType, is HKCategoryType:

@@ -14,21 +14,21 @@ import XCTest
 
 class HKSampleTypeResourceTypeMapping: XCTestCase {
     func testHKSampleTypeMappingToObservation() {
-        try XCTAssertEqual(HKQuantityType(.activeEnergyBurned).resourceTyoe, .observation)
-        try XCTAssertEqual(HKCorrelationType(.bloodPressure).resourceTyoe, .observation)
-        try XCTAssertEqual(HKCategoryType(.abdominalCramps).resourceTyoe, .observation)
-        
-        XCTAssertThrowsError(try HKSampleType.workoutType().resourceTyoe)
+        try XCTAssertEqual(HKQuantityType(.activeEnergyBurned).resourceType, .observation)
+        try XCTAssertEqual(HKCorrelationType(.bloodPressure).resourceType, .observation)
+        try XCTAssertEqual(HKCategoryType(.abdominalCramps).resourceType, .observation)
+
+        XCTAssertThrowsError(try HKSampleType.workoutType().resourceType)
     }
     
     func testHKClinicalTypeMappingToResourceType() throws {
-        try XCTAssertEqual(HKClinicalType(.allergyRecord).resourceTyoe, .allergyIntolerance)
-        try XCTAssertEqual(HKClinicalType(.conditionRecord).resourceTyoe, .condition)
-        try XCTAssertEqual(HKClinicalType(.coverageRecord).resourceTyoe, .coverage)
-        try XCTAssertEqual(HKClinicalType(.immunizationRecord).resourceTyoe, .immunization)
-        try XCTAssertEqual(HKClinicalType(.labResultRecord).resourceTyoe, .observation)
-        try XCTAssertEqual(HKClinicalType(.medicationRecord).resourceTyoe, .medication)
-        try XCTAssertEqual(HKClinicalType(.procedureRecord).resourceTyoe, .procedure)
-        try XCTAssertEqual(HKClinicalType(.vitalSignRecord).resourceTyoe, .observation)
+        try XCTAssertEqual(HKClinicalType(.allergyRecord).resourceType, .allergyIntolerance)
+        try XCTAssertEqual(HKClinicalType(.conditionRecord).resourceType, .condition)
+        try XCTAssertEqual(HKClinicalType(.coverageRecord).resourceType, .coverage)
+        try XCTAssertEqual(HKClinicalType(.immunizationRecord).resourceType, .immunization)
+        try XCTAssertEqual(HKClinicalType(.labResultRecord).resourceType, .observation)
+        try XCTAssertEqual(HKClinicalType(.medicationRecord).resourceType, .medication)
+        try XCTAssertEqual(HKClinicalType(.procedureRecord).resourceType, .procedure)
+        try XCTAssertEqual(HKClinicalType(.vitalSignRecord).resourceType, .observation)
     }
 }
