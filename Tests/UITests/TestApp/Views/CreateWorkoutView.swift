@@ -29,6 +29,7 @@ struct CreateWorkoutView: View {
         .sheet(isPresented: $showingSheet) {
             JSONView(json: $json)
         }
+            .navigationBarTitle("Create Workout")
     }
 
     /// Uses the `HKWorkoutBuilder` to build and save an `HKWorkout` to the health store
