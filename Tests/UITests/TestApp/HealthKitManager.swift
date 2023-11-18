@@ -60,7 +60,18 @@ class HealthKitManager: ObservableObject {
         
         try await healthStore.save(stepsSample)
     }
-    
+
+    // MARK: - Workouts
+
+    func requestWorkoutAuthorization() async throws {
+        guard let healthStore else {
+            throw HKError(.errorHealthDataUnavailable)
+        }
+
+        let typesToWrite: Set<HKSampleType> = [HKObjectType.workoutType()]
+        try await healthStore.requestAuthorization(toShare: typesToWrite, read: [])
+    }
+
     // MARK: - Electrocardiogram
     
     func requestElectrocardiogramAuthorization() async throws {

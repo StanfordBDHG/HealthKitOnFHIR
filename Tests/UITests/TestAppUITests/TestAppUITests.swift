@@ -70,4 +70,20 @@ class TestAppUITests: XCTestCase {
         // Dismiss results view
         app.swipeDown(velocity: XCUIGestureVelocity.fast)
     }
+
+    func testWorkoutMapping() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        // Create Workout
+        XCTAssert(app.collectionViews.buttons["Create Workout"].waitForExistence(timeout: 2))
+        app.collectionViews.buttons["Create Workout"].tap()
+        app.collectionViews.buttons["Create Sample Workout"].tap()
+
+        // Enable Apple Health Access if needed
+        try app.handleHealthKitAuthorization()
+
+        // Dismiss results view
+        app.swipeDown(velocity: XCUIGestureVelocity.fast)
+    }
 }

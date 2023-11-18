@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272A31F62B092A6200735827 /* CreateWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A31F52B092A6200735827 /* CreateWorkoutView.swift */; };
 		273373FD295BA8B80062EB05 /* HealthRecordsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273373FC295BA8B80062EB05 /* HealthRecordsTestView.swift */; };
 		2765017029319B2100644064 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765016F29319B2100644064 /* HealthKitManager.swift */; };
 		2765017229319E3000644064 /* WriteDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765017129319E3000644064 /* WriteDataView.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		272A31F52B092A6200735827 /* CreateWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutView.swift; sourceTree = "<group>"; };
 		273373FC295BA8B80062EB05 /* HealthRecordsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecordsTestView.swift; sourceTree = "<group>"; };
 		2765016F29319B2100644064 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		2765017129319E3000644064 /* WriteDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDataView.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				276501752931A58700644064 /* ContentView.swift */,
+				272A31F52B092A6200735827 /* CreateWorkoutView.swift */,
 				2765017129319E3000644064 /* WriteDataView.swift */,
 				276501772931A82F00644064 /* ReadDataView.swift */,
 				2790F40929326CE90024213F /* JSONView.swift */,
@@ -255,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				272A31F62B092A6200735827 /* CreateWorkoutView.swift in Sources */,
 				2790F40A29326CE90024213F /* JSONView.swift in Sources */,
 				2765017029319B2100644064 /* HealthKitManager.swift in Sources */,
 				2F5425F62951AE2600B5DAC2 /* HKElectrocardiogram+Context.swift in Sources */,
