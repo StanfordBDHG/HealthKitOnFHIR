@@ -36,6 +36,8 @@ extension HKWorkoutActivityType: HKWorkoutActivityTypeDescription {
                 return "australianFootball"
             case .badminton:
                 return "badminton"
+            case .barre:
+                return "barre"
             case .baseball:
                 return "baseball"
             case .basketball:
@@ -44,10 +46,18 @@ extension HKWorkoutActivityType: HKWorkoutActivityTypeDescription {
                 return "bowling"
             case .boxing:
                 return "boxing"
+            case .cardioDance:
+                return "cardioDance"
             case .climbing:
                 return "climbing"
+            case .cooldown:
+                return "coolDown"
+            case .coreTraining:
+                return "coreTraining"
             case .cricket:
                 return "cricket"
+            case .crossCountrySkiing:
+                return "crossCountrySkiing"
             case .crossTraining:
                 return "crossTraining"
             case .curling:
@@ -58,6 +68,10 @@ extension HKWorkoutActivityType: HKWorkoutActivityTypeDescription {
                 return "dance"
             case .danceInspiredTraining:
                 return "danceInspiredTraining"
+            case .discSports:
+                return "discSports"
+            case .downhillSkiing:
+                return "downhillSkiing"
             case .elliptical:
                 return "elliptical"
             case .equestrianSports:
@@ -66,30 +80,50 @@ extension HKWorkoutActivityType: HKWorkoutActivityTypeDescription {
                 return "fencing"
             case .fishing:
                 return "fishing"
+            case .fitnessGaming:
+                return "fitnessGaming"
+            case .flexibility:
+                return "flexibility"
             case .functionalStrengthTraining:
                 return "functionalStrengthTraining"
             case .golf:
                 return "golf"
             case .gymnastics:
                 return "gymnastics"
+            case .handCycling:
+                return "handCycling"
             case .handball:
                 return "handball"
+            case .highIntensityIntervalTraining:
+                return "highIntensityIntervalTraining"
             case .hiking:
                 return "hiking"
             case .hockey:
                 return "hockey"
             case .hunting:
                 return "hunting"
+            case .jumpRope:
+                return "jumpRope"
+            case .kickboxing:
+                return "kickboxing"
             case .lacrosse:
                 return "lacrosse"
             case .martialArts:
                 return "martialArts"
             case .mindAndBody:
                 return "mindAndBody"
+            case .mixedCardio:
+                return "mixedCardio"
             case .mixedMetabolicCardioTraining:
                 return "mixedMetabolicCardioTraining"
+            case .other:
+                return "other"
             case .paddleSports:
                 return "paddleSports"
+            case .pickleball:
+                return "pickleball"
+            case .pilates:
+                return "pilates"
             case .play:
                 return "play"
             case .preparationAndRecovery:
@@ -106,28 +140,44 @@ extension HKWorkoutActivityType: HKWorkoutActivityTypeDescription {
                 return "sailing"
             case .skatingSports:
                 return "skatingSports"
+            case .snowboarding:
+                return "snowboarding"
             case .snowSports:
                 return "snowSports"
             case .soccer:
                 return "soccer"
+            case .socialDance:
+                return "socialDance"
             case .softball:
                 return "softball"
             case .squash:
                 return "squash"
             case .stairClimbing:
                 return "stairClimbing"
+            case .stairs:
+                return "stairs"
+            case .stepTraining:
+                return "stepTraining"
             case .surfingSports:
                 return "surfingSports"
+            case .swimBikeRun:
+                return "swimBikeRun"
             case .swimming:
                 return "swimming"
             case .tableTennis:
                 return "tableTennis"
+            case .taiChi:
+                return "taiChi"
             case .tennis:
                 return "tennis"
             case .trackAndField:
                 return "trackAndField"
             case .traditionalStrengthTraining:
                 return "traditionalStrengthTraining"
+            case .transition:
+                return "transition"
+            case .underwaterDiving:
+                return "underwaterDiving"
             case .volleyball:
                 return "volleyball"
             case .walking:
@@ -138,64 +188,14 @@ extension HKWorkoutActivityType: HKWorkoutActivityTypeDescription {
                 return "waterPolo"
             case .waterSports:
                 return "waterSports"
+            case .wheelchairRunPace:
+                return "wheelchairRunPace"
+            case .wheelchairWalkPace:
+                return "wheelchairWalkPace"
             case .wrestling:
                 return "wrestling"
             case .yoga:
                 return "yoga"
-            case .barre:
-                return "barre"
-            case .coreTraining:
-                return "coreTraining"
-            case .crossCountrySkiing:
-                return "crossCountrySkiing"
-            case .downhillSkiing:
-                return "downhillSkiing"
-            case .flexibility:
-                return "flexibility"
-            case .highIntensityIntervalTraining:
-                return "highIntensityIntervalTraining"
-            case .jumpRope:
-                return "jumpRope"
-            case .kickboxing:
-                return "kickboxing"
-            case .pilates:
-                return "pilates"
-            case .snowboarding:
-                return "snowboarding"
-            case .stairs:
-                return "stairs"
-            case .stepTraining:
-                return "stepTraining"
-            case .wheelchairWalkPace:
-                return "wheelchairWalkPace"
-            case .wheelchairRunPace:
-                return "wheelchairRunPace"
-            case .taiChi:
-                return "taiChi"
-            case .mixedCardio:
-                return "mixedCardio"
-            case .handCycling:
-                return "handCycling"
-            case .discSports:
-                return "discSports"
-            case .fitnessGaming:
-                return "fitnessGaming"
-            case .cardioDance:
-                return "cardioDance"
-            case .socialDance:
-                return "socialDance"
-            case .pickleball:
-                return "pickleball"
-            case .cooldown:
-                return "coolDown"
-            case .swimBikeRun:
-                return "swimBikeRun"
-            case .transition:
-                return "transition"
-            case .underwaterDiving:
-                return "underwaterDiving"
-            case .other:
-                return "other"
             @unknown default:
                 throw HealthKitOnFHIRError.invalidValue
             }

@@ -27,6 +27,88 @@ class HKWorkoutTests: XCTestCase {
         }
     }
 
+    let supportedWorkoutActivityTypes: [HKWorkoutActivityType] = [
+        .americanFootball,
+        .archery,
+        .australianFootball,
+        .badminton,
+        .barre,
+        .baseball,
+        .basketball,
+        .bowling,
+        .boxing,
+        .cardioDance,
+        .climbing,
+        .cooldown,
+        .coreTraining,
+        .cricket,
+        .crossCountrySkiing,
+        .crossTraining,
+        .curling,
+        .cycling,
+        .discSports,
+        .downhillSkiing,
+        .elliptical,
+        .equestrianSports,
+        .fencing,
+        .fishing,
+        .fitnessGaming,
+        .flexibility,
+        .functionalStrengthTraining,
+        .golf,
+        .gymnastics,
+        .handCycling,
+        .handball,
+        .highIntensityIntervalTraining,
+        .hiking,
+        .hockey,
+        .hunting,
+        .jumpRope,
+        .kickboxing,
+        .lacrosse,
+        .martialArts,
+        .mindAndBody,
+        .mixedCardio,
+        .other,
+        .paddleSports,
+        .pickleball,
+        .pilates,
+        .play,
+        .preparationAndRecovery,
+        .racquetball,
+        .rowing,
+        .rugby,
+        .running,
+        .sailing,
+        .skatingSports,
+        .snowboarding,
+        .snowSports,
+        .soccer,
+        .socialDance,
+        .softball,
+        .squash,
+        .stairClimbing,
+        .stepTraining,
+        .surfingSports,
+        .swimBikeRun,
+        .swimming,
+        .tableTennis,
+        .taiChi,
+        .tennis,
+        .trackAndField,
+        .traditionalStrengthTraining,
+        .transition,
+        .volleyball,
+        .walking,
+        .waterFitness,
+        .waterPolo,
+        .waterSports,
+        .wheelchairRunPace,
+        .wheelchairWalkPace,
+        .wrestling,
+        .yoga
+    ]
+
     func createCodeableConcept(
         code: String,
         system: String
@@ -41,18 +123,23 @@ class HKWorkoutTests: XCTestCase {
         )
     }
 
-    func testSingleWorkout() throws {
+    func testHKWorkoutToObservation() throws {
         // The HKWorkout initializers are deprecated as of iOS 17 in favor of using `HKWorkoutBuilder`, but there
         // is currently no mechanism to use `HKWorkoutBuilder` inside unit tests without an authenticated
         // `HKHealthStore`, so we use this approach.
-        let workoutSample = HKWorkout(
-            activityType: .americanFootball,
-            start: try startDate,
-            end: try endDate
-        )
+        for activityType in supportedWorkoutActivityTypes {
+            let workoutSample = HKWorkout(
+                activityType: activityType,
+                start: try startDate,
+                end: try endDate
+            )
 
-        let observation = try XCTUnwrap(workoutSample.resource.get(if: Observation.self))
-        let expectedValue = createCodeableConcept(code: "americanFootball", system: "http://developer.apple.com/documentation/healthkit")
-        XCTAssertEqual(observation.value, .codeableConcept(expectedValue))
+            let observation = try XCTUnwrap(workoutSample.resource.get(if: Observation.self))
+            let expectedValue = createCodeableConcept(
+                code: try activityType.workoutTypeDescription,
+                system: "http://developer.apple.com/documentation/healthkit"
+            )
+            XCTAssertEqual(observation.value, .codeableConcept(expectedValue))
+        }
     }
 }
