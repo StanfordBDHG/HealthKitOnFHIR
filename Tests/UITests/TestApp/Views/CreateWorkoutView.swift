@@ -31,7 +31,8 @@ struct CreateWorkoutView: View {
         }
     }
 
-    private func createWorkout(
+    /// Uses the `HKWorkoutBuilder` to build and save an `HKWorkout` to the health store
+    private func buildWorkout(
         startDate: Date,
         endDate: Date,
         activityType: HKWorkoutActivityType
@@ -72,17 +73,14 @@ struct CreateWorkoutView: View {
     }
 
     private func createWorkout() async {
-        let startDate = Date()
-        let endDate = Date().addingTimeInterval(3600)
-        let activityType = HKWorkoutActivityType.running
-
         do {
             try await manager.requestWorkoutAuthorization()
 
-            let workout = try await createWorkout(
-                startDate: startDate,
-                endDate: endDate,
-                activityType: activityType
+            /// Use `HKWorkoutBuilder` to create the workout
+            let workout = try await buildWorkout(
+                startDate: Date(),
+                endDate: Date().addingTimeInterval(3600),
+                activityType: .running
             )
 
             let observation = try workout.resource.get()

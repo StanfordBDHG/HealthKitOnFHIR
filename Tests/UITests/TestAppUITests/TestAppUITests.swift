@@ -76,8 +76,9 @@ class TestAppUITests: XCTestCase {
         app.launch()
 
         // Create Workout
-        XCTAssert(app.collectionViews.buttons["Create Workout"].waitForExistence(timeout: 2))
+        XCTAssert(app.collectionViews.buttons["Create Workout"].waitForExistence(timeout: 5))
         app.collectionViews.buttons["Create Workout"].tap()
+        XCTAssert(app.collectionViews.buttons["Create Sample Workout"]).waitForExistence(timeout: 5)
         app.collectionViews.buttons["Create Sample Workout"].tap()
 
         // Enable Apple Health Access if needed
