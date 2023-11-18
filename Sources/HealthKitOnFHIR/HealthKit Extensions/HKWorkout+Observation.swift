@@ -14,30 +14,20 @@ extension HKWorkout {
     /// Generates an observation that captures the type of physical activity performed for a single instance of physical activity, based on https://build.fhir.org/ig/HL7/physical-activity/StructureDefinition-pa-observation-activity-measure.html
     /// Note:  An `HKWorkout` object can also act as a container for other `HKSample` objects, which will need to be converted to observations individually.
     func buildWorkoutObservation(
-        _ observation: inout Observation
+        _ observation: inout Observation,
+        mappings: HKSampleMapping = HKSampleMapping.default
     ) throws {
-        observation.appendCategory(
-            CodeableConcept(
-                coding: [
-                    Coding(
-                        code: "activity".asFHIRStringPrimitive(),
-                        system: "http://terminology.hl7.org/CodeSystem/observation-category".asFHIRURIPrimitive()
-                    ),
-                    Coding(
-                        code: "PhysicalActivity".asFHIRStringPrimitive(),
-                        system: "http://hl7.org/fhir/us/physical-activity/CodeSystem/pa-temporary-codes".asFHIRURIPrimitive()
-                    )
-                ]
-            )
-        )
+        let mapping = mappings.workoutSampleMapping
 
-        observation.code = CodeableConcept(coding: [
-            Coding(
-                code: "73985-4".asFHIRStringPrimitive(),
-                display: "Exercise activity".asFHIRStringPrimitive(),
-                system: "http://loinc.org".asFHIRURIPrimitive()
+        for code in mapping.codings {
+            observation.appendCoding(code.coding)
+        }
+
+        for category in mapping.categories {
+            observation.appendCategory(
+                CodeableConcept(coding: [category.coding])
             )
-        ])
+        }
         
         let activityTypeString = self.workoutActivityType.description.asFHIRStringPrimitive()
 

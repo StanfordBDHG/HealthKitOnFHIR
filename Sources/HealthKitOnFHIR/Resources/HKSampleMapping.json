@@ -1,4 +1,25 @@
 {
+    "HKWorkout": {
+        "categories": [
+            {
+                "code": "activity",
+                "display": "Activity",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category"
+            },
+            {
+                "code": "PhysicalActivity",
+                "display": "Physical Activity",
+                "system": "http://hl7.org/fhir/us/physical-activity/CodeSystem/pa-temporary-codes"
+            }
+        ],
+        "codings": [
+            {
+                "code": "73985-4",
+                "display": "Exercise activity",
+                "system": "http://loinc.org"
+            }
+        ]
+    },
     "HKElectrocardiogram": {
         "categories": [
             {
