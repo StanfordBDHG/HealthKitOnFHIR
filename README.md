@@ -46,7 +46,7 @@ let resource = try sample.resource
 
 ### Observations
 
-`HKQuantitySample`, `HKCategorySample`, `HKCorrelationSample`, and `HKElectrocardiogram` will be converted into FHIR [Observation](https://hl7.org/fhir/R4/observation.html) resources encapsulated in a [ResourceProxy](https://github.com/apple/FHIRModels/blob/main/HowTo/Instantiation.md#1-use-resourceproxy).
+`HKQuantitySample`, `HKCategorySample`, `HKCorrelationSample`, `HKElectrocardiogram`, and `HKWorkout` will be converted into FHIR [Observation](https://hl7.org/fhir/R4/observation.html) resources encapsulated in a [ResourceProxy](https://github.com/apple/FHIRModels/blob/main/HowTo/Instantiation.md#1-use-resourceproxy).
 
 ```swift
 let sample: HKQuantitySample = // ...

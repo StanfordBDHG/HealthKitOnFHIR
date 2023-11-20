@@ -2567,10 +2567,12 @@ class HKQuantitySampleTests: XCTestCase {
     
     func testUnsupportedType() throws {
         XCTAssertThrowsError(
-            try HKWorkout(
-                activityType: .running,
-                start: Date(),
-                end: Date()
+            try HKVisionPrescription(
+                type: .glasses,
+                dateIssued: try startDate,
+                expirationDate: nil,
+                device: nil,
+                metadata: nil
             ).resource
         )
     }

@@ -48,6 +48,8 @@ extension HKSample {
             try electrocardiogram.buildObservation(&observation, mappings: mapping)
         case let clinicalRecord as HKClinicalRecord:
             return try clinicalRecord.resource()
+        case let workout as HKWorkout:
+            try workout.buildWorkoutObservation(&observation)
         default:
             throw HealthKitOnFHIRError.notSupported
         }

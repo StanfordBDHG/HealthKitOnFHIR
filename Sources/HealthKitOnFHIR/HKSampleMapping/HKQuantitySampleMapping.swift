@@ -23,7 +23,7 @@ public struct HKQuantitySampleMapping: Decodable {
     public var unit: MappedUnit
 
     
-    /// An ``HKQuantitySampleMapping`` allows developers to customize the mapping of `HKQuantitySample`s to an FHIR observations.
+    /// An ``HKQuantitySampleMapping`` allows developers to customize the mapping of `HKQuantitySample`s to FHIR observations.
     /// - Parameters:
     ///   - codings: The FHIR codings defined as ``MappedCode``s used for the specified `HKQuantitySample` type
     ///   - unit: The FHIR units defined as ``MappedUnit``s used for the specified `HKQuantitySample` type

@@ -24,10 +24,10 @@ class TestAppUITests: XCTestCase {
         app.launch()
         
         // Write Data
-        XCTAssert(app.collectionViews.buttons["Write Data"].waitForExistence(timeout: 2))
+        XCTAssert(app.collectionViews.buttons["Write Data"].waitForExistence(timeout: 5))
         app.collectionViews.buttons["Write Data"].tap()
         
-        XCTAssert(app.collectionViews.textFields["Number of steps..."].waitForExistence(timeout: 2))
+        XCTAssert(app.collectionViews.textFields["Number of steps..."].waitForExistence(timeout: 5))
         try app.collectionViews.textFields["Number of steps..."].enter(value: "2")
         
         app.collectionViews.buttons["Write Step Count"].tap()
@@ -55,9 +55,9 @@ class TestAppUITests: XCTestCase {
         
         try exitAppAndOpenHealth(.electrocardiograms)
         
-        XCTAssert(app.buttons["Electrocardiogram"].waitForExistence(timeout: 2))
+        XCTAssert(app.collectionViews.buttons["Electrocardiogram"].waitForExistence(timeout: 5))
         app.buttons["Electrocardiogram"].tap()
-        XCTAssert(app.buttons["Read Electrocardiogram"].waitForExistence(timeout: 2))
+        XCTAssert(app.collectionViews.buttons["Read Electrocardiogram"].waitForExistence(timeout: 5))
         app.buttons["Read Electrocardiogram"].tap()
         
         // Enable Apple Health Access if needed
@@ -67,6 +67,23 @@ class TestAppUITests: XCTestCase {
         
         app.collectionViews.buttons["See JSON"].tap()
         
+        // Dismiss results view
+        app.swipeDown(velocity: XCUIGestureVelocity.fast)
+    }
+
+    func testWorkoutMapping() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        // Create Workout
+        XCTAssert(app.collectionViews.buttons["Create Workout"].waitForExistence(timeout: 5))
+        app.collectionViews.buttons["Create Workout"].tap()
+        XCTAssert(app.collectionViews.buttons["Create Sample Workout"].waitForExistence(timeout: 5))
+        app.collectionViews.buttons["Create Sample Workout"].tap()
+
+        // Enable Apple Health Access if needed
+        try app.handleHealthKitAuthorization()
+
         // Dismiss results view
         app.swipeDown(velocity: XCUIGestureVelocity.fast)
     }

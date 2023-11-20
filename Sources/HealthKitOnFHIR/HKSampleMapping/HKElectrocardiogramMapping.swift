@@ -39,7 +39,7 @@ public struct HKElectrocardiogramMapping: Decodable {
     ///   - categories: The FHIR categories defined as ``MappedCode``s used for the specified `HKElectrocardiogram`
     ///   - classification: Defines the mapping of the `classification` category sample  of an `HKElectrocardiogram` to a FHIR observation.
     ///   - symptomsStatus: Defines the mapping of the `symptomsStatus` category sample  of an `HKElectrocardiogram` to a FHIR observation.
-    ///   - numberOfVoltageMeasurements: efines the mapping of the `numberOfVoltageMeasurements` quantity property of an `HKElectrocardiogram` to a FHIR observation.
+    ///   - numberOfVoltageMeasurements: Defines the mapping of the `numberOfVoltageMeasurements` quantity property of an `HKElectrocardiogram` to a FHIR observation.
     ///   - samplingFrequency: Defines the mapping of the `samplingFrequency` quantity property of an `HKElectrocardiogram` to a FHIR observation.
     ///   - averageHeartRate: Defines the mapping of the `averageHeartRate` quantity property of an `HKElectrocardiogram` to a FHIR observation.
     ///   - voltageMeasurements: Defines the mapping of the `voltageMeasurements` of an `HKElectrocardiogram` to a FHIR observation.
