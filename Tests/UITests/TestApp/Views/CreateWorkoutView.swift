@@ -32,7 +32,7 @@ struct CreateWorkoutView: View {
             .navigationBarTitle("Create Workout")
     }
 
-    /// Uses the `HKWorkoutBuilder` to build and save an `HKWorkout` to the health store
+    /// Uses `HKWorkoutBuilder` to build an `HKWorkout`
     private func buildWorkout(
         startDate: Date,
         endDate: Date,
