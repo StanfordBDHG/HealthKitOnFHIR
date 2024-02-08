@@ -73,7 +73,7 @@ let allergyIntolerance = try allergyRecord.resource.get(if: AllergyIntolerance.s
 
 ## Example
 
-In the following example, we will query the HealthKit store for step count data, convert the resulting samples to FHIR observations, and encode them into JSON.
+In the following example, we will query the HealthKit store for heart rate data, convert the resulting samples to FHIR observations, and encode them into JSON.
 
 ```swift
 import HealthKitOnFHIR
