@@ -1909,6 +1909,21 @@
                 "unit": "%"
             }
         },
+        "HKQuantityTypeIdentifierPhysicalEffort": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierPhysicalEffort",
+                    "display": "Physical Effort",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "kcal/hr/kg",
+                "hkunit": "kcal/hr*kg",
+                "system": "http://unitsofmeasure.org",
+                "unit": "kcal/hr/kg"
+            }
+        },
         "HKQuantityTypeIdentifierPushCount": {
             "codings": [
                 {
