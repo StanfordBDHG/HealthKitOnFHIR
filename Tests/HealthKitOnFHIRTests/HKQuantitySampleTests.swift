@@ -2288,10 +2288,11 @@ class HKQuantitySampleTests: XCTestCase {
         )
     }
     
+    @available(iOS 17.0, *)
     func testApplePhysicalEffort() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.physicalEffort),
-            quantity: HKQuantity(unit: HKUnit(from: "kcal/hr*kg"), doubleValue: 75)
+            quantity: HKQuantity(unit: HKUnit(from: "kcal/hr*kg"), doubleValue: 2)
         )
         
         XCTAssertEqual(
