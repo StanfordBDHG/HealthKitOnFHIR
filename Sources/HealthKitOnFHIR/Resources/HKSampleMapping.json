@@ -1913,7 +1913,7 @@
             "codings": [
                 {
                     "code": "HKQuantityTypeIdentifierPhysicalEffort",
-                    "display": "Physical Effort",
+                    "display": "Apple Physical Effort",
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
