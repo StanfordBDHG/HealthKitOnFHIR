@@ -88,6 +88,7 @@ HealthKitOnFHIR supports 82 of 84 quantity types.
 |[OxygenSaturation](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierOxygenSaturation)|✅|[59408-5](http://loinc.org/59408-5)|[%](http://unitsofmeasure.org)|
 |[PeakExpiratoryFlowRate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPeakExpiratoryFlowRate)|✅|[19935-6](http://loinc.org/19935-6)|[L/min](http://unitsofmeasure.org)|
 |[PeripheralPerfusionIndex](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPeripheralPerfusionIndex)|✅|[61006-3](http://loinc.org/61006-3)|[%](http://unitsofmeasure.org)|
+|[PhysicalEffort](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPhysicalEffort)|✅|[HKQuantityTypeIdentifierPhysicalEffort](http://developer.apple.com/documentation/healthkit)|[kcal/hr/kg](http://unitsofmeasure.org)|
 |[PushCount](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierPushCount)|✅|[96502-0](http://loinc.org/96502-0)|wheelchair pushes|
 |[RespiratoryRate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierRespiratoryRate)|✅|[9279-1](http://loinc.org/9279-1)|[breaths/minute](http://unitsofmeasure.org)|
 |[RestingHeartRate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierRestingHeartRate)|✅|[40443-4](http://loinc.org/40443-4)|[beats/minute](http://unitsofmeasure.org)|
