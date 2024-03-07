@@ -2288,6 +2288,37 @@ class HKQuantitySampleTests: XCTestCase {
         )
     }
     
+    @available(iOS 17.0, *)
+    func testApplePhysicalEffort() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.physicalEffort),
+            quantity: HKQuantity(unit: HKUnit(from: "kcal/hr*kg"), doubleValue: 2)
+        )
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierPhysicalEffort",
+                    display: "Apple Physical Effort",
+                    system: .apple
+                )
+            ]
+        )
+        
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "kcal/hr/kg",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "kcal/hr/kg",
+                    value: 2.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+    
     func testAppleStandTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleStandTime),

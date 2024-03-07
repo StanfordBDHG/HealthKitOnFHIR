@@ -55,9 +55,9 @@ class TestAppUITests: XCTestCase {
         
         try exitAppAndOpenHealth(.electrocardiograms)
         
-        XCTAssert(app.collectionViews.buttons["Electrocardiogram"].waitForExistence(timeout: 5))
-        app.buttons["Electrocardiogram"].tap()
-        XCTAssert(app.collectionViews.buttons["Read Electrocardiogram"].waitForExistence(timeout: 5))
+        XCTAssert(app.staticTexts["Electrocardiogram"].waitForExistence(timeout: 5))
+        app.staticTexts["Electrocardiogram"].tap()
+        XCTAssert(app.buttons["Read Electrocardiogram"].waitForExistence(timeout: 5))
         app.buttons["Read Electrocardiogram"].tap()
         
         // Enable Apple Health Access if needed
