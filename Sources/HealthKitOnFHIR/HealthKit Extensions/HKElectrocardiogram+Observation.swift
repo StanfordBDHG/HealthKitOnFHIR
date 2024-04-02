@@ -232,13 +232,16 @@ extension HKElectrocardiogram {
         
         // Batch the measurements in 10 Second Intervals
         var lastIndex = 0
+        var lastRemainder = 10.0
         var voltageMeasurementBatches: [[(time: TimeInterval, value: HKQuantity)]] = []
         for voltageMeasurement in voltageMeasurements.enumerated() {
             let remainder = voltageMeasurement.element.time.truncatingRemainder(dividingBy: 10.0)
-            if remainder <= period / 2 && lastIndex < voltageMeasurement.offset {
+            if lastRemainder > remainder && lastIndex < voltageMeasurement.offset {
                 voltageMeasurementBatches.append(Array(voltageMeasurements[lastIndex..<voltageMeasurement.offset]))
                 lastIndex = voltageMeasurement.offset
             }
+            
+            lastRemainder = remainder
         }
         // Append the last elements that are left over (ideally exactly 10 seconds of data).
         voltageMeasurementBatches.append(Array(voltageMeasurements[lastIndex..<voltageMeasurements.count]))
