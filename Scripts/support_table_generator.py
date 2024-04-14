@@ -26,6 +26,7 @@ UNSUPPORTED_SYMBOL = '❌'
 ALL_QUANTITY_TYPES = [
     "HKQuantityTypeIdentifierActiveEnergyBurned",
     "HKQuantityTypeIdentifierAppleExerciseTime",
+    "HKQuantityTypeIdentifierAppleWalkingSteadiness",
     "HKQuantityTypeIdentifierBasalBodyTemperature",
     "HKQuantityTypeIdentifierBasalEnergyBurned",
     "HKQuantityTypeIdentifierBloodAlcoholContent",
@@ -103,7 +104,8 @@ ALL_QUANTITY_TYPES = [
     "HKQuantityTypeIdentifierUVExposure",
     "HKQuantityTypeIdentifierVO2Max",
     "HKQuantityTypeIdentifierWaistCircumference",
-    "HKQuantityTypeIdentifierWalkingHeartRateAverage"
+    "HKQuantityTypeIdentifierWalkingHeartRateAverage",
+    "HKQuantityTypeIdentifierWalkingAsymmetryPercentage"
 ]
 
 ALL_CORRELATION_TYPES = [

@@ -775,6 +775,21 @@
                 "unit": "min"
             }
         },
+        "HKQuantityTypeIdentifierAppleWalkingSteadiness": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierAppleWalkingSteadiness",
+                    "display": "Apple Walking Steadiness",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "%",
+                "hkunit": "%",
+                "system": "http://unitsofmeasure.org",
+                "unit": "%"
+            }
+        },
         "HKQuantityTypeIdentifierBasalBodyTemperature": {
             "codings": [
                 {
@@ -2059,6 +2074,21 @@
                 "hkunit": "in",
                 "system": "http://unitsofmeasure.org",
                 "unit": "in"
+            }
+        },
+        "HKQuantityTypeIdentifierWalkingAsymmetryPercentage": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierWalkingAsymmetryPercentage",
+                    "display": "Walking Asymmetry Percentage",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "%",
+                "hkunit": "%",
+                "system": "http://unitsofmeasure.org",
+                "unit": "%"
             }
         },
         "HKQuantityTypeIdentifierWalkingHeartRateAverage": {

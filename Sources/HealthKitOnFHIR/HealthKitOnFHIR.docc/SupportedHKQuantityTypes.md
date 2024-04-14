@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
              
 -->
 
-HealthKitOnFHIR supports 82 of 84 quantity types.
+HealthKitOnFHIR supports 85 of 87 quantity types.
 
 |HKQuantityType|Supported|Code|Unit|
 |----|----|----|----|
@@ -17,6 +17,7 @@ HealthKitOnFHIR supports 82 of 84 quantity types.
 |[AppleExerciseTime](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierAppleExerciseTime)|✅|[HKQuantityTypeIdentifierAppleExerciseTime](http://developer.apple.com/documentation/healthkit)|[min](http://unitsofmeasure.org)|
 |[AppleMoveTime](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierAppleMoveTime)|✅|[HKQuantityTypeIdentifierAppleMoveTime](http://developer.apple.com/documentation/healthkit)|[min](http://unitsofmeasure.org)|
 |[AppleStandTime](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierAppleStandTime)|✅|[HKQuantityTypeIdentifierAppleStandTime](http://developer.apple.com/documentation/healthkit)|[min](http://unitsofmeasure.org)|
+|[AppleWalkingSteadiness](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierAppleWalkingSteadiness)|✅|[HKQuantityTypeIdentifierAppleWalkingSteadiness](http://developer.apple.com/documentation/healthkit)|[%](http://unitsofmeasure.org)|
 |[BasalBodyTemperature](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBasalBodyTemperature)|✅|[HKQuantityTypeIdentifierBasalBodyTemperature](http://developer.apple.com/documentation/healthkit)|[C](http://unitsofmeasure.org)|
 |[BasalEnergyBurned](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBasalEnergyBurned)|✅|[HKQuantityTypeIdentifierBasalEnergyBurned](http://developer.apple.com/documentation/healthkit)|[kcal](http://unitsofmeasure.org)|
 |[BloodAlcoholContent](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierBloodAlcoholContent)|✅|[74859-0](http://loinc.org/74859-0)|[%](http://unitsofmeasure.org)|
@@ -97,4 +98,5 @@ HealthKitOnFHIR supports 82 of 84 quantity types.
 |[UVExposure](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierUVExposure)|✅|[HKQuantityTypeIdentifierUVExposure](http://developer.apple.com/documentation/healthkit)|count|
 |[VO2Max](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierVO2Max)|✅|[HKQuantityTypeIdentifierVO2Max](http://developer.apple.com/documentation/healthkit)|[mL/kg/min](http://unitsofmeasure.org)|
 |[WaistCircumference](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWaistCircumference)|✅|[8280-0](http://loinc.org/8280-0)|[in](http://unitsofmeasure.org)|
+|[WalkingAsymmetryPercentage](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWalkingAsymmetryPercentage)|✅|[HKQuantityTypeIdentifierWalkingAsymmetryPercentage](http://developer.apple.com/documentation/healthkit)|[%](http://unitsofmeasure.org)|
 |[WalkingHeartRateAverage](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWalkingHeartRateAverage)|✅|[HKQuantityTypeIdentifierWalkingHeartRateAverage](http://developer.apple.com/documentation/healthkit)|[beats/minute](http://unitsofmeasure.org)|

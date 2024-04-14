@@ -1531,6 +1531,36 @@ class HKQuantitySampleTests: XCTestCase {
         )
     }
     
+    func testWalkingAsymmetryPercentage() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.walkingAsymmetryPercentage),
+            quantity: HKQuantity(unit: .percent(), doubleValue: 50)
+        )
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierWalkingAsymmetryPercentage",
+                    display: "Walking Asymmetry Percentage",
+                    system: .apple
+                )
+            ]
+        )
+        
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "%",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "%",
+                    value: 50.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+    
     func testHeartRateVariabilitySDNN() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.heartRateVariabilitySDNN),
@@ -2344,6 +2374,36 @@ class HKQuantitySampleTests: XCTestCase {
                     system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
                     unit: "min",
                     value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+    
+    func testAppleWalkingSteadiness() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.appleWalkingSteadiness),
+            quantity: HKQuantity(unit: .percent(), doubleValue: 50)
+        )
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierAppleWalkingSteadiness",
+                    display: "Apple Walking Steadiness",
+                    system: .apple
+                )
+            ]
+        )
+        
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "%",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "%",
+                    value: 50.asFHIRDecimalPrimitive()
                 )
             )
         )
