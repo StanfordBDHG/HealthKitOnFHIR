@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
              
 -->
 
-HealthKitOnFHIR supports 85 of 87 quantity types.
+HealthKitOnFHIR supports 86 of 88 quantity types.
 
 |HKQuantityType|Supported|Code|Unit|
 |----|----|----|----|
@@ -100,3 +100,4 @@ HealthKitOnFHIR supports 85 of 87 quantity types.
 |[WaistCircumference](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWaistCircumference)|✅|[8280-0](http://loinc.org/8280-0)|[in](http://unitsofmeasure.org)|
 |[WalkingAsymmetryPercentage](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWalkingAsymmetryPercentage)|✅|[HKQuantityTypeIdentifierWalkingAsymmetryPercentage](http://developer.apple.com/documentation/healthkit)|[%](http://unitsofmeasure.org)|
 |[WalkingHeartRateAverage](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWalkingHeartRateAverage)|✅|[HKQuantityTypeIdentifierWalkingHeartRateAverage](http://developer.apple.com/documentation/healthkit)|[beats/minute](http://unitsofmeasure.org)|
+|[WalkingSpeed](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWalkingSpeed)|✅|[HKQuantityTypeIdentifierWalkingSpeed](http://developer.apple.com/documentation/healthkit)|[m/s](http://unitsofmeasure.org)|
