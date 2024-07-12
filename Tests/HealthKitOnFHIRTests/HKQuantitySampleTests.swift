@@ -2439,7 +2439,6 @@ class HKQuantitySampleTests: XCTestCase {
         )
     }
 
-    
     func testDistanceCycling() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceCycling),
