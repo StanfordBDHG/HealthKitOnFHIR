@@ -2409,6 +2409,36 @@ class HKQuantitySampleTests: XCTestCase {
         )
     }
     
+    func testWalkingSpeed() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.walkingSpeed),
+            quantity: HKQuantity(unit: HKUnit.meter().unitDivided(by: HKUnit.second()), doubleValue: 1.5)
+        )
+        
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierWalkingSpeed",
+                    display: "Walking Speed",
+                    system: .apple
+                )
+            ]
+        )
+        
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "m.s-1",
+                    system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
+                    unit: "m/s",
+                    value: 1.5.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+    
     func testDistanceCycling() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceCycling),
