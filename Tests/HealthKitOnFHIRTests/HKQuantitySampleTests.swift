@@ -1582,7 +1582,7 @@ class HKQuantitySampleTests: XCTestCase {
             observation.value,
             .quantity(
                 Quantity(
-                    code: "m.s-1",
+                    code: "m/s",
                     system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
                     unit: "m/s",
                     value: 1.5.asFHIRDecimalPrimitive()

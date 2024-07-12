@@ -2115,7 +2115,7 @@
                 }
             ],
             "unit": {
-                "code": "m.s-1",
+                "code": "m/s",
                 "hkunit": "m/s",
                 "system": "http://unitsofmeasure.org",
                 "unit": "m/s"
