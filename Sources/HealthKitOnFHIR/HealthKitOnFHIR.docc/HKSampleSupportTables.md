@@ -17,5 +17,5 @@ SPDX-License-Identifier: MIT
 - [HKClinicalType](<doc:SupportedHKClinicalTypes>)
     - HealthKitOnFHIR supports 8 of 8 clinical types.
 - [HKQuantityType](<doc:SupportedHKQuantityTypes>)
-    - HealthKitOnFHIR supports 85 of 87 quantity types.
+    - HealthKitOnFHIR supports 86 of 88 quantity types.
     
