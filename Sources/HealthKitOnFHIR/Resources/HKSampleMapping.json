@@ -2105,6 +2105,21 @@
                 "system": "http://unitsofmeasure.org",
                 "unit": "beats/minute"
             }
+        },
+        "HKQuantityTypeIdentifierWalkingSpeed": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierWalkingSpeed",
+                    "display": "Walking Speed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m.s-1",
+                "hkunit": "m/s",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m/s"
+            }
         }
     }
 }
