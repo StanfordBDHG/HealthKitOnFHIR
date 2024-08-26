@@ -10,7 +10,7 @@ import HealthKit
 
 
 /// An ``HKWorkoutSampleMapping`` allows developers to customize the mapping of `HKWorkout` samples to FHIR Observations.
-public struct HKWorkoutSampleMapping: Decodable {
+public struct HKWorkoutSampleMapping: Decodable, Sendable {
     /// A default instance of an ``HKWorkoutSampleMapping`` allowing developers to customize the ``HKWorkoutSampleMapping``
     /// The default values are loaded from the `HKSampleMapping.json` resource in the ``HealthKitOnFHIR`` Swift Package.
     public static let `default` = HKSampleMapping.default.workoutSampleMapping
@@ -26,8 +26,8 @@ public struct HKWorkoutSampleMapping: Decodable {
     ///   - codings: The FHIR codings defined as ``MappedCode``s used for the `HKWorkout` sample
     ///   - categories: The FHIR categories defined as ``MappedCode``s used for the `HKWorkout` sample
     public init(
-        codings: [MappedCode],
-        categories: [MappedCode]
+        codings: [MappedCode] = Self.default.codings,
+        categories: [MappedCode] = Self.default.categories
     ) {
         self.codings = codings
         self.categories = categories

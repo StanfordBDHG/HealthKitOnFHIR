@@ -7,7 +7,7 @@
 //
 
 
-/// Error thrown by the HealthKitOnFHIR module if transforming a specific `HKSample` type to a FHIR resource was not possible.
+/// Error thrown by the HealthKitOnFHIR module if transforming a specific `HKSample` type to an FHIR  resource was not possible.
 public enum HealthKitOnFHIRError: Error {
     /// Indicates that a specific `HKSample` type is currently not supported by HealthKitOnFHIR.
     case notSupported

@@ -120,7 +120,8 @@
                 "system": "http://unitsofmeasure.org",
                 "unit": "uV"
             }
-        }
+        },
+        "voltagePrecision": 3
     },
     "HKCategorySamples": {
         "HKCategoryTypeIdentifierAppetiteChanges": {

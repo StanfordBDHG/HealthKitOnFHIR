@@ -11,7 +11,7 @@ import ModelsR4
 
 
 extension HKSample {
-    /// Converts an `HKSample` into a FHIR resource, encapsulated in a `ResourceProxy`
+    /// Converts an `HKSample` into an FHIR  resource, encapsulated in a `ResourceProxy`
     public var resource: ResourceProxy {
         get throws {
             try resource()
@@ -19,11 +19,11 @@ extension HKSample {
     }
     
     
-    /// A `ResourceProxy` containing a FHIR `Observation` based on the concrete subclass of `HKSample`.
+    /// A `ResourceProxy` containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
     ///
     /// If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
     /// - Parameter withMapping: A mapping to map `HKSample`s to corresponding FHIR observations allowing the customization of, e.g., codings and units. See ``HKSampleMapping``.
-    /// - Returns: A `ResourceProxy`containing a FHIR `Observation` based on the concrete subclass of `HKSample`.
+    /// - Returns: A `ResourceProxy`containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
     public func resource(withMapping mapping: HKSampleMapping = HKSampleMapping.default) throws -> ResourceProxy {
         var observation = Observation(
             code: CodeableConcept(),

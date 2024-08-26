@@ -19,6 +19,7 @@ class TestAppUITests: XCTestCase {
     }
     
     
+    @MainActor
     func testHealthKitOnFHIR() throws {
         let app = XCUIApplication()
         app.launch()
@@ -49,6 +50,7 @@ class TestAppUITests: XCTestCase {
         app.swipeDown(velocity: XCUIGestureVelocity.fast)
     }
     
+    @MainActor
     func testECGHealthKitMapping() throws {
         let app = XCUIApplication()
         app.launch()
@@ -71,6 +73,7 @@ class TestAppUITests: XCTestCase {
         app.swipeDown(velocity: XCUIGestureVelocity.fast)
     }
 
+    @MainActor
     func testWorkoutMapping() throws {
         let app = XCUIApplication()
         app.launch()

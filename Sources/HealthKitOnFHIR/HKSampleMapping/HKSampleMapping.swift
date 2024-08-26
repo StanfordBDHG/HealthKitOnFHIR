@@ -10,7 +10,7 @@ import HealthKit
 
 
 /// A ``HKSampleMapping`` instance is used to specify the mapping of `HKSample`s to FHIR observations allowing the customization of, e.g., codings and units.
-public struct HKSampleMapping: Decodable {
+public struct HKSampleMapping: Decodable, Sendable {
     private enum CodingKeys: String, CodingKey {
         case quantitySampleMapping = "HKQuantitySamples"
         case categorySampleMapping = "HKCategorySamples"
@@ -34,9 +34,9 @@ public struct HKSampleMapping: Decodable {
     public var categorySampleMapping: [HKCategoryType: HKCategorySampleMapping]
     /// The ``HKSampleMapping/correlationMapping`` property defines the mapping of `HKCorrelationType`s to FHIR observations.
     public var correlationMapping: [HKCorrelationType: HKCorrelationMapping]
-    /// The ``HKSampleMapping/electrocardiogramMapping`` property defines the mapping of  an`HKElectrocardiogramMapping` to a FHIR observation.
+    /// The ``HKSampleMapping/electrocardiogramMapping`` property defines the mapping of  an`HKElectrocardiogramMapping` to an FHIR  observation.
     public var electrocardiogramMapping: HKElectrocardiogramMapping
-    /// The ``HKSampleMapping/workoutMapping`` property defines the mapping of an `HKWorkout` to a FHIR Observation.
+    /// The ``HKSampleMapping/workoutMapping`` property defines the mapping of an `HKWorkout` to an FHIR  Observation.
     public var workoutSampleMapping: HKWorkoutSampleMapping
 
     

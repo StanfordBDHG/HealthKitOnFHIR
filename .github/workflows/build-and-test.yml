@@ -20,17 +20,27 @@ jobs:
     name: Build and Test Swift Package
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
     with:
-      artifactname: HealthKitOnFHIR.xcresult
       runsonlabels: '["macOS", "self-hosted"]'
       scheme: HealthKitOnFHIR
+      artifactname: HealthKitOnFHIR.xcresult
+  buildandtestlatest:
+    name: Build and Test Swift Package Latest
+    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
+    with:
+      runsonlabels: '["macOS", "self-hosted"]'
+      scheme: HealthKitOnFHIR
+      xcodeversion: latest
+      swiftVersion: 6
+      resultBundle: HealthKitOnFHIRLatest.xcresult
+      artifactname: HealthKitOnFHIRLatest.xcresult
   buildandtestuitests:
     name: Build and Test UI Tests
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
     with:
-      artifactname: TestApp.xcresult
       runsonlabels: '["macOS", "self-hosted"]'
       path: Tests/UITests
       scheme: TestApp
+      artifactname: TestApp.xcresult
   uploadcoveragereport:
     name: Upload Coverage Report
     needs: [buildandtest, buildandtestuitests]

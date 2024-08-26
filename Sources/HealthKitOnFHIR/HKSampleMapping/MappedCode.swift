@@ -11,7 +11,7 @@ import ModelsR4
 
 
 /// A ``MappedCode`` instance is used to specify codings for FHIR observations mapped from HealthKit's `HKSample`s.
-public struct MappedCode: Decodable {
+public struct MappedCode: Decodable, Sendable {
     /// Symbol in syntax defined by the system.
     public var code: String
     /// Representation defined by the system.
