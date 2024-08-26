@@ -65,7 +65,7 @@ extension HKElectrocardiogram {
     public typealias VoltageMeasurements = [(time: TimeInterval, value: HKQuantity)]
     
     
-    /// Creates a FHIR observation incorporating additional `Symptoms` and`VoltageMeasurements` collected in HealthKit.
+    /// Creates an FHIR  observation incorporating additional `Symptoms` and`VoltageMeasurements` collected in HealthKit.
     /// If you do not need `HKElectrocardiogram` specific context added you can use the generic `observation` extension on `HKSample`.
     ///
     /// - Parameters:
@@ -249,11 +249,12 @@ extension HKElectrocardiogram {
         // Check that we did not loose any data in the batching process.
         assert(voltageMeasurements.count == voltageMeasurementBatches.reduce(0, { $0 + $1.count }))
         
+        let voltagePrecision = mappings.electrocardiogramMapping.voltagePrecision
         for voltageMeasurementBatch in voltageMeasurementBatches {
             // Create a space separated string of all the measurement values as defined by the mapping unit
             let data = voltageMeasurementBatch
                 .map {
-                    $0.value.doubleValue(for: mapping.unit.hkunit).description
+                    String(format: "%.\(voltagePrecision)f", $0.value.doubleValue(for: mapping.unit.hkunit))
                 }
                 .joined(separator: " ")
             

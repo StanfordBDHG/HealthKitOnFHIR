@@ -10,7 +10,7 @@ import HealthKit
 
 
 /// An ``HKQuantitySampleMapping`` allows developers to customize the mapping of `HKQuantitySample`s to an FHIR observations.
-public struct HKQuantitySampleMapping: Decodable {
+public struct HKQuantitySampleMapping: Decodable, Sendable {
     /// A default instance of an ``HKQuantitySampleMapping`` instance allowing developers to customize the ``HKQuantitySampleMapping``.
     ///
     /// The default values are loaded from the `HKSampleMapping.json` resource in the ``HealthKitOnFHIR`` Swift Package.
