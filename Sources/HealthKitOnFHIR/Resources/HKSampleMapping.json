@@ -121,7 +121,7 @@
                 "unit": "uV"
             }
         },
-        "voltagePrecision": 2
+        "voltagePrecision": 3
     },
     "HKCategorySamples": {
         "HKCategoryTypeIdentifierAppetiteChanges": {
