@@ -30,7 +30,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/FHIRModels.git", .upToNextMajor(from: "0.4.0"))
-    ],
+    ] + swiftLintPackage(),
     targets: [
         .target(
             name: "HealthKitOnFHIR",
