@@ -56,7 +56,10 @@ class TestAppUITests: XCTestCase {
         app.launch()
         
         try exitAppAndOpenHealth(.electrocardiograms)
-        
+
+        app.launch()
+        XCTAssert(app.wait(for: .runningForeground, timeout: 6.0))
+
         XCTAssert(app.staticTexts["Electrocardiogram"].waitForExistence(timeout: 5))
         app.staticTexts["Electrocardiogram"].tap()
         XCTAssert(app.buttons["Read Electrocardiogram"].waitForExistence(timeout: 5))
