@@ -1764,6 +1764,37 @@ class HKQuantitySampleTests: XCTestCase {
         )
     }
     
+    @available(iOS 17.0, *)
+    func testTimeInDaylight() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.timeInDaylight),
+            quantity: HKQuantity(unit: .minute(), doubleValue: 100)
+        )
+            
+        XCTAssertEqual(
+            observation.code.coding,
+            [
+                createCoding(
+                    code: "HKQuantityTypeIdentifierTimeInDaylight",
+                    display: "Time in Daylight",
+                    system: .apple
+                )
+            ]
+        )
+            
+        XCTAssertEqual(
+            observation.value,
+            .quantity(
+                Quantity(
+                    code: "min",
+                    system: "http://unitsofmeasure.org",
+                    unit: "min",
+                    value: 100.asFHIRDecimalPrimitive()
+                )
+            )
+        )
+    }
+    
     func testUVExposure() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.uvExposure),
