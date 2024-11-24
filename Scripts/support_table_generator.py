@@ -101,6 +101,7 @@ ALL_QUANTITY_TYPES = [
     "HKQuantityTypeIdentifierRestingHeartRate",
     "HKQuantityTypeIdentifierStepCount",
     "HKQuantityTypeIdentifierSwimmingStrokeCount",
+    "HKQuantityTypeIdentifierTimeInDaylight",
     "HKQuantityTypeIdentifierUVExposure",
     "HKQuantityTypeIdentifierVO2Max",
     "HKQuantityTypeIdentifierWaistCircumference",
