@@ -9,7 +9,7 @@ SPDX-License-Identifier: MIT
              
 -->
 
-HealthKitOnFHIR supports 86 of 88 quantity types.
+HealthKitOnFHIR supports 87 of 89 quantity types.
 
 |HKQuantityType|Supported|Code|Unit|
 |----|----|----|----|
@@ -95,6 +95,7 @@ HealthKitOnFHIR supports 86 of 88 quantity types.
 |[RestingHeartRate](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierRestingHeartRate)|✅|[40443-4](http://loinc.org/40443-4)|[beats/minute](http://unitsofmeasure.org)|
 |[StepCount](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierStepCount)|✅|[55423-8](http://loinc.org/55423-8)|steps|
 |[SwimmingStrokeCount](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierSwimmingStrokeCount)|✅|[HKQuantityTypeIdentifierSwimmingStrokeCount](http://developer.apple.com/documentation/healthkit)|strokes|
+|[TimeInDaylight](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierTimeInDaylight)|✅|[HKQuantityTypeIdentifierTimeInDaylight](http://developer.apple.com/documentation/healthkit)|[min](http://unitsofmeasure.org)|
 |[UVExposure](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierUVExposure)|✅|[HKQuantityTypeIdentifierUVExposure](http://developer.apple.com/documentation/healthkit)|count|
 |[VO2Max](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierVO2Max)|✅|[HKQuantityTypeIdentifierVO2Max](http://developer.apple.com/documentation/healthkit)|[mL/kg/min](http://unitsofmeasure.org)|
 |[WaistCircumference](https://developer.apple.com/documentation/healthkit/HKQuantityTypeIdentifierWaistCircumference)|✅|[8280-0](http://loinc.org/8280-0)|[in](http://unitsofmeasure.org)|
