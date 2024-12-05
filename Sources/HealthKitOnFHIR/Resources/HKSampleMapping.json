@@ -2029,6 +2029,21 @@
                 "unit": "strokes"
             }
         },
+        "HKQuantityTypeIdentifierTimeInDaylight": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierTimeInDaylight",
+                    "display": "Time in Daylight",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "min",
+                "hkunit": "min",
+                "system": "http://unitsofmeasure.org",
+                "unit": "min"
+            }
+        },
         "HKQuantityTypeIdentifierUVExposure": {
             "codings": [
                 {
