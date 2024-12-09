@@ -12,7 +12,7 @@ import HealthKit
 extension HKSample {
     /// Gets the `TimeZone` from the sample's metadata if available
     /// - Returns: A `TimeZone` if the metadata contains a valid HKMetadataKeyTimeZone value, otherwise nil
-    public var timeZone: TimeZone? {
+    internal var timeZone: TimeZone? {
         guard let timeZoneIdentifier = metadata?[HKMetadataKeyTimeZone] as? String else {
             return nil
         }
