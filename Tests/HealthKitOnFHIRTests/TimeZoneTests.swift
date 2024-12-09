@@ -25,8 +25,8 @@ class TimeZoneTests: XCTestCase {
     }
     
     func createDatesFor(timeZone: String) throws -> (start: Date, end: Date) {
-        let startComponents = DateComponents(year: 2024, month: 3, day: 15, hour: 9, minute: 30, second: 0)
-        let endComponents = DateComponents(year: 2024, month: 3, day: 15, hour: 10, minute: 45, second: 0)
+        let startComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 9, minute: 00, second: 0)
+        let endComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 10, minute: 45, second: 0)
         
         return (
             try getTimeZoneDate(startComponents, timeZoneName: timeZone),
@@ -74,12 +74,12 @@ class TimeZoneTests: XCTestCase {
         
         XCTAssertEqual(
             startTimestamp,
-            "2024-03-15T09:30:00-08:00",
+            "2024-12-01T09:00:00-08:00",
             "Start timestamp should match expected format with timezone"
         )
         XCTAssertEqual(
             endTimestamp,
-            "2024-03-15T10:45:00-08:00",
+            "2024-12-01T10:45:00-08:00",
             "End timestamp should match expected format with timezone"
         )
     }
@@ -107,12 +107,12 @@ class TimeZoneTests: XCTestCase {
 
         XCTAssertEqual(
             startTimestamp,
-            "2024-03-15T09:30:00-05:00",
+            "2024-12-01T09:00:00-05:00",
             "Start timestamp should match expected format with timezone"
         )
         XCTAssertEqual(
             endTimestamp,
-            "2024-03-15T10:45:00-05:00",
+            "2024-12-01T10:45:00-05:00",
             "End timestamp should match expected format with timezone"
         )
     }
@@ -140,12 +140,12 @@ class TimeZoneTests: XCTestCase {
         
         XCTAssertEqual(
             startTimestamp,
-            "2024-03-15T09:30:00+05:30",
+            "2024-12-01T09:00:00+05:30",
             "Start timestamp should match expected format with timezone"
         )
         XCTAssertEqual(
             endTimestamp,
-            "2024-03-15T10:45:00+05:30",
+            "2024-12-01T10:45:00+05:30",
             "End timestamp should match expected format with timezone"
         )
     }
@@ -178,9 +178,11 @@ class TimeZoneTests: XCTestCase {
         let endTimestamp = try XCTUnwrap(period.end?.value?.description)
         
         let currentTimeZone = TimeZone.current
-        let expectedOffset = currentTimeZone.secondsFromGMT() / 3600
-        let sign = expectedOffset >= 0 ? "+" : "-"
-        let expectedOffsetString = String(format: "%@%02d:00", sign, abs(expectedOffset))
+        let totalMinutes = currentTimeZone.secondsFromGMT() / 60
+        let hours = abs(totalMinutes / 60)
+        let minutes = abs(totalMinutes % 60)
+        let sign = totalMinutes >= 0 ? "+" : "-"
+        let expectedOffsetString = String(format: "%@%02d:%02d", sign, hours, minutes)
         
         XCTAssertTrue(
             startTimestamp.contains(expectedOffsetString),
