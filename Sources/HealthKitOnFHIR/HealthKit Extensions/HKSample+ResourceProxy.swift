@@ -33,7 +33,11 @@ extension HKSample {
         // Set basic elements applicable to all observations
         observation.id = self.uuid.uuidString.asFHIRStringPrimitive()
         observation.appendIdentifier(Identifier(id: observation.id))
-        observation.setEffective(startDate: self.startDate, endDate: self.endDate)
+        observation.setEffective(
+            startDate: self.startDate,
+            endDate: self.endDate,
+            timeZone: self.timeZone ?? .current
+        )
         observation.setIssued(on: Date())
         
         // Set specific data based on HealthKit type
