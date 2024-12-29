@@ -337,6 +337,15 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         let expectedOffsetString = String(format: "%@%02d:%02d", sign, hours, minutes)
         
         XCTAssertTrue(
+            startTimestamp.starts(with: "2024-12-01T09:00:00"),
+            "Start timestamp should begin with correct date and time"
+        )
+        XCTAssertTrue(
+            endTimestamp.starts(with: "2024-12-01T10:45:00"),
+            "End timestamp should begin with correct date and time"
+        )
+        
+        XCTAssertTrue(
             startTimestamp.contains(expectedOffsetString),
             "Start time should contain current timezone offset \(expectedOffsetString)"
         )
@@ -375,6 +384,11 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         let minutes = abs(totalMinutes % 60)
         let sign = totalMinutes >= 0 ? "+" : "-"
         let expectedOffsetString = String(format: "%@%02d:%02d", sign, hours, minutes)
+        
+        XCTAssertTrue(
+            timestamp.starts(with: "2024-12-01T09:00:00"),
+            "Timestamp should begin with correct date and time"
+        )
         
         XCTAssertTrue(
             timestamp.contains(expectedOffsetString),
