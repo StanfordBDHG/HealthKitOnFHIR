@@ -12,14 +12,22 @@ import ModelsR4
 
 
 extension Observation {
-    func setEffective(startDate: Date, endDate: Date) {
+    func setEffective(startDate: Date, endDate: Date, timeZone: TimeZone) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = timeZone
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        
         if startDate == endDate {
-            effective = .dateTime(FHIRPrimitive(try? DateTime(date: startDate)))
+            effective = .dateTime(
+                FHIRPrimitive(
+                    try? DateTime(dateFormatter.string(from: startDate))
+                )
+            )
         } else {
             effective = .period(
                 Period(
-                    end: FHIRPrimitive(try? DateTime(date: endDate)),
-                    start: FHIRPrimitive(try? DateTime(date: startDate))
+                    end: FHIRPrimitive(try? DateTime(dateFormatter.string(from: endDate))),
+                    start: FHIRPrimitive(try? DateTime(dateFormatter.string(from: startDate)))
                 )
             )
         }
