@@ -26,6 +26,8 @@ HealthKitOnFHIR supports:
 
 Please refer to the [HKObject Support Table](Sources/HealthKitOnFHIR/HealthKitOnFHIR.docc/HKSampleSupportTables.md) for a complete list of supported types.
 
+> [!NOTE] 
+> HealthKitOnFHIR will use the time zone specified in [HKMetadataKeyTimeZone](https://developer.apple.com/documentation/healthkit/hkmetadatakeytimezone) when creating FHIR resources from HealthKit samples. If no time zone is specified, HealthKitOnFHIR will use the device's current time zone.
 
 ## Installation
 
