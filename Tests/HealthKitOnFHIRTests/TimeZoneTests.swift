@@ -12,7 +12,7 @@ import ModelsR4
 import XCTest
 
 
-class TimeZoneTests: XCTestCase {
+class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
     func createDateInTimeZone(_ components: DateComponents, timeZone: TimeZone) throws -> Date {
         var calendar = Calendar.current
         calendar.timeZone = timeZone
@@ -62,7 +62,7 @@ class TimeZoneTests: XCTestCase {
     }
     
     
-    /// Tests specifying the pacific standard time zone (-08:00) in metadata with a different start and end date
+    /// Tests specifying the pacific standard time zone (-08:00) in metadata with a different start and end date (results in a FHIR `Period`)
     func testPSTTimeZonePeriod() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
@@ -95,10 +95,10 @@ class TimeZoneTests: XCTestCase {
         )
     }
 
-    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with the same start and end date
+    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with the same start and end date (results in a FHIR `DateTime`)
     func testPSTTimeZoneDateTime() throws {
         let timeZone = "America/Los_Angeles"
-        let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
+        let (startDate, _) = try createDatesFor(timeZone: timeZone)
         
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),
@@ -122,7 +122,7 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with a different start and end date
+    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with a different start and end date (results in a FHIR `Period`)
     func testPSTTimeZoneWithDSTPeriod() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, endDate) = try createDSTDatesFor(timeZone: timeZone)
@@ -155,10 +155,10 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with the same start and end date
+    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with the same start and end date  (results in a FHIR `DateTime`)
     func testPSTTimeZoneWithDSTDateTime() throws {
         let timeZone = "America/Los_Angeles"
-        let (startDate, endDate) = try createDSTDatesFor(timeZone: timeZone)
+        let (startDate, _) = try createDSTDatesFor(timeZone: timeZone)
         
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),
@@ -182,7 +182,7 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests specifying eastern standard time (-5:00) in metadata with an HKSample that defines a period with a different start and end date
+    /// Tests specifying eastern standard time (-5:00) in metadata with an HKSample that defines a period with a different start and end date (results in a FHIR `Period`)
     func testESTTimeZonePeriod() throws {
         let timeZone = "America/New_York"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
@@ -215,10 +215,10 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests specifying eastern standard time (-5:00) in metadata with the same start and end date
+    /// Tests specifying eastern standard time (-5:00) in metadata with the same start and end date (results in a FHIR `DateTime`)
     func testESTTimeZoneDateTime() throws {
         let timeZone = "America/New_York"
-        let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
+        let (startDate, _) = try createDatesFor(timeZone: timeZone)
         
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),
@@ -242,7 +242,7 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests specifying indian standard time (+5:30) in metadata with a different start and end date
+    /// Tests specifying indian standard time (+5:30) in metadata with a different start and end date (results in a FHIR `Period`)
     func testISTTimeZonePeriod() throws {
         let timeZone = "Asia/Calcutta"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
@@ -275,10 +275,10 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests specifying indian standard time (+5:30) in metadata with the same start and end date
+    /// Tests specifying indian standard time (+5:30) in metadata with the same start and end date  (results in a FHIR `DateTime`)
     func testISTTimeZoneDateTime() throws {
         let timeZone = "Asia/Calcutta"
-        let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
+        let (startDate, _) = try createDatesFor(timeZone: timeZone)
         
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),
@@ -302,7 +302,7 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests that the current time zone is added if a time zone is not specified in metadata with a different start and end date
+    /// Tests that the current time zone is added if a time zone is not specified in metadata with a different start and end date (results in a FHIR `Period`)
     func testDefaultTimeZonePeriod() throws {
         let startDate: Date = try {
             let dateComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 9, minute: 00, second: 0)
@@ -346,7 +346,7 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests that the current time zone is added if a time zone is not specified in metadata with the same start and end date
+    /// Tests that the current time zone is added if a time zone is not specified in metadata with the same start and end date  (results in a FHIR `DateTime`)
     func testDefaultTimeZoneDateTime() throws {
         let startDate: Date = try {
             let dateComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 9, minute: 00, second: 0)
