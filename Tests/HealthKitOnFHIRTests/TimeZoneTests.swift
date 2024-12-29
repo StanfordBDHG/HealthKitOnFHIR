@@ -95,7 +95,7 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
     }
 
-    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with the same start and end date (results in a FHIR `DateTime`)
+    /// Tests specifying the pacific standard time zone (-8:00) in metadata with the same start and end date (results in a FHIR `DateTime`)
     func testPSTTimeZoneDateTime() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, _) = try createDatesFor(timeZone: timeZone)
@@ -123,7 +123,7 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
     
     /// Tests specifying the pacific daylight time zone (-7:00) in metadata with a different start and end date (results in a FHIR `Period`)
-    func testPSTTimeZoneWithDSTPeriod() throws {
+    func testPDTTimeZonePeriod() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, endDate) = try createDSTDatesFor(timeZone: timeZone)
         
@@ -156,7 +156,7 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
     }
     
     /// Tests specifying the pacific daylight time zone (-7:00) in metadata with the same start and end date  (results in a FHIR `DateTime`)
-    func testPSTTimeZoneWithDSTDateTime() throws {
+    func testPDTTimeZoneDateTime() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, _) = try createDSTDatesFor(timeZone: timeZone)
         
