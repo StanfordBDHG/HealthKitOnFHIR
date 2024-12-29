@@ -34,6 +34,16 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
+    func createDSTDatesFor(timeZone: String) throws -> (start: Date, end: Date) {
+        let startComponents = DateComponents(year: 2024, month: 4, day: 1, hour: 9, minute: 00, second: 0)
+        let endComponents = DateComponents(year: 2024, month: 4, day: 1, hour: 10, minute: 45, second: 0)
+        
+        return (
+            try getTimeZoneDate(startComponents, timeZoneName: timeZone),
+            try getTimeZoneDate(endComponents, timeZoneName: timeZone)
+        )
+    }
+    
     func createObservationFrom(
         type quantityType: HKQuantityType,
         quantity: HKQuantity,
@@ -51,7 +61,7 @@ class TimeZoneTests: XCTestCase {
         return try XCTUnwrap(quantitySample.resource.get(if: Observation.self))
     }
     
-    /// Tests specifying the pacific time zone (-08:00) in metadata
+    /// Tests specifying the pacific standard time zone (-08:00) in metadata
     func testPSTTimeZone() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
@@ -80,6 +90,39 @@ class TimeZoneTests: XCTestCase {
         XCTAssertEqual(
             endTimestamp,
             "2024-12-01T10:45:00-08:00",
+            "End timestamp should match expected format with timezone"
+        )
+    }
+    
+    /// Tests specifying the pacific daylight time zone (-7:00) in metadata
+    func testPSTTimeZoneWithDST() throws {
+        let timeZone = "America/Los_Angeles"
+        let (startDate, endDate) = try createDSTDatesFor(timeZone: timeZone)
+        
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            start: startDate,
+            end: endDate,
+            metadata: [HKMetadataKeyTimeZone: timeZone]
+        )
+        
+        guard case let .period(period) = observation.effective else {
+            XCTFail("Expected period effective type")
+            return
+        }
+        
+        let startTimestamp = try XCTUnwrap(period.start?.value?.description)
+        let endTimestamp = try XCTUnwrap(period.end?.value?.description)
+        
+        XCTAssertEqual(
+            startTimestamp,
+            "2024-04-01T09:00:00-07:00",
+            "Start timestamp should match expected format with timezone"
+        )
+        XCTAssertEqual(
+            endTimestamp,
+            "2024-04-01T10:45:00-07:00",
             "End timestamp should match expected format with timezone"
         )
     }
@@ -153,12 +196,12 @@ class TimeZoneTests: XCTestCase {
     /// Tests that the current time zone is added if a time zone is not specified in metadata
     func testDefaultTimeZone() throws {
         let startDate: Date = try {
-            let dateComponents = DateComponents(year: 2024, month: 3, day: 15, hour: 9, minute: 30, second: 0)
+            let dateComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 9, minute: 00, second: 0)
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }()
         
         let endDate: Date = try {
-            let dateComponents = DateComponents(year: 2024, month: 3, day: 15, hour: 10, minute: 45, second: 0)
+            let dateComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 10, minute: 45, second: 0)
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }()
         
