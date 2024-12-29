@@ -61,8 +61,9 @@ class TimeZoneTests: XCTestCase {
         return try XCTUnwrap(quantitySample.resource.get(if: Observation.self))
     }
     
-    /// Tests specifying the pacific standard time zone (-08:00) in metadata
-    func testPSTTimeZone() throws {
+    
+    /// Tests specifying the pacific standard time zone (-08:00) in metadata with a different start and end date
+    func testPSTTimeZonePeriod() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
         
@@ -93,9 +94,36 @@ class TimeZoneTests: XCTestCase {
             "End timestamp should match expected format with timezone"
         )
     }
+
+    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with the same start and end date
+    func testPSTTimeZoneDateTime() throws {
+        let timeZone = "America/Los_Angeles"
+        let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
+        
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            start: startDate,
+            end: startDate,
+            metadata: [HKMetadataKeyTimeZone: timeZone]
+        )
+        
+        guard case let .dateTime(dateTime) = observation.effective else {
+            XCTFail("Expected dateTime effective type")
+            return
+        }
+        
+        let timestamp = try XCTUnwrap(dateTime.value?.description)
+        
+        XCTAssertEqual(
+            timestamp,
+            "2024-12-01T09:00:00-08:00",
+            "Timestamp should match expected format with timezone"
+        )
+    }
     
-    /// Tests specifying the pacific daylight time zone (-7:00) in metadata
-    func testPSTTimeZoneWithDST() throws {
+    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with a different start and end date
+    func testPSTTimeZoneWithDSTPeriod() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, endDate) = try createDSTDatesFor(timeZone: timeZone)
         
@@ -127,8 +155,35 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests specifying eastern standard time (-5:00) in metadata
-    func testESTTimeZone() throws {
+    /// Tests specifying the pacific daylight time zone (-7:00) in metadata with the same start and end date
+    func testPSTTimeZoneWithDSTDateTime() throws {
+        let timeZone = "America/Los_Angeles"
+        let (startDate, endDate) = try createDSTDatesFor(timeZone: timeZone)
+        
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            start: startDate,
+            end: startDate,
+            metadata: [HKMetadataKeyTimeZone: timeZone]
+        )
+        
+        guard case let .dateTime(dateTime) = observation.effective else {
+            XCTFail("Expected dateTime effective type")
+            return
+        }
+        
+        let timestamp = try XCTUnwrap(dateTime.value?.description)
+        
+        XCTAssertEqual(
+            timestamp,
+            "2024-04-01T09:00:00-07:00",
+            "Timestamp should match expected format with timezone during DST"
+        )
+    }
+    
+    /// Tests specifying eastern standard time (-5:00) in metadata with an HKSample that defines a period with a different start and end date
+    func testESTTimeZonePeriod() throws {
         let timeZone = "America/New_York"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
         
@@ -160,8 +215,35 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests specifying indian standard time (+5:30) in metadata
-    func testISTTimeZone() throws {
+    /// Tests specifying eastern standard time (-5:00) in metadata with the same start and end date
+    func testESTTimeZoneDateTime() throws {
+        let timeZone = "America/New_York"
+        let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
+        
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            start: startDate,
+            end: startDate,
+            metadata: [HKMetadataKeyTimeZone: timeZone]
+        )
+        
+        guard case let .dateTime(dateTime) = observation.effective else {
+            XCTFail("Expected dateTime effective type")
+            return
+        }
+        
+        let timestamp = try XCTUnwrap(dateTime.value?.description)
+        
+        XCTAssertEqual(
+            timestamp,
+            "2024-12-01T09:00:00-05:00",
+            "Timestamp should match expected format with timezone"
+        )
+    }
+    
+    /// Tests specifying indian standard time (+5:30) in metadata with a different start and end date
+    func testISTTimeZonePeriod() throws {
         let timeZone = "Asia/Calcutta"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
         
@@ -193,8 +275,35 @@ class TimeZoneTests: XCTestCase {
         )
     }
     
-    /// Tests that the current time zone is added if a time zone is not specified in metadata
-    func testDefaultTimeZone() throws {
+    /// Tests specifying indian standard time (+5:30) in metadata with the same start and end date
+    func testISTTimeZoneDateTime() throws {
+        let timeZone = "Asia/Calcutta"
+        let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
+        
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            start: startDate,
+            end: startDate,
+            metadata: [HKMetadataKeyTimeZone: timeZone]
+        )
+        
+        guard case let .dateTime(dateTime) = observation.effective else {
+            XCTFail("Expected dateTime effective type")
+            return
+        }
+        
+        let timestamp = try XCTUnwrap(dateTime.value?.description)
+        
+        XCTAssertEqual(
+            timestamp,
+            "2024-12-01T09:00:00+05:30",
+            "Timestamp should match expected format with timezone"
+        )
+    }
+    
+    /// Tests that the current time zone is added if a time zone is not specified in metadata with a different start and end date
+    func testDefaultTimeZonePeriod() throws {
         let startDate: Date = try {
             let dateComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 9, minute: 00, second: 0)
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
@@ -234,6 +343,42 @@ class TimeZoneTests: XCTestCase {
         XCTAssertTrue(
             endTimestamp.contains(expectedOffsetString),
             "End time should contain current timezone offset \(expectedOffsetString)"
+        )
+    }
+    
+    /// Tests that the current time zone is added if a time zone is not specified in metadata with the same start and end date
+    func testDefaultTimeZoneDateTime() throws {
+        let startDate: Date = try {
+            let dateComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 9, minute: 00, second: 0)
+            return try XCTUnwrap(Calendar.current.date(from: dateComponents))
+        }()
+        
+        let endDate = startDate
+        
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            start: startDate,
+            end: endDate
+        )
+        
+        guard case let .dateTime(dateTime) = observation.effective else {
+            XCTFail("Expected dateTime effective type")
+            return
+        }
+        
+        let timestamp = try XCTUnwrap(dateTime.value?.description)
+        
+        let currentTimeZone = TimeZone.current
+        let totalMinutes = currentTimeZone.secondsFromGMT() / 60
+        let hours = abs(totalMinutes / 60)
+        let minutes = abs(totalMinutes % 60)
+        let sign = totalMinutes >= 0 ? "+" : "-"
+        let expectedOffsetString = String(format: "%@%02d:%02d", sign, hours, minutes)
+        
+        XCTAssertTrue(
+            timestamp.contains(expectedOffsetString),
+            "Time should contain current timezone offset \(expectedOffsetString)"
         )
     }
 }
