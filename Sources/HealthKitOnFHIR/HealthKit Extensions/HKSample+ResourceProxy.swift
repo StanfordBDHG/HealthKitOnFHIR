@@ -50,8 +50,10 @@ extension HKSample {
             try categorySample.buildCategoryObservation(&observation)
         case let electrocardiogram as HKElectrocardiogram:
             try electrocardiogram.buildObservation(&observation, mappings: mapping)
+        #if !os(watchOS)
         case let clinicalRecord as HKClinicalRecord:
             return try clinicalRecord.resource()
+        #endif
         case let workout as HKWorkout:
             try workout.buildWorkoutObservation(&observation)
         default:
