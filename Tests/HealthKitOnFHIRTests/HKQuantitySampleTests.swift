@@ -1764,7 +1764,7 @@ class HKQuantitySampleTests: XCTestCase {
         )
     }
     
-    @available(iOS 17.0, *)
+    @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
     func testTimeInDaylight() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.timeInDaylight),
@@ -2379,7 +2379,7 @@ class HKQuantitySampleTests: XCTestCase {
         )
     }
     
-    @available(iOS 17.0, *)
+    @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
     func testApplePhysicalEffort() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.physicalEffort),
