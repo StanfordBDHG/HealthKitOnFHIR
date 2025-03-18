@@ -16,23 +16,32 @@ on:
   workflow_dispatch:
 
 jobs:
-  buildandtest:
-    name: Build and Test Swift Package
+  buildandtest_ios:
+    name: Build and Test Swift Package iOS
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
     with:
       runsonlabels: '["macOS", "self-hosted"]'
       scheme: HealthKitOnFHIR
-      artifactname: HealthKitOnFHIR.xcresult
-  buildandtestlatest:
-    name: Build and Test Swift Package Latest
+      resultBundle: HealthKitOnFHIR-iOS.xcresult
+      artifactname: HealthKitOnFHIR-iOS.xcresult
+  buildandtest_macos:
+    name: Build and Test Swift Package macOS
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
     with:
       runsonlabels: '["macOS", "self-hosted"]'
       scheme: HealthKitOnFHIR
-      xcodeversion: latest
-      swiftVersion: 6
-      resultBundle: HealthKitOnFHIRLatest.xcresult
-      artifactname: HealthKitOnFHIRLatest.xcresult
+      destination: 'platform=macOS,arch=arm64'
+      resultBundle: HealthKitOnFHIR-macOS.xcresult
+      artifactname: HealthKitOnFHIR-macOS.xcresult
+  buildandtest_watchos:
+    name: Build and Test Swift Package watchOS
+    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
+    with:
+      runsonlabels: '["macOS", "self-hosted"]'
+      scheme: HealthKitOnFHIR
+      destination: 'platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)'
+      resultBundle: HealthKitOnFHIR-watchOS.xcresult
+      artifactname: HealthKitOnFHIR-watchOS.xcresult
   buildandtestuitests:
     name: Build and Test UI Tests
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
@@ -43,9 +52,9 @@ jobs:
       artifactname: TestApp.xcresult
   uploadcoveragereport:
     name: Upload Coverage Report
-    needs: [buildandtest, buildandtestuitests]
+    needs: [buildandtest_ios, buildandtest_macos, buildandtest_watchos, buildandtestuitests]
     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
     with:
-      coveragereports: HealthKitOnFHIR.xcresult TestApp.xcresult
+      coveragereports: HealthKitOnFHIR-iOS.xcresult HealthKitOnFHIR-macOS.xcresult HealthKitOnFHIR-watchOS.xcresult TestApp.xcresult
     secrets:
       token: ${{ secrets.CODECOV_TOKEN }}
