@@ -24,6 +24,7 @@ extension HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueCervicalMucusQuality: @retroactive CustomStringConvertible {}
 extension HKCategoryValueCervicalMucusQuality: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -45,6 +46,7 @@ extension HKCategoryValueCervicalMucusQuality: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueMenstrualFlow: @retroactive CustomStringConvertible {}
 extension HKCategoryValueMenstrualFlow: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -66,6 +68,7 @@ extension HKCategoryValueMenstrualFlow: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueOvulationTestResult: @retroactive CustomStringConvertible {}
 extension HKCategoryValueOvulationTestResult: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -85,6 +88,7 @@ extension HKCategoryValueOvulationTestResult: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueContraceptive: @retroactive CustomStringConvertible {}
 extension HKCategoryValueContraceptive: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -110,6 +114,7 @@ extension HKCategoryValueContraceptive: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueSleepAnalysis: @retroactive CustomStringConvertible {}
 extension HKCategoryValueSleepAnalysis: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -133,6 +138,7 @@ extension HKCategoryValueSleepAnalysis: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueAppetiteChanges: @retroactive CustomStringConvertible {}
 extension HKCategoryValueAppetiteChanges: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -152,6 +158,7 @@ extension HKCategoryValueAppetiteChanges: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueEnvironmentalAudioExposureEvent: @retroactive CustomStringConvertible {}
 extension HKCategoryValueEnvironmentalAudioExposureEvent: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -165,6 +172,7 @@ extension HKCategoryValueEnvironmentalAudioExposureEvent: HKCategoryValueDescrip
     }
 }
 
+extension HKCategoryValueHeadphoneAudioExposureEvent: @retroactive CustomStringConvertible {}
 extension HKCategoryValueHeadphoneAudioExposureEvent: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -178,6 +186,7 @@ extension HKCategoryValueHeadphoneAudioExposureEvent: HKCategoryValueDescription
     }
 }
 
+extension HKCategoryValueLowCardioFitnessEvent: @retroactive CustomStringConvertible {}
 extension HKCategoryValueLowCardioFitnessEvent: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -191,6 +200,7 @@ extension HKCategoryValueLowCardioFitnessEvent: HKCategoryValueDescription {
     }
 }
 
+extension HKAppleWalkingSteadinessClassification: @retroactive CustomStringConvertible {}
 extension HKAppleWalkingSteadinessClassification: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -208,6 +218,7 @@ extension HKAppleWalkingSteadinessClassification: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueAppleWalkingSteadinessEvent: @retroactive CustomStringConvertible {}
 extension HKCategoryValueAppleWalkingSteadinessEvent: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -227,6 +238,7 @@ extension HKCategoryValueAppleWalkingSteadinessEvent: HKCategoryValueDescription
     }
 }
 
+extension HKCategoryValuePregnancyTestResult: @retroactive CustomStringConvertible {}
 extension HKCategoryValuePregnancyTestResult: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -244,6 +256,7 @@ extension HKCategoryValuePregnancyTestResult: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueProgesteroneTestResult: @retroactive CustomStringConvertible {}
 extension HKCategoryValueProgesteroneTestResult: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -261,6 +274,7 @@ extension HKCategoryValueProgesteroneTestResult: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueAppleStandHour: @retroactive CustomStringConvertible {}
 extension HKCategoryValueAppleStandHour: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -276,6 +290,7 @@ extension HKCategoryValueAppleStandHour: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValueSeverity: @retroactive CustomStringConvertible {}
 extension HKCategoryValueSeverity: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -297,6 +312,7 @@ extension HKCategoryValueSeverity: HKCategoryValueDescription {
     }
 }
 
+extension HKCategoryValuePresence: @retroactive CustomStringConvertible {}
 extension HKCategoryValuePresence: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {

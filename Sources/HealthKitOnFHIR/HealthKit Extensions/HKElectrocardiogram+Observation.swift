@@ -10,6 +10,7 @@ import HealthKit
 import ModelsR4
 
 
+extension HKElectrocardiogram.Classification: @retroactive CustomStringConvertible {}
 extension HKElectrocardiogram.Classification: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {
@@ -38,6 +39,7 @@ extension HKElectrocardiogram.Classification: HKCategoryValueDescription {
 }
 
 
+extension HKElectrocardiogram.SymptomsStatus: @retroactive CustomStringConvertible {}
 extension HKElectrocardiogram.SymptomsStatus: HKCategoryValueDescription {
     var categoryValueDescription: String {
         get throws {

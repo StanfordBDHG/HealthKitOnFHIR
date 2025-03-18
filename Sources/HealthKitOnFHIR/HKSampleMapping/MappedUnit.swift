@@ -29,7 +29,7 @@ public struct MappedUnit: Decodable, Sendable {
     public private(set) var code: String?
     
     
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let hkunit = try HKUnit(from: values.decode(String.self, forKey: .hkunit))
         let unit = try values.decode(String.self, forKey: .unit)
