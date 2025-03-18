@@ -392,7 +392,7 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         
         XCTAssertTrue(
             timestamp.contains(expectedOffsetString),
-            "Time should contain current timezone offset \(expectedOffsetString)"
+            "Time should contain current timezone offset '\(expectedOffsetString)' (timestamp: '\(timestamp)')"
         )
     }
 }
