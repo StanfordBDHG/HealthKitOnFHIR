@@ -1,4 +1,4 @@
-// swift-tools-version:5.10
+// swift-tools-version:6.0
 
 //
 // This source file is part of the HealthKitOnFHIR open source project
@@ -12,18 +12,13 @@ import class Foundation.ProcessInfo
 import PackageDescription
 
 
-#if swift(<6)
-let swiftConcurrency: SwiftSetting = .enableExperimentalFeature("StrictConcurrency")
-#else
-let swiftConcurrency: SwiftSetting = .enableUpcomingFeature("StrictConcurrency")
-#endif
-
-
 let package = Package(
     name: "HealthKitOnFHIR",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v16)
+        .iOS(.v16),
+        .macOS(.v13),
+        .watchOS(.v9)
     ],
     products: [
         .library(name: "HealthKitOnFHIR", targets: ["HealthKitOnFHIR"])
@@ -40,9 +35,7 @@ let package = Package(
             resources: [
                 .process("Resources")
             ],
-            swiftSettings: [
-                swiftConcurrency
-            ],
+            swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
             plugins: [] + swiftLintPlugin()
         ),
         .testTarget(
@@ -50,9 +43,7 @@ let package = Package(
             dependencies: [
                 .target(name: "HealthKitOnFHIR")
             ],
-            swiftSettings: [
-                swiftConcurrency
-            ],
+            swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
             plugins: [] + swiftLintPlugin()
         )
     ]

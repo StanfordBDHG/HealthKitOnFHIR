@@ -330,7 +330,7 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         let endTimestamp = try XCTUnwrap(period.end?.value?.description)
         
         let currentTimeZone = TimeZone.current
-        let totalMinutes = currentTimeZone.secondsFromGMT() / 60
+        let totalMinutes = currentTimeZone.secondsFromGMT(for: startDate) / 60
         let hours = abs(totalMinutes / 60)
         let minutes = abs(totalMinutes % 60)
         let sign = totalMinutes >= 0 ? "+" : "-"
@@ -379,7 +379,7 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         let timestamp = try XCTUnwrap(dateTime.value?.description)
         
         let currentTimeZone = TimeZone.current
-        let totalMinutes = currentTimeZone.secondsFromGMT() / 60
+        let totalMinutes = currentTimeZone.secondsFromGMT(for: startDate) / 60
         let hours = abs(totalMinutes / 60)
         let minutes = abs(totalMinutes % 60)
         let sign = totalMinutes >= 0 ? "+" : "-"
@@ -392,7 +392,7 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         
         XCTAssertTrue(
             timestamp.contains(expectedOffsetString),
-            "Time should contain current timezone offset \(expectedOffsetString)"
+            "Time should contain current timezone offset '\(expectedOffsetString)' (timestamp: '\(timestamp)')"
         )
     }
 }

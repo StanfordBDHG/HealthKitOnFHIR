@@ -40,7 +40,7 @@ public struct HKSampleMapping: Decodable, Sendable {
     public var workoutSampleMapping: HKWorkoutSampleMapping
 
     
-    public init(from decoder: Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let mappings = try decoder.container(keyedBy: CodingKeys.self)
         let quantityStringBasedSampleMapping = try mappings.decode(
             [String: HKQuantitySampleMapping].self,

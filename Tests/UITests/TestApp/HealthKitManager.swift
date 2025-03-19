@@ -9,15 +9,18 @@
 
 import Foundation
 import HealthKit
+import Observation
 
 
-class HealthKitManager: ObservableObject {
-    var healthStore: HKHealthStore?
-    
+@Observable
+final class HealthKitManager: Sendable {
+    let healthStore: HKHealthStore?
     
     init() {
         if HKHealthStore.isHealthDataAvailable() {
             healthStore = HKHealthStore()
+        } else {
+            healthStore = nil
         }
     }
     

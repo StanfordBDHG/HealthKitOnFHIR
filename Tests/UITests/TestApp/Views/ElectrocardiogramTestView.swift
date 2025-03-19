@@ -14,7 +14,7 @@ import SwiftUI
 
 
 struct ElectrocardiogramTestView: View {
-    @StateObject private var manager = HealthKitManager()
+    @State private var manager = HealthKitManager()
     
     @State private var observation: Observation?
     @State private var passed = false

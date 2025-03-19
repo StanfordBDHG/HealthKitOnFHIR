@@ -24,6 +24,7 @@ extension HKWorkoutActivityTypeDescription {
     }
 }
 
+extension HKWorkoutActivityType: @retroactive CustomStringConvertible {}
 extension HKWorkoutActivityType: HKWorkoutActivityTypeDescription {
     var workoutTypeDescription: String {
         get throws {

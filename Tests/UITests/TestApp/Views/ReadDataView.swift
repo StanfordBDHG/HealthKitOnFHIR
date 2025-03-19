@@ -11,7 +11,7 @@ import SwiftUI
 
 
 struct ReadDataView: View {
-    @StateObject private var manager = HealthKitManager()
+    @State private var manager = HealthKitManager()
     
     @State private var json = ""
     @State private var showingSheet = false
