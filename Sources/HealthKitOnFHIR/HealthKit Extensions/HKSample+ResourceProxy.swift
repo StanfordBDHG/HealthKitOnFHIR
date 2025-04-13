@@ -39,7 +39,7 @@ extension HKSample: ResourceProxyProviding {
         *, deprecated,
          renamed: "resource()",
          // swiftlint:disable:next line_length
-         message: "Important: When mapping an array of HKSample objects into ResourceProxies, for performance reasons always prefer 'Collection.mapIntoResourceProxies()' or 'Collection.compactMapIntoResourceProxies()'"
+         message: "Important: When mapping an array of HKSample objects into ResourceProxies, for performance reasons always prefer 'Sequence.mapIntoResourceProxies()' or 'Sequence.compactMapIntoResourceProxies()'"
     )
     public var resource: ResourceProxy {
         get throws {
@@ -89,7 +89,7 @@ extension HKSample: ResourceProxyProviding {
 }
 
 
-extension Collection where Element: ResourceProxyProviding {
+extension Sequence where Element: ResourceProxyProviding {
     /// Produces an Array of FHIR `ResourceProxies`.
     ///
     /// - Note: This method provides significant performance improvements as compared to calling ``ResourceProxyProviding/resource()`` for each element in the collection.
