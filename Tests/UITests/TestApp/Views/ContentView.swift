@@ -19,6 +19,7 @@ struct ContentView: View {
                     NavigationLink("Electrocardiogram", destination: ElectrocardiogramTestView())
                     NavigationLink("Health Records", destination: HealthRecordsTestView())
                     NavigationLink("Create Workout", destination: CreateWorkoutView())
+                    NavigationLink("Export Data", destination: ExportDataView())
                 }
             }
             .navigationBarTitle("HealthKitOnFHIR Tests")
