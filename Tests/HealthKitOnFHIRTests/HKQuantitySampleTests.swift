@@ -42,7 +42,7 @@ class HKQuantitySampleTests: XCTestCase {
             end: try endDate,
             metadata: metadata
         )
-        return try XCTUnwrap(quantitySample.resource.get(if: Observation.self))
+        return try XCTUnwrap(quantitySample.resource().get(if: Observation.self))
     }
     
     func createCoding(
@@ -2693,7 +2693,7 @@ class HKQuantitySampleTests: XCTestCase {
             end: try endDate
         )
         XCTAssertThrowsError(
-            try quantitySample.resource.get(if: Observation.self)
+            try quantitySample.resource().get(if: Observation.self)
         )
     }
     
@@ -2713,7 +2713,7 @@ class HKQuantitySampleTests: XCTestCase {
         )
         
         XCTAssertThrowsError(
-            try correlation.resource
+            try correlation.resource()
         )
     }
     
@@ -2725,7 +2725,7 @@ class HKQuantitySampleTests: XCTestCase {
                 expirationDate: nil,
                 device: nil,
                 metadata: nil
-            ).resource
+            ).resource()
         )
     }
     

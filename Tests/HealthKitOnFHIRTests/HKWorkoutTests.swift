@@ -138,7 +138,7 @@ class HKWorkoutTests: XCTestCase {
                 end: try endDate
             )
 
-            let observation = try XCTUnwrap(workoutSample.resource.get(if: Observation.self))
+            let observation = try XCTUnwrap(workoutSample.resource().get(if: Observation.self))
             let expectedValue = createCodeableConcept(
                 code: try activityType.workoutTypeDescription,
                 system: "http://developer.apple.com/documentation/healthkit"
