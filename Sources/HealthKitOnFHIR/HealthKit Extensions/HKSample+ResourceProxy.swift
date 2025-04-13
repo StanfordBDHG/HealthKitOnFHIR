@@ -77,16 +77,16 @@ extension Sequence where Element: HKSample {
     /// Produces an Array of FHIR `ResourceProxies`.
     ///
     /// - Note: This method provides significant performance improvements as compared to calling ``ResourceProxyProviding/resource()`` for each element in the collection.
-    public func mapIntoResourceProxies() throws -> [ResourceProxy] {
+    public func mapIntoResourceProxies(using mapping: HKSampleMapping = .default) throws -> [ResourceProxy] {
         let issuedDate = FHIRPrimitive<Instant>(try Instant(date: .now))
-        return try map { try $0.resource(issuedDate: issuedDate) }
+        return try map { try $0.resource(withMapping: mapping, issuedDate: issuedDate) }
     }
     
     /// Produces an Array of FHIR `ResourceProxies`.
     ///
     /// - Note: This method provides significant performance improvements as compared to calling ``ResourceProxyProviding/resource()`` for each element in the collection.
-    public func compactMapIntoResourceProxies() throws -> [ResourceProxy] {
+    public func compactMapIntoResourceProxies(using mapping: HKSampleMapping = .default) throws -> [ResourceProxy] {
         let issuedDate = FHIRPrimitive<Instant>(try Instant(date: .now))
-        return compactMap { try? $0.resource(issuedDate: issuedDate) }
+        return compactMap { try? $0.resource(withMapping: mapping, issuedDate: issuedDate) }
     }
 }
