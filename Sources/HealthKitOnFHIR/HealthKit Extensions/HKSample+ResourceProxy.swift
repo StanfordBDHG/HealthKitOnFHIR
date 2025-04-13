@@ -10,30 +10,7 @@ import HealthKit
 import ModelsR4
 
 
-/// A type which can be turned into a FHIR `ResourceProxy`
-public protocol ResourceProxyProviding: HKSample {
-    /// A `ResourceProxy` containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
-    ///
-    /// - parameter mapping: A mapping to map `HKSample`s to corresponding FHIR observations allowing the customization of, e.g., codings and units. See ``HKSampleMapping``.
-    /// - parameter issuedDate: `Instant` specifying when this version of the resource was made available. Defaults to `Date.now`.
-    /// - returns: A `ResourceProxy`containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
-    /// - throws: If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
-    func resource(withMapping mapping: HKSampleMapping, issuedDate: FHIRPrimitive<Instant>?) throws -> ResourceProxy
-}
-
-
-extension ResourceProxyProviding {
-    /// A `ResourceProxy` containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
-    ///
-    /// - returns: A `ResourceProxy`containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
-    /// - throws: If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
-    public func resource() throws -> ResourceProxy {
-        try resource(withMapping: .default, issuedDate: nil)
-    }
-}
-
-
-extension HKSample: ResourceProxyProviding {
+extension HKSample {
     /// Converts an `HKSample` into an FHIR  resource, encapsulated in a `ResourceProxy`
     @available(
         *, deprecated,
@@ -47,6 +24,13 @@ extension HKSample: ResourceProxyProviding {
         }
     }
     
+    
+    /// A `ResourceProxy` containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
+    ///
+    /// - parameter mapping: A mapping to map `HKSample`s to corresponding FHIR observations allowing the customization of, e.g., codings and units. See ``HKSampleMapping``.
+    /// - parameter issuedDate: `Instant` specifying when this version of the resource was made available. Defaults to `Date.now`.
+    /// - returns: A `ResourceProxy`containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
+    /// - throws: If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
     public func resource(withMapping mapping: HKSampleMapping = .default, issuedDate: FHIRPrimitive<Instant>? = nil) throws -> ResourceProxy {
         var observation = Observation(
             code: CodeableConcept(),
@@ -89,7 +73,7 @@ extension HKSample: ResourceProxyProviding {
 }
 
 
-extension Sequence where Element: ResourceProxyProviding {
+extension Sequence where Element: HKSample {
     /// Produces an Array of FHIR `ResourceProxies`.
     ///
     /// - Note: This method provides significant performance improvements as compared to calling ``ResourceProxyProviding/resource()`` for each element in the collection.
