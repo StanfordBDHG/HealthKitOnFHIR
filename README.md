@@ -43,7 +43,7 @@ The HealthKitOnFHIR library provides extensions that convert supported HealthKit
 
 ```swift
 let sample: HKSample = // ...
-let resource = try sample.resource
+let resource = try sample.resource()
 ```
 
 ### Observations
@@ -52,7 +52,7 @@ let resource = try sample.resource
 
 ```swift
 let sample: HKQuantitySample = // ...
-let observation = try sample.resource.get(if: Observation.self)
+let observation = try sample.resource().get(if: Observation.self)
 ```
 
 Codes and units can be customized by passing in a custom `HKSampleMapping` instance to the `resource(withMapping:)` method.
@@ -69,7 +69,7 @@ let observation = try sample.resource(withMapping: sampleMapping).get(if: Observ
 
 ```swift
 let allergyRecord: HKClinicalRecord = // ...
-let allergyIntolerance = try allergyRecord.resource.get(if: AllergyIntolerance.self)
+let allergyIntolerance = try allergyRecord.resource().get(if: AllergyIntolerance.self)
 ```
 
 
@@ -94,7 +94,7 @@ let sample = HKQuantitySample(
 // Convert the results to FHIR observations
 let observation: Observation?
 do {
-    try observation = sample.resource.get(if: Observation.self)
+    try observation = sample.resource().get(if: Observation.self)
 } catch {
     // Handle any mapping errors here.
     // ...

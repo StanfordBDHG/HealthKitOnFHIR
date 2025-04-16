@@ -60,7 +60,7 @@ struct HealthRecordsTestView: View {
         let resources: [Resource] = try await manager.readHealthRecords(type: type)
             .compactMap { sample in
                 do {
-                    return try sample.resource.get()
+                    return try sample.resource().get()
                 } catch {
                     print(error.localizedDescription)
                 }

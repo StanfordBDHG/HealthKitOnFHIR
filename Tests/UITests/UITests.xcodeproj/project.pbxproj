@@ -3,25 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		272A31F62B092A6200735827 /* CreateWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272A31F52B092A6200735827 /* CreateWorkoutView.swift */; };
-		273373FD295BA8B80062EB05 /* HealthRecordsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273373FC295BA8B80062EB05 /* HealthRecordsTestView.swift */; };
-		2765017029319B2100644064 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765016F29319B2100644064 /* HealthKitManager.swift */; };
-		2765017229319E3000644064 /* WriteDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2765017129319E3000644064 /* WriteDataView.swift */; };
-		276501762931A58700644064 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276501752931A58700644064 /* ContentView.swift */; };
-		276501782931A82F00644064 /* ReadDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276501772931A82F00644064 /* ReadDataView.swift */; };
-		2790F40A29326CE90024213F /* JSONView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2790F40929326CE90024213F /* JSONView.swift */; };
 		2F1B52D42A4F78A5003AE151 /* XCTHealthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1B52D32A4F78A5003AE151 /* XCTHealthKit */; };
 		2F1B52D72A4F7909003AE151 /* XCTestExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1B52D62A4F7909003AE151 /* XCTestExtensions */; };
-		2F5425F32951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5425F22951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift */; };
-		2F5425F62951AE2600B5DAC2 /* HKElectrocardiogram+Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5425F42951AD1D00B5DAC2 /* HKElectrocardiogram+Context.swift */; };
 		2F68C3C8292EA52000B3E12C /* HealthKitOnFHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 2F68C3C7292EA52000B3E12C /* HealthKitOnFHIR */; };
-		2F6D139A28F5F386007C25D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F6D139928F5F386007C25D6 /* Assets.xcassets */; };
-		2F8A431329130A8C005D2B8F /* TestAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8A431229130A8C005D2B8F /* TestAppUITests.swift */; };
-		2FA7382C290ADFAA007ACEB9 /* TestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA7382B290ADFAA007ACEB9 /* TestApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,25 +23,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		272A31F52B092A6200735827 /* CreateWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWorkoutView.swift; sourceTree = "<group>"; };
-		273373FC295BA8B80062EB05 /* HealthRecordsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecordsTestView.swift; sourceTree = "<group>"; };
-		2765016F29319B2100644064 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
-		2765017129319E3000644064 /* WriteDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDataView.swift; sourceTree = "<group>"; };
-		276501752931A58700644064 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		276501772931A82F00644064 /* ReadDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadDataView.swift; sourceTree = "<group>"; };
-		2790F40929326CE90024213F /* JSONView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONView.swift; sourceTree = "<group>"; };
-		2F01E8CD291490B80089C46B /* TestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestApp.entitlements; sourceTree = "<group>"; };
-		2F01E8CE291493560089C46B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F1B52D82A4F7D93003AE151 /* TestApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestApp.xctestplan; sourceTree = "<group>"; };
-		2F5425F22951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectrocardiogramTestView.swift; sourceTree = "<group>"; };
-		2F5425F42951AD1D00B5DAC2 /* HKElectrocardiogram+Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKElectrocardiogram+Context.swift"; sourceTree = "<group>"; };
 		2F68C3C6292E9F8F00B3E12C /* HealthKitOnFHIR */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HealthKitOnFHIR; path = ../..; sourceTree = "<group>"; };
 		2F6D139228F5F384007C25D6 /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F6D139928F5F386007C25D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F6D13AC28F5F386007C25D6 /* TestAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F8A431229130A8C005D2B8F /* TestAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppUITests.swift; sourceTree = "<group>"; };
-		2FA7382B290ADFAA007ACEB9 /* TestApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		80E246092DABA6A600423C4B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Support Files/Info.plist",
+			);
+			target = 2F6D139128F5F384007C25D6 /* TestApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		80E245FA2DABA6A600423C4B /* TestApp */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (80E246092DABA6A600423C4B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = TestApp; sourceTree = "<group>"; };
+		80E2460B2DABA6A900423C4B /* TestAppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TestAppUITests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		2F6D138F28F5F384007C25D6 /* Frameworks */ = {
@@ -81,8 +70,8 @@
 			children = (
 				2F1B52D82A4F7D93003AE151 /* TestApp.xctestplan */,
 				2F68C3C6292E9F8F00B3E12C /* HealthKitOnFHIR */,
-				2F6D139428F5F384007C25D6 /* TestApp */,
-				2F6D13AF28F5F386007C25D6 /* TestAppUITests */,
+				80E245FA2DABA6A600423C4B /* TestApp */,
+				80E2460B2DABA6A900423C4B /* TestAppUITests */,
 				2F6D139328F5F384007C25D6 /* Products */,
 				2F6D13C228F5F3BE007C25D6 /* Frameworks */,
 			);
@@ -97,55 +86,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2F6D139428F5F384007C25D6 /* TestApp */ = {
-			isa = PBXGroup;
-			children = (
-				2FA7382B290ADFAA007ACEB9 /* TestApp.swift */,
-				2765016F29319B2100644064 /* HealthKitManager.swift */,
-				2F5425F42951AD1D00B5DAC2 /* HKElectrocardiogram+Context.swift */,
-				2FBE356C29399F37002EE0D5 /* Views */,
-				2FBE356B29399ED1002EE0D5 /* Support Files */,
-			);
-			path = TestApp;
-			sourceTree = "<group>";
-		};
-		2F6D13AF28F5F386007C25D6 /* TestAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2F8A431229130A8C005D2B8F /* TestAppUITests.swift */,
-			);
-			path = TestAppUITests;
-			sourceTree = "<group>";
-		};
 		2F6D13C228F5F3BE007C25D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		2FBE356B29399ED1002EE0D5 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				2F01E8CE291493560089C46B /* Info.plist */,
-				2F01E8CD291490B80089C46B /* TestApp.entitlements */,
-				2F6D139928F5F386007C25D6 /* Assets.xcassets */,
-			);
-			path = "Support Files";
-			sourceTree = "<group>";
-		};
-		2FBE356C29399F37002EE0D5 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				276501752931A58700644064 /* ContentView.swift */,
-				272A31F52B092A6200735827 /* CreateWorkoutView.swift */,
-				2765017129319E3000644064 /* WriteDataView.swift */,
-				276501772931A82F00644064 /* ReadDataView.swift */,
-				2790F40929326CE90024213F /* JSONView.swift */,
-				2F5425F22951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift */,
-				273373FC295BA8B80062EB05 /* HealthRecordsTestView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +107,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				80E245FA2DABA6A600423C4B /* TestApp */,
 			);
 			name = TestApp;
 			packageProductDependencies = (
@@ -183,6 +131,9 @@
 			);
 			dependencies = (
 				2F6D13AE28F5F386007C25D6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				80E2460B2DABA6A900423C4B /* TestAppUITests */,
 			);
 			name = TestAppUITests;
 			packageProductDependencies = (
@@ -240,7 +191,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F6D139A28F5F386007C25D6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,16 +208,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				272A31F62B092A6200735827 /* CreateWorkoutView.swift in Sources */,
-				2790F40A29326CE90024213F /* JSONView.swift in Sources */,
-				2765017029319B2100644064 /* HealthKitManager.swift in Sources */,
-				2F5425F62951AE2600B5DAC2 /* HKElectrocardiogram+Context.swift in Sources */,
-				2F5425F32951AB7B00B5DAC2 /* ElectrocardiogramTestView.swift in Sources */,
-				273373FD295BA8B80062EB05 /* HealthRecordsTestView.swift in Sources */,
-				276501762931A58700644064 /* ContentView.swift in Sources */,
-				2FA7382C290ADFAA007ACEB9 /* TestApp.swift in Sources */,
-				276501782931A82F00644064 /* ReadDataView.swift in Sources */,
-				2765017229319E3000644064 /* WriteDataView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +215,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F8A431329130A8C005D2B8F /* TestAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,7 +426,6 @@
 		2F6D13BD28F5F386007C25D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 637867499T;
@@ -506,7 +444,6 @@
 		2F6D13BE28F5F386007C25D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 637867499T;

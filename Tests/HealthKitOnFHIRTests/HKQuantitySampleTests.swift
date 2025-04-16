@@ -42,7 +42,7 @@ class HKQuantitySampleTests: XCTestCase {
             end: try endDate,
             metadata: metadata
         )
-        return try XCTUnwrap(quantitySample.resource.get(if: Observation.self))
+        return try XCTUnwrap(quantitySample.resource().get(if: Observation.self))
     }
     
     func createCoding(
@@ -55,6 +55,28 @@ class HKQuantitySampleTests: XCTestCase {
             display: FHIRPrimitive(stringLiteral: display),
             system: FHIRPrimitive(FHIRURI(stringLiteral: system.rawValue))
         )
+    }
+    
+    func testResourceComputedPropertyForward() throws {
+        let observation1 = try createObservationFrom(
+            type: HKQuantityType(.bloodGlucose),
+            quantity: HKQuantity(unit: HKUnit(from: "mg/dL"), doubleValue: 99)
+        )
+        let observation2: Observation = try {
+            let quantitySample = HKQuantitySample(
+                type: HKQuantityType(.bloodGlucose),
+                quantity: HKQuantity(unit: HKUnit(from: "mg/dL"), doubleValue: 99),
+                start: try startDate,
+                end: try endDate,
+                metadata: [:]
+            )
+            return try XCTUnwrap(quantitySample.resource.get(if: Observation.self))
+        }()
+        
+        observation2.issued = observation1.issued
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        XCTAssertEqual(try encoder.encode(observation1), try encoder.encode(observation1))
     }
     
     func testBloodGlucose() throws {
@@ -2693,7 +2715,7 @@ class HKQuantitySampleTests: XCTestCase {
             end: try endDate
         )
         XCTAssertThrowsError(
-            try quantitySample.resource.get(if: Observation.self)
+            try quantitySample.resource().get(if: Observation.self)
         )
     }
     
@@ -2713,7 +2735,7 @@ class HKQuantitySampleTests: XCTestCase {
         )
         
         XCTAssertThrowsError(
-            try correlation.resource
+            try correlation.resource()
         )
     }
     
@@ -2725,7 +2747,7 @@ class HKQuantitySampleTests: XCTestCase {
                 expirationDate: nil,
                 device: nil,
                 metadata: nil
-            ).resource
+            ).resource()
         )
     }
     
@@ -2738,5 +2760,59 @@ class HKQuantitySampleTests: XCTestCase {
         )
         
         XCTAssertEqual(sample.quantityType.codes, [])
+    }
+    
+    func testCollectionSampleToResourceProxy() throws {
+        func makeSample(numSteps: Int, date: DateComponents) throws -> HKQuantitySample {
+            let date = try XCTUnwrap(Calendar.current.date(from: date))
+            return HKQuantitySample(
+                type: HKQuantityType(.stepCount),
+                quantity: HKQuantity(unit: .count(), doubleValue: Double(numSteps)),
+                start: date,
+                end: date
+            )
+        }
+        let samples = [
+            try makeSample(numSteps: 12, date: .init(year: 2025, month: 1, day: 1, hour: 0)),
+            try makeSample(numSteps: 13, date: .init(year: 2025, month: 1, day: 1, hour: 1)),
+            try makeSample(numSteps: 14, date: .init(year: 2025, month: 1, day: 1, hour: 2)),
+            try makeSample(numSteps: 15, date: .init(year: 2025, month: 1, day: 1, hour: 3)),
+            try makeSample(numSteps: 16, date: .init(year: 2025, month: 1, day: 1, hour: 4)),
+            try makeSample(numSteps: 17, date: .init(year: 2025, month: 1, day: 1, hour: 5))
+        ]
+        let resources = try samples.mapIntoResourceProxies()
+        XCTAssertEqual(resources.count, samples.count)
+        for resource in resources {
+            XCTAssertNotNil(resource.get(if: Observation.self))
+        }
+    }
+    
+    func testCollectionSampleToResourceProxyWithUnsupportedSample() throws {
+        func makeSample(numSteps: Int, date: DateComponents) throws -> HKQuantitySample {
+            let date = try XCTUnwrap(Calendar.current.date(from: date))
+            return HKQuantitySample(
+                type: HKQuantityType(.stepCount),
+                quantity: HKQuantity(unit: .count(), doubleValue: Double(numSteps)),
+                start: date,
+                end: date
+            )
+        }
+        let samples = [
+            try makeSample(numSteps: 12, date: .init(year: 2025, month: 1, day: 1, hour: 0)),
+            try makeSample(numSteps: 13, date: .init(year: 2025, month: 1, day: 1, hour: 1)),
+            try makeSample(numSteps: 14, date: .init(year: 2025, month: 1, day: 1, hour: 2)),
+            try makeSample(numSteps: 15, date: .init(year: 2025, month: 1, day: 1, hour: 3)),
+            try makeSample(numSteps: 16, date: .init(year: 2025, month: 1, day: 1, hour: 4)),
+            try makeSample(numSteps: 17, date: .init(year: 2025, month: 1, day: 1, hour: 5)),
+            HKQuantitySample(type: HKQuantityType(.nikeFuel), quantity: HKQuantity(unit: .count(), doubleValue: 123), start: .now, end: .now)
+        ]
+        XCTAssertThrowsError(
+            try samples.mapIntoResourceProxies()
+        )
+        let resources = try samples.compactMapIntoResourceProxies()
+        XCTAssertEqual(resources.count, samples.count - 1)
+        for resource in resources {
+            XCTAssertNotNil(resource.get(if: Observation.self))
+        }
     }
 }

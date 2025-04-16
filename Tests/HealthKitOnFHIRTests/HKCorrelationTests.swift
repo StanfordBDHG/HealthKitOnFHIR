@@ -49,7 +49,7 @@ class HKCorrelationTests: XCTestCase {
             objects: [systolicBloodPressure, diastolicBloodPressure]
         )
         
-        let observation = try XCTUnwrap(correlation.resource.get(if: Observation.self))
+        let observation = try XCTUnwrap(correlation.resource().get(if: Observation.self))
 
         XCTAssertEqual(1, observation.component?.filter {
             $0.value == .quantity(
@@ -89,6 +89,6 @@ class HKCorrelationTests: XCTestCase {
             end: try endDate,
             objects: [vitaminC]
         )
-        XCTAssertThrowsError(try correlation.resource)
+        XCTAssertThrowsError(try correlation.resource())
     }
 }
