@@ -57,6 +57,28 @@ class HKQuantitySampleTests: XCTestCase {
         )
     }
     
+    func testResourceComputedPropertyForward() throws {
+        let observation1 = try createObservationFrom(
+            type: HKQuantityType(.bloodGlucose),
+            quantity: HKQuantity(unit: HKUnit(from: "mg/dL"), doubleValue: 99)
+        )
+        let observation2: Observation = try {
+            let quantitySample = HKQuantitySample(
+                type: HKQuantityType(.bloodGlucose),
+                quantity: HKQuantity(unit: HKUnit(from: "mg/dL"), doubleValue: 99),
+                start: try startDate,
+                end: try endDate,
+                metadata: [:]
+            )
+            return try XCTUnwrap(quantitySample.resource.get(if: Observation.self))
+        }()
+        
+        observation2.issued = observation1.issued
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        XCTAssertEqual(try encoder.encode(observation1), try encoder.encode(observation1))
+    }
+    
     func testBloodGlucose() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bloodGlucose),
