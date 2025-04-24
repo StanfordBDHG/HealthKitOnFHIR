@@ -10,7 +10,7 @@ import HealthKit
 import ModelsR4
 
 
-/// A Type that can be used to build up a FHIR`Observation`.
+/// A Type that can be used to build up a FHIR `Observation`.
 protocol FHIRObservationBuildable {
     func build(_ observation: Observation, mapping: HKSampleMapping) throws
 }
