@@ -14,9 +14,13 @@ import SwiftUI
 
 struct CheckMappingCompletenessView: View {
     private struct TestResult {
-        var missingQuantityTypes: Set<String> = []
-        var missingCategoryTypes: Set<String> = []
-        var missingCorrelationTypes: Set<String> = []
+        struct Entry: Hashable {
+            let typeIdentifier: String
+            let unitString: String?
+        }
+        var missingQuantityTypes: Set<Entry> = []
+        var missingCategoryTypes: Set<Entry> = []
+        var missingCorrelationTypes: Set<Entry> = []
         
         var isEmpty: Bool {
             missingQuantityTypes.isEmpty && missingCategoryTypes.isEmpty && missingCorrelationTypes.isEmpty
@@ -26,6 +30,7 @@ struct CheckMappingCompletenessView: View {
     
     var body: some View {
         Form {
+            let _ = print(SampleType.environmentalSoundReduction.displayUnit.unitString)
             let testResult = runCheck()
             Section {
                 Text(testResult.isEmpty ? "All Fine!" : "Missing Mapping Entries!")
@@ -37,11 +42,20 @@ struct CheckMappingCompletenessView: View {
     }
     
     @ViewBuilder
-    private func makeSection(title: String, for types: some Collection<String>) -> some View {
+    private func makeSection(title: String, for types: some Collection<TestResult.Entry>) -> some View {
         if !types.isEmpty {
             Section(title) {
-                ForEach(types.sorted(), id: \.self) { type in
-                    Text(type)
+                ForEach(types.sorted(by: { $0.typeIdentifier < $1.typeIdentifier }), id: \.self) { entry in
+                    HStack {
+                        Text(entry.typeIdentifier)
+                        if let unitString = entry.unitString {
+                            Spacer()
+                            Text(unitString)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .monospaced()
+                        }
+                    }
                 }
             }
         }
@@ -54,19 +68,22 @@ struct CheckMappingCompletenessView: View {
             guard mappings.quantitySampleMapping[type] == nil else {
                 continue
             }
-            result.missingQuantityTypes.insert(type.identifier)
+            result.missingQuantityTypes.insert(.init(
+                typeIdentifier: type.identifier,
+                unitString: type.sampleType.flatMap { $0 as? SampleType<HKQuantitySample> }?.displayUnit.unitString
+            ))
         }
         for type in HKCategoryType.allKnownCategories {
             guard mappings.categorySampleMapping[type] == nil else {
                 continue
             }
-            result.missingCategoryTypes.insert(type.identifier)
+            result.missingCategoryTypes.insert(.init(typeIdentifier: type.identifier, unitString: nil))
         }
         for type in HKCorrelationType.allKnownCorrelations {
             guard mappings.correlationMapping[type] == nil else {
                 continue
             }
-            result.missingCorrelationTypes.insert(type.identifier)
+            result.missingCorrelationTypes.insert(.init(typeIdentifier: type.identifier, unitString: nil))
         }
         return result
     }
