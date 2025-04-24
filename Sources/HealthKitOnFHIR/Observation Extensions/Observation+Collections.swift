@@ -15,26 +15,23 @@ extension Observation {
     private func appendElement<T>(_ element: T, to collection: ReferenceWritableKeyPath<Observation, [T]?>) {
         // swiftlint:disable:previous discouraged_optional_collection
         // Unfortunately we need to use an optional collection here as the ModelsR4 modules uses optional collections in the Observation type.
-        
         guard self[keyPath: collection] != nil else {
             self[keyPath: collection] = [element]
             return
         }
-        
         self[keyPath: collection]?.append(element)
     }
+    
     
     private func appendElements<T>(_ elements: [T], to collection: ReferenceWritableKeyPath<Observation, [T]?>) {
         // swiftlint:disable:previous discouraged_optional_collection
         // Unfortunately we need to use an optional collection here as the ModelsR4 modules uses optional collections in the Observation type.
-        
         if self[keyPath: collection] == nil {
             self[keyPath: collection] = []
             self[keyPath: collection]?.reserveCapacity(elements.count)
         } else {
             self[keyPath: collection]?.reserveCapacity((self[keyPath: collection]?.count ?? 0) + elements.count)
         }
-        
         for element in elements {
             appendElement(element, to: collection)
         }

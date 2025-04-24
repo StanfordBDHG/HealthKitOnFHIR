@@ -10,36 +10,25 @@ import HealthKit
 import ModelsR4
 
 
-extension HKWorkout {
+extension HKWorkout: FHIRObservationBuildable {
     /// Generates an observation that captures the type of physical activity performed for a single instance of physical activity, based on https://build.fhir.org/ig/HL7/physical-activity/StructureDefinition-pa-observation-activity-measure.html
     /// Note:  An `HKWorkout` object can also act as a container for other `HKSample` objects, which will need to be converted to observations individually.
-    func buildWorkoutObservation(
-        _ observation: inout Observation,
-        mappings: HKSampleMapping = HKSampleMapping.default
-    ) throws {
-        let mapping = mappings.workoutSampleMapping
-
+    func build(_ observation: Observation, mapping: HKSampleMapping) throws {
+        let mapping = mapping.workoutSampleMapping
         for code in mapping.codings {
             observation.appendCoding(code.coding)
         }
-
         for category in mapping.categories {
-            observation.appendCategory(
-                CodeableConcept(coding: [category.coding])
-            )
+            observation.appendCategory(CodeableConcept(coding: [category.coding]))
         }
-        
-        let activityTypeString = self.workoutActivityType.description.asFHIRStringPrimitive()
-
         let valueCodeableConcept = CodeableConcept(
             coding: [
                 Coding(
-                    code: activityTypeString,
+                    code: try self.workoutActivityType.fhirWorkoutTypeValue.asFHIRStringPrimitive(),
                     system: "http://developer.apple.com/documentation/healthkit".asFHIRURIPrimitive()
                 )
             ]
         )
-
         observation.value = .codeableConcept(valueCodeableConcept)
     }
 }

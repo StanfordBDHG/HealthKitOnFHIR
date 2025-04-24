@@ -140,7 +140,7 @@ class HKWorkoutTests: XCTestCase {
 
             let observation = try XCTUnwrap(workoutSample.resource().get(if: Observation.self))
             let expectedValue = createCodeableConcept(
-                code: try activityType.workoutTypeDescription,
+                code: try activityType.fhirWorkoutTypeValue,
                 system: "http://developer.apple.com/documentation/healthkit"
             )
             XCTAssertEqual(observation.value, .codeableConcept(expectedValue))

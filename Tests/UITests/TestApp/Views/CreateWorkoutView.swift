@@ -84,7 +84,7 @@ struct CreateWorkoutView: View {
                 activityType: .running
             )
 
-            let observation = try workout.resource.get()
+            let observation = try workout.resource().get()
 
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]

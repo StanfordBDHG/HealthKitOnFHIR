@@ -10,9 +10,8 @@ import HealthKit
 import ModelsR4
 
 
-extension HKElectrocardiogram.Classification: @retroactive CustomStringConvertible {}
-extension HKElectrocardiogram.Classification: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+extension HKElectrocardiogram.Classification: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .notSet:
@@ -39,9 +38,8 @@ extension HKElectrocardiogram.Classification: HKCategoryValueDescription {
 }
 
 
-extension HKElectrocardiogram.SymptomsStatus: @retroactive CustomStringConvertible {}
-extension HKElectrocardiogram.SymptomsStatus: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+extension HKElectrocardiogram.SymptomsStatus: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .notSet:
@@ -71,56 +69,49 @@ extension HKElectrocardiogram {
     /// If you do not need `HKElectrocardiogram` specific context added you can use the generic `observation` extension on `HKSample`.
     ///
     /// - Parameters:
-    ///   - symptoms: The `Symptoms` that should be encoded in the FHIR observation.
+    ///   - symptoms: The ``Symptoms`` that should be encoded in the FHIR observation.
     ///   - voltageMeasurements: The URL pointing to the raw voltage measurement data corrolated ot the FHIR observation.
-    ///   - mapping: The `HKSampleMapping` used to populate the FHIR observation.
+    ///   - mapping: The ``HKSampleMapping`` used to populate the FHIR observation.
     public func observation(
         symptoms: Symptoms,
         voltageMeasurements: VoltageMeasurements,
         withMapping mapping: HKSampleMapping = HKSampleMapping.default
     ) throws -> Observation {
-        guard var observation = try resource(withMapping: mapping).get(if: Observation.self) else {
+        guard let observation = try resource(withMapping: mapping).get(if: Observation.self) else {
             throw HealthKitOnFHIRError.notSupported
         }
-        
         if !symptoms.isEmpty {
-            try appendSymptomsComponent(&observation, symptoms: symptoms, mappings: mapping)
+            try appendSymptomsComponent(to: observation, symptoms: symptoms, mappings: mapping)
         }
-        
         if !voltageMeasurements.isEmpty {
-            try appendVoltageMeasurementsComponent(&observation, voltageMeasurements: voltageMeasurements, mappings: mapping)
+            try appendVoltageMeasurementsComponent(to: observation, voltageMeasurements: voltageMeasurements, mappings: mapping)
         }
-        
         return observation
     }
-    
-    
-    func buildObservation(
-        _ observation: inout Observation,
-        mappings: HKSampleMapping = HKSampleMapping.default
-    ) throws {
-        let mapping = mappings.electrocardiogramMapping
-        
+}
+
+
+extension HKElectrocardiogram: FHIRObservationBuildable {
+    func build(_ observation: Observation, mapping: HKSampleMapping) throws {
+        let mapping = mapping.electrocardiogramMapping
         for code in mapping.codings {
             observation.appendCoding(code.coding)
         }
-        
         for category in mapping.categories {
             observation.appendCategory(
                 CodeableConcept(coding: [category.coding])
             )
         }
-        
-        try appendNumberOfVoltageMeasurementsComponent(&observation, mapping: mapping)
-        try appendSamplingFrequencyComponent(&observation, mapping: mapping)
-        try appendClassificationComponent(&observation, mapping: mapping)
-        try appendAverageHeartRateComponent(&observation, mapping: mapping)
-        try appendSymptomsStatusComponent(&observation, mapping: mapping)
+        try appendNumberOfVoltageMeasurementsComponent(to: observation, mapping: mapping)
+        try appendSamplingFrequencyComponent(to: observation, mapping: mapping)
+        try appendClassificationComponent(to: observation, mapping: mapping)
+        try appendAverageHeartRateComponent(to: observation, mapping: mapping)
+        try appendSymptomsStatusComponent(to: observation, mapping: mapping)
     }
     
     
     private func appendNumberOfVoltageMeasurementsComponent(
-        _ observation: inout Observation,
+        to observation: Observation,
         mapping: HKElectrocardiogramMapping
     ) throws {
         // Number Of Voltage Measurements
@@ -139,7 +130,7 @@ extension HKElectrocardiogram {
     }
     
     private func appendSamplingFrequencyComponent(
-        _ observation: inout Observation,
+        to observation: Observation,
         mapping: HKElectrocardiogramMapping
     ) throws {
         if let samplingFrequency {
@@ -159,16 +150,16 @@ extension HKElectrocardiogram {
     }
     
     private func appendClassificationComponent(
-        _ observation: inout Observation,
+        to observation: Observation,
         mapping: HKElectrocardiogramMapping
     ) throws {
         let classificationComponent = ObservationComponent(code: CodeableConcept(coding: mapping.classification.codings.map(\.coding)))
-        classificationComponent.value = .string(try classification.categoryValueDescription.asFHIRStringPrimitive())
+        classificationComponent.value = .string(try classification.fhirCategoryValue.asFHIRStringPrimitive())
         observation.appendComponent(classificationComponent)
     }
     
     private func appendAverageHeartRateComponent(
-        _ observation: inout Observation,
+        to observation: Observation,
         mapping: HKElectrocardiogramMapping
     ) throws {
         if let averageHeartRate {
@@ -188,17 +179,17 @@ extension HKElectrocardiogram {
     }
     
     private func appendSymptomsStatusComponent(
-        _ observation: inout Observation,
+        to observation: Observation,
         mapping: HKElectrocardiogramMapping
     ) throws {
         let symptomsStatusComponent = ObservationComponent(code: CodeableConcept(coding: mapping.symptomsStatus.codings.map(\.coding)))
-        symptomsStatusComponent.value = .string(try symptomsStatus.categoryValueDescription.asFHIRStringPrimitive())
+        symptomsStatusComponent.value = .string(try symptomsStatus.fhirCategoryValue.asFHIRStringPrimitive())
         observation.appendComponent(symptomsStatusComponent)
     }
     
     
     private func appendSymptomsComponent(
-        _ observation: inout Observation,
+        to observation: Observation,
         symptoms: Symptoms,
         mappings: HKSampleMapping
     ) throws {
@@ -206,18 +197,17 @@ extension HKElectrocardiogram {
             guard let mapping = mappings.categorySampleMapping[symptom.key] else {
                 throw HealthKitOnFHIRError.notSupported
             }
-            
             let symptomComponent = ObservationComponent(
                 code: CodeableConcept(coding: mapping.codings.map(\.coding))
             )
-            symptomComponent.value = .string(try symptom.value.categoryValueDescription.asFHIRStringPrimitive())
+            symptomComponent.value = .string(try symptom.value.fhirCategoryValue.asFHIRStringPrimitive())
             observation.appendComponent(symptomComponent)
         }
     }
     
     
     private func appendVoltageMeasurementsComponent(
-        _ observation: inout Observation,
+        to observation: Observation,
         voltageMeasurements: VoltageMeasurements,
         mappings: HKSampleMapping
     ) throws {
@@ -242,7 +232,6 @@ extension HKElectrocardiogram {
                 voltageMeasurementBatches.append(Array(voltageMeasurements[lastIndex..<voltageMeasurement.offset]))
                 lastIndex = voltageMeasurement.offset
             }
-            
             lastRemainder = remainder
         }
         // Append the last elements that are left over (ideally exactly 10 seconds of data).
@@ -255,11 +244,8 @@ extension HKElectrocardiogram {
         for voltageMeasurementBatch in voltageMeasurementBatches {
             // Create a space separated string of all the measurement values as defined by the mapping unit
             let data = voltageMeasurementBatch
-                .map {
-                    String(format: "%.\(voltagePrecision)f", $0.value.doubleValue(for: mapping.unit.hkunit))
-                }
+                .map { String(format: "%.\(voltagePrecision)f", $0.value.doubleValue(for: mapping.unit.hkunit)) }
                 .joined(separator: " ")
-            
             let voltageMeasurementBatchComponent = ObservationComponent(
                 code: CodeableConcept(coding: mapping.codings.map(\.coding))
             )

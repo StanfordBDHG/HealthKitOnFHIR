@@ -10,6 +10,7 @@
 		2F1B52D42A4F78A5003AE151 /* XCTHealthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1B52D32A4F78A5003AE151 /* XCTHealthKit */; };
 		2F1B52D72A4F7909003AE151 /* XCTestExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 2F1B52D62A4F7909003AE151 /* XCTestExtensions */; };
 		2F68C3C8292EA52000B3E12C /* HealthKitOnFHIR in Frameworks */ = {isa = PBXBuildFile; productRef = 2F68C3C7292EA52000B3E12C /* HealthKitOnFHIR */; };
+		80DE0CF12DBAC0E800B519CF /* SpeziHealthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 80DE0CF02DBAC0E800B519CF /* SpeziHealthKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F68C3C8292EA52000B3E12C /* HealthKitOnFHIR in Frameworks */,
+				80DE0CF12DBAC0E800B519CF /* SpeziHealthKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +116,7 @@
 			name = TestApp;
 			packageProductDependencies = (
 				2F68C3C7292EA52000B3E12C /* HealthKitOnFHIR */,
+				80DE0CF02DBAC0E800B519CF /* SpeziHealthKit */,
 			);
 			productName = Example;
 			productReference = 2F6D139228F5F384007C25D6 /* TestApp.app */;
@@ -175,6 +178,7 @@
 			packageReferences = (
 				2F1B52D22A4F78A5003AE151 /* XCRemoteSwiftPackageReference "XCTHealthKit" */,
 				2F1B52D52A4F7909003AE151 /* XCRemoteSwiftPackageReference "XCTestExtensions" */,
+				80DE0CEF2DBAC0E800B519CF /* XCRemoteSwiftPackageReference "SpeziHealthKit" */,
 			);
 			productRefGroup = 2F6D139328F5F384007C25D6 /* Products */;
 			projectDirPath = "";
@@ -508,6 +512,14 @@
 				minimumVersion = 0.4.5;
 			};
 		};
+		80DE0CEF2DBAC0E800B519CF /* XCRemoteSwiftPackageReference "SpeziHealthKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/StanfordSpezi/SpeziHealthKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -524,6 +536,11 @@
 		2F68C3C7292EA52000B3E12C /* HealthKitOnFHIR */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HealthKitOnFHIR;
+		};
+		80DE0CF02DBAC0E800B519CF /* SpeziHealthKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80DE0CEF2DBAC0E800B519CF /* XCRemoteSwiftPackageReference "SpeziHealthKit" */;
+			productName = SpeziHealthKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

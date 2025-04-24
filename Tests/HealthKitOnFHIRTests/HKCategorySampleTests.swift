@@ -28,12 +28,12 @@ class HKCategorySampleTests: XCTestCase {
     }
 
     func createObservationFrom(
-        type categoryType: HKCategoryType,
+        type categoryType: HKCategoryTypeIdentifier,
         value: Int,
         metadata: [String: Any] = [:]
     ) throws -> Observation {
         let categorySample = HKCategorySample(
-            type: categoryType,
+            type: HKCategoryType(categoryType),
             value: value,
             start: try startDate,
             end: try endDate,
@@ -43,11 +43,11 @@ class HKCategorySampleTests: XCTestCase {
     }
 
     func createCategoryCoding(
-        categoryType: String,
+        categoryType: HKCategoryTypeIdentifier,
         display: String
     ) -> Coding {
         Coding(
-            code: FHIRPrimitive(stringLiteral: categoryType),
+            code: FHIRPrimitive(stringLiteral: categoryType.rawValue),
             display: FHIRPrimitive(stringLiteral: display),
             system: FHIRPrimitive(FHIRURI(stringLiteral: SupportedCodeSystem.apple.rawValue))
         )
@@ -58,18 +58,18 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.cervicalMucusQuality),
+                type: .cervicalMucusQuality,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.cervicalMucusQuality).description,
+                    categoryType: .cervicalMucusQuality,
                     display: "Cervical Mucus Quality"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -78,7 +78,7 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.menstrualFlow),
+                type: .menstrualFlow,
                 value: value.rawValue,
                 metadata: [HKMetadataKeyMenstrualCycleStart: true]
             )
@@ -86,10 +86,11 @@ class HKCategorySampleTests: XCTestCase {
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.menstrualFlow).description, display: "Menstrual Flow"
+                    categoryType: .menstrualFlow,
+                    display: "Menstrual Flow"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -98,19 +99,19 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.ovulationTestResult),
+                type: .ovulationTestResult,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.ovulationTestResult).description,
+                    categoryType: .ovulationTestResult,
                     display: "Ovulation Test Result"
                 )
             )
             XCTAssertEqual(
-                observation.value, .string(value.description.asFHIRStringPrimitive())
+                observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive())
             )
         }
     }
@@ -120,18 +121,18 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.contraceptive),
+                type: .contraceptive,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.contraceptive).description,
+                    categoryType: .contraceptive,
                     display: "Contraceptive"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -140,18 +141,18 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.sleepAnalysis),
+                type: .sleepAnalysis,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.sleepAnalysis).description,
+                    categoryType: .sleepAnalysis,
                     display: "Sleep Analysis"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -160,31 +161,31 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.appetiteChanges),
+                type: .appetiteChanges,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.appetiteChanges).description,
+                    categoryType: .appetiteChanges,
                     display: "Appetite Changes"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
     func testEnvironmentalAudioExposureEvent() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.environmentalAudioExposureEvent),
+            type: .environmentalAudioExposureEvent,
             value: HKCategoryValueEnvironmentalAudioExposureEvent.momentaryLimit.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.environmentalAudioExposureEvent).description,
+                categoryType: .environmentalAudioExposureEvent,
                 display: "Environmental Audio Exposure Event"
             )
         )
@@ -193,14 +194,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testHeadphoneAudioExposureEvent() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.headphoneAudioExposureEvent),
+            type: .headphoneAudioExposureEvent,
             value: HKCategoryValueHeadphoneAudioExposureEvent.sevenDayLimit.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.headphoneAudioExposureEvent).description,
+                categoryType: .headphoneAudioExposureEvent,
                 display: "Headphone Audio Exposure Event"
             )
         )
@@ -209,14 +210,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testLowCardioFitnessEvent() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.lowCardioFitnessEvent),
+            type: .lowCardioFitnessEvent,
             value: HKCategoryValueLowCardioFitnessEvent.lowFitness.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.lowCardioFitnessEvent).description,
+                categoryType: .lowCardioFitnessEvent,
                 display: "Low Cardio Fitness Event"
             )
         )
@@ -228,35 +229,35 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.appleWalkingSteadinessEvent),
+                type: .appleWalkingSteadinessEvent,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.appleWalkingSteadinessEvent).description,
+                    categoryType: .appleWalkingSteadinessEvent,
                     display: "Apple Walking Steadiness Event"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
     func testAppleWalkingSteadinessClassification() throws {
         let okClassification = try HKAppleWalkingSteadinessClassification(
             rawValue: HKAppleWalkingSteadinessClassification.ok.rawValue
-        )?.categoryValueDescription
+        )?.fhirCategoryValue
         XCTAssertEqual(okClassification, "ok")
 
         let lowClassification = try HKAppleWalkingSteadinessClassification(
             rawValue: HKAppleWalkingSteadinessClassification.low.rawValue
-        )?.categoryValueDescription
+        )?.fhirCategoryValue
         XCTAssertEqual(lowClassification, "low")
 
         let veryLowClassification = try HKAppleWalkingSteadinessClassification(
             rawValue: HKAppleWalkingSteadinessClassification.veryLow.rawValue
-        )?.categoryValueDescription
+        )?.fhirCategoryValue
         XCTAssertEqual(veryLowClassification, "very low")
     }
 
@@ -265,18 +266,18 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.pregnancyTestResult),
+                type: .pregnancyTestResult,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.pregnancyTestResult).description,
+                    categoryType: .pregnancyTestResult,
                     display: "Pregnancy Test Result"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -285,18 +286,18 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.progesteroneTestResult),
+                type: .progesteroneTestResult,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.progesteroneTestResult).description,
+                    categoryType: .progesteroneTestResult,
                     display: "Progesterone Test Result"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -305,31 +306,31 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.appleStandHour),
+                type: .appleStandHour,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.appleStandHour).description,
+                    categoryType: .appleStandHour,
                     display: "Apple Stand Hour"
                 )
             )
-            XCTAssertEqual(observation.value, .string(value.description.asFHIRStringPrimitive()))
+            XCTAssertEqual(observation.value, .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
     func testIntermenstrualBleeding() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.intermenstrualBleeding),
+            type: .intermenstrualBleeding,
             value: HKCategoryValue.notApplicable.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.intermenstrualBleeding).description,
+                categoryType: .intermenstrualBleeding,
                 display: "Intermenstrual Bleeding"
             )
         )
@@ -341,14 +342,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testInfrequentMenstrualCycles() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.infrequentMenstrualCycles),
+            type: .infrequentMenstrualCycles,
             value: HKCategoryValue.notApplicable.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.infrequentMenstrualCycles).description,
+                categoryType: .infrequentMenstrualCycles,
                 display: "Infrequent Menstrual Cycles"
             )
         )
@@ -360,14 +361,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testIrregularMenstrualCycles() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.irregularMenstrualCycles),
+            type: .irregularMenstrualCycles,
             value: HKCategoryValue.notApplicable.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.irregularMenstrualCycles).description,
+                categoryType: .irregularMenstrualCycles,
                 display: "Irregular Menstrual Cycles"
             )
         )
@@ -379,14 +380,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testPersistentIntermenstrualBleeding() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.persistentIntermenstrualBleeding),
+            type: .persistentIntermenstrualBleeding,
             value: HKCategoryValue.notApplicable.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.persistentIntermenstrualBleeding).description,
+                categoryType: .persistentIntermenstrualBleeding,
                 display: "Persistent Intermenstrual Bleeding"
             )
         )
@@ -398,14 +399,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testProlongedMenstrualPeriods() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.prolongedMenstrualPeriods),
+            type: .prolongedMenstrualPeriods,
             value: HKCategoryValue.notApplicable.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.prolongedMenstrualPeriods).description,
+                categoryType: .prolongedMenstrualPeriods,
                 display: "Prolonged Menstrual Periods"
             )
         )
@@ -417,14 +418,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testLactation() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.lactation),
+            type: .lactation,
             value: HKCategoryValue.notApplicable.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.lactation).description,
+                categoryType: .lactation,
                 display: "Lactation"
             )
         )
@@ -436,14 +437,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testHandwashingEvent() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.handwashingEvent),
+            type: .handwashingEvent,
             value: HKCategoryValue.notApplicable.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.handwashingEvent).description,
+                categoryType: .handwashingEvent,
                 display: "Handwashing Event"
             )
         )
@@ -455,14 +456,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testToothbrushingEvent() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.toothbrushingEvent),
+            type: .toothbrushingEvent,
             value: HKCategoryValue.notApplicable.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.toothbrushingEvent).description,
+                categoryType: .toothbrushingEvent,
                 display: "Toothbrushing Event"
             )
         )
@@ -474,14 +475,14 @@ class HKCategorySampleTests: XCTestCase {
 
     func testMindfulSession() throws {
         let observation = try createObservationFrom(
-            type: HKCategoryType(.mindfulSession),
+            type: .mindfulSession,
             value: HKCategoryValue.notApplicable.rawValue
         )
 
         XCTAssertEqual(
             observation.code.coding?.first,
             createCategoryCoding(
-                categoryType: HKCategoryType(.mindfulSession).description,
+                categoryType: .mindfulSession,
                 display: "Mindful Session"
             )
         )
@@ -493,7 +494,7 @@ class HKCategorySampleTests: XCTestCase {
 
     // SYMPTOM TESTS
 
-    func testSymptoms(type: HKCategoryType, display: String) throws {
+    func testSymptoms(type: HKCategoryTypeIdentifier, display: String) throws {
         let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
 
         for value in values {
@@ -505,104 +506,104 @@ class HKCategorySampleTests: XCTestCase {
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: type.description,
+                    categoryType: type,
                     display: display
                 )
             )
 
             XCTAssertEqual(
                 observation.value,
-                .string(value.description.asFHIRStringPrimitive())
+                .string(try value.fhirCategoryValue.asFHIRStringPrimitive())
             )
         }
     }
 
     func testAbdominalCramps() throws {
-        try testSymptoms(type: HKCategoryType(.abdominalCramps), display: "Abdominal Cramps")
+        try testSymptoms(type: .abdominalCramps, display: "Abdominal Cramps")
     }
 
     func testAcne() throws {
-        try testSymptoms(type: HKCategoryType(.acne), display: "Acne")
+        try testSymptoms(type: .acne, display: "Acne")
     }
 
     func testBladderIncontinence() throws {
-        try testSymptoms(type: HKCategoryType(.bladderIncontinence), display: "Bladder Incontinence")
+        try testSymptoms(type: .bladderIncontinence, display: "Bladder Incontinence")
     }
 
     func testBloating() throws {
-        try testSymptoms(type: HKCategoryType(.bloating), display: "Bloating")
+        try testSymptoms(type: .bloating, display: "Bloating")
     }
 
     func testBreastPain() throws {
-        try testSymptoms(type: HKCategoryType(.breastPain), display: "Breast Pain")
+        try testSymptoms(type: .breastPain, display: "Breast Pain")
     }
 
     func testChestTightnessOrPain() throws {
-        try testSymptoms(type: HKCategoryType(.chestTightnessOrPain), display: "Chest Tightness Or Pain")
+        try testSymptoms(type: .chestTightnessOrPain, display: "Chest Tightness Or Pain")
     }
 
     func testChills() throws {
-        try testSymptoms(type: HKCategoryType(.chills), display: "Chills")
+        try testSymptoms(type: .chills, display: "Chills")
     }
 
     func testConstipation() throws {
-        try testSymptoms(type: HKCategoryType(.constipation), display: "Constipation")
+        try testSymptoms(type: .constipation, display: "Constipation")
     }
 
     func testCoughing() throws {
-        try testSymptoms(type: HKCategoryType(.coughing), display: "Coughing")
+        try testSymptoms(type: .coughing, display: "Coughing")
     }
 
     func testDizziness() throws {
-        try testSymptoms(type: HKCategoryType(.dizziness), display: "Dizziness")
+        try testSymptoms(type: .dizziness, display: "Dizziness")
     }
 
     func testDrySkin() throws {
-        try testSymptoms(type: HKCategoryType(.drySkin), display: "Dry Skin")
+        try testSymptoms(type: .drySkin, display: "Dry Skin")
     }
 
     func testFainting() throws {
-        try testSymptoms(type: HKCategoryType(.fainting), display: "Fainting")
+        try testSymptoms(type: .fainting, display: "Fainting")
     }
 
     func testFever() throws {
-        try testSymptoms(type: HKCategoryType(.fever), display: "Fever")
+        try testSymptoms(type: .fever, display: "Fever")
     }
 
     func testGeneralizedBodyAche() throws {
-        try testSymptoms(type: HKCategoryType(.generalizedBodyAche), display: "Generalized Body Ache")
+        try testSymptoms(type: .generalizedBodyAche, display: "Generalized Body Ache")
     }
 
     func testHairLoss() throws {
-        try testSymptoms(type: HKCategoryType(.hairLoss), display: "Hair Loss")
+        try testSymptoms(type: .hairLoss, display: "Hair Loss")
     }
 
     func testHeadache() throws {
-        try testSymptoms(type: HKCategoryType(.headache), display: "Headache")
+        try testSymptoms(type: .headache, display: "Headache")
     }
 
     func testHeartburn() throws {
-        try testSymptoms(type: HKCategoryType(.heartburn), display: "Heartburn")
+        try testSymptoms(type: .heartburn, display: "Heartburn")
     }
 
     func testHotFlashes() throws {
-        try testSymptoms(type: HKCategoryType(.hotFlashes), display: "Hot Flashes")
+        try testSymptoms(type: .hotFlashes, display: "Hot Flashes")
     }
 
     func testLossOfSmell() throws {
-        try testSymptoms(type: HKCategoryType(.lossOfSmell), display: "Loss Of Smell")
+        try testSymptoms(type: .lossOfSmell, display: "Loss Of Smell")
     }
 
     func testLossOfTaste() throws {
-        try testSymptoms(type: HKCategoryType(.lossOfTaste), display: "Loss Of Taste")
+        try testSymptoms(type: .lossOfTaste, display: "Loss Of Taste")
     }
 
     func testLowerBackPain() throws {
-        try testSymptoms(type: HKCategoryType(.lowerBackPain), display: "Lower Back Pain")
+        try testSymptoms(type: .lowerBackPain, display: "Lower Back Pain")
     }
 
     func testMemoryLapse() throws {
-        try testSymptoms(type: HKCategoryType(.memoryLapse), display: "Memory Lapse")
+        try testSymptoms(type: .memoryLapse, display: "Memory Lapse")
     }
 
     func testMoodChanges() throws {
@@ -610,21 +611,21 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.moodChanges),
+                type: .moodChanges,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.moodChanges).description,
+                    categoryType: .moodChanges,
                     display: "Mood Changes"
                 )
             )
 
             XCTAssertEqual(
                 observation.value,
-                .string(value.description.asFHIRStringPrimitive())
+                .string(try value.fhirCategoryValue.asFHIRStringPrimitive())
             )
         }
     }
@@ -634,70 +635,70 @@ class HKCategorySampleTests: XCTestCase {
 
         for value in values {
             let observation = try createObservationFrom(
-                type: HKCategoryType(.sleepChanges),
+                type: .sleepChanges,
                 value: value.rawValue
             )
 
             XCTAssertEqual(
                 observation.code.coding?.first,
                 createCategoryCoding(
-                    categoryType: HKCategoryType(.sleepChanges).description,
+                    categoryType: .sleepChanges,
                     display: "Sleep Changes"
                 )
             )
 
             XCTAssertEqual(
                 observation.value,
-                .string(value.description.asFHIRStringPrimitive())
+                .string(try value.fhirCategoryValue.asFHIRStringPrimitive())
             )
         }
     }
 
     func testNausea() throws {
-        try testSymptoms(type: HKCategoryType(.nausea), display: "Nausea")
+        try testSymptoms(type: .nausea, display: "Nausea")
     }
 
     func testNightSweats() throws {
-        try testSymptoms(type: HKCategoryType(.nightSweats), display: "Night Sweats")
+        try testSymptoms(type: .nightSweats, display: "Night Sweats")
     }
 
     func testPelvicPain() throws {
-        try testSymptoms(type: HKCategoryType(.pelvicPain), display: "Pelvic Pain")
+        try testSymptoms(type: .pelvicPain, display: "Pelvic Pain")
     }
 
     func testRapidPoundingOrFlutteringHeartbeat() throws {
-        try testSymptoms(type: HKCategoryType(.rapidPoundingOrFlutteringHeartbeat), display: "Rapid Pounding Or Fluttering Heartbeat")
+        try testSymptoms(type: .rapidPoundingOrFlutteringHeartbeat, display: "Rapid Pounding Or Fluttering Heartbeat")
     }
 
     func testRunnyNose() throws {
-        try testSymptoms(type: HKCategoryType(.runnyNose), display: "Runny Nose")
+        try testSymptoms(type: .runnyNose, display: "Runny Nose")
     }
 
     func testShortnessOfBreath() throws {
-        try testSymptoms(type: HKCategoryType(.shortnessOfBreath), display: "Shortness Of Breath")
+        try testSymptoms(type: .shortnessOfBreath, display: "Shortness Of Breath")
     }
 
     func testSinusCongestion() throws {
-        try testSymptoms(type: HKCategoryType(.sinusCongestion), display: "Sinus Congestion")
+        try testSymptoms(type: .sinusCongestion, display: "Sinus Congestion")
     }
 
     func testSkippedHeartbeat() throws {
-        try testSymptoms(type: HKCategoryType(.skippedHeartbeat), display: "Skipped Heartbeat")
+        try testSymptoms(type: .skippedHeartbeat, display: "Skipped Heartbeat")
     }
 
     func testSoreThroat() throws {
-        try testSymptoms(type: HKCategoryType(.soreThroat), display: "Sore Throat")
+        try testSymptoms(type: .soreThroat, display: "Sore Throat")
     }
 
     func testVaginalDryness() throws {
-        try testSymptoms(type: HKCategoryType(.vaginalDryness), display: "Vaginal Dryness")
+        try testSymptoms(type: .vaginalDryness, display: "Vaginal Dryness")
     }
 
     func testVomiting() throws {
-        try testSymptoms(type: HKCategoryType(.vomiting), display: "Vomiting")
+        try testSymptoms(type: .vomiting, display: "Vomiting")
     }
 
     func testWheezing() throws {
-        try testSymptoms(type: HKCategoryType(.wheezing), display: "Wheezing")
+        try testSymptoms(type: .wheezing, display: "Wheezing")
     }
 }

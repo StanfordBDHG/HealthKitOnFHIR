@@ -17,14 +17,9 @@ extension HKClinicalRecord {
         guard let fhirResource = self.fhirResource else {
             throw HealthKitOnFHIRError.invalidFHIRResource
         }
-        
         guard fhirResource.fhirVersion == HKFHIRVersion.primaryR4() else {
             throw HealthKitOnFHIRError.unsupportedFHIRVersion
         }
-        
-        let decoder = JSONDecoder()
-        do {
-            return try decoder.decode(ResourceProxy.self, from: fhirResource.data)
-        }
+        return try JSONDecoder().decode(ResourceProxy.self, from: fhirResource.data)
     }
 }

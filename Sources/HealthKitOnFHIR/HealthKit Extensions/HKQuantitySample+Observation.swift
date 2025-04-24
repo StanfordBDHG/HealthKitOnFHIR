@@ -10,41 +10,69 @@ import HealthKit
 import ModelsR4
 
 
-extension HKQuantitySample {
-    func buildQuantitySampleObservation(
-        _ observation: inout Observation,
-        mappings: HKSampleMapping = HKSampleMapping.default
-    ) throws {
-        guard let mapping = mappings.quantitySampleMapping[self.quantityType] else {
+extension HKQuantitySample: FHIRObservationBuildable {
+    func build(_ observation: Observation, mapping: HKSampleMapping) throws {
+        guard let mapping = mapping.quantitySampleMapping[self.quantityType] else {
             throw HealthKitOnFHIRError.notSupported
         }
-        
         for code in mapping.codings {
             observation.appendCoding(code.coding)
         }
-        
-        observation.setValue(buildQuantity(mapping))
+        observation.setValue(quantity.buildQuantity(mapping: mapping))
     }
     
-    func buildQuantitySampleObservationComponent(
-        _ observation: inout Observation,
+    
+//    func buildQuantitySampleObservationComponent(
+//        _ observation: Observation,
+//        mappings: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
+//    ) throws {
+//        guard let mapping = mappings[self.quantityType] else {
+//            throw HealthKitOnFHIRError.notSupported
+//        }
+//        
+//        let component = ObservationComponent(code: CodeableConcept(coding: mapping.codings.map(\.coding)))
+//        component.value = .quantity(quantity.buildQuantity(mapping: mapping))
+//        observation.appendComponent(component)
+//    }
+}
+
+
+extension HKQuantity {
+    func buildObservationComponent(
+        for quantityType: HKQuantityType,
         mappings: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
-    ) throws {
-        guard let mapping = mappings[self.quantityType] else {
+    ) throws -> ObservationComponent {
+        guard let mapping = mappings[quantityType] else {
             throw HealthKitOnFHIRError.notSupported
         }
-        
-        let component = ObservationComponent(code: CodeableConcept(coding: mapping.codings.map(\.coding)))
-        component.value = .quantity(buildQuantity(mapping))
-        observation.appendComponent(component)
+        return buildObservationComponent(mapping: mapping)
     }
     
-    private func buildQuantity(_ mapping: HKQuantitySampleMapping) -> Quantity {
+    func buildObservationComponent(mapping: HKQuantitySampleMapping) -> ObservationComponent {
+        ObservationComponent(
+            code: CodeableConcept(coding: mapping.codings.map(\.coding)),
+            value: .quantity(buildQuantity(mapping: mapping))
+        )
+    }
+    
+    
+    func buildQuantity(
+        for quantityType: HKQuantityType,
+        mappings: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
+    ) throws -> Quantity {
+        guard let mapping = mappings[quantityType] else {
+            throw HealthKitOnFHIRError.notSupported
+        }
+        return self.buildQuantity(mapping: mapping)
+    }
+    
+    
+    func buildQuantity(mapping: HKQuantitySampleMapping) -> Quantity {
         Quantity(
             code: mapping.unit.code?.asFHIRStringPrimitive(),
             system: mapping.unit.system?.asFHIRURIPrimitive(),
             unit: mapping.unit.unit.asFHIRStringPrimitive(),
-            value: self.quantity.doubleValue(for: mapping.unit.hkunit).asFHIRDecimalPrimitive()
+            value: self.doubleValue(for: mapping.unit.hkunit).asFHIRDecimalPrimitive()
         )
     }
 }

@@ -13,17 +13,17 @@ import XCTest
 
 class HKElectrocardiogramTests: XCTestCase {
     func testElectrocardiogramCategoryTests() throws {
-        try XCTAssertEqual(HKElectrocardiogram.SymptomsStatus.notSet.categoryValueDescription, "notSet")
-        try XCTAssertEqual(HKElectrocardiogram.SymptomsStatus.none.categoryValueDescription, "none")
-        try XCTAssertEqual(HKElectrocardiogram.SymptomsStatus.present.categoryValueDescription, "present")
+        try XCTAssertEqual(HKElectrocardiogram.SymptomsStatus.notSet.fhirCategoryValue, "notSet")
+        try XCTAssertEqual(HKElectrocardiogram.SymptomsStatus.none.fhirCategoryValue, "none")
+        try XCTAssertEqual(HKElectrocardiogram.SymptomsStatus.present.fhirCategoryValue, "present")
         
-        try XCTAssertEqual(HKElectrocardiogram.Classification.notSet.categoryValueDescription, "notSet")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.sinusRhythm.categoryValueDescription, "sinusRhythm")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.atrialFibrillation.categoryValueDescription, "atrialFibrillation")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusiveLowHeartRate.categoryValueDescription, "inconclusiveLowHeartRate")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusiveHighHeartRate.categoryValueDescription, "inconclusiveHighHeartRate")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusivePoorReading.categoryValueDescription, "inconclusivePoorReading")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusiveOther.categoryValueDescription, "inconclusiveOther")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.unrecognized.categoryValueDescription, "unrecognized")
+        try XCTAssertEqual(HKElectrocardiogram.Classification.notSet.fhirCategoryValue, "notSet")
+        try XCTAssertEqual(HKElectrocardiogram.Classification.sinusRhythm.fhirCategoryValue, "sinusRhythm")
+        try XCTAssertEqual(HKElectrocardiogram.Classification.atrialFibrillation.fhirCategoryValue, "atrialFibrillation")
+        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusiveLowHeartRate.fhirCategoryValue, "inconclusiveLowHeartRate")
+        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusiveHighHeartRate.fhirCategoryValue, "inconclusiveHighHeartRate")
+        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusivePoorReading.fhirCategoryValue, "inconclusivePoorReading")
+        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusiveOther.fhirCategoryValue, "inconclusiveOther")
+        try XCTAssertEqual(HKElectrocardiogram.Classification.unrecognized.fhirCategoryValue, "unrecognized")
     }
 }
