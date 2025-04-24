@@ -30,7 +30,6 @@ struct CheckMappingCompletenessView: View {
     
     var body: some View {
         Form {
-            let _ = print(SampleType.environmentalSoundReduction.displayUnit.unitString)
             let testResult = runCheck()
             Section {
                 Text(testResult.isEmpty ? "All Fine!" : "Missing Mapping Entries!")
