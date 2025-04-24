@@ -167,7 +167,7 @@ extension HKCategoryTypeIdentifier {
             case .moodChanges, .sleepChanges:
                 return .init(valueType: HKCategoryValuePresence.self)
             default:
-                if #available(iOS 18.0, *), self == .bleedingDuringPregnancy || self == .bleedingAfterPregnancy {
+                if #available(iOS 18.0, macOS 15.0, watchOS 11.0, *), self == .bleedingDuringPregnancy || self == .bleedingAfterPregnancy {
                     return .init(valueType: HKCategoryValueVaginalBleeding.self)
                 } else {
                     throw HealthKitOnFHIRError.notSupported
