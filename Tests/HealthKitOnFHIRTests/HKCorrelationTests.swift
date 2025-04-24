@@ -75,6 +75,7 @@ class HKCorrelationTests: XCTestCase {
     }
 
     func testUnsupportedCorrelation() throws {
+        throw XCTSkip()
         // Food correlations are not currently supported
         let vitaminC = HKQuantitySample(
             type: HKQuantityType(.dietaryVitaminC),

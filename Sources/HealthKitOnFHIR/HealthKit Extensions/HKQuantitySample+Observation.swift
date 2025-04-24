@@ -20,20 +20,6 @@ extension HKQuantitySample: FHIRObservationBuildable {
         }
         observation.setValue(quantity.buildQuantity(mapping: mapping))
     }
-    
-    
-//    func buildQuantitySampleObservationComponent(
-//        _ observation: Observation,
-//        mappings: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
-//    ) throws {
-//        guard let mapping = mappings[self.quantityType] else {
-//            throw HealthKitOnFHIRError.notSupported
-//        }
-//        
-//        let component = ObservationComponent(code: CodeableConcept(coding: mapping.codings.map(\.coding)))
-//        component.value = .quantity(quantity.buildQuantity(mapping: mapping))
-//        observation.appendComponent(component)
-//    }
 }
 
 
