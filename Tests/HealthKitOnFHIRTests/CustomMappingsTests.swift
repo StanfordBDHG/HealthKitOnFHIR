@@ -9,11 +9,12 @@
 import HealthKit
 @testable import HealthKitOnFHIR
 import ModelsR4
-import XCTest
+import Testing
 
 
-final class CustomMappingsTests: XCTestCase {
-    func testCustomMappingsTests() throws {
+struct CustomMappingsTests {
+    @Test
+    func customMappings() throws {
         // swiftlint:disable:previous function_body_length
         // We disable the function body length as this is a test case
         
@@ -24,11 +25,8 @@ final class CustomMappingsTests: XCTestCase {
             end: Date()
         )
 
-        guard let ucumSystem = URL(string: "http://unitsofmeasure.org"),
-              let stanfordURL = URL(string: "http://stanford.edu") else {
-            XCTFail("Could not create URLs")
-            return
-        }
+        let ucumSystem = try #require(URL(string: "http://unitsofmeasure.org"))
+        let stanfordURL = try #require(URL(string: "http://stanford.edu"))
 
         var customMapping = [
             HKQuantityType(.bodyMass):
@@ -49,12 +47,12 @@ final class CustomMappingsTests: XCTestCase {
             )
         ]
         customMapping[HKQuantityType(.bodyMass)]?.unit.removeSystemAndCode()
-        XCTAssertNil(customMapping[HKQuantityType(.bodyMass)]?.unit.system)
-        XCTAssertNil(customMapping[HKQuantityType(.bodyMass)]?.unit.code)
+        #expect(customMapping[HKQuantityType(.bodyMass)]?.unit.system == nil)
+        #expect(customMapping[HKQuantityType(.bodyMass)]?.unit.code == nil)
         
         customMapping[HKQuantityType(.bodyMass)]?.unit.update(system: ucumSystem, code: "[oz_av]")
-        XCTAssertEqual(customMapping[HKQuantityType(.bodyMass)]?.unit.system, ucumSystem)
-        XCTAssertEqual(customMapping[HKQuantityType(.bodyMass)]?.unit.code, "[oz_av]")
+        #expect(customMapping[HKQuantityType(.bodyMass)]?.unit.system == ucumSystem)
+        #expect(customMapping[HKQuantityType(.bodyMass)]?.unit.code == "[oz_av]")
 
         let hkSampleMapping = HKSampleMapping(quantitySampleMapping: customMapping)
         
@@ -62,43 +60,32 @@ final class CustomMappingsTests: XCTestCase {
             .resource(withMapping: hkSampleMapping)
             .get(if: Observation.self)
         
-        XCTAssertEqual(
-            quantitySample.quantityType.codes,
-            [
-                Coding(
-                    code: "29463-7",
-                    display: "Body weight",
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: "http://loinc.org"))
-                ),
-                Coding(
-                    code: "HKQuantityTypeIdentifierBodyMass",
-                    display: "Body Mass",
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: "http://developer.apple.com/documentation/healthkit"))
-                )
-            ]
-        )
-        
-        XCTAssertEqual(
-            observation?.code.coding,
-            [
-                Coding(
-                    code: "SU-01",
-                    display: "Stanford University",
-                    system: FHIRPrimitive(FHIRURI(stanfordURL))
-                )
-            ]
-        )
-        
-        XCTAssertEqual(
-            observation?.value,
-            .quantity(
-                Quantity(
-                    code: "[oz_av]",
-                    system: "http://unitsofmeasure.org",
-                    unit: "oz",
-                    value: 2116.43771697482496.asFHIRDecimalPrimitive()
-                )
+        #expect(quantitySample.quantityType.codes == [
+            Coding(
+                code: "29463-7",
+                display: "Body weight",
+                system: FHIRPrimitive(FHIRURI(stringLiteral: "http://loinc.org"))
+            ),
+            Coding(
+                code: "HKQuantityTypeIdentifierBodyMass",
+                display: "Body Mass",
+                system: FHIRPrimitive(FHIRURI(stringLiteral: "http://developer.apple.com/documentation/healthkit"))
             )
-        )
+        ])
+        
+        #expect(observation?.code.coding == [
+            Coding(
+                code: "SU-01",
+                display: "Stanford University",
+                system: FHIRPrimitive(FHIRURI(stanfordURL))
+            )
+        ])
+        
+        #expect(observation?.value == .quantity(Quantity(
+            code: "[oz_av]",
+            system: "http://unitsofmeasure.org",
+            unit: "oz",
+            value: 2116.43771697482496.asFHIRDecimalPrimitive()
+        )))
     }
 }

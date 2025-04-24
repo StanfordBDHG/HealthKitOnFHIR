@@ -93,4 +93,13 @@ class TestAppUITests: XCTestCase {
         // Dismiss results view
         app.swipeDown(velocity: XCUIGestureVelocity.fast)
     }
+    
+    @MainActor
+    func testMappingCompleteness() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.buttons["Mapping Completeness"].tap()
+        XCTAssertTrue(app.staticTexts["All Fine!"].waitForExistence(timeout: 2))
+    }
 }
