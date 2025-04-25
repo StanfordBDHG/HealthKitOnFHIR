@@ -14,9 +14,3 @@ import ModelsR4
 protocol FHIRObservationBuildable {
     func build(_ observation: Observation, mapping: HKSampleMapping) throws
 }
-
-extension FHIRObservationBuildable {
-    func build(_ observation: Observation) throws {
-        try build(observation, mapping: .default)
-    }
-}

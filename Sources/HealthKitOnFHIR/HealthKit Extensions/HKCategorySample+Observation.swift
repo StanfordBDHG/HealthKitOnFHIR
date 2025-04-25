@@ -33,7 +33,10 @@ extension HKCategorySample: FHIRObservationBuildable {
                 continue
             }
             if let quantity = value as? HKQuantity {
-                observation.appendComponent(try quantity.buildObservationComponent(for: HKQuantityType(.vo2Max)))
+                guard let quantityType = HKCategoryType.quantityType(forMetadataKey: metadataKey) else {
+                    continue
+                }
+                observation.appendComponent(try quantity.buildObservationComponent(for: quantityType))
             } else if let value = value as? Bool {
                 guard let coding = HKCategoryType.coding(forMetadataKey: metadataKey) else {
                     continue
@@ -64,6 +67,17 @@ extension HKCategoryType {
                 display: "Sexual Activity: Protection Used".asFHIRStringPrimitive(),
                 system: "http://developer.apple.com/documentation/healthkit".asFHIRURIPrimitive()
             )
+        default:
+            nil
+        }
+    }
+    
+    fileprivate static func quantityType(forMetadataKey key: String) -> HKQuantityType? {
+        switch key {
+        case HKMetadataKeyHeartRateEventThreshold:
+            HKQuantityType(.heartRate)
+        case HKMetadataKeyLowCardioFitnessEventThreshold:
+            HKQuantityType(.vo2Max)
         default:
             nil
         }
@@ -167,6 +181,7 @@ extension HKCategoryTypeIdentifier {
             case .moodChanges, .sleepChanges:
                 return .init(valueType: HKCategoryValuePresence.self)
             default:
+                // we need to put these in here, in the default, since we can't do the #available check as part of the switch cases above...
                 if #available(iOS 18.0, macOS 15.0, watchOS 11.0, *), self == .bleedingDuringPregnancy || self == .bleedingAfterPregnancy {
                     return .init(valueType: HKCategoryValueVaginalBleeding.self)
                 } else {

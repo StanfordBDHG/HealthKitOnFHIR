@@ -9,25 +9,12 @@
 import HealthKit
 @testable import HealthKitOnFHIR
 import ModelsR4
-import XCTest
+import Testing
 
 
-class HKWorkoutTests: XCTestCase {
-    var startDate: Date {
-        get throws {
-            let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 0) // Date Stanford University opened (https://www.stanford.edu/about/history/)
-            return try XCTUnwrap(Calendar.current.date(from: dateComponents))
-        }
-    }
-
-    var endDate: Date {
-        get throws {
-            let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 42)
-            return try XCTUnwrap(Calendar.current.date(from: dateComponents))
-        }
-    }
-
-    let supportedWorkoutActivityTypes: [HKWorkoutActivityType] = [
+@Suite
+struct HKWorkoutTests {
+    static let supportedWorkoutActivityTypes: [HKWorkoutActivityType] = [
         .americanFootball,
         .archery,
         .australianFootball,
@@ -46,8 +33,10 @@ class HKWorkoutTests: XCTestCase {
         .crossTraining,
         .curling,
         .cycling,
-        .dance,
-        .danceInspiredTraining,
+        .socialDance,
+        .cardioDance,
+        .barre,
+        .pilates,
         .discSports,
         .downhillSkiing,
         .elliptical,
@@ -71,7 +60,8 @@ class HKWorkoutTests: XCTestCase {
         .martialArts,
         .mindAndBody,
         .mixedCardio,
-        .mixedMetabolicCardioTraining,
+        .mixedCardio,
+        .highIntensityIntervalTraining,
         .other,
         .paddleSports,
         .pickleball,
@@ -112,6 +102,20 @@ class HKWorkoutTests: XCTestCase {
         .wrestling,
         .yoga
     ]
+    
+    var startDate: Date {
+        get throws {
+            let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 0) // Date Stanford University opened (https://www.stanford.edu/about/history/)
+            return try #require(Calendar.current.date(from: dateComponents))
+        }
+    }
+
+    var endDate: Date {
+        get throws {
+            let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 42)
+            return try #require(Calendar.current.date(from: dateComponents))
+        }
+    }
 
     func createCodeableConcept(
         code: String,
@@ -126,24 +130,26 @@ class HKWorkoutTests: XCTestCase {
             ]
         )
     }
-
-    func testHKWorkoutToObservation() throws {
+    
+    
+    @Test
+    func hkWorkoutToObservation() throws {
         // The HKWorkout initializers are deprecated as of iOS 17 in favor of using `HKWorkoutBuilder`, but there
         // is currently no mechanism to use `HKWorkoutBuilder` inside unit tests without an authenticated
         // `HKHealthStore`, so we use this approach.
-        for activityType in supportedWorkoutActivityTypes {
+        for activityType in Self.supportedWorkoutActivityTypes {
             let workoutSample = HKWorkout(
                 activityType: activityType,
                 start: try startDate,
                 end: try endDate
             )
-
-            let observation = try XCTUnwrap(workoutSample.resource().get(if: Observation.self))
+            
+            let observation = try #require(workoutSample.resource().get(if: Observation.self))
             let expectedValue = createCodeableConcept(
                 code: try activityType.fhirWorkoutTypeValue,
                 system: "http://developer.apple.com/documentation/healthkit"
             )
-            XCTAssertEqual(observation.value, .codeableConcept(expectedValue))
+            #expect(observation.value == .codeableConcept(expectedValue))
         }
     }
 }
