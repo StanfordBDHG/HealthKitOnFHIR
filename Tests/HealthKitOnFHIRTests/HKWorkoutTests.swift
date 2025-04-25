@@ -13,6 +13,7 @@ import Testing
 
 
 @Suite
+@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
 struct HKWorkoutTests {
     static let supportedWorkoutActivityTypes: [HKWorkoutActivityType] = [
         .americanFootball,

@@ -12,6 +12,7 @@ import ModelsR4
 import Testing
 
 
+@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
 struct HKCorrelationTests {
     var startDate: Date {
         get throws {

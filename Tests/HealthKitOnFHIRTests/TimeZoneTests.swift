@@ -9,18 +9,19 @@
 import HealthKit
 @testable import HealthKitOnFHIR
 import ModelsR4
-import XCTest
+import Testing
 
 
-class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
+@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
+struct TimeZoneTests { // swiftlint:disable:this type_body_length
     func createDateInTimeZone(_ components: DateComponents, timeZone: TimeZone) throws -> Date {
         var calendar = Calendar.current
         calendar.timeZone = timeZone
-        return try XCTUnwrap(calendar.date(from: components))
+        return try #require(calendar.date(from: components))
     }
     
     func getTimeZoneDate(_ components: DateComponents, timeZoneName: String) throws -> Date {
-        let timeZone = try XCTUnwrap(TimeZone(identifier: timeZoneName))
+        let timeZone = try #require(TimeZone(identifier: timeZoneName))
         return try createDateInTimeZone(components, timeZone: timeZone)
     }
     
@@ -37,7 +38,6 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
     func createDSTDatesFor(timeZone: String) throws -> (start: Date, end: Date) {
         let startComponents = DateComponents(year: 2024, month: 4, day: 1, hour: 9, minute: 00, second: 0)
         let endComponents = DateComponents(year: 2024, month: 4, day: 1, hour: 10, minute: 45, second: 0)
-        
         return (
             try getTimeZoneDate(startComponents, timeZoneName: timeZone),
             try getTimeZoneDate(endComponents, timeZoneName: timeZone)
@@ -58,11 +58,12 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
             end: end,
             metadata: metadata
         )
-        return try XCTUnwrap(quantitySample.resource().get(if: Observation.self))
+        return try #require(quantitySample.resource().get(if: Observation.self))
     }
     
     /// Tests specifying the pacific standard time zone (-08:00) in metadata with a different start and end date (results in a FHIR `Period`)
-    func testPSTTimeZonePeriod() throws {
+    @Test
+    func pstTimeZonePeriod() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
         
@@ -75,16 +76,17 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .period(period) = observation.effective else {
-            XCTFail("Expected period effective type")
+            Issue.record("Expected period effective type")
             return
         }
         
-        XCTAssertEqual(try XCTUnwrap(period.start?.value).asNSDate(), startDate)
-        XCTAssertEqual(try XCTUnwrap(period.end?.value).asNSDate(), endDate)
+        #expect(try #require(period.start?.value).asNSDate() == startDate)
+        #expect(try #require(period.end?.value).asNSDate() == endDate)
     }
 
     /// Tests specifying the pacific standard time zone (-8:00) in metadata with the same start and end date (results in a FHIR `DateTime`)
-    func testPSTTimeZoneDateTime() throws {
+    @Test
+    func pstTimeZoneDateTime() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, _) = try createDatesFor(timeZone: timeZone)
         
@@ -97,15 +99,16 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .dateTime(dateTime) = observation.effective else {
-            XCTFail("Expected dateTime effective type")
+            Issue.record("Expected dateTime effective type")
             return
         }
         
-        XCTAssertEqual(try XCTUnwrap(dateTime.value).asNSDate(), startDate)
+        #expect(try #require(dateTime.value).asNSDate() == startDate)
     }
     
     /// Tests specifying the pacific daylight time zone (-7:00) in metadata with a different start and end date (results in a FHIR `Period`)
-    func testPDTTimeZonePeriod() throws {
+    @Test
+    func pdtTimeZonePeriod() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, endDate) = try createDSTDatesFor(timeZone: timeZone)
         
@@ -118,27 +121,20 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .period(period) = observation.effective else {
-            XCTFail("Expected period effective type")
+            Issue.record("Expected period effective type")
             return
         }
         
-        let startTimestamp = try XCTUnwrap(period.start?.value?.description)
-        let endTimestamp = try XCTUnwrap(period.end?.value?.description)
+        let startTimestamp = try #require(period.start?.value?.description)
+        let endTimestamp = try #require(period.end?.value?.description)
         
-        XCTAssertEqual(
-            startTimestamp,
-            "2024-04-01T09:00:00-07:00",
-            "Start timestamp should match expected format with timezone"
-        )
-        XCTAssertEqual(
-            endTimestamp,
-            "2024-04-01T10:45:00-07:00",
-            "End timestamp should match expected format with timezone"
-        )
+        #expect(startTimestamp == "2024-04-01T09:00:00-07:00", "Start timestamp should match expected format with timezone")
+        #expect(endTimestamp == "2024-04-01T10:45:00-07:00", "End timestamp should match expected format with timezone")
     }
     
     /// Tests specifying the pacific daylight time zone (-7:00) in metadata with the same start and end date  (results in a FHIR `DateTime`)
-    func testPDTTimeZoneDateTime() throws {
+    @Test
+    func pdtTimeZoneDateTime() throws {
         let timeZone = "America/Los_Angeles"
         let (startDate, _) = try createDSTDatesFor(timeZone: timeZone)
         
@@ -151,21 +147,17 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .dateTime(dateTime) = observation.effective else {
-            XCTFail("Expected dateTime effective type")
+            Issue.record("Expected dateTime effective type")
             return
         }
         
-        let timestamp = try XCTUnwrap(dateTime.value?.description)
-        
-        XCTAssertEqual(
-            timestamp,
-            "2024-04-01T09:00:00-07:00",
-            "Timestamp should match expected format with timezone during DST"
-        )
+        let timestamp = try #require(dateTime.value?.description)
+        #expect(timestamp == "2024-04-01T09:00:00-07:00", "Timestamp should match expected format with timezone during DST")
     }
     
     /// Tests specifying eastern standard time (-5:00) in metadata with an HKSample that defines a period with a different start and end date (results in a FHIR `Period`)
-    func testESTTimeZonePeriod() throws {
+    @Test
+    func estTimeZonePeriod() throws {
         let timeZone = "America/New_York"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
         
@@ -178,16 +170,17 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .period(period) = observation.effective else {
-            XCTFail("Expected period effective type")
+            Issue.record("Expected period effective type")
             return
         }
 
-        XCTAssertEqual(try XCTUnwrap(period.start?.value).asNSDate(), startDate)
-        XCTAssertEqual(try XCTUnwrap(period.end?.value).asNSDate(), endDate)
+        #expect(try #require(period.start?.value).asNSDate() == startDate)
+        #expect(try #require(period.end?.value).asNSDate() == endDate)
     }
     
     /// Tests specifying eastern standard time (-5:00) in metadata with the same start and end date (results in a FHIR `DateTime`)
-    func testESTTimeZoneDateTime() throws {
+    @Test
+    func estTimeZoneDateTime() throws {
         let timeZone = "America/New_York"
         let (startDate, _) = try createDatesFor(timeZone: timeZone)
         
@@ -200,15 +193,16 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .dateTime(dateTime) = observation.effective else {
-            XCTFail("Expected dateTime effective type")
+            Issue.record("Expected dateTime effective type")
             return
         }
         
-        XCTAssertEqual(try XCTUnwrap(dateTime.value).asNSDate(), startDate)
+        #expect(try #require(dateTime.value).asNSDate() == startDate)
     }
     
     /// Tests specifying indian standard time (+5:30) in metadata with a different start and end date (results in a FHIR `Period`)
-    func testISTTimeZonePeriod() throws {
+    @Test
+    func istTimeZonePeriod() throws {
         let timeZone = "Asia/Calcutta"
         let (startDate, endDate) = try createDatesFor(timeZone: timeZone)
         
@@ -221,27 +215,20 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .period(period) = observation.effective else {
-            XCTFail("Expected period effective type")
+            Issue.record("Expected period effective type")
             return
         }
         
-        let startTimestamp = try XCTUnwrap(period.start?.value?.description)
-        let endTimestamp = try XCTUnwrap(period.end?.value?.description)
+        let startTimestamp = try #require(period.start?.value?.description)
+        let endTimestamp = try #require(period.end?.value?.description)
         
-        XCTAssertEqual(
-            startTimestamp,
-            "2024-12-01T09:00:00+05:30",
-            "Start timestamp should match expected format with timezone"
-        )
-        XCTAssertEqual(
-            endTimestamp,
-            "2024-12-01T10:45:00+05:30",
-            "End timestamp should match expected format with timezone"
-        )
+        #expect(startTimestamp == "2024-12-01T09:00:00+05:30", "Start timestamp should match expected format with timezone")
+        #expect(endTimestamp == "2024-12-01T10:45:00+05:30", "End timestamp should match expected format with timezone")
     }
     
     /// Tests specifying indian standard time (+5:30) in metadata with the same start and end date  (results in a FHIR `DateTime`)
-    func testISTTimeZoneDateTime() throws {
+    @Test
+    func istTimeZoneDateTime() throws {
         let timeZone = "Asia/Calcutta"
         let (startDate, _) = try createDatesFor(timeZone: timeZone)
         
@@ -254,29 +241,26 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .dateTime(dateTime) = observation.effective else {
-            XCTFail("Expected dateTime effective type")
+            Issue.record("Expected dateTime effective type")
             return
         }
         
-        let timestamp = try XCTUnwrap(dateTime.value?.description)
+        let timestamp = try #require(dateTime.value?.description)
         
-        XCTAssertEqual(
-            timestamp,
-            "2024-12-01T09:00:00+05:30",
-            "Timestamp should match expected format with timezone"
-        )
+        #expect(timestamp == "2024-12-01T09:00:00+05:30", "Timestamp should match expected format with timezone")
     }
     
     /// Tests that the current time zone is added if a time zone is not specified in metadata with a different start and end date (results in a FHIR `Period`)
-    func testDefaultTimeZonePeriod() throws {
+    @Test
+    func defaultTimeZonePeriod() throws {
         let startDate: Date = try {
             let dateComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 9, minute: 00, second: 0)
-            return try XCTUnwrap(Calendar.current.date(from: dateComponents))
+            return try #require(Calendar.current.date(from: dateComponents))
         }()
         
         let endDate: Date = try {
             let dateComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 10, minute: 45, second: 0)
-            return try XCTUnwrap(Calendar.current.date(from: dateComponents))
+            return try #require(Calendar.current.date(from: dateComponents))
         }()
         
         let observation = try createObservationFrom(
@@ -287,12 +271,12 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .period(period) = observation.effective else {
-            XCTFail("Expected period effective type")
+            Issue.record("Expected period effective type")
             return
         }
         
-        let startTimestamp = try XCTUnwrap(period.start?.value?.description)
-        let endTimestamp = try XCTUnwrap(period.end?.value?.description)
+        let startTimestamp = try #require(period.start?.value?.description)
+        let endTimestamp = try #require(period.end?.value?.description)
         
         let currentTimeZone = TimeZone.current
         let totalMinutes = currentTimeZone.secondsFromGMT(for: startDate) / 60
@@ -301,23 +285,18 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         let sign = totalMinutes >= 0 ? "+" : "-"
         let expectedOffsetString = String(format: "%@%02d:%02d", sign, hours, minutes)
         
-        XCTAssertTrue(
-            startTimestamp.starts(with: "2024-12-01T09:00:00"),
-            "Start timestamp should begin with correct date and time"
-        )
-        XCTAssertTrue(
-            endTimestamp.starts(with: "2024-12-01T10:45:00"),
-            "End timestamp should begin with correct date and time"
-        )
-        XCTAssertEqual(try XCTUnwrap(period.start?.value).asNSDate(), startDate)
-        XCTAssertEqual(try XCTUnwrap(period.end?.value).asNSDate(), endDate)
+        #expect(startTimestamp.starts(with: "2024-12-01T09:00:00"), "Start timestamp should begin with correct date and time")
+        #expect(endTimestamp.starts(with: "2024-12-01T10:45:00"), "End timestamp should begin with correct date and time")
+        #expect(try #require(period.start?.value).asNSDate() == startDate)
+        #expect(try #require(period.end?.value).asNSDate() == endDate)
     }
     
     /// Tests that the current time zone is added if a time zone is not specified in metadata with the same start and end date  (results in a FHIR `DateTime`)
-    func testDefaultTimeZoneDateTime() throws {
+    @Test
+    func defaultTimeZoneDateTime() throws {
         let startDate: Date = try {
             let dateComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 9, minute: 00, second: 0)
-            return try XCTUnwrap(Calendar.current.date(from: dateComponents))
+            return try #require(Calendar.current.date(from: dateComponents))
         }()
         
         let endDate = startDate
@@ -330,11 +309,11 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         )
         
         guard case let .dateTime(dateTime) = observation.effective else {
-            XCTFail("Expected dateTime effective type")
+            Issue.record("Expected dateTime effective type")
             return
         }
         
-        let timestamp = try XCTUnwrap(dateTime.value?.description)
+        let timestamp = try #require(dateTime.value?.description)
         
         let currentTimeZone = TimeZone.current
         let totalMinutes = currentTimeZone.secondsFromGMT(for: startDate) / 60
@@ -343,33 +322,25 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
         let sign = totalMinutes >= 0 ? "+" : "-"
         let expectedOffsetString = String(format: "%@%02d:%02d", sign, hours, minutes)
         
-        XCTAssertTrue(
-            timestamp.starts(with: "2024-12-01T09:00:00"),
-            "Timestamp should begin with correct date and time"
-        )
-        XCTAssertEqual(try XCTUnwrap(dateTime.value).asNSDate(), startDate)
+        #expect(timestamp.starts(with: "2024-12-01T09:00:00"), "Timestamp should begin with correct date and time")
+        #expect(try #require(dateTime.value).asNSDate() == startDate)
     }
     
     /// Tests creating a `Period` instance using different time zones for start and end date.
-    func testMultiTimeZonePeriod() throws {
-        let timeZoneLA = try XCTUnwrap(TimeZone(identifier: "America/Los_Angeles"))
-        let timeZoneDE = try XCTUnwrap(TimeZone(identifier: "Europe/Berlin"))
+    @Test
+    func multiTimeZonePeriod() throws {
+        let timeZoneLA = try #require(TimeZone(identifier: "America/Los_Angeles"))
+        let timeZoneDE = try #require(TimeZone(identifier: "Europe/Berlin"))
         
         // we're choosing this exact date bc at that point in time, LA was already in DST, while germany was not.
-        let startDateLA = try XCTUnwrap(Calendar.current.date(from: .init(timeZone: timeZoneLA, year: 2025, month: 3, day: 14, hour: 7)))
-        let startDateDE = try XCTUnwrap(Calendar.current.date(from: .init(timeZone: timeZoneDE, year: 2025, month: 3, day: 14, hour: 15)))
-        let endDateLA = try XCTUnwrap(Calendar.current.date(from: .init(timeZone: timeZoneLA, year: 2025, month: 3, day: 14, hour: 7, minute: 30)))
-        let endDateDE = try XCTUnwrap(Calendar.current.date(from: .init(timeZone: timeZoneDE, year: 2025, month: 3, day: 14, hour: 15, minute: 30)))
+        let startDateLA = try #require(Calendar.current.date(from: .init(timeZone: timeZoneLA, year: 2025, month: 3, day: 14, hour: 7)))
+        let startDateDE = try #require(Calendar.current.date(from: .init(timeZone: timeZoneDE, year: 2025, month: 3, day: 14, hour: 15)))
+        let endDateLA = try #require(Calendar.current.date(from: .init(timeZone: timeZoneLA, year: 2025, month: 3, day: 14, hour: 7, minute: 30)))
+        let endDateDE = try #require(Calendar.current.date(from: .init(timeZone: timeZoneDE, year: 2025, month: 3, day: 14, hour: 15, minute: 30)))
         
-        XCTAssertEqual(
-            try DateTime(date: startDateLA, timeZone: timeZoneLA).asNSDate(),
-            try DateTime(date: startDateDE, timeZone: timeZoneDE).asNSDate()
-        )
+        #expect(try DateTime(date: startDateLA, timeZone: timeZoneLA).asNSDate() == DateTime(date: startDateDE, timeZone: timeZoneDE).asNSDate())
         
-        XCTAssertEqual(
-            try DateTime(date: endDateLA, timeZone: timeZoneLA).asNSDate(),
-            try DateTime(date: endDateDE, timeZone: timeZoneDE).asNSDate()
-        )
+        #expect(try DateTime(date: endDateLA, timeZone: timeZoneLA).asNSDate() == DateTime(date: endDateDE, timeZone: timeZoneDE).asNSDate())
         
         let period1 = Period(
             end: FHIRPrimitive(try DateTime(date: startDateLA, timeZone: timeZoneLA)),
@@ -380,13 +351,7 @@ class TimeZoneTests: XCTestCase { // swiftlint:disable:this type_body_length
             start: FHIRPrimitive(try DateTime(date: endDateLA, timeZone: timeZoneLA))
         )
         
-        XCTAssertEqual(
-            try XCTUnwrap(period1.start?.value).asNSDate(),
-            try XCTUnwrap(period2.start?.value).asNSDate()
-        )
-        XCTAssertEqual(
-            try XCTUnwrap(period1.end?.value).asNSDate(),
-            try XCTUnwrap(period2.end?.value).asNSDate()
-        )
+        #expect(try #require(period1.start?.value).asNSDate() == #require(period2.start?.value).asNSDate())
+        #expect(try #require(period1.end?.value).asNSDate() == #require(period2.end?.value).asNSDate())
     }
 }
