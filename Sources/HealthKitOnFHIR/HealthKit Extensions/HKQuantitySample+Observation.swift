@@ -41,18 +41,6 @@ extension HKQuantity {
         )
     }
     
-    
-    func buildQuantity(
-        for quantityType: HKQuantityType,
-        mappings: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default
-    ) throws -> Quantity {
-        guard let mapping = mappings[quantityType] else {
-            throw HealthKitOnFHIRError.notSupported
-        }
-        return self.buildQuantity(mapping: mapping)
-    }
-    
-    
     func buildQuantity(mapping: HKQuantitySampleMapping) -> Quantity {
         Quantity(
             code: mapping.unit.code?.asFHIRStringPrimitive(),
