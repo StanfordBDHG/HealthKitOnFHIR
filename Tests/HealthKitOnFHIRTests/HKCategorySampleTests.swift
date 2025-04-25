@@ -69,7 +69,7 @@ struct HKCategorySampleTests {
                 categoryType: .cervicalMucusQuality,
                 display: "Cervical Mucus Quality"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -86,7 +86,7 @@ struct HKCategorySampleTests {
                 categoryType: .menstrualFlow,
                 display: "Menstrual Flow"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -102,7 +102,7 @@ struct HKCategorySampleTests {
                 categoryType: .ovulationTestResult,
                 display: "Ovulation Test Result"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -118,7 +118,7 @@ struct HKCategorySampleTests {
                 categoryType: .contraceptive,
                 display: "Contraceptive"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -134,7 +134,7 @@ struct HKCategorySampleTests {
                 categoryType: .sleepAnalysis,
                 display: "Sleep Analysis"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -150,7 +150,7 @@ struct HKCategorySampleTests {
                 categoryType: .appetiteChanges,
                 display: "Appetite Changes"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -236,7 +236,7 @@ struct HKCategorySampleTests {
                 categoryType: .appleWalkingSteadinessEvent,
                 display: "Apple Walking Steadiness Event"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -309,7 +309,7 @@ struct HKCategorySampleTests {
                 categoryType: .pregnancyTestResult,
                 display: "Pregnancy Test Result"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
     
@@ -338,7 +338,7 @@ struct HKCategorySampleTests {
                 categoryType: .progesteroneTestResult,
                 display: "Progesterone Test Result"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
     
@@ -404,7 +404,7 @@ struct HKCategorySampleTests {
                 categoryType: .appleStandHour,
                 display: "Apple Stand Hour"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -552,7 +552,7 @@ struct HKCategorySampleTests {
                 categoryType: type,
                 display: display
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -678,7 +678,7 @@ struct HKCategorySampleTests {
                 categoryType: .moodChanges,
                 display: "Mood Changes"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
 
@@ -694,7 +694,7 @@ struct HKCategorySampleTests {
                 categoryType: .sleepChanges,
                 display: "Sleep Changes"
             ))
-            #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+            #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
         }
     }
     
@@ -715,7 +715,7 @@ struct HKCategorySampleTests {
             categoryType: category,
             display: displayTitle
         ))
-        #expect(observation.value == .string(try value.fhirCategoryValue.asFHIRStringPrimitive()))
+        #expect(try observation.value == .string(value.fhirCategoryValue.asFHIRStringPrimitive()))
     }
 
     @Test

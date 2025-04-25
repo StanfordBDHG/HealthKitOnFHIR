@@ -28,7 +28,6 @@ struct TimeZoneTests { // swiftlint:disable:this type_body_length
     func createDatesFor(timeZone: String) throws -> (start: Date, end: Date) {
         let startComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 9, minute: 00, second: 0)
         let endComponents = DateComponents(year: 2024, month: 12, day: 1, hour: 10, minute: 45, second: 0)
-        
         return (
             try getTimeZoneDate(startComponents, timeZoneName: timeZone),
             try getTimeZoneDate(endComponents, timeZoneName: timeZone)
