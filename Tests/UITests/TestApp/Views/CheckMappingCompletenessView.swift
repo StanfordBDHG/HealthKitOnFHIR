@@ -18,9 +18,9 @@ struct CheckMappingCompletenessView: View {
             let typeIdentifier: String
             let unitString: String?
         }
-        var missingQuantityTypes: Set<Entry> = []
-        var missingCategoryTypes: Set<Entry> = []
-        var missingCorrelationTypes: Set<Entry> = []
+        var missingQuantityTypes = Set<Entry>()
+        var missingCategoryTypes = Set<Entry>()
+        var missingCorrelationTypes = Set<Entry>()
         
         var isEmpty: Bool {
             missingQuantityTypes.isEmpty && missingCategoryTypes.isEmpty && missingCorrelationTypes.isEmpty
