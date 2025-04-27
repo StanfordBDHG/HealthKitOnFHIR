@@ -55,7 +55,7 @@ class TestAppUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        try exitAppAndOpenHealth(.electrocardiograms)
+        try launchAndAddSample(healthApp: .healthApp, .electrocardiogram())
 
         app.launch()
         XCTAssert(app.wait(for: .runningForeground, timeout: 6.0))
