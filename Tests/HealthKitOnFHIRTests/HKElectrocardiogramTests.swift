@@ -8,22 +8,24 @@
 
 import HealthKit
 @testable import HealthKitOnFHIR
-import XCTest
+import Testing
 
 
-class HKElectrocardiogramTests: XCTestCase {
-    func testElectrocardiogramCategoryTests() throws {
-        try XCTAssertEqual(HKElectrocardiogram.SymptomsStatus.notSet.categoryValueDescription, "notSet")
-        try XCTAssertEqual(HKElectrocardiogram.SymptomsStatus.none.categoryValueDescription, "none")
-        try XCTAssertEqual(HKElectrocardiogram.SymptomsStatus.present.categoryValueDescription, "present")
+@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
+struct HKElectrocardiogramTests {
+    @Test
+    func electrocardiogramCategoryTests() throws {
+        #expect(try HKElectrocardiogram.SymptomsStatus.notSet.fhirCategoryValue == "notSet")
+        #expect(try HKElectrocardiogram.SymptomsStatus.none.fhirCategoryValue == "none")
+        #expect(try HKElectrocardiogram.SymptomsStatus.present.fhirCategoryValue == "present")
         
-        try XCTAssertEqual(HKElectrocardiogram.Classification.notSet.categoryValueDescription, "notSet")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.sinusRhythm.categoryValueDescription, "sinusRhythm")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.atrialFibrillation.categoryValueDescription, "atrialFibrillation")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusiveLowHeartRate.categoryValueDescription, "inconclusiveLowHeartRate")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusiveHighHeartRate.categoryValueDescription, "inconclusiveHighHeartRate")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusivePoorReading.categoryValueDescription, "inconclusivePoorReading")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.inconclusiveOther.categoryValueDescription, "inconclusiveOther")
-        try XCTAssertEqual(HKElectrocardiogram.Classification.unrecognized.categoryValueDescription, "unrecognized")
+        #expect(try HKElectrocardiogram.Classification.notSet.fhirCategoryValue == "notSet")
+        #expect(try HKElectrocardiogram.Classification.sinusRhythm.fhirCategoryValue == "sinusRhythm")
+        #expect(try HKElectrocardiogram.Classification.atrialFibrillation.fhirCategoryValue == "atrialFibrillation")
+        #expect(try HKElectrocardiogram.Classification.inconclusiveLowHeartRate.fhirCategoryValue == "inconclusiveLowHeartRate")
+        #expect(try HKElectrocardiogram.Classification.inconclusiveHighHeartRate.fhirCategoryValue == "inconclusiveHighHeartRate")
+        #expect(try HKElectrocardiogram.Classification.inconclusivePoorReading.fhirCategoryValue == "inconclusivePoorReading")
+        #expect(try HKElectrocardiogram.Classification.inconclusiveOther.fhirCategoryValue == "inconclusiveOther")
+        #expect(try HKElectrocardiogram.Classification.unrecognized.fhirCategoryValue == "unrecognized")
     }
 }

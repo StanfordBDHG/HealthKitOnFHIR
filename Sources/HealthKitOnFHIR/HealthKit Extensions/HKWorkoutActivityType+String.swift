@@ -9,24 +9,8 @@
 import HealthKit
 
 
-protocol HKWorkoutActivityTypeDescription: CustomStringConvertible {
-    var workoutTypeDescription: String { get throws }
-}
-
-extension HKWorkoutActivityTypeDescription {
-    /// A string description of the HKWorkoutActivityType case
-    public var description: String {
-        do {
-            return try workoutTypeDescription
-        } catch {
-            return "undefined"
-        }
-    }
-}
-
-extension HKWorkoutActivityType: @retroactive CustomStringConvertible {}
-extension HKWorkoutActivityType: HKWorkoutActivityTypeDescription {
-    var workoutTypeDescription: String {
+extension HKWorkoutActivityType {
+    var fhirWorkoutTypeValue: String {
         get throws {
             switch self {
             case .americanFootball:

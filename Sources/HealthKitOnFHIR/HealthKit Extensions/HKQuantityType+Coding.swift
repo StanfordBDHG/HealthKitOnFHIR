@@ -23,7 +23,6 @@ extension HKQuantityType {
         guard let mapping = mappings[self] else {
             return []
         }
-        
         return mapping.codings.map(\.coding)
     }
 }

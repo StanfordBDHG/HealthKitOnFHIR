@@ -41,35 +41,20 @@ struct CreateWorkoutView: View {
         guard let healthStore = self.manager.healthStore else {
             throw HKError(.errorHealthDataUnavailable)
         }
-
         let configuration = HKWorkoutConfiguration()
         configuration.activityType = activityType
         configuration.locationType = .indoor
-
-        let workoutBuilder = HKWorkoutBuilder(healthStore: healthStore, configuration: configuration, device: nil)
-
-        return try await withCheckedThrowingContinuation { continuation in
-            workoutBuilder.beginCollection(withStart: startDate) { success, error in
-                guard success else {
-                    continuation.resume(throwing: error ?? HKError(.errorHealthDataUnavailable))
-                    return
-                }
-
-                workoutBuilder.endCollection(withEnd: endDate) { success, error in
-                    guard success else {
-                        continuation.resume(throwing: error ?? HKError(.errorHealthDataUnavailable))
-                        return
-                    }
-
-                    workoutBuilder.finishWorkout { workout, error in
-                        if let workout = workout {
-                            continuation.resume(returning: workout)
-                        } else {
-                            continuation.resume(throwing: error ?? HKError(.errorHealthDataUnavailable))
-                        }
-                    }
-                }
-            }
+        let workoutBuilder = HKWorkoutBuilder(
+            healthStore: healthStore,
+            configuration: configuration,
+            device: nil
+        )
+        try await workoutBuilder.beginCollection(at: startDate)
+        try await workoutBuilder.endCollection(at: endDate)
+        if let workout = try await workoutBuilder.finishWorkout() {
+            return workout
+        } else {
+            throw HKError(.errorHealthDataUnavailable)
         }
     }
 
@@ -84,7 +69,7 @@ struct CreateWorkoutView: View {
                 activityType: .running
             )
 
-            let observation = try workout.resource.get()
+            let observation = try workout.resource().get()
 
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]

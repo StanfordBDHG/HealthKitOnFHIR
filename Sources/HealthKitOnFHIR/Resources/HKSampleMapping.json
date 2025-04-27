@@ -151,6 +151,24 @@
                 }
             ]
         },
+        "HKCategoryTypeIdentifierBleedingAfterPregnancy": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierBleedingAfterPregnancy",
+                    "display": "Bleeding After Pregnancy",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierBleedingDuringPregnancy": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierBleedingDuringPregnancy",
+                    "display": "Bleeding During Pregnancy",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
         "HKCategoryTypeIdentifierCervicalMucusQuality": {
             "codings": [
                 {
@@ -174,6 +192,15 @@
                 {
                     "code": "HKCategoryTypeIdentifierAudioExposureEvent",
                     "display": "Environmental Audio Exposure Event",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierDiarrhea": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierDiarrhea",
+                    "display": "Diarrhea",
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ]
@@ -214,6 +241,15 @@
                 }
             ]
         },
+        "HKCategoryTypeIdentifierPregnancy": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierPregnancy",
+                    "display": "Pregnancy",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
         "HKCategoryTypeIdentifierPregnancyTestResult": {
             "codings": [
                 {
@@ -237,6 +273,15 @@
                 {
                     "code": "HKCategoryTypeIdentifierSleepAnalysis",
                     "display": "Sleep Analysis",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "HKCategoryTypeIdentifierSleepApneaEvent": {
+            "codings": [
+                {
+                    "code": "HKCategoryTypeIdentifierSleepApneaEvent",
+                    "display": "Sleep Apnea Event",
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ]
@@ -708,6 +753,16 @@
                     "system": "http://loinc.org"
                 }
             ]
+        },
+        "HKCorrelationTypeIdentifierFood": {
+            "categories": [],
+            "codings": [
+                {
+                    "code": "80453-4",
+                    "display": "Food intake panel",
+                    "system": "http://loinc.org"
+                }
+            ]
         }
     },
     "HKQuantitySamples": {
@@ -761,6 +816,34 @@
                 "unit": "min"
             }
         },
+        "HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierAppleSleepingBreathingDisturbances",
+                    "display": "Apple Sleeping Breathing Disturbances",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "count"
+            }
+        },
+        "HKQuantityTypeIdentifierAppleSleepingWristTemperature": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierAppleSleepingWristTemperature",
+                    "display": "Apple Sleeping Wrist Temperature",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "Cel",
+                "hkunit": "degC",
+                "system": "http://unitsofmeasure.org",
+                "unit": "C"
+            }
+        },
         "HKQuantityTypeIdentifierAppleStandTime": {
             "codings": [
                 {
@@ -781,6 +864,21 @@
                 {
                     "code": "HKQuantityTypeIdentifierAppleWalkingSteadiness",
                     "display": "Apple Walking Steadiness",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "%",
+                "hkunit": "%",
+                "system": "http://unitsofmeasure.org",
+                "unit": "%"
+            }
+        },
+        "HKQuantityTypeIdentifierAtrialFibrillationBurden": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierAppleSleepingWristTemperature",
+                    "display": "Atrial Fibrillation Burden",
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
@@ -979,6 +1077,81 @@
                 "hkunit": "degC",
                 "system": "http://unitsofmeasure.org",
                 "unit": "C"
+            }
+        },
+        "HKQuantityTypeIdentifierCrossCountrySkiingSpeed": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierCrossCountrySkiingSpeed",
+                    "display": "Cross Country Skiing Speed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m/s",
+                "hkunit": "m/s",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m/s"
+            }
+        },
+        "HKQuantityTypeIdentifierCyclingCadence": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierCyclingCadence",
+                    "display": "Cycling Cadence",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "/min",
+                "hkunit": "count/min",
+                "system": "http://unitsofmeasure.org",
+                "unit": "r/min"
+            }
+        },
+        "HKQuantityTypeIdentifierCyclingFunctionalThresholdPower": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierCyclingFunctionalThresholdPower",
+                    "display": "Cycling Functional Threshold Power",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "W",
+                "hkunit": "W",
+                "system": "http://unitsofmeasure.org",
+                "unit": "watt"
+            }
+        },
+        "HKQuantityTypeIdentifierCyclingPower": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierCyclingPower",
+                    "display": "Cycling Power",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "W",
+                "hkunit": "W",
+                "system": "http://unitsofmeasure.org",
+                "unit": "watt"
+            }
+        },
+        "HKQuantityTypeIdentifierCyclingSpeed": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierCyclingFunctionalThresholdPower",
+                    "display": "Cycling Speed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "km/h",
+                "hkunit": "km/hr",
+                "system": "http://unitsofmeasure.org",
+                "unit": "km/h"
             }
         },
         "HKQuantityTypeIdentifierDietaryBiotin": {
@@ -1576,6 +1749,21 @@
                 "unit": "mg"
             }
         },
+        "HKQuantityTypeIdentifierDistanceCrossCountrySkiing": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDistanceCrossCountrySkiing",
+                    "display": "Distance Cross Country Skiing",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m"
+            }
+        },
         "HKQuantityTypeIdentifierDistanceCycling": {
             "codings": [
                 {
@@ -1596,6 +1784,51 @@
                 {
                     "code": "HKQuantityTypeIdentifierDistanceDownhillSnowSports",
                     "display": "Distance Downhill Snow Sports",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierDistancePaddleSports": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDistancePaddleSports",
+                    "display": "Distance Paddle Sports",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierDistanceRowing": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDistanceRowing",
+                    "display": "Distance Rowing",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierDistanceSkatingSports": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierDistanceSkatingSports",
+                    "display": "Distance Cross Country Skiing",
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],
@@ -1684,6 +1917,49 @@
                 "hkunit": "dBASPL",
                 "system": "http://unitsofmeasure.org",
                 "unit": "dB(SPL)"
+            }
+        },
+        "HKQuantityTypeIdentifierEnvironmentalSoundReduction": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierEnvironmentalSoundReduction",
+                    "display": "Environmental Sound Reduction",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "dB(HL)",
+                "hkunit": "dBHL",
+                "system": "http://unitsofmeasure.org",
+                "unit": "dB(HL)"
+            }
+        },
+        "HKQuantityTypeIdentifierEstimatedWorkoutEffortScore": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierEstimatedWorkoutEffortScore",
+                    "display": "Workout Effort Score",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "effort"
+            }
+        },
+        "HKQuantityTypeIdentifierHeartRateRecoveryOneMinute": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierHeartRateRecoveryOneMinute",
+                    "display": "One-Minute Heart Rate Recovery",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "/min",
+                "hkunit": "count/min",
+                "system": "http://unitsofmeasure.org",
+                "unit": "beats/minute"
             }
         },
         "HKQuantityTypeIdentifierFlightsClimbed": {
@@ -1832,6 +2108,21 @@
                 "unit": "count"
             }
         },
+        "HKQuantityTypeIdentifierInsulinDelivery": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierInsulinDelivery",
+                    "display": "Insulin Delivery",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "IU",
+                "hkunit": "IU",
+                "system": "http://unitsofmeasure.org",
+                "unit": "IU"
+            }
+        },
         "HKQuantityTypeIdentifierLeanBodyMass": {
             "codings": [
                 {
@@ -1850,6 +2141,19 @@
                 "hkunit": "lb",
                 "system": "http://unitsofmeasure.org",
                 "unit": "lbs"
+            }
+        },
+        "HKQuantityTypeIdentifierNumberOfAlcoholicBeverages": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierNumberOfAlcoholicBeverages",
+                    "display": "Number of Alcoholic Beverages",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "beverages"
             }
         },
         "HKQuantityTypeIdentifierNumberOfTimesFallen": {
@@ -1883,6 +2187,21 @@
                 "hkunit": "%",
                 "system": "http://unitsofmeasure.org",
                 "unit": "%"
+            }
+        },
+        "HKQuantityTypeIdentifierPaddleSportsSpeed": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierPaddleSportsSpeed",
+                    "display": "Paddle Sports Speed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m/s",
+                "hkunit": "m/s",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m/s"
             }
         },
         "HKQuantityTypeIdentifierPeakExpiratoryFlowRate": {
@@ -1998,6 +2317,141 @@
                 "unit": "beats/minute"
             }
         },
+        "HKQuantityTypeIdentifierRowingSpeed": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierRowingSpeed",
+                    "display": "Rowing Speed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m/s",
+                "hkunit": "m/s",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m/s"
+            }
+        },
+        "HKQuantityTypeIdentifierRunningGroundContactTime": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierRunningGroundContactTime",
+                    "display": "Running Ground Contact Time",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "ms",
+                "hkunit": "ms",
+                "system": "http://unitsofmeasure.org",
+                "unit": "ms"
+            }
+        },
+        "HKQuantityTypeIdentifierRunningPower": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierRunningPower",
+                    "display": "Running Power",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "W",
+                "hkunit": "W",
+                "system": "http://unitsofmeasure.org",
+                "unit": "watt"
+            }
+        },
+        "HKQuantityTypeIdentifierRunningSpeed": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierRunningSpeed",
+                    "display": "Running Speed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "km/h",
+                "hkunit": "km/hr",
+                "system": "http://unitsofmeasure.org",
+                "unit": "km/h"
+            }
+        },
+        "HKQuantityTypeIdentifierRunningStrideLength": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierRunningStrideLength",
+                    "display": "Running Stride Length",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "meters"
+            }
+        },
+        "HKQuantityTypeIdentifierRunningVerticalOscillation": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierRunningVerticalOscillation",
+                    "display": "Running Vertical Oscillation",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierSixMinuteWalkTestDistance": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierSixMinuteWalkTestDistance",
+                    "display": "Six Minute Walk Test Distance",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierStairAscentSpeed": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierStairAscentSpeed",
+                    "display": "Stair Ascent Speed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m/s",
+                "hkunit": "m/s",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m/s"
+            }
+        },
+        "HKQuantityTypeIdentifierStairDescentSpeed": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierStairDescentSpeed",
+                    "display": "Stair Descent Speed",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m/s",
+                "hkunit": "m/s",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m/s"
+            }
+        },
         "HKQuantityTypeIdentifierStepCount": {
             "codings": [
                 {
@@ -2042,6 +2496,21 @@
                 "hkunit": "min",
                 "system": "http://unitsofmeasure.org",
                 "unit": "min"
+            }
+        },
+        "HKQuantityTypeIdentifierUnderwaterDepth": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierUnderwaterDepth",
+                    "display": "Underwater Depth",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m"
             }
         },
         "HKQuantityTypeIdentifierUVExposure": {
@@ -2107,6 +2576,21 @@
                 "unit": "%"
             }
         },
+        "HKQuantityTypeIdentifierWalkingDoubleSupportPercentage": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierWalkingDoubleSupportPercentage",
+                    "display": "Walking Double Support Percentage",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "%",
+                "hkunit": "%",
+                "system": "http://unitsofmeasure.org",
+                "unit": "%"
+            }
+        },
         "HKQuantityTypeIdentifierWalkingHeartRateAverage": {
             "codings": [
                 {
@@ -2135,6 +2619,49 @@
                 "hkunit": "m/s",
                 "system": "http://unitsofmeasure.org",
                 "unit": "m/s"
+            }
+        },
+        "HKQuantityTypeIdentifierWalkingStepLength": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierWalkingStepLength",
+                    "display": "Walking Step Length",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "m",
+                "hkunit": "m",
+                "system": "http://unitsofmeasure.org",
+                "unit": "m"
+            }
+        },
+        "HKQuantityTypeIdentifierWaterTemperature": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierWaterTemperature",
+                    "display": "Water Temperature",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "code": "Cel",
+                "hkunit": "degC",
+                "system": "http://unitsofmeasure.org",
+                "unit": "C"
+            }
+        },
+        "HKQuantityTypeIdentifierWorkoutEffortScore": {
+            "codings": [
+                {
+                    "code": "HKQuantityTypeIdentifierWorkoutEffortScore",
+                    "display": "Workout Effort Score",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ],
+            "unit": {
+                "hkunit": "count",
+                "unit": "effort"
             }
         }
     }

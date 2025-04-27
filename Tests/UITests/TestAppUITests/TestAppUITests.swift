@@ -55,7 +55,7 @@ class TestAppUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        try exitAppAndOpenHealth(.electrocardiograms)
+        try launchAndAddSample(healthApp: .healthApp, .electrocardiogram())
 
         app.launch()
         XCTAssert(app.wait(for: .runningForeground, timeout: 6.0))
@@ -92,5 +92,14 @@ class TestAppUITests: XCTestCase {
 
         // Dismiss results view
         app.swipeDown(velocity: XCUIGestureVelocity.fast)
+    }
+    
+    @MainActor
+    func testMappingCompleteness() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.buttons["Mapping Completeness"].tap()
+        XCTAssertTrue(app.staticTexts["All Fine!"].waitForExistence(timeout: 2))
     }
 }

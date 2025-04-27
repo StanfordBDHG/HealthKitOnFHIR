@@ -8,44 +8,36 @@
 
 @testable import HealthKitOnFHIR
 import ModelsR4
-import XCTest
+import Testing
 
 
-final class ObservationExtensionsTests: XCTestCase {
+@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
+struct ObservationExtensionsTests {
+    @Test
     func testCollectionExtensionsIdentifier() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
-        observation.appendIdentifier(
-            Identifier(id: "ID1")
-        )
+        observation.appendIdentifier(Identifier(id: "ID1"))
         
         // Assertions for the nil/non-present case:
-        XCTAssertEqual(
-            observation.identifier?.first,
-            Identifier(id: "ID1")
-        )
-        
+        #expect(observation.identifier?.first == Identifier(id: "ID1"))
         
         // Now Append multiple elements and in a non-nil collection:
-        observation.appendIdentifiers(
-            [
-                Identifier(id: "ID2"),
-                Identifier(id: "ID3")
-            ]
-        )
+        observation.appendIdentifiers([
+            Identifier(id: "ID2"),
+            Identifier(id: "ID3")
+        ])
         
         // Assertions for the non-nil collection case:
-        XCTAssertEqual(
-            observation.identifier,
-            [
-                Identifier(id: "ID1"),
-                Identifier(id: "ID2"),
-                Identifier(id: "ID3")
-            ]
-        )
+        #expect(observation.identifier == [
+            Identifier(id: "ID1"),
+            Identifier(id: "ID2"),
+            Identifier(id: "ID3")
+        ])
     }
     
+    @Test
     func testCollectionExtensionsCoding() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
@@ -59,88 +51,71 @@ final class ObservationExtensionsTests: XCTestCase {
         )
         
         // Assertions for the nil/non-present case:
-        XCTAssertEqual(
-            observation.code.coding?.first,
+        #expect(observation.code.coding?.first == Coding(
+            code: "Code1",
+            display: "Display1",
+            system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test1.system"))
+        ))
+        
+        // Now Append multiple elements and in a non-nil collection:
+        observation.appendCodings([
+            Coding(
+                code: "Code2",
+                display: "Display2",
+                system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test2.system"))
+            ),
+            Coding(
+                code: "Code3",
+                display: "Display3",
+                system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test3.system"))
+            )
+        ])
+        
+        // Assertions for the non-nil collection case:
+        #expect(observation.code.coding == [
             Coding(
                 code: "Code1",
                 display: "Display1",
                 system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test1.system"))
+            ),
+            Coding(
+                code: "Code2",
+                display: "Display2",
+                system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test2.system"))
+            ),
+            Coding(
+                code: "Code3",
+                display: "Display3",
+                system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test3.system"))
             )
-        )
-        
-        
-        // Now Append multiple elements and in a non-nil collection:
-        observation.appendCodings(
-            [
-                Coding(
-                    code: "Code2",
-                    display: "Display2",
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test2.system"))
-                ),
-                Coding(
-                    code: "Code3",
-                    display: "Display3",
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test3.system"))
-                )
-            ]
-        )
-        
-        // Assertions for the non-nil collection case:
-        XCTAssertEqual(
-            observation.code.coding,
-            [
-                Coding(
-                    code: "Code1",
-                    display: "Display1",
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test1.system"))
-                ),
-                Coding(
-                    code: "Code2",
-                    display: "Display2",
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test2.system"))
-                ),
-                Coding(
-                    code: "Code3",
-                    display: "Display3",
-                    system: FHIRPrimitive(FHIRURI(stringLiteral: "https://test3.system"))
-                )
-            ]
-        )
+        ])
     }
     
+    @Test
     func testCollectionExtensionsCategories() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
-        observation.appendCategory(
-            CodeableConcept(id: "Concept1")
-        )
+        observation.appendCategory(CodeableConcept(id: "Concept1"))
         
         // Assertions for the nil/non-present case:
-        XCTAssertEqual(
-            observation.category?.first,
-            CodeableConcept(id: "Concept1")
-        )
+        #expect(observation.category?.first == CodeableConcept(id: "Concept1"))
         
         // Now Append multiple elements and in a non-nil collection:
-        observation.appendCategories(
-            [
-                CodeableConcept(id: "Concept2"),
-                CodeableConcept(id: "Concept3")
-            ]
-        )
+        observation.appendCategories([
+            CodeableConcept(id: "Concept2"),
+            CodeableConcept(id: "Concept3")
+        ])
 
         // Assertions for the non-nil collection case:
-        XCTAssertEqual(
-            observation.category,
-            [
-                CodeableConcept(id: "Concept1"),
-                CodeableConcept(id: "Concept2"),
-                CodeableConcept(id: "Concept3")
-            ]
-        )
+        #expect(observation.category == [
+            CodeableConcept(id: "Concept1"),
+            CodeableConcept(id: "Concept2"),
+            CodeableConcept(id: "Concept3")
+        ])
     }
     
+    @Test
     func testCollectionExtensionsComponents() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
@@ -153,13 +128,10 @@ final class ObservationExtensionsTests: XCTestCase {
         )
         
         // Assertions for the nil/non-present case:
-        XCTAssertEqual(
-            observation.component?.first,
-            ObservationComponent(
-                code: CodeableConcept(id: "Concept4"),
-                value: .boolean(true.asPrimitive())
-            )
-        )
+        #expect(observation.component?.first == ObservationComponent(
+            code: CodeableConcept(id: "Concept4"),
+            value: .boolean(true.asPrimitive())
+        ))
         
         
         // Now Append multiple elements and in a non-nil collection:
@@ -175,22 +147,19 @@ final class ObservationExtensionsTests: XCTestCase {
         ])
         
         // Assertions for the non-nil collection case:
-        XCTAssertEqual(
-            observation.component,
-            [
-                ObservationComponent(
-                    code: CodeableConcept(id: "Concept4"),
-                    value: .boolean(true.asPrimitive())
-                ),
-                ObservationComponent(
-                    code: CodeableConcept(id: "Concept5"),
-                    value: .string("Test".asFHIRStringPrimitive())
-                ),
-                ObservationComponent(
-                    code: CodeableConcept(id: "Concept6"),
-                    value: .integer(10.asFHIRIntegerPrimitive())
-                )
-            ]
-        )
+        #expect(observation.component == [
+            ObservationComponent(
+                code: CodeableConcept(id: "Concept4"),
+                value: .boolean(true.asPrimitive())
+            ),
+            ObservationComponent(
+                code: CodeableConcept(id: "Concept5"),
+                value: .string("Test".asFHIRStringPrimitive())
+            ),
+            ObservationComponent(
+                code: CodeableConcept(id: "Concept6"),
+                value: .integer(10.asFHIRIntegerPrimitive())
+            )
+        ])
     }
 }

@@ -9,24 +9,39 @@
 import HealthKit
 
 
-protocol HKCategoryValueDescription: CustomStringConvertible {
-    var categoryValueDescription: String { get throws }
+/// Models a value type used by a `HKCategoryType`.
+protocol FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String { get throws }
+    
+    init?(rawValue: Int)
 }
 
-extension HKCategoryValueDescription {
-    /// A string description of the HKCategoryValue case
-    public var description: String {
-        do {
-            return try categoryValueDescription
-        } catch {
-            return "undefined"
+
+@available(iOS 18.0, macOS 15.0, watchOS 11.0, *)
+extension HKCategoryValueVaginalBleeding: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
+        get throws {
+            switch self {
+            case .unspecified:
+                return "unspecified"
+            case .light:
+                return "light"
+            case .medium:
+                return "medium"
+            case .heavy:
+                return "heavy"
+            case .none:
+                return "none"
+            @unknown default:
+                throw HealthKitOnFHIRError.invalidValue
+            }
         }
     }
 }
 
-extension HKCategoryValueCervicalMucusQuality: @retroactive CustomStringConvertible {}
-extension HKCategoryValueCervicalMucusQuality: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueCervicalMucusQuality: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .dry:
@@ -46,9 +61,9 @@ extension HKCategoryValueCervicalMucusQuality: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueMenstrualFlow: @retroactive CustomStringConvertible {}
-extension HKCategoryValueMenstrualFlow: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueMenstrualFlow: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .unspecified:
@@ -68,9 +83,9 @@ extension HKCategoryValueMenstrualFlow: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueOvulationTestResult: @retroactive CustomStringConvertible {}
-extension HKCategoryValueOvulationTestResult: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueOvulationTestResult: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .negative:
@@ -88,9 +103,9 @@ extension HKCategoryValueOvulationTestResult: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueContraceptive: @retroactive CustomStringConvertible {}
-extension HKCategoryValueContraceptive: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueContraceptive: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .unspecified:
@@ -114,9 +129,9 @@ extension HKCategoryValueContraceptive: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueSleepAnalysis: @retroactive CustomStringConvertible {}
-extension HKCategoryValueSleepAnalysis: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueSleepAnalysis: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .inBed:
@@ -138,9 +153,9 @@ extension HKCategoryValueSleepAnalysis: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueAppetiteChanges: @retroactive CustomStringConvertible {}
-extension HKCategoryValueAppetiteChanges: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueAppetiteChanges: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .unspecified:
@@ -158,9 +173,9 @@ extension HKCategoryValueAppetiteChanges: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueEnvironmentalAudioExposureEvent: @retroactive CustomStringConvertible {}
-extension HKCategoryValueEnvironmentalAudioExposureEvent: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueEnvironmentalAudioExposureEvent: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .momentaryLimit:
@@ -172,9 +187,9 @@ extension HKCategoryValueEnvironmentalAudioExposureEvent: HKCategoryValueDescrip
     }
 }
 
-extension HKCategoryValueHeadphoneAudioExposureEvent: @retroactive CustomStringConvertible {}
-extension HKCategoryValueHeadphoneAudioExposureEvent: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueHeadphoneAudioExposureEvent: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .sevenDayLimit:
@@ -186,9 +201,9 @@ extension HKCategoryValueHeadphoneAudioExposureEvent: HKCategoryValueDescription
     }
 }
 
-extension HKCategoryValueLowCardioFitnessEvent: @retroactive CustomStringConvertible {}
-extension HKCategoryValueLowCardioFitnessEvent: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueLowCardioFitnessEvent: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .lowFitness:
@@ -200,9 +215,9 @@ extension HKCategoryValueLowCardioFitnessEvent: HKCategoryValueDescription {
     }
 }
 
-extension HKAppleWalkingSteadinessClassification: @retroactive CustomStringConvertible {}
-extension HKAppleWalkingSteadinessClassification: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKAppleWalkingSteadinessClassification: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .ok:
@@ -218,9 +233,9 @@ extension HKAppleWalkingSteadinessClassification: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueAppleWalkingSteadinessEvent: @retroactive CustomStringConvertible {}
-extension HKCategoryValueAppleWalkingSteadinessEvent: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueAppleWalkingSteadinessEvent: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .initialLow:
@@ -238,9 +253,9 @@ extension HKCategoryValueAppleWalkingSteadinessEvent: HKCategoryValueDescription
     }
 }
 
-extension HKCategoryValuePregnancyTestResult: @retroactive CustomStringConvertible {}
-extension HKCategoryValuePregnancyTestResult: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValuePregnancyTestResult: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .negative:
@@ -256,9 +271,9 @@ extension HKCategoryValuePregnancyTestResult: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueProgesteroneTestResult: @retroactive CustomStringConvertible {}
-extension HKCategoryValueProgesteroneTestResult: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueProgesteroneTestResult: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .negative:
@@ -274,9 +289,9 @@ extension HKCategoryValueProgesteroneTestResult: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueAppleStandHour: @retroactive CustomStringConvertible {}
-extension HKCategoryValueAppleStandHour: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueAppleStandHour: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .stood:
@@ -290,9 +305,9 @@ extension HKCategoryValueAppleStandHour: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValueSeverity: @retroactive CustomStringConvertible {}
-extension HKCategoryValueSeverity: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValueSeverity: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .unspecified:
@@ -312,9 +327,9 @@ extension HKCategoryValueSeverity: HKCategoryValueDescription {
     }
 }
 
-extension HKCategoryValuePresence: @retroactive CustomStringConvertible {}
-extension HKCategoryValuePresence: HKCategoryValueDescription {
-    var categoryValueDescription: String {
+
+extension HKCategoryValuePresence: FHIRCompatibleHKCategoryValueType {
+    var fhirCategoryValue: String {
         get throws {
             switch self {
             case .present:

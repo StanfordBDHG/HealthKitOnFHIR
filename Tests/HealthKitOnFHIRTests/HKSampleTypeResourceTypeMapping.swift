@@ -9,26 +9,31 @@
 import HealthKit
 import HealthKitOnFHIR
 import ModelsR4
-import XCTest
+import Testing
 
 
-class HKSampleTypeResourceTypeMapping: XCTestCase {
-    func testHKSampleTypeMappingToObservation() {
-        try XCTAssertEqual(HKQuantityType(.activeEnergyBurned).resourceType, .observation)
-        try XCTAssertEqual(HKCorrelationType(.bloodPressure).resourceType, .observation)
-        try XCTAssertEqual(HKCategoryType(.abdominalCramps).resourceType, .observation)
+@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
+struct HKSampleTypeResourceTypeMapping {
+    @Test
+    func hkSampleTypeMappingToObservation() throws {
+        #expect(try HKQuantityType(.activeEnergyBurned).resourceType == .observation)
+        #expect(try HKCorrelationType(.bloodPressure).resourceType == .observation)
+        #expect(try HKCategoryType(.abdominalCramps).resourceType == .observation)
 
-        XCTAssertThrowsError(try HKSampleType.workoutType().resourceType)
+        #expect(throws: HealthKitOnFHIRError.self) {
+            try HKSampleType.workoutType().resourceType
+        }
     }
     
-    func testHKClinicalTypeMappingToResourceType() throws {
-        try XCTAssertEqual(HKClinicalType(.allergyRecord).resourceType, .allergyIntolerance)
-        try XCTAssertEqual(HKClinicalType(.conditionRecord).resourceType, .condition)
-        try XCTAssertEqual(HKClinicalType(.coverageRecord).resourceType, .coverage)
-        try XCTAssertEqual(HKClinicalType(.immunizationRecord).resourceType, .immunization)
-        try XCTAssertEqual(HKClinicalType(.labResultRecord).resourceType, .observation)
-        try XCTAssertEqual(HKClinicalType(.medicationRecord).resourceType, .medication)
-        try XCTAssertEqual(HKClinicalType(.procedureRecord).resourceType, .procedure)
-        try XCTAssertEqual(HKClinicalType(.vitalSignRecord).resourceType, .observation)
+    @Test
+    func hkClinicalTypeMappingToResourceType() throws {
+        #expect(try HKClinicalType(.allergyRecord).resourceType == .allergyIntolerance)
+        #expect(try HKClinicalType(.conditionRecord).resourceType == .condition)
+        #expect(try HKClinicalType(.coverageRecord).resourceType == .coverage)
+        #expect(try HKClinicalType(.immunizationRecord).resourceType == .immunization)
+        #expect(try HKClinicalType(.labResultRecord).resourceType == .observation)
+        #expect(try HKClinicalType(.medicationRecord).resourceType == .medication)
+        #expect(try HKClinicalType(.procedureRecord).resourceType == .procedure)
+        #expect(try HKClinicalType(.vitalSignRecord).resourceType == .observation)
     }
 }

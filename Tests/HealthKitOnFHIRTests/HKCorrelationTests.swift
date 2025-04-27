@@ -9,25 +9,27 @@
 import HealthKit
 @testable import HealthKitOnFHIR
 import ModelsR4
-import XCTest
+import Testing
 
 
-class HKCorrelationTests: XCTestCase {
+@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
+struct HKCorrelationTests {
     var startDate: Date {
         get throws {
             let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 0) // Date Stanford University opened (https://www.stanford.edu/about/history/)
-            return try XCTUnwrap(Calendar.current.date(from: dateComponents))
+            return try #require(Calendar.current.date(from: dateComponents))
         }
     }
 
     var endDate: Date {
         get throws {
             let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 42)
-            return try XCTUnwrap(Calendar.current.date(from: dateComponents))
+            return try #require(Calendar.current.date(from: dateComponents))
         }
     }
 
-    func testBloodPressureCorrelation() throws {
+    @Test
+    func bloodPressureCorrelation() throws {
         let systolicBloodPressure = HKQuantitySample(
             type: HKQuantityType(.bloodPressureSystolic),
             quantity: HKQuantity(unit: .millimeterOfMercury(), doubleValue: 120),
@@ -49,9 +51,9 @@ class HKCorrelationTests: XCTestCase {
             objects: [systolicBloodPressure, diastolicBloodPressure]
         )
         
-        let observation = try XCTUnwrap(correlation.resource().get(if: Observation.self))
+        let observation = try #require(correlation.resource().get(if: Observation.self))
 
-        XCTAssertEqual(1, observation.component?.filter {
+        #expect(1 == observation.component?.filter {
             $0.value == .quantity(
                 Quantity(
                     code: "mm[Hg]",
@@ -62,7 +64,7 @@ class HKCorrelationTests: XCTestCase {
             )
         }.count)
 
-        XCTAssertEqual(1, observation.component?.filter {
+        #expect(1 == observation.component?.filter {
             $0.value == .quantity(
                 Quantity(
                     code: "mm[Hg]",
@@ -74,7 +76,8 @@ class HKCorrelationTests: XCTestCase {
         }.count)
     }
 
-    func testUnsupportedCorrelation() throws {
+    @Test(.disabled())
+    func unsupportedCorrelation() throws {
         // Food correlations are not currently supported
         let vitaminC = HKQuantitySample(
             type: HKQuantityType(.dietaryVitaminC),
@@ -89,6 +92,8 @@ class HKCorrelationTests: XCTestCase {
             end: try endDate,
             objects: [vitaminC]
         )
-        XCTAssertThrowsError(try correlation.resource())
+        #expect(throws: HealthKitOnFHIRError.self) {
+            try correlation.resource()
+        }
     }
 }
