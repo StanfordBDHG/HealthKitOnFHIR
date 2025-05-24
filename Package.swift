@@ -24,7 +24,7 @@ let package = Package(
         .library(name: "HealthKitOnFHIR", targets: ["HealthKitOnFHIR"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/FHIRModels.git", .upToNextMajor(from: "0.4.0"))
+        .package(url: "https://github.com/apple/FHIRModels.git", .upToNextMajor(from: "0.7.0"))
     ] + swiftLintPackage(),
     targets: [
         .target(
