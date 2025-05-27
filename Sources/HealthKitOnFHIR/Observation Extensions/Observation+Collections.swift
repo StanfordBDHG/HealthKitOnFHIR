@@ -23,7 +23,7 @@ extension Observation {
     }
     
     
-    private func appendElements<T>(_ elements: [T], to collection: ReferenceWritableKeyPath<Observation, [T]?>) {
+    private func appendElements<T>(_ elements: some Collection<T>, to collection: ReferenceWritableKeyPath<Observation, [T]?>) {
         // swiftlint:disable:previous discouraged_optional_collection
         // Unfortunately we need to use an optional collection here as the ModelsR4 modules uses optional collections in the Observation type.
         if self[keyPath: collection] == nil {
@@ -44,7 +44,7 @@ extension Observation {
     }
     
     /// Appends multiple `Identifier`s to the `Observation`
-    public func appendIdentifiers(_ identifiers: [Identifier]) {
+    public func appendIdentifiers(_ identifiers: some Collection<Identifier>) {
         appendElements(identifiers, to: \.identifier)
     }
     
@@ -54,7 +54,7 @@ extension Observation {
     }
     
     /// Appends multiple `CodeableConcept`s to the `Observation`
-    public func appendCategories(_ categories: [CodeableConcept]) {
+    public func appendCategories(_ categories: some Collection<CodeableConcept>) {
         appendElements(categories, to: \.category)
     }
     
@@ -64,7 +64,7 @@ extension Observation {
     }
     
     /// Appends multiple `Coding`s to the `Observation`
-    public func appendCodings(_ codings: [Coding]) {
+    public func appendCodings(_ codings: some Collection<Coding>) {
         appendElements(codings, to: \.code.coding)
     }
     
@@ -74,7 +74,7 @@ extension Observation {
     }
     
     /// Appends multiple `ObservationComponent`s to the `Observation`
-    public func appendComponents(_ components: [ObservationComponent]) {
+    public func appendComponents(_ components: some Collection<ObservationComponent>) {
         appendElements(components, to: \.component)
     }
 }
