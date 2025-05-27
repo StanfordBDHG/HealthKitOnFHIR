@@ -38,35 +38,43 @@ extension Observation {
     }
     
     
-    func appendIdentifier(_ identifier: Identifier) {
+    /// Appends an `Identifier` to the `Observation`
+    public func appendIdentifier(_ identifier: Identifier) {
         appendElement(identifier, to: \.identifier)
     }
     
-    func appendIdentifiers(_ identifiers: [Identifier]) {
+    /// Appends multiple `Identifier`s to the `Observation`
+    public func appendIdentifiers(_ identifiers: [Identifier]) {
         appendElements(identifiers, to: \.identifier)
     }
     
-    func appendCategory(_ category: CodeableConcept) {
+    /// Appends a `CodeableConcept` to the `Observation`
+    public func appendCategory(_ category: CodeableConcept) {
         appendElement(category, to: \.category)
     }
     
-    func appendCategories(_ categories: [CodeableConcept]) {
+    /// Appends multiple `CodeableConcept`s to the `Observation`
+    public func appendCategories(_ categories: [CodeableConcept]) {
         appendElements(categories, to: \.category)
     }
     
-    func appendCoding(_ coding: Coding) {
+    /// Appends a `Coding` to the `Observation`
+    public func appendCoding(_ coding: Coding) {
         appendElement(coding, to: \.code.coding)
     }
     
-    func appendCodings(_ codings: [Coding]) {
+    /// Appends multiple `Coding`s to the `Observation`
+    public func appendCodings(_ codings: [Coding]) {
         appendElements(codings, to: \.code.coding)
     }
     
-    func appendComponent(_ component: ObservationComponent) {
+    /// Appends an `ObservationComponent` to the `Observation`
+    public func appendComponent(_ component: ObservationComponent) {
         appendElement(component, to: \.component)
     }
     
-    func appendComponents(_ components: [ObservationComponent]) {
+    /// Appends multiple `ObservationComponent`s to the `Observation`
+    public func appendComponents(_ components: [ObservationComponent]) {
         appendElements(components, to: \.component)
     }
 }
