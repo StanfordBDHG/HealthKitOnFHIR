@@ -12,61 +12,61 @@ import ModelsR4
 
 
 extension Observation {
-    private func appendElement<T>(_ element: T, to collection: ReferenceWritableKeyPath<Observation, [T]?>) {
-        // swiftlint:disable:previous discouraged_optional_collection
-        // Unfortunately we need to use an optional collection here as the ModelsR4 modules uses optional collections in the Observation type.
-        guard self[keyPath: collection] != nil else {
-            self[keyPath: collection] = [element]
-            return
-        }
-        self[keyPath: collection]?.append(element)
+    private func appendElement<C: RangeReplaceableCollection>(_ element: C.Element, to keyPath: ReferenceWritableKeyPath<Observation, C?>) {
+        appendElements(CollectionOfOne(element), to: keyPath)
     }
     
-    
-    private func appendElements<T>(_ elements: [T], to collection: ReferenceWritableKeyPath<Observation, [T]?>) {
-        // swiftlint:disable:previous discouraged_optional_collection
-        // Unfortunately we need to use an optional collection here as the ModelsR4 modules uses optional collections in the Observation type.
-        if self[keyPath: collection] == nil {
-            self[keyPath: collection] = []
-            self[keyPath: collection]?.reserveCapacity(elements.count)
+    private func appendElements<C: RangeReplaceableCollection>(
+        _ elements: some Collection<C.Element>,
+        to keyPath: ReferenceWritableKeyPath<Observation, C?>
+    ) {
+        if self[keyPath: keyPath] == nil {
+            self[keyPath: keyPath] = C()
+            self[keyPath: keyPath]?.reserveCapacity(elements.count)
         } else {
-            self[keyPath: collection]?.reserveCapacity((self[keyPath: collection]?.count ?? 0) + elements.count)
+            self[keyPath: keyPath]?.reserveCapacity((self[keyPath: keyPath]?.count ?? 0) + elements.count)
         }
-        for element in elements {
-            appendElement(element, to: collection)
-        }
+        self[keyPath: keyPath]?.append(contentsOf: elements)
     }
     
     
-    func appendIdentifier(_ identifier: Identifier) {
+    /// Appends an `Identifier` to the `Observation`
+    public func appendIdentifier(_ identifier: Identifier) {
         appendElement(identifier, to: \.identifier)
     }
     
-    func appendIdentifiers(_ identifiers: [Identifier]) {
+    /// Appends multiple `Identifier`s to the `Observation`
+    public func appendIdentifiers(_ identifiers: some Collection<Identifier>) {
         appendElements(identifiers, to: \.identifier)
     }
     
-    func appendCategory(_ category: CodeableConcept) {
+    /// Appends a `CodeableConcept` to the `Observation`
+    public func appendCategory(_ category: CodeableConcept) {
         appendElement(category, to: \.category)
     }
     
-    func appendCategories(_ categories: [CodeableConcept]) {
+    /// Appends multiple `CodeableConcept`s to the `Observation`
+    public func appendCategories(_ categories: some Collection<CodeableConcept>) {
         appendElements(categories, to: \.category)
     }
     
-    func appendCoding(_ coding: Coding) {
+    /// Appends a `Coding` to the `Observation`
+    public func appendCoding(_ coding: Coding) {
         appendElement(coding, to: \.code.coding)
     }
     
-    func appendCodings(_ codings: [Coding]) {
+    /// Appends multiple `Coding`s to the `Observation`
+    public func appendCodings(_ codings: some Collection<Coding>) {
         appendElements(codings, to: \.code.coding)
     }
     
-    func appendComponent(_ component: ObservationComponent) {
+    /// Appends an `ObservationComponent` to the `Observation`
+    public func appendComponent(_ component: ObservationComponent) {
         appendElement(component, to: \.component)
     }
     
-    func appendComponents(_ components: [ObservationComponent]) {
+    /// Appends multiple `ObservationComponent`s to the `Observation`
+    public func appendComponents(_ components: some Collection<ObservationComponent>) {
         appendElements(components, to: \.component)
     }
 }
