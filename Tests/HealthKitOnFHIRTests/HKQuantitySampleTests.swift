@@ -35,13 +35,14 @@ struct HKQuantitySampleTests {
     func createObservationFrom(
         type quantityType: HKQuantityType,
         quantity: HKQuantity,
+        timeRange: Swift.Range<Date>? = nil,
         metadata: [String: Any] = [:]
     ) throws -> Observation {
         let quantitySample = HKQuantitySample(
             type: quantityType,
             quantity: quantity,
-            start: try startDate,
-            end: try endDate,
+            start: try timeRange?.lowerBound ?? startDate,
+            end: try timeRange?.upperBound ?? endDate,
             metadata: metadata
         )
         return try #require(quantitySample.resource().get(if: Observation.self))
@@ -965,6 +966,7 @@ struct HKQuantitySampleTests {
             )
         ))
     }
+    
     
     func testElectrodermalActivity() throws {
         let observation = try createObservationFrom(
@@ -2159,5 +2161,29 @@ struct HKQuantitySampleTests {
         for resource in resources {
             #expect(resource.get(if: Observation.self) != nil)
         }
+    }
+    
+    @Test
+    func absoluteTimeRangeStoredInExtension() throws {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = .gmt
+        let startDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0)))
+        let endDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 15, second: 0)))
+        
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            timeRange: startDate..<endDate
+        )
+        #expect(observation.value == .quantity(
+            Quantity(
+                unit: "steps",
+                value: 42.asFHIRDecimalPrimitive()
+            )
+        ))
+        #expect(observation.extension == [
+            Extension(url: Observation.absoluteTimeRangeStartExtensionUrl, value: .decimal(0.asFHIRDecimalPrimitive())),
+            Extension(url: Observation.absoluteTimeRangeEndExtensionUrl, value: .decimal(900.asFHIRDecimalPrimitive()))
+        ])
     }
 }

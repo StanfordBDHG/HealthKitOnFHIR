@@ -10,26 +10,7 @@ import Foundation
 import HealthKit
 import ModelsR4
 
-
 extension Observation {
-    private func appendElement<C: RangeReplaceableCollection>(_ element: C.Element, to keyPath: ReferenceWritableKeyPath<Observation, C?>) {
-        appendElements(CollectionOfOne(element), to: keyPath)
-    }
-    
-    private func appendElements<C: RangeReplaceableCollection>(
-        _ elements: some Collection<C.Element>,
-        to keyPath: ReferenceWritableKeyPath<Observation, C?>
-    ) {
-        if self[keyPath: keyPath] == nil {
-            self[keyPath: keyPath] = C()
-            self[keyPath: keyPath]?.reserveCapacity(elements.count)
-        } else {
-            self[keyPath: keyPath]?.reserveCapacity((self[keyPath: keyPath]?.count ?? 0) + elements.count)
-        }
-        self[keyPath: keyPath]?.append(contentsOf: elements)
-    }
-    
-    
     /// Appends an `Identifier` to the `Observation`
     public func appendIdentifier(_ identifier: Identifier) {
         appendElement(identifier, to: \.identifier)
@@ -68,5 +49,39 @@ extension Observation {
     /// Appends multiple `ObservationComponent`s to the `Observation`
     public func appendComponents(_ components: some Collection<ObservationComponent>) {
         appendElements(components, to: \.component)
+    }
+}
+
+
+extension DomainResource {
+    /// Appends an `Extension` to the `DomainResource`
+    public func appendExtension(_ extension: Extension, replaceExistingWithSameUrl: Bool) {
+        appendExtensions(CollectionOfOne(`extension`), replaceExistingWithSameUrl: replaceExistingWithSameUrl)
+    }
+    
+    /// Appends multiple `Extension`s to the `DomainResource`
+    public func appendExtensions(_ extensions: some Collection<Extension>, replaceExistingWithSameUrl: Bool) {
+        if replaceExistingWithSameUrl {
+            for element in extensions {
+                removeAllExtensions(withUrl: element.url)
+            }
+        }
+        appendElements(extensions, to: \.extension)
+    }
+    
+    /// Removes the first extension element that matches the specified url.
+    ///
+    /// - returns: the removed extension element, if any.
+    @discardableResult
+    public func removeFirstExtension(withUrl url: FHIRPrimitive<FHIRURI>) -> Extension? {
+        removeFirstElement(of: \.extension) { $0.url == url }
+    }
+    
+    /// Removes all extension elements that matches the specified url.
+    ///
+    /// - returns: the removed extension elements, if any.
+    @discardableResult
+    public func removeAllExtensions(withUrl url: FHIRPrimitive<FHIRURI>) -> [Extension]? { // swiftlint:disable:this discouraged_optional_extension
+        removeAllElements(of: \.extension) { $0.url == url }
     }
 }
