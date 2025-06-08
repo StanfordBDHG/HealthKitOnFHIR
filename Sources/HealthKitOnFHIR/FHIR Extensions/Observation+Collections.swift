@@ -81,7 +81,7 @@ extension DomainResource {
     ///
     /// - returns: the removed extension elements, if any.
     @discardableResult
-    public func removeAllExtensions(withUrl url: FHIRPrimitive<FHIRURI>) -> [Extension]? { // swiftlint:disable:this discouraged_optional_extension
+    public func removeAllExtensions(withUrl url: FHIRPrimitive<FHIRURI>) -> [Extension]? { // swiftlint:disable:this discouraged_optional_collection
         removeAllElements(of: \.extension) { $0.url == url }
     }
 }
