@@ -27,9 +27,9 @@ extension FHIRResourceMutationExtensions where Self: Resource {
     ) {
         if self[keyPath: keyPath] == nil {
             self[keyPath: keyPath] = C()
-            self[keyPath: keyPath]?.reserveCapacity(elements.count)
+            self[keyPath: keyPath]!.reserveCapacity(elements.count) // swiftlint:disable:this force_unwrapping
         } else {
-            self[keyPath: keyPath]?.reserveCapacity((self[keyPath: keyPath]?.count ?? 0) + elements.count)
+            self[keyPath: keyPath]!.reserveCapacity(self[keyPath: keyPath]!.count + elements.count) // swiftlint:disable:this force_unwrapping
         }
         self[keyPath: keyPath]?.append(contentsOf: elements)
     }
