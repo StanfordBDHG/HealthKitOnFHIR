@@ -35,16 +35,18 @@ struct HKQuantitySampleTests {
     func createObservationFrom(
         type quantityType: HKQuantityType,
         quantity: HKQuantity,
-        metadata: [String: Any] = [:]
+        timeRange: Swift.Range<Date>? = nil,
+        metadata: [String: Any] = [:],
+        extensions: [FHIRExtensionBuilder] = []
     ) throws -> Observation {
         let quantitySample = HKQuantitySample(
             type: quantityType,
             quantity: quantity,
-            start: try startDate,
-            end: try endDate,
+            start: try timeRange?.lowerBound ?? startDate,
+            end: try timeRange?.upperBound ?? endDate,
             metadata: metadata
         )
-        return try #require(quantitySample.resource().get(if: Observation.self))
+        return try #require(quantitySample.resource(extensions: extensions).get(if: Observation.self))
     }
     
     func createCoding(
@@ -966,7 +968,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testElectrodermalActivity() throws {
+    @Test
+    func electrodermalActivity() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.electrodermalActivity),
             quantity: HKQuantity(unit: .siemen(), doubleValue: 0.000001)
@@ -988,7 +991,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testForcedExpiratoryVolume1() throws {
+    @Test
+    func forcedExpiratoryVolume1() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.forcedExpiratoryVolume1),
             quantity: HKQuantity(unit: .liter(), doubleValue: 3.5)
@@ -1015,7 +1019,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testForcedVitalCapacity() throws {
+    @Test
+    func forcedVitalCapacity() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.forcedVitalCapacity),
             quantity: HKQuantity(unit: .liter(), doubleValue: 5.5)
@@ -1042,7 +1047,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testInhalerUsage() throws {
+    @Test
+    func inhalerUsage() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.inhalerUsage),
             quantity: HKQuantity(unit: .count(), doubleValue: 3)
@@ -1062,7 +1068,8 @@ struct HKQuantitySampleTests {
         ))
     }
 
-    func testStepCount() throws {
+    @Test
+    func stepCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.stepCount),
             quantity: HKQuantity(unit: .count(), doubleValue: 42)
@@ -1087,7 +1094,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testFlightsClimbed() throws {
+    @Test
+    func flightsClimbed() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.flightsClimbed),
             quantity: HKQuantity(unit: .count(), doubleValue: 10)
@@ -1112,7 +1120,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testHeartRate() throws {
+    @Test
+    func heartRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.heartRate),
             quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
@@ -1139,7 +1148,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testRestingHeartRate() throws {
+    @Test
+    func restingHeartRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.restingHeartRate),
             quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
@@ -1166,7 +1176,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testWalkingHeartRateAverage() throws {
+    @Test
+    func walkingHeartRateAverage() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.walkingHeartRateAverage),
             quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 84)
@@ -1188,7 +1199,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testWalkingAsymmetryPercentage() throws {
+    @Test
+    func walkingAsymmetryPercentage() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.walkingAsymmetryPercentage),
             quantity: HKQuantity(unit: .percent(), doubleValue: 50)
@@ -1210,7 +1222,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testWalkingSpeed() throws {
+    @Test
+    func walkingSpeed() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.walkingSpeed),
             quantity: HKQuantity(unit: HKUnit.meter().unitDivided(by: HKUnit.second()), doubleValue: 1.5)
@@ -1232,7 +1245,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testHeartRateVariabilitySDNN() throws {
+    @Test
+    func heartRateVariabilitySDNN() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.heartRateVariabilitySDNN),
             quantity: HKQuantity(unit: .secondUnit(with: .milli), doubleValue: 100)
@@ -1259,7 +1273,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testOxygenSaturation() throws {
+    @Test
+    func oxygenSaturation() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.oxygenSaturation),
             quantity: HKQuantity(unit: .percent(), doubleValue: 99)
@@ -1286,7 +1301,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testPeakExpiratoryFlowRate() throws {
+    @Test
+    func peakExpiratoryFlowRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.peakExpiratoryFlowRate),
             quantity: HKQuantity(unit: .liter().unitDivided(by: .minute()), doubleValue: 600)
@@ -1313,7 +1329,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testPeripheralPerfusionIndex() throws {
+    @Test
+    func peripheralPerfusionIndex() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.peripheralPerfusionIndex),
             quantity: HKQuantity(unit: .percent(), doubleValue: 5)
@@ -1340,7 +1357,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testPushCount() throws {
+    @Test
+    func pushCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.pushCount),
             quantity: HKQuantity(unit: .count(), doubleValue: 5)
@@ -1366,7 +1384,8 @@ struct HKQuantitySampleTests {
     }
     
     @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
-    func testTimeInDaylight() throws {
+    @Test
+    func timeInDaylight() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.timeInDaylight),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
@@ -1388,7 +1407,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testUVExposure() throws {
+    @Test
+    func uvExposure() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.uvExposure),
             quantity: HKQuantity(unit: .count(), doubleValue: 5)
@@ -1408,7 +1428,8 @@ struct HKQuantitySampleTests {
         ))
     }
 
-    func testVO2Max() throws {
+    @Test
+    func vo2Max() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.vo2Max),
             quantity: HKQuantity(unit: HKUnit(from: "mL/kg*min"), doubleValue: 31)
@@ -1430,7 +1451,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testWaistCircumference() throws {
+    @Test
+    func waistCircumference() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.waistCircumference),
             quantity: HKQuantity(unit: HKUnit(from: "in"), doubleValue: 38.7)
@@ -1457,7 +1479,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testBodyTemperature() throws {
+    @Test
+    func bodyTemperature() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyTemperature),
             quantity: HKQuantity(unit: .degreeCelsius(), doubleValue: 37)
@@ -1484,7 +1507,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testBasalBodyTemperature() throws {
+    @Test
+    func basalBodyTemperature() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.basalBodyTemperature),
             quantity: HKQuantity(unit: .degreeCelsius(), doubleValue: 37)
@@ -1506,7 +1530,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testBasalEnergyBurned() throws {
+    @Test
+    func basalEnergyBurned() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.basalEnergyBurned),
             quantity: HKQuantity(unit: HKUnit(from: "kcal"), doubleValue: 1200)
@@ -1528,7 +1553,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testBloodAlcoholContent() throws {
+    @Test
+    func bloodAlcoholContent() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bloodAlcoholContent),
             quantity: HKQuantity(unit: .percent(), doubleValue: 0.0)
@@ -1555,7 +1581,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testBodyFatPercentage() throws {
+    @Test
+    func bodyFatPercentage() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyFatPercentage),
             quantity: HKQuantity(unit: .percent(), doubleValue: 21)
@@ -1582,7 +1609,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testBodyMassIndex() throws {
+    @Test
+    func bodyMassIndex() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyMassIndex),
             quantity: HKQuantity(unit: .count(), doubleValue: 20)
@@ -1609,7 +1637,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testHeight() throws {
+    @Test
+    func height() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.height),
             quantity: HKQuantity(unit: .inch(), doubleValue: 64)
@@ -1636,7 +1665,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testBodyMass() throws {
+    @Test
+    func bodyMass() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.bodyMass),
             quantity: HKQuantity(unit: .pound(), doubleValue: 60)
@@ -1663,7 +1693,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testLeanBodyMass() throws {
+    @Test
+    func leanBodyMass() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.leanBodyMass),
             quantity: HKQuantity(unit: .pound(), doubleValue: 60)
@@ -1690,7 +1721,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testNumberOfTimesFallen() throws {
+    @Test
+    func numberOfTimesFallen() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.numberOfTimesFallen),
             quantity: HKQuantity(unit: .count(), doubleValue: 0)
@@ -1710,7 +1742,8 @@ struct HKQuantitySampleTests {
         ))
     }
 
-    func testSwimmingStrokeCount() throws {
+    @Test
+    func swimmingStrokeCount() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.swimmingStrokeCount),
             quantity: HKQuantity(unit: .count(), doubleValue: 10)
@@ -1730,7 +1763,8 @@ struct HKQuantitySampleTests {
         ))
     }
 
-    func testRespiratoryRate() throws {
+    @Test
+    func respiratoryRate() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.respiratoryRate),
             quantity: HKQuantity(unit: .count().unitDivided(by: .minute()), doubleValue: 18)
@@ -1757,7 +1791,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testActiveEnergyBurned() throws {
+    @Test
+    func activeEnergyBurned() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.activeEnergyBurned),
             quantity: HKQuantity(unit: .largeCalorie(), doubleValue: 100)
@@ -1784,7 +1819,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testAppleExerciseTime() throws {
+    @Test
+    func appleExerciseTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleExerciseTime),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
@@ -1806,7 +1842,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testAppleMoveTime() throws {
+    @Test
+    func appleMoveTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleMoveTime),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
@@ -1829,7 +1866,8 @@ struct HKQuantitySampleTests {
     }
     
     @available(iOS 17.0, macOS 14.0, watchOS 10.0, *)
-    func testApplePhysicalEffort() throws {
+    @Test
+    func applePhysicalEffort() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.physicalEffort),
             quantity: HKQuantity(unit: HKUnit(from: "kcal/hr*kg"), doubleValue: 2)
@@ -1851,7 +1889,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testAppleStandTime() throws {
+    @Test
+    func appleStandTime() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleStandTime),
             quantity: HKQuantity(unit: .minute(), doubleValue: 100)
@@ -1873,7 +1912,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testAppleWalkingSteadiness() throws {
+    @Test
+    func ppleWalkingSteadiness() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.appleWalkingSteadiness),
             quantity: HKQuantity(unit: .percent(), doubleValue: 50)
@@ -1895,7 +1935,8 @@ struct HKQuantitySampleTests {
         ))
     }
 
-    func testDistanceCycling() throws {
+    @Test
+    func distanceCycling() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceCycling),
             quantity: HKQuantity(unit: .meter(), doubleValue: 1000)
@@ -1917,7 +1958,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testDistanceDownhillSnowSports() throws {
+    @Test
+    func distanceDownhillSnowSports() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceDownhillSnowSports),
             quantity: HKQuantity(unit: .meter(), doubleValue: 1000)
@@ -1939,7 +1981,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testDistanceSwimming() throws {
+    @Test
+    func distanceSwimming() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceSwimming),
             quantity: HKQuantity(unit: .meter(), doubleValue: 100)
@@ -1967,7 +2010,8 @@ struct HKQuantitySampleTests {
     }
 
     
-    func testDistanceWalkingRunning() throws {
+    @Test
+    func distanceWalkingRunning() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceWalkingRunning),
             quantity: HKQuantity(unit: .meter(), doubleValue: 100)
@@ -1989,7 +2033,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testDistanceWheelchair() throws {
+    @Test
+    func distanceWheelchair() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.distanceWheelchair),
             quantity: HKQuantity(unit: .meter(), doubleValue: 100)
@@ -2011,7 +2056,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testEnvironmentalAudioExposure() throws {
+    @Test
+    func environmentalAudioExposure() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.environmentalAudioExposure),
             quantity: HKQuantity(unit: .decibelAWeightedSoundPressureLevel(), doubleValue: 100)
@@ -2033,7 +2079,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testHeadphoneAudioExposure() throws {
+    @Test
+    func headphoneAudioExposure() throws {
         let observation = try createObservationFrom(
             type: HKQuantityType(.headphoneAudioExposure),
             quantity: HKQuantity(unit: .decibelAWeightedSoundPressureLevel(), doubleValue: 100)
@@ -2055,7 +2102,8 @@ struct HKQuantitySampleTests {
         ))
     }
     
-    func testUnsupportedTypeSample() throws {
+    @Test
+    func unsupportedTypeSample() throws {
         let quantitySample = HKQuantitySample(
             type: HKQuantityType(.nikeFuel),
             quantity: HKQuantity(unit: .count(), doubleValue: 1),
@@ -2067,7 +2115,8 @@ struct HKQuantitySampleTests {
         }
     }
     
-    func testInvalidComponent() throws {
+    @Test
+    func invalidComponent() throws {
         let nikeFuel = HKQuantitySample(
             type: HKQuantityType(.nikeFuel),
             quantity: HKQuantity(unit: .count(), doubleValue: 1),
@@ -2086,7 +2135,9 @@ struct HKQuantitySampleTests {
         }
     }
     
-    func testUnsupportedType() throws {#expect(throws: HealthKitOnFHIRError.self) {
+    @Test
+    func unsupportedType() throws {
+        #expect(throws: HealthKitOnFHIRError.self) {
             try HKVisionPrescription(
                 type: .glasses,
                 dateIssued: try startDate,
@@ -2097,7 +2148,8 @@ struct HKQuantitySampleTests {
         }
     }
     
-    func testUnsupportedMapping() throws {
+    @Test
+    func unsupportedMapping() throws {
         let sample = HKQuantitySample(
             type: HKQuantityType(.nikeFuel),
             quantity: HKQuantity(unit: .count(), doubleValue: 1),
@@ -2107,7 +2159,8 @@ struct HKQuantitySampleTests {
         #expect(sample.quantityType.codes.isEmpty)
     }
     
-    func testCollectionSampleToResourceProxy() throws {
+    @Test
+    func collectionSampleToResourceProxy() throws {
         func makeSample(numSteps: Int, date: DateComponents) throws -> HKQuantitySample {
             let date = try #require(Calendar.current.date(from: date))
             return HKQuantitySample(
@@ -2132,7 +2185,8 @@ struct HKQuantitySampleTests {
         }
     }
     
-    func testCollectionSampleToResourceProxyWithUnsupportedSample() throws {
+    @Test
+    func collectionSampleToResourceProxyWithUnsupportedSample() throws {
         func makeSample(numSteps: Int, date: DateComponents) throws -> HKQuantitySample {
             let date = try #require(Calendar.current.date(from: date))
             return HKQuantitySample(
@@ -2159,5 +2213,32 @@ struct HKQuantitySampleTests {
         for resource in resources {
             #expect(resource.get(if: Observation.self) != nil)
         }
+    }
+    
+    @Test
+    func absoluteTimeRangeStoredInExtension() throws {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = .gmt
+        let startDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0)))
+        let endDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 15, second: 0)))
+        
+        let observation1 = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            timeRange: startDate..<endDate,
+            extensions: []
+        )
+        #expect(observation1.extension == nil)
+        
+        let observation2 = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            timeRange: startDate..<endDate,
+            extensions: [.includeAbsoluteTimeRange]
+        )
+        #expect(observation2.extension == [
+            Extension(url: FHIRExtensionUrls.absoluteTimeRangeStart, value: .decimal(0.asFHIRDecimalPrimitive())),
+            Extension(url: FHIRExtensionUrls.absoluteTimeRangeEnd, value: .decimal(900.asFHIRDecimalPrimitive()))
+        ])
     }
 }

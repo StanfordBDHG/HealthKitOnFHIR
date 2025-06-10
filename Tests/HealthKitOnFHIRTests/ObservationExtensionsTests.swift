@@ -14,7 +14,7 @@ import Testing
 @MainActor // to work around https://github.com/apple/FHIRModels/issues/36
 struct ObservationExtensionsTests {
     @Test
-    func testCollectionExtensionsIdentifier() throws {
+    func collectionExtensionsIdentifier() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -38,7 +38,7 @@ struct ObservationExtensionsTests {
     }
     
     @Test
-    func testCollectionExtensionsCoding() throws {
+    func collectionExtensionsCoding() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -92,7 +92,7 @@ struct ObservationExtensionsTests {
     }
     
     @Test
-    func testCollectionExtensionsCategories() throws {
+    func collectionExtensionsCategories() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -116,7 +116,7 @@ struct ObservationExtensionsTests {
     }
     
     @Test
-    func testCollectionExtensionsComponents() throws {
+    func collectionExtensionsComponents() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -161,5 +161,47 @@ struct ObservationExtensionsTests {
                 value: .integer(10.asFHIRIntegerPrimitive())
             )
         ])
+    }
+    
+    
+    @Test
+    func fhirExtension() throws {
+        let extension1Url = try #require("https://bdh.stanford.edu/fhir/testDef1".asFHIRURIPrimitive())
+        let extension2Url = try #require("https://bdh.stanford.edu/fhir/testDef2".asFHIRURIPrimitive())
+        let extension1: (Int) -> Extension = { Extension(url: extension1Url, value: .integer($0.asFHIRIntegerPrimitive())) }
+        let extension2: (Int) -> Extension = { Extension(url: extension2Url, value: .integer($0.asFHIRIntegerPrimitive())) }
+        
+        let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
+        #expect(observation.extension == nil)
+        
+        observation.appendExtension(extension1(0), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension1(0)])
+        
+        observation.appendExtension(extension2(0), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension1(0), extension2(0)])
+        
+        observation.appendExtension(extension1(1), replaceAllExistingWithSameUrl: true)
+        #expect(observation.extension == [extension2(0), extension1(1)])
+        
+        observation.appendExtension(extension1(2), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension2(0), extension1(1), extension1(2)])
+        
+        observation.appendExtension(extension1(3), replaceAllExistingWithSameUrl: true)
+        #expect(observation.extension == [extension2(0), extension1(3)])
+        
+        observation.appendExtension(extension2(1), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension2(0), extension1(3), extension2(1)])
+        
+        observation.appendExtension(extension2(2), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension2(0), extension1(3), extension2(1), extension2(2)])
+        
+        observation.removeFirstExtension(withUrl: extension1Url)
+        #expect(observation.extension == [extension2(0), extension2(1), extension2(2)])
+        
+        observation.removeFirstExtension(withUrl: extension2Url)
+        #expect(observation.extension == [extension2(1), extension2(2)])
+        
+        observation.removeAllExtensions(withUrl: extension2Url)
+        #expect(observation.extension == nil)
     }
 }
