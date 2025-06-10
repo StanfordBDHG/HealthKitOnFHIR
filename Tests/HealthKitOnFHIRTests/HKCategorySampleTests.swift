@@ -541,6 +541,7 @@ struct HKCategorySampleTests {
     
     // MARK: Symptom Tests
 
+
     func testSymptoms(type: HKCategoryTypeIdentifier, display: String) throws {
         let values: [HKCategoryValueSeverity] = [.moderate, .unspecified, .notPresent, .severe, .mild]
         for value in values {

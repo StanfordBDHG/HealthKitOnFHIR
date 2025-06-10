@@ -14,7 +14,7 @@ import Testing
 @MainActor // to work around https://github.com/apple/FHIRModels/issues/36
 struct ObservationExtensionsTests {
     @Test
-    func testCollectionExtensionsIdentifier() throws {
+    func collectionExtensionsIdentifier() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -38,7 +38,7 @@ struct ObservationExtensionsTests {
     }
     
     @Test
-    func testCollectionExtensionsCoding() throws {
+    func collectionExtensionsCoding() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -92,7 +92,7 @@ struct ObservationExtensionsTests {
     }
     
     @Test
-    func testCollectionExtensionsCategories() throws {
+    func collectionExtensionsCategories() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
@@ -116,7 +116,7 @@ struct ObservationExtensionsTests {
     }
     
     @Test
-    func testCollectionExtensionsComponents() throws {
+    func collectionExtensionsComponents() throws {
         let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
         
         // First test all extensions with no value beeing present (collection is nil)
