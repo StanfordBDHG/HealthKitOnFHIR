@@ -13,7 +13,7 @@ import ModelsR4
 
 extension Observation {
     /// Sets the `Observation`'s effective date.
-    public func setEffective(startDate: Date, endDate: Date, timeZone: TimeZone, ) throws {
+    public func setEffective(startDate: Date, endDate: Date, timeZone: TimeZone) throws {
         if startDate == endDate {
             effective = .dateTime(FHIRPrimitive(try DateTime(date: startDate, timeZone: timeZone)))
         } else {

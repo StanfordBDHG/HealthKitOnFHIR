@@ -37,13 +37,13 @@ enum FHIRExtensionUrls {
     // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
-    nonisolated(unsafe) static let absoluteTimeRangeStart = "https://spezi.stanford.edu/fhir/defs/absoluteTimeRangeStart".asFHIRURIPrimitive()!
+    nonisolated(unsafe) static let absoluteTimeRangeStart = "https://bdh.stanford.edu/fhir/defs/absoluteTimeRangeStart".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
     
     // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
-    nonisolated(unsafe) static let absoluteTimeRangeEnd = "https://spezi.stanford.edu/fhir/defs/absoluteTimeRangeEnd".asFHIRURIPrimitive()!
+    nonisolated(unsafe) static let absoluteTimeRangeEnd = "https://bdh.stanford.edu/fhir/defs/absoluteTimeRangeEnd".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
 }
 

@@ -166,8 +166,8 @@ struct ObservationExtensionsTests {
     
     @Test
     func fhirExtension() throws {
-        let extension1Url = try #require("https://spezi.stanford.edu/fhir/testDef1".asFHIRURIPrimitive())
-        let extension2Url = try #require("https://spezi.stanford.edu/fhir/testDef2".asFHIRURIPrimitive())
+        let extension1Url = try #require("https://bdh.stanford.edu/fhir/testDef1".asFHIRURIPrimitive())
+        let extension2Url = try #require("https://bdh.stanford.edu/fhir/testDef2".asFHIRURIPrimitive())
         let extension1: (Int) -> Extension = { Extension(url: extension1Url, value: .integer($0.asFHIRIntegerPrimitive())) }
         let extension2: (Int) -> Extension = { Extension(url: extension2Url, value: .integer($0.asFHIRIntegerPrimitive())) }
         
