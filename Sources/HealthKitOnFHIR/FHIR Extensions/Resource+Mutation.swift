@@ -11,6 +11,7 @@ import HealthKit
 import ModelsR4
 
 
+// we need this as a protocol extension, bc we can't use `Self` in the KeyPath type if it's a normal extension on eg Resource.
 protocol FHIRResourceMutationExtensions {}
 extension Resource: FHIRResourceMutationExtensions {}
 

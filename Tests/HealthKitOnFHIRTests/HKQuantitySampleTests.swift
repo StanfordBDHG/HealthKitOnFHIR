@@ -36,7 +36,8 @@ struct HKQuantitySampleTests {
         type quantityType: HKQuantityType,
         quantity: HKQuantity,
         timeRange: Swift.Range<Date>? = nil,
-        metadata: [String: Any] = [:]
+        metadata: [String: Any] = [:],
+        extensions: [FHIRExtension] = []
     ) throws -> Observation {
         let quantitySample = HKQuantitySample(
             type: quantityType,
@@ -45,7 +46,7 @@ struct HKQuantitySampleTests {
             end: try timeRange?.upperBound ?? endDate,
             metadata: metadata
         )
-        return try #require(quantitySample.resource().get(if: Observation.self))
+        return try #require(quantitySample.resource(extensions: extensions).get(if: Observation.self))
     }
     
     func createCoding(
@@ -2170,20 +2171,23 @@ struct HKQuantitySampleTests {
         let startDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0)))
         let endDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 15, second: 0)))
         
-        let observation = try createObservationFrom(
+        let observation1 = try createObservationFrom(
             type: HKQuantityType(.stepCount),
             quantity: HKQuantity(unit: .count(), doubleValue: 42),
-            timeRange: startDate..<endDate
+            timeRange: startDate..<endDate,
+            extensions: []
         )
-        #expect(observation.value == .quantity(
-            Quantity(
-                unit: "steps",
-                value: 42.asFHIRDecimalPrimitive()
-            )
-        ))
-        #expect(observation.extension == [
-            Extension(url: Observation.absoluteTimeRangeStartExtensionUrl, value: .decimal(0.asFHIRDecimalPrimitive())),
-            Extension(url: Observation.absoluteTimeRangeEndExtensionUrl, value: .decimal(900.asFHIRDecimalPrimitive()))
+        #expect(observation1.extension == nil)
+        
+        let observation2 = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            timeRange: startDate..<endDate,
+            extensions: [.includeAbsoluteTimeRange]
+        )
+        #expect(observation2.extension == [
+            Extension(url: FHIRExtensionUrls.absoluteTimeRangeStart, value: .decimal(0.asFHIRDecimalPrimitive())),
+            Extension(url: FHIRExtensionUrls.absoluteTimeRangeEnd, value: .decimal(900.asFHIRDecimalPrimitive()))
         ])
     }
 }

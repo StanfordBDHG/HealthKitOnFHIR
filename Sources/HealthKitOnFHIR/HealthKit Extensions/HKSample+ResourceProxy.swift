@@ -15,11 +15,16 @@ extension HKSample {
     ///
     /// - parameter mapping: A mapping to map `HKSample`s to corresponding FHIR observations allowing the customization of, e.g., codings and units. See ``HKSampleMapping``.
     /// - parameter issuedDate: `Instant` specifying when this version of the resource was made available. Defaults to `Date.now`.
+    /// - parameter extensions: Any ``FHIRExtension``s that should be applied to each of the produced observations, e.g. ``FHIRExtension/includeAbsoluteTimeRange``.
     /// - returns: A `ResourceProxy`containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
     /// - throws: If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
     ///
     /// - Important: When mapping an array of HKSample objects into ResourceProxies, for performance reasons always prefer ``Swift/Sequence/mapIntoResourceProxies(using:)`` or ``Swift/Sequence/compactMapIntoResourceProxies(using:)``.
-    public func resource(withMapping mapping: HKSampleMapping = .default, issuedDate: FHIRPrimitive<Instant>? = nil) throws -> ResourceProxy {
+    public func resource(
+        withMapping mapping: HKSampleMapping = .default,
+        issuedDate: FHIRPrimitive<Instant>? = nil,
+        extensions: [FHIRExtension] = []
+    ) throws -> ResourceProxy {
         #if !os(watchOS)
         if let self = self as? HKClinicalRecord {
             return try self.resource()
@@ -47,6 +52,9 @@ extension HKSample {
             try self.build(observation, mapping: mapping)
         } else {
             throw HealthKitOnFHIRError.notSupported
+        }
+        for `extension` in extensions {
+            try `extension`.apply(input: self, observation: observation)
         }
         return ResourceProxy(with: observation)
     }
