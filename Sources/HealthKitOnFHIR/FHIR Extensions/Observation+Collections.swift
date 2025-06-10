@@ -55,13 +55,13 @@ extension Observation {
 
 extension DomainResource {
     /// Appends an `Extension` to the `DomainResource`
-    public func appendExtension(_ extension: Extension, replaceExistingWithSameUrl: Bool) {
-        appendExtensions(CollectionOfOne(`extension`), replaceExistingWithSameUrl: replaceExistingWithSameUrl)
+    public func appendExtension(_ extension: Extension, replaceAllExistingWithSameUrl: Bool) {
+        appendExtensions(CollectionOfOne(`extension`), replaceAllExistingWithSameUrl: replaceAllExistingWithSameUrl)
     }
     
     /// Appends multiple `Extension`s to the `DomainResource`
-    public func appendExtensions(_ extensions: some Collection<Extension>, replaceExistingWithSameUrl: Bool) {
-        if replaceExistingWithSameUrl {
+    public func appendExtensions(_ extensions: some Collection<Extension>, replaceAllExistingWithSameUrl: Bool) {
+        if replaceAllExistingWithSameUrl {
             for element in extensions {
                 removeAllExtensions(withUrl: element.url)
             }

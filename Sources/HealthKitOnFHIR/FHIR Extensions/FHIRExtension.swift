@@ -61,6 +61,6 @@ extension FHIRExtension {
                 value: .decimal(sample.endDate.timeIntervalSince1970.asFHIRDecimalPrimitive())
             )
         ]
-        observation.appendExtensions(timeRangeExtensions, replaceExistingWithSameUrl: true)
+        observation.appendExtensions(timeRangeExtensions, replaceAllExistingWithSameUrl: true)
     }
 }

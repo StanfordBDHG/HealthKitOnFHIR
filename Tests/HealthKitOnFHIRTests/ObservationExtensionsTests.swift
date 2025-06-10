@@ -162,4 +162,31 @@ struct ObservationExtensionsTests {
             )
         ])
     }
+    
+    
+    @Test
+    func fhirExtension() throws {
+        let extension1Url = try #require("https://spezi.stanford.edu/fhir/testDef1".asFHIRURIPrimitive())
+        let extension2Url = try #require("https://spezi.stanford.edu/fhir/testDef2".asFHIRURIPrimitive())
+        let extension1: (Int) -> Extension = { Extension(url: extension1Url, value: .integer($0.asFHIRIntegerPrimitive())) }
+        let extension2: (Int) -> Extension = { Extension(url: extension2Url, value: .integer($0.asFHIRIntegerPrimitive())) }
+        
+        let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
+        #expect(observation.extension == nil)
+        
+        observation.appendExtension(extension1(0), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension1(0)])
+        
+        observation.appendExtension(extension2(0), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension1(0), extension2(0)])
+        
+        observation.appendExtension(extension1(1), replaceAllExistingWithSameUrl: true)
+        #expect(observation.extension == [extension2(0), extension1(1)])
+        
+        observation.appendExtension(extension1(2), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension2(0), extension1(1), extension1(2)])
+        
+        observation.appendExtension(extension1(3), replaceAllExistingWithSameUrl: true)
+        #expect(observation.extension == [extension2(0), extension1(3)])
+    }
 }
