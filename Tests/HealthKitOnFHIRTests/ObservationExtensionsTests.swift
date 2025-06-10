@@ -188,5 +188,20 @@ struct ObservationExtensionsTests {
         
         observation.appendExtension(extension1(3), replaceAllExistingWithSameUrl: true)
         #expect(observation.extension == [extension2(0), extension1(3)])
+        
+        observation.appendExtension(extension2(1), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension2(0), extension1(3), extension2(1)])
+        
+        observation.appendExtension(extension2(2), replaceAllExistingWithSameUrl: false)
+        #expect(observation.extension == [extension2(0), extension1(3), extension2(1), extension2(2)])
+        
+        observation.removeFirstExtension(withUrl: extension1Url)
+        #expect(observation.extension == [extension2(0), extension2(1), extension2(2)])
+        
+        observation.removeFirstExtension(withUrl: extension2Url)
+        #expect(observation.extension == [extension2(1), extension2(2)])
+        
+        observation.removeAllExtensions(withUrl: extension2Url)
+        #expect(observation.extension == nil)
     }
 }
