@@ -14,7 +14,7 @@ import ModelsR4
 
 
 /// Defines a custom Extension that can be applied to a FHIR `Observation` representing a HeathKit sample.
-public struct FHIRExtension: Sendable {
+public struct FHIRExtensionBuilder: Sendable {
     private let impl: @Sendable (_ input: HKSample, _ observation: Observation) throws -> Void
     
     /// Createa a new Extension, which uses a closure to apply itself to an `Observation` created from a `HKSample` (or a subclass thereof).
@@ -48,7 +48,7 @@ enum FHIRExtensionUrls {
 }
 
 
-extension FHIRExtension {
+extension FHIRExtensionBuilder {
     /// A FHIR Extension that writes the absolute time range (i.e., start and end date) of a HealthKit sample into a FHIR `Observation` created from the sample.
     public static let includeAbsoluteTimeRange = Self { (sample: HKSample, observation) in
         let timeRangeExtensions = [

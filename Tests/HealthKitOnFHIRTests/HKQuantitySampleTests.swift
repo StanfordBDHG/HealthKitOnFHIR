@@ -37,7 +37,7 @@ struct HKQuantitySampleTests {
         quantity: HKQuantity,
         timeRange: Swift.Range<Date>? = nil,
         metadata: [String: Any] = [:],
-        extensions: [FHIRExtension] = []
+        extensions: [FHIRExtensionBuilder] = []
     ) throws -> Observation {
         let quantitySample = HKQuantitySample(
             type: quantityType,
