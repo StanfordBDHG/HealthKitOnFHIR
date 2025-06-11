@@ -17,13 +17,14 @@ extension FHIRExtensionUrls {
     // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
-    /// Url of a FHIR Extension containing, if applicable, the absolute
+    /// Url of a FHIR Extension containing, if applicable, the absolute start date timestamp of a FHIR `Observation`.
     public nonisolated(unsafe) static let absoluteTimeRangeStart = "https://bdh.stanford.edu/fhir/defs/absoluteTimeRangeStart".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
     
     // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
+    /// Url of a FHIR Extension containing, if applicable, the absolute end date timestamp of a FHIR `Observation`.
     public nonisolated(unsafe) static let absoluteTimeRangeEnd = "https://bdh.stanford.edu/fhir/defs/absoluteTimeRangeEnd".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
 }
@@ -49,7 +50,13 @@ extension FHIRExtensionBuilder {
 
 extension Observation {
     /// Writes the Observation's absolute effective start and end date into a FHIR Extension.
+    ///
+    /// The absolute timestamps (decimals representing the time interval since 1970) are stored using the ``FHIRExtensionUrls/absoluteTimeRangeStart`` and ``FHIRExtensionUrls/absoluteTimeRangeEnd`` urls.
+    ///
+    /// - throws: If an error was encountered when converting the effective time range into the extension values. If the Observation's effecrive time uses an unsupported format (eg: `Timing`), ``HealthKitOnFHIRError/notSupported`` is thrown.
     public func encodeAbsoluteTimeRangeIntoExtension() throws {
+        removeAllExtensions(withUrl: FHIRExtensionUrls.absoluteTimeRangeStart)
+        removeAllExtensions(withUrl: FHIRExtensionUrls.absoluteTimeRangeEnd)
         let startDate, endDate: DateTime?
         switch effective {
         case nil:
@@ -58,15 +65,15 @@ extension Observation {
             startDate = dateTime.value
             endDate = dateTime.value
         case .period(let period):
-            startDate = period.start
-            endDate = period.end
+            startDate = period.start?.value
+            endDate = period.end?.value
         case .instant(let instant):
-            startDate = try? DateTime(instant: instant.value)
+            startDate = try instant.value.flatMap { try DateTime(instant: $0) }
             endDate = startDate
-        case .timing(let timing):
+        case .timing:
             throw HealthKitOnFHIRError.notSupported
         }
-        if let startDate = try? startDate?.asNSDate() {
+        if let startDate = try startDate?.asNSDate() {
             appendExtension(
                 Extension(
                     url: FHIRExtensionUrls.absoluteTimeRangeStart,
@@ -75,7 +82,7 @@ extension Observation {
                 replaceAllExistingWithSameUrl: true
             )
         }
-        if let endDate = try? endDate?.asNSDate() {
+        if let endDate = try endDate?.asNSDate() {
             appendExtension(
                 Extension(
                     url: FHIRExtensionUrls.absoluteTimeRangeEnd,
