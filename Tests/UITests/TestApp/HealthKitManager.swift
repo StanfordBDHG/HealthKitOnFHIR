@@ -30,21 +30,18 @@ final class HealthKitManager: Sendable {
               let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
             throw HKError(.errorHealthDataUnavailable)
         }
-        
         try await healthStore.requestAuthorization(toShare: [stepType], read: [stepType])
     }
     
-    func readStepCount() async throws -> [HKQuantitySample] {
+    func readStepCount(sorted sortDescriptors: [SortDescriptor<HKQuantitySample>] = [], limit: Int? = nil) async throws -> [HKQuantitySample] {
         guard let healthStore else {
             throw HKError(.errorHealthDataUnavailable)
         }
-        
         let query = HKSampleQueryDescriptor(
             predicates: [.quantitySample(type: HKQuantityType(.stepCount))],
-            sortDescriptors: [],
-            limit: HKObjectQueryNoLimit
+            sortDescriptors: sortDescriptors,
+            limit: limit ?? HKObjectQueryNoLimit
         )
-        
         return try await query.result(for: healthStore)
     }
     
@@ -53,14 +50,12 @@ final class HealthKitManager: Sendable {
               let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
             throw HKError(.errorHealthDataUnavailable)
         }
-        
         let stepsSample = HKQuantitySample(
             type: stepType,
             quantity: HKQuantity(unit: HKUnit.count(), doubleValue: steps),
             start: startDate,
             end: endDate
         )
-        
         try await healthStore.save(stepsSample)
     }
 
@@ -70,7 +65,6 @@ final class HealthKitManager: Sendable {
         guard let healthStore else {
             throw HKError(.errorHealthDataUnavailable)
         }
-
         let typesToWrite: Set<HKSampleType> = [HKObjectType.workoutType()]
         try await healthStore.requestAuthorization(toShare: typesToWrite, read: [])
     }
@@ -81,7 +75,6 @@ final class HealthKitManager: Sendable {
         guard let healthStore else {
             throw HKError(.errorHealthDataUnavailable)
         }
-        
         var readTypes: [HKObjectType] = HKElectrocardiogram.correlatedSymptomTypes
         readTypes.append(HKQuantityType.electrocardiogramType())
         try await healthStore.requestAuthorization(toShare: [], read: Set(readTypes))
@@ -91,13 +84,11 @@ final class HealthKitManager: Sendable {
         guard let healthStore else {
             throw HKError(.errorHealthDataUnavailable)
         }
-        
         let query = HKSampleQueryDescriptor(
             predicates: [.electrocardiogram()],
             sortDescriptors: [],
             limit: 1
         )
-        
         return try await query.result(for: healthStore).first
     }
     
@@ -131,7 +122,6 @@ final class HealthKitManager: Sendable {
             HKObjectType.clinicalType(forIdentifier: .procedureRecord)!,
             HKObjectType.clinicalType(forIdentifier: .vitalSignRecord)!
         ]
-
         try await healthStore.requestAuthorization(toShare: [], read: readTypes)
     }
 
@@ -139,13 +129,11 @@ final class HealthKitManager: Sendable {
         guard let healthStore else {
             return []
         }
-
         let query = HKSampleQueryDescriptor(
             predicates: [.clinicalRecord(type: HKClinicalType(type))],
             sortDescriptors: [],
             limit: HKObjectQueryNoLimit
         )
-
         return try await query.result(for: healthStore)
     }
 }

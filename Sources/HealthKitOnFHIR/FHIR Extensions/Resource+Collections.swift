@@ -6,6 +6,8 @@
 // SPDX-License-Identifier: MIT
 //
 
+// swiftlint:disable discouraged_optional_collection
+
 import Foundation
 import HealthKit
 import ModelsR4
@@ -53,7 +55,17 @@ extension Observation {
 }
 
 
-extension DomainResource {
+/// A FHIR Type that supports extensions.
+@_documentation(visibility: internal)
+public protocol FHIRTypeWithExtensions: AnyObject {
+    var `extension`: [Extension]? { get set }
+}
+
+extension ModelsR4.Element: FHIRTypeWithExtensions {}
+extension ModelsR4.DomainResource: FHIRTypeWithExtensions {}
+
+
+extension FHIRTypeWithExtensions where Self: FHIRResourceMutationExtensions {
     /// Appends an `Extension` to the `DomainResource`
     public func appendExtension(_ extension: Extension, replaceAllExistingWithSameUrl: Bool) {
         appendExtensions(CollectionOfOne(`extension`), replaceAllExistingWithSameUrl: replaceAllExistingWithSameUrl)
@@ -81,7 +93,7 @@ extension DomainResource {
     ///
     /// - returns: the removed extension elements, if any.
     @discardableResult
-    public func removeAllExtensions(withUrl url: FHIRPrimitive<FHIRURI>) -> [Extension]? { // swiftlint:disable:this discouraged_optional_collection
+    public func removeAllExtensions(withUrl url: FHIRPrimitive<FHIRURI>) -> [Extension]? {
         removeAllElements(of: \.extension) { $0.url == url }
     }
 }

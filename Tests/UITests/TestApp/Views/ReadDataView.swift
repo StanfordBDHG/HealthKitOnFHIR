@@ -26,19 +26,22 @@ struct ReadDataView: View {
                         showingSheet.toggle()
                     }
                 }
-                    .sheet(isPresented: $showingSheet) {
-                        JSONView(json: $json)
-                    }
+                .sheet(isPresented: $showingSheet) {
+                    JSONView(json: $json)
+                }
             }
         }
-            .navigationBarTitle("Read Data")
+        .navigationBarTitle("Read Data")
     }
     
     
     private func readSteps() async throws {
         try await manager.requestStepAuthorization()
         
-        let observations = try await manager.readStepCount()
+        let observations = try await manager.readStepCount(
+            sorted: [.init(\.startDate, order: .reverse)],
+            limit: 1
+        )
             .compactMap { sample in
                 try? sample.resource().get()
             }

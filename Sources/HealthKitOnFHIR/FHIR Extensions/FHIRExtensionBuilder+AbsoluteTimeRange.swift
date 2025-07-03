@@ -6,8 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-// swiftlint:disable file_types_order
-
 import Foundation
 import HealthKit
 import ModelsR4
@@ -31,7 +29,7 @@ extension FHIRExtensionUrls {
 
 
 extension FHIRExtensionBuilder {
-    /// A FHIR Extension that writes the absolute time range (i.e., start and end date) of a HealthKit sample into a FHIR `Observation` created from the sample.
+    /// A FHIR Extension Builder that writes the absolute time range (i.e., start and end date) of a HealthKit sample into a FHIR `Observation` created from the sample.
     public static let includeAbsoluteTimeRange = Self { (sample: HKSample, observation) in
         let timeRangeExtensions = [
             Extension(
