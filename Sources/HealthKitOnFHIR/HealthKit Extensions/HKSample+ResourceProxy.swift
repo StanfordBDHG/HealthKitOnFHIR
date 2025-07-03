@@ -53,7 +53,7 @@ extension HKSample {
         } else {
             throw HealthKitOnFHIRError.notSupported
         }
-        for `extension` in extensions + [.sourceDevice, .sourceRevision] {
+        for `extension` in extensions + [.sourceDevice, .sourceRevision, .metadata] {
             try `extension`.apply(input: self, observation: observation)
         }
         return ResourceProxy(with: observation)

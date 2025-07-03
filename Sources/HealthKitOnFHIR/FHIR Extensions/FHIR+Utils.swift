@@ -32,3 +32,34 @@ extension FHIRDate {
         )
     }
 }
+
+
+extension Decimal {
+    /// Creates a `FHIRPrimitive<FHIRDecimal>` with the value of the `Decimal`.
+    public func asFHIRPrimitive() -> FHIRPrimitive<FHIRDecimal> {
+        FHIRPrimitive(FHIRDecimal(self))
+    }
+}
+
+
+extension FHIRPrimitive where PrimitiveType == FHIRURI {
+    /// Creates a new `FHIRPrimitive<FHIRURI>`, by appending the specified component.
+    public func appending(component: some StringProtocol) -> Self {
+        guard let value else {
+            return self
+        }
+        return Self(FHIRURI(value.url.appending(component: component)))
+    }
+    
+    /// Creates a new `FHIRPrimitive<FHIRURI>`, by appending the specified components.
+    public func appending(components: [some StringProtocol]) -> Self {
+        guard let value else {
+            return self
+        }
+        var url = value.url
+        for component in components {
+            url = url.appending(component: component)
+        }
+        return Self(FHIRURI(url))
+    }
+}
