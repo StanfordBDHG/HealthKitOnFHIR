@@ -112,7 +112,7 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
     /// A FHIR Extension Builder that writes a HealthKit object's `HKSourceRevision` into a FHIR `Observation` created from the sample.
     public static var sourceRevision: Self {
         .init { object, observation in
-            try FHIRExtensionBuilder<HKSourceRevision>.sourceRevision.apply(input: object.sourceRevision, to: observation)
+            try observation.apply(.sourceRevision, input: object.sourceRevision)
         }
     }
     
@@ -120,7 +120,7 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
     public static var sourceDevice: Self {
         .init { object, observation in
             if let device = object.device {
-                try FHIRExtensionBuilder<HKDevice>.sourceDevice.apply(input: device, to: observation)
+                try observation.apply(.sourceDevice, input: device)
             } else {
                 observation.removeAllExtensions(withUrl: FHIRExtensionUrls.sourceDevice)
             }
