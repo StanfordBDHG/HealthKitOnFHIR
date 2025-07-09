@@ -85,6 +85,8 @@ extension Sequence where Element: HKSample {
     
     /// Produces an Array of FHIR `ResourceProxies`.
     ///
+    /// This function is equivalent to calling ``HealthKit/HKSample/resource(withMapping:issuedDate:extensions:)`` on every element in the sequence, andd filtering out those elememt for which the call raised an error.
+    ///
     /// - Note: This method provides significant performance improvements as compared to calling ``HealthKit/HKSample/resource(withMapping:issuedDate:extensions:)`` for each element in the collection.
     ///
     /// - parameter mapping: A mapping to map `HKSample`s to corresponding FHIR observations allowing the customization of, e.g., codings and units. See ``HKSampleMapping``.
