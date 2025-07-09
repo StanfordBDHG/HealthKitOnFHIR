@@ -57,7 +57,7 @@ extension HKSample {
         let baseExtensions: [FHIRExtensionBuilder<HKObject>] = [
             .sourceDevice, .sourceRevision, .metadata
         ]
-        for builder in extensions + baseExtensions {
+        for builder in baseExtensions + extensions {
             try builder.apply(typeErasedInput: self, to: observation)
         }
         return ResourceProxy(with: observation)
