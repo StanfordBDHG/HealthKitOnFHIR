@@ -2367,11 +2367,4 @@ func checkProperty(
     }
     let value = try #require(ext.value)
     #expect(value == expectedValue, sourceLocation: loc)
-//    switch value {
-//    case .string(let value):
-//        let value = try #require(value.value).string
-//        #expect(value == expectedValue, sourceLocation: loc)
-//    default:
-//        Issue.record("Unexpected value: \(value)")
-//    }
 }
