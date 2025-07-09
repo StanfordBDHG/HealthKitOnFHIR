@@ -20,20 +20,40 @@ public protocol FHIRExtensionBuilderProtocol<Input> {
     /// The extension builder's input type.
     associatedtype Input
     
-    /// Invokes the extension builder, using the specified input and `Observation`.
+    /// Applies the extension builder to an `Observation`, using the specified input.
     func apply(input: Input, to observation: Observation) throws
 }
 
 
 /// Defines a custom Extension Builder that can be applied to a FHIR `Observation` representing a HeathKit sample.
+///
+/// ## Topics
+///
+/// ### Creating an Extension Builder
+/// - ``init(_:)-((Input,Observation)->Void)``
+/// - ``init(_:)-((Observation)->Void)``
+///
+/// ### Applying Extensions
+/// - ``apply(input:to:)``
+/// - ``apply(to:)``
+/// - ``apply(typeErasedInput:to:)``
+///
+/// ### Supporting Types
+/// - ``FHIRExtensionUrls``
+/// - ``FHIRExtensionBuilderProtocol``
+///
+/// ### Other
+/// - ``ModelsR4/Observation/apply(_:input:)``
+/// - ``ModelsR4/Observation/apply(_:)``
 public struct FHIRExtensionBuilder<Input>: FHIRExtensionBuilderProtocol, Sendable {
     private let impl: @Sendable (_ input: Input, _ observation: Observation) throws -> Void
     
-    /// Createa a new Extension Builder.
+    /// Creates a new Extension Builder.
     public init(_ action: @escaping @Sendable (_ input: Input, _ observation: Observation) throws -> Void) {
         self.impl = action
     }
     
+    /// Creates a new Extension Builder.
     public init(_ action: @escaping @Sendable (_ observation: Observation) throws -> Void) where Input == Void {
         self.init { _, observation in
             try action(observation)
@@ -47,12 +67,12 @@ public struct FHIRExtensionBuilder<Input>: FHIRExtensionBuilderProtocol, Sendabl
 
 
 extension FHIRExtensionBuilderProtocol {
-    /// Invokes the extension builder to an `Observation`.
+    /// Applies the extension builder to an `Observation`.
     public func apply(to observation: Observation) throws where Input == Void {
         try apply(input: (), to: observation)
     }
     
-    /// Attempts to apply the extension builder to the `Observation`, using the specified input.
+    /// Attempts to apply the extension builder to an `Observation`, using the specified input.
     ///
     /// This function will have no effect if `typeErasedInput` doesn't match the extension builder's input type.
     /// An exception is if the extension builder's input type is `Void`; in this case any input is allowed, and will simply be discarded.

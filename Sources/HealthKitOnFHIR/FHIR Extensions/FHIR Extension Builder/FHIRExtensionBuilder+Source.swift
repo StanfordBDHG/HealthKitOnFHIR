@@ -28,14 +28,10 @@ extension FHIRExtensionUrls {
 }
 
 
-extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObject> {
-    /// A FHIR Extension Builder that writes encoded `HKDevice` of a HealthKit sample into a FHIR `Observation` created from the sample.
+extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKDevice> {
+    /// A FHIR Extension Builder that writes a  `HKDevice` into a FHIR `Observation`.
     public static var sourceDevice: Self {
-        .init { (object: HKObject, observation) in
-            guard let device = object.device else {
-                observation.removeAllExtensions(withUrl: FHIRExtensionUrls.sourceDevice)
-                return
-            }
+        .init { (device: HKDevice, observation) in
             let deviceInfo = Extension(url: FHIRExtensionUrls.sourceDevice)
             let appendDeviceInfoEntry = { (keyPath: KeyPath<HKDevice, String?>) in
                 guard let name = keyPath._kvcKeyPathString else {
@@ -66,7 +62,7 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
 
 
 extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKSourceRevision> {
-    /// A FHIR Extension Builder that writes a `HKSourceRevision` into a FHIR `Observation` created from the sample.
+    /// A FHIR Extension Builder that writes a `HKSourceRevision` into a FHIR `Observation`.
     public static var sourceRevision: Self {
         .init { (revision: HKSourceRevision, observation) throws in // swiftlint:disable:this closure_body_length
             let deviceInfo = Extension(url: FHIRExtensionUrls.sourceRevision)
@@ -117,6 +113,17 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
     public static var sourceRevision: Self {
         .init { object, observation in
             try FHIRExtensionBuilder<HKSourceRevision>.sourceRevision.apply(input: object.sourceRevision, to: observation)
+        }
+    }
+    
+    /// A FHIR Extension Builder that writes a HealthKit object's `HKDevice` into a FHIR `Observation` created from the sample.
+    public static var sourceDevice: Self {
+        .init { object, observation in
+            if let device = object.device {
+                try FHIRExtensionBuilder<HKDevice>.sourceDevice.apply(input: device, to: observation)
+            } else {
+                observation.removeAllExtensions(withUrl: FHIRExtensionUrls.sourceDevice)
+            }
         }
     }
 }

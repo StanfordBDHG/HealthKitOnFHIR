@@ -130,10 +130,20 @@ The following example generates the following FHIR observation:
 }
 ```
 
-## Supported HealthKit HKSample Types
+## Topics
 
+### Mapping HealthKit Samples into FHIR Observations
+- ``HealthKit/HKSample/resource(withMapping:issuedDate:extensions:)``
+- ``HealthKit/HKSampleType/resourceType``
+- ``HealthKit/HKElectrocardiogram/observation(symptoms:voltageMeasurements:withMapping:issuedDate:extensions:)``
+
+### Supported HealthKit HKSample Types
 - <doc:HKSampleSupportTables>
 - <doc:SupportedHKQuantityTypes>
 - <doc:SupportedHKClinicalTypes>
 - <doc:SupportedHKCategoryTypes>
 - <doc:SupportedHKCorrelationTypes>
+
+### Working with FHIR Extensions
+- ``FHIRExtensionBuilder``
+- ``FHIRTypeWithExtensions``

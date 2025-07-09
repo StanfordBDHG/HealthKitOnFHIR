@@ -28,15 +28,15 @@ public struct HKSampleMapping: Decodable, Sendable {
     }()
     
     
-    /// The ``HKSampleMapping/quantitySampleMapping`` property defines the mapping of `HKQuantityType`s to FHIR observations.
+    /// The mapping of `HKQuantityType`s to FHIR `Observation`s.
     public var quantitySampleMapping: [HKQuantityType: HKQuantitySampleMapping]
-    /// The ``HKSampleMapping/categorySampleMapping`` property defines the mapping of `HKCategoryType`s to FHIR observations.
+    /// The mapping of `HKCategoryType`s to FHIR `Observation`s.
     public var categorySampleMapping: [HKCategoryType: HKCategorySampleMapping]
-    /// The ``HKSampleMapping/correlationMapping`` property defines the mapping of `HKCorrelationType`s to FHIR observations.
+    /// The mapping of `HKCorrelationType`s to FHIR `Observation`s.
     public var correlationMapping: [HKCorrelationType: HKCorrelationMapping]
-    /// The ``HKSampleMapping/electrocardiogramMapping`` property defines the mapping of  an`HKElectrocardiogramMapping` to an FHIR  observation.
+    /// The mapping of `HKElectrocardiogramMapping`s to FHIR `Observation`s.
     public var electrocardiogramMapping: HKElectrocardiogramMapping
-    /// The ``HKSampleMapping/workoutMapping`` property defines the mapping of an `HKWorkout` to an FHIR  Observation.
+    /// The mapping of  `HKWorkout`s to FHIR `Observation`s.
     public var workoutSampleMapping: HKWorkoutSampleMapping
 
     
@@ -99,8 +99,11 @@ public struct HKSampleMapping: Decodable, Sendable {
     
     /// A ``HKSampleMapping`` instance is used to specify the mapping of `HKSample`s to FHIR observations allowing the customization of, e.g., codings and units.
     /// - Parameters:
-    ///   - quantitySampleMapping: The ``HKSampleMapping/quantitySampleMapping`` property defines the mapping of `HKQuantityType`s to FHIR observations.
-    ///   - correlationMapping: The ``HKSampleMapping/correlationMapping`` property defines the mapping of `HKCorrelationType`s to FHIR observations.
+    ///   - quantitySampleMapping: The mapping of `HKQuantityType`s to FHIR Observations.
+    ///   - categorySampleMapping: The mapping of `HKCategoryType`s to FHIR `Observation`s.
+    ///   - correlationMapping: The mapping of `HKCorrelationType`s to FHIR Observations.
+    ///   - workoutSampleMapping: The mapping of  `HKWorkout`s to FHIR `Observation`s.
+    ///   - electrocardiogramMapping: The mapping of `HKElectrocardiogramMapping`s to FHIR `Observation`s.
     public init(
         quantitySampleMapping: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
         categorySampleMapping: [HKCategoryType: HKCategorySampleMapping] = HKCategorySampleMapping.default,
