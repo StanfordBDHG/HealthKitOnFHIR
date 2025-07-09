@@ -36,6 +36,7 @@ struct HKQuantitySampleTests {
         type quantityType: HKQuantityType,
         quantity: HKQuantity,
         timeRange: Swift.Range<Date>? = nil,
+        device: HKDevice? = nil,
         metadata: [String: Any] = [:],
         extensions: [FHIRExtensionBuilder] = []
     ) throws -> Observation {
@@ -44,6 +45,7 @@ struct HKQuantitySampleTests {
             quantity: quantity,
             start: try timeRange?.lowerBound ?? startDate,
             end: try timeRange?.upperBound ?? endDate,
+            device: device,
             metadata: metadata
         )
         return try #require(quantitySample.resource(extensions: extensions).get(if: Observation.self))
@@ -2228,7 +2230,11 @@ struct HKQuantitySampleTests {
             timeRange: startDate..<endDate,
             extensions: []
         )
-        #expect(observation1.extension == nil)
+        do {
+            let extensions = try #require(observation1.extension)
+            #expect(extensions.count == 1)
+            #expect(extensions.map(\.url) == [FHIRExtensionUrls.sourceRevision])
+        }
         
         let observation2 = try createObservationFrom(
             type: HKQuantityType(.stepCount),
@@ -2236,9 +2242,129 @@ struct HKQuantitySampleTests {
             timeRange: startDate..<endDate,
             extensions: [.includeAbsoluteTimeRange]
         )
-        #expect(observation2.extension == [
-            Extension(url: FHIRExtensionUrls.absoluteTimeRangeStart, value: .decimal(0.asFHIRDecimalPrimitive())),
-            Extension(url: FHIRExtensionUrls.absoluteTimeRangeEnd, value: .decimal(900.asFHIRDecimalPrimitive()))
-        ])
+        do {
+            let extensions = try #require(observation2.extension)
+            #expect(extensions.count == 3)
+            #expect(Set(extensions.map(\.url)) == [
+                FHIRExtensionUrls.sourceRevision, FHIRExtensionUrls.absoluteTimeRangeStart, FHIRExtensionUrls.absoluteTimeRangeEnd
+            ])
+            #expect(extensions.contains(Extension(url: FHIRExtensionUrls.absoluteTimeRangeStart, value: .decimal(0.asFHIRDecimalPrimitive()))))
+            #expect(extensions.contains(Extension(url: FHIRExtensionUrls.absoluteTimeRangeEnd, value: .decimal(900.asFHIRDecimalPrimitive()))))
+        }
     }
+    
+    @Test
+    func sampleSourceInfo() throws {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = .gmt
+        let startDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0)))
+        let endDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 15, second: 0)))
+        let device = HKDevice(
+            name: "Cerebral Activity Modulator",
+            manufacturer: "Lukas Industries",
+            model: "A1000",
+            hardwareVersion: "X12/49",
+            firmwareVersion: "2.1.4",
+            softwareVersion: "1.7.9",
+            localIdentifier: UUID().uuidString,
+            udiDeviceIdentifier: nil
+        )
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            timeRange: startDate..<endDate,
+            device: device,
+            extensions: []
+        )
+        let extensions = try #require(observation.extension)
+        #expect(extensions.count == 2)
+        #expect(Set(extensions.map(\.url)) == [FHIRExtensionUrls.sourceRevision, FHIRExtensionUrls.sourceDevice])
+        let deviceExtension = try #require(extensions.first { $0.url == FHIRExtensionUrls.sourceDevice })
+        _ = try #require(extensions.first { $0.url == FHIRExtensionUrls.sourceRevision })
+        
+        try checkProperty(in: deviceExtension, ["name"], value: device.name.map { .string($0.asFHIRStringPrimitive()) })
+        try checkProperty(in: deviceExtension, ["manufacturer"], value: device.manufacturer.map { .string($0.asFHIRStringPrimitive()) })
+        try checkProperty(in: deviceExtension, ["model"], value: device.model.map { .string($0.asFHIRStringPrimitive()) })
+        try checkProperty(in: deviceExtension, ["hardwareVersion"], value: device.hardwareVersion.map { .string($0.asFHIRStringPrimitive()) })
+        try checkProperty(in: deviceExtension, ["firmwareVersion"], value: device.firmwareVersion.map { .string($0.asFHIRStringPrimitive()) })
+        try checkProperty(in: deviceExtension, ["softwareVersion"], value: device.softwareVersion.map { .string($0.asFHIRStringPrimitive()) })
+        try checkProperty(in: deviceExtension, ["localIdentifier"], value: device.localIdentifier.map { .string($0.asFHIRStringPrimitive()) })
+        try checkProperty(in: deviceExtension, ["udiDeviceIdentifier"], value: device.udiDeviceIdentifier.map { .string($0.asFHIRStringPrimitive()) })
+        
+        // can't unit-test the encoding of the source revision into the extensions,
+        // since HKSamples only have a source revision once they're saved to HealthKit, which we can't do here.
+    }
+    
+    
+    @Test
+    func sampleMetadataExtension() throws {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = .gmt
+        let startDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0)))
+        let endDate = try #require(cal.date(from: .init(year: 1970, month: 1, day: 1, hour: 0, minute: 15, second: 0)))
+        let metadataExternalUUID = UUID()
+        let metadataTimeZone = TimeZone.current
+        let metadataWeather = HKWeatherCondition.snow
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            timeRange: startDate..<endDate,
+            metadata: [
+                HKMetadataKeyExternalUUID: metadataExternalUUID.uuidString,
+                HKMetadataKeyTimeZone: metadataTimeZone.identifier,
+                HKMetadataKeyWeatherCondition: NSNumber(value: metadataWeather.rawValue)
+            ]
+        )
+        let extensions = try #require(observation.extension)
+        #expect(extensions.count == 2)
+        #expect(Set(extensions.compactMap(\.url)) == [FHIRExtensionUrls.metadata, FHIRExtensionUrls.sourceRevision])
+        let metadataExtension = try #require(extensions.first { $0.url == FHIRExtensionUrls.metadata })
+        
+        try checkProperty(
+            in: metadataExtension,
+            [HKMetadataKeyExternalUUID],
+            value: .string(metadataExternalUUID.uuidString.asFHIRStringPrimitive())
+        )
+        try checkProperty(
+            in: metadataExtension,
+            [HKMetadataKeyTimeZone],
+            value: .string(metadataTimeZone.identifier.asFHIRStringPrimitive())
+        )
+        try checkProperty(
+            in: metadataExtension,
+            [HKMetadataKeyWeatherCondition],
+            value: .decimal(Decimal(metadataWeather.rawValue).asFHIRPrimitive())
+        )
+        
+        // can't unit-test the encoding of the source revision into the extensions,
+        // since HKSamples only have a source revision once they're saved to HealthKit, which we can't do here.
+    }
+}
+
+
+// MARK: Utils
+
+func checkProperty(
+    in parentExtension: Extension,
+    _ path: some Collection<String>,
+    value expectedValue: Extension.ValueX?,
+    loc: SourceLocation = #_sourceLocation
+) throws {
+    guard let name = path.first else {
+        Issue.record("Empty path")
+        return
+    }
+    let url = try #require(parentExtension.url.value).url.appending(component: name).asFHIRURIPrimitive()
+    guard let ext = parentExtension.extension?.first(where: { $0.url == url }) else {
+        if expectedValue != nil {
+            Issue.record("Unable to find extension for \(try #require(url.value?.url).absoluteString)")
+        }
+        return
+    }
+    guard path.count == 1 else {
+        try checkProperty(in: ext, path.dropFirst(), value: expectedValue, loc: loc)
+        return
+    }
+    let value = try #require(ext.value)
+    #expect(value == expectedValue, sourceLocation: loc)
 }

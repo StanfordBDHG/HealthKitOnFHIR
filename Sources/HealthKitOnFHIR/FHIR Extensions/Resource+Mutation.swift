@@ -11,12 +11,16 @@ import HealthKit
 import ModelsR4
 
 
-// we need this as a protocol extension, bc we can't use `Self` in the KeyPath type if it's a normal extension on eg Resource.
-protocol FHIRResourceMutationExtensions {}
-extension Resource: FHIRResourceMutationExtensions {}
+/// we need this as a protocol extension, bc we can't use `Self` in the KeyPath type if it's a normal extension on eg Resource.
+@_marker
+@_documentation(visibility: internal)
+public protocol FHIRResourceMutationExtensions {}
+
+extension ModelsR4.FHIRAbstractResource: FHIRResourceMutationExtensions {}
+extension ModelsR4.Element: FHIRResourceMutationExtensions {}
 
 
-extension FHIRResourceMutationExtensions where Self: Resource {
+extension FHIRResourceMutationExtensions {
     func appendElement<C: RangeReplaceableCollection>(_ element: C.Element, to keyPath: ReferenceWritableKeyPath<Self, C?>) {
         appendElements(CollectionOfOne(element), to: keyPath)
     }
