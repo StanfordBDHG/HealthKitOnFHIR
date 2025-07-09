@@ -96,7 +96,7 @@ extension Sequence where Element: HKSample {
         issuedDate: FHIRPrimitive<Instant>? = nil,
         extensions: [any FHIRExtensionBuilderProtocol] = []
     ) throws -> [ResourceProxy] {
-        // 1
+        // 12
         let issuedDate = try issuedDate ?? FHIRPrimitive<Instant>(try Instant(date: .now))
         return compactMap { try? $0.resource(withMapping: mapping, issuedDate: issuedDate, extensions: extensions) }
     }
