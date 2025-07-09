@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import Foundation
 @testable import HealthKitOnFHIR
 import ModelsR4
 import Testing
@@ -203,5 +204,27 @@ struct ObservationExtensionsTests {
         
         observation.removeAllExtensions(withUrl: extension2Url)
         #expect(observation.extension == nil)
+    }
+    
+    
+    @Test
+    func addObservationAbsoluteTimeRetroactively() throws {
+        let cal = Calendar.current
+        let startDate = try #require(cal.date(from: .init(year: 2025, month: 07, day: 09, hour: 12, minute: 31)))
+        let endDate = try #require(cal.date(byAdding: .minute, value: 15, to: startDate))
+        
+        let observation = Observation(code: CodeableConcept(), status: FHIRPrimitive(.final))
+        try observation.setEffective(startDate: startDate, endDate: endDate, timeZone: .current)
+        #expect(observation.extension == nil)
+        
+        try observation.encodeAbsoluteTimeRangeIntoExtension()
+        let extensions = try #require(observation.extension)
+        #expect(extensions.count == 2)
+        #expect(observation.extensions(for: FHIRExtensionUrls.absoluteTimeRangeStart) == [
+            Extension(url: FHIRExtensionUrls.absoluteTimeRangeStart, value: .decimal(startDate.timeIntervalSince1970.asFHIRDecimalPrimitive()))
+        ])
+        #expect(observation.extensions(for: FHIRExtensionUrls.absoluteTimeRangeEnd) == [
+            Extension(url: FHIRExtensionUrls.absoluteTimeRangeEnd, value: .decimal(endDate.timeIntervalSince1970.asFHIRDecimalPrimitive()))
+        ])
     }
 }

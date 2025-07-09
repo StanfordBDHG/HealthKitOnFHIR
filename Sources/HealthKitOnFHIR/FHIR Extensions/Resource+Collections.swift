@@ -65,6 +65,14 @@ extension ModelsR4.Element: FHIRTypeWithExtensions {}
 extension ModelsR4.DomainResource: FHIRTypeWithExtensions {}
 
 
+extension FHIRTypeWithExtensions {
+    /// Retrieves all FHIR Extensions for the specified url.
+    public func extensions(for url: FHIRPrimitive<FHIRURI>) -> [Extension] {
+        `extension`.map { $0.filter { $0.url == url } } ?? []
+    }
+}
+
+
 extension FHIRTypeWithExtensions where Self: FHIRResourceMutationExtensions {
     /// Appends an `Extension` to the `DomainResource`
     public func appendExtension(_ extension: Extension, replaceAllExistingWithSameUrl: Bool) {
