@@ -56,6 +56,7 @@ jobs:
     needs: [buildandtest_macos]
     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
     with:
-      coveragereports: HealthKitOnFHIR-iOS.xcresult HealthKitOnFHIR-macOS.xcresult HealthKitOnFHIR-watchOS.xcresult TestApp.xcresult
+      # coveragereports: HealthKitOnFHIR-iOS.xcresult HealthKitOnFHIR-macOS.xcresult HealthKitOnFHIR-watchOS.xcresult TestApp.xcresult
+      coveragereports: HealthKitOnFHIR-macOS.xcresult
     secrets:
       token: ${{ secrets.CODECOV_TOKEN }}
