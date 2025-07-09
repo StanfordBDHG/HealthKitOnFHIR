@@ -69,11 +69,15 @@ extension Sequence where Element: HKSample {
     /// Produces an Array of FHIR `ResourceProxies`.
     ///
     /// - Note: This method provides significant performance improvements as compared to calling ``HealthKit/HKSample/resource(withMapping:issuedDate:extensions:)`` for each element in the collection.
+    ///
+    /// - parameter mapping: A mapping to map `HKSample`s to corresponding FHIR observations allowing the customization of, e.g., codings and units. See ``HKSampleMapping``.
+    /// - parameter issuedDate: `Instant` specifying when this version of the resource was made available. Defaults to `Date.now`.
     public func mapIntoResourceProxies(
         using mapping: HKSampleMapping = .default,
+        issuedDate: FHIRPrimitive<Instant>? = nil,
         extensions: [any FHIRExtensionBuilderProtocol] = []
     ) throws -> [ResourceProxy] {
-        let issuedDate = FHIRPrimitive<Instant>(try Instant(date: .now))
+        let issuedDate = try issuedDate ?? FHIRPrimitive<Instant>(try Instant(date: .now))
         return try map { try $0.resource(withMapping: mapping, issuedDate: issuedDate, extensions: extensions) }
     }
     
@@ -82,9 +86,10 @@ extension Sequence where Element: HKSample {
     /// - Note: This method provides significant performance improvements as compared to calling ``HealthKit/HKSample/resource(withMapping:issuedDate:extensions:)`` for each element in the collection.
     public func compactMapIntoResourceProxies(
         using mapping: HKSampleMapping = .default,
+        issuedDate: FHIRPrimitive<Instant>? = nil,
         extensions: [any FHIRExtensionBuilderProtocol] = []
     ) throws -> [ResourceProxy] {
-        let issuedDate = FHIRPrimitive<Instant>(try Instant(date: .now))
+        let issuedDate = try issuedDate ?? FHIRPrimitive<Instant>(try Instant(date: .now))
         return compactMap { try? $0.resource(withMapping: mapping, issuedDate: issuedDate, extensions: extensions) }
     }
 }
