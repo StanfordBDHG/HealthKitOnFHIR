@@ -53,7 +53,10 @@ extension HKSample {
         } else {
             throw HealthKitOnFHIRError.notSupported
         }
-        for builder in extensions + [FHIRExtensionBuilder.sourceDevice, .sourceRevision, .metadata] {
+        let baseExtensions: [FHIRExtensionBuilder<HKObject>] = [
+            .sourceDevice, .sourceRevision, .metadata
+        ]
+        for builder in extensions + baseExtensions {
             try builder.apply(typeErasedInput: self, to: observation)
         }
         return ResourceProxy(with: observation)

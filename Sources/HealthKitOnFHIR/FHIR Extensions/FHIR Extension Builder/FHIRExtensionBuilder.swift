@@ -34,6 +34,12 @@ public struct FHIRExtensionBuilder<Input>: FHIRExtensionBuilderProtocol, Sendabl
         self.impl = action
     }
     
+    public init(_ action: @escaping @Sendable (_ observation: Observation) throws -> Void) where Input == Void {
+        self.init { _, observation in
+            try action(observation)
+        }
+    }
+    
     public func apply(input: Input, to observation: Observation) throws {
         try impl(input, observation)
     }
