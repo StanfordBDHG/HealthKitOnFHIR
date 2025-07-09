@@ -86,6 +86,7 @@ extension Sequence where Element: HKSample {
     /// - Note: This method provides significant performance improvements as compared to calling ``HealthKit/HKSample/resource(withMapping:issuedDate:extensions:)`` for each element in the collection.
     ///
     /// - parameter mapping: A mapping to map `HKSample`s to corresponding FHIR observations allowing the customization of, e.g., codings and units. See ``HKSampleMapping``.
+    /// - parameter issuedDate: `Instant` specifying when this version of the resource was made available. Defaults to `Date.now`.
     public func compactMapIntoResourceProxies(
         using mapping: HKSampleMapping = .default,
         issuedDate: FHIRPrimitive<Instant>? = nil,
