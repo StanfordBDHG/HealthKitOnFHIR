@@ -72,12 +72,16 @@ extension HKElectrocardiogram {
     ///   - symptoms: The ``Symptoms`` that should be encoded in the FHIR observation.
     ///   - voltageMeasurements: The URL pointing to the raw voltage measurement data corrolated ot the FHIR observation.
     ///   - mapping: The ``HKSampleMapping`` used to populate the FHIR observation.
+    ///   - issuedDate: `Instant` specifying when this version of the resource was made available. Defaults to `Date.now`.
+    ///   - extensions: ``FHIRExtensionBuilder``s that should be applied to the resulting `Observation`.
     public func observation(
         symptoms: Symptoms,
         voltageMeasurements: VoltageMeasurements,
-        withMapping mapping: HKSampleMapping = HKSampleMapping.default
+        withMapping mapping: HKSampleMapping = HKSampleMapping.default,
+        issuedDate: FHIRPrimitive<Instant>? = nil,
+        extensions: [any FHIRExtensionBuilderProtocol] = []
     ) throws -> Observation {
-        guard let observation = try resource(withMapping: mapping).get(if: Observation.self) else {
+        guard let observation = try resource(withMapping: mapping, issuedDate: issuedDate, extensions: extensions).get(if: Observation.self) else {
             throw HealthKitOnFHIRError.notSupported
         }
         if !symptoms.isEmpty {

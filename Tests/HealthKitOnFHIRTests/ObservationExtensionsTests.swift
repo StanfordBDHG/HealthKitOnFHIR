@@ -227,4 +227,22 @@ struct ObservationExtensionsTests {
             Extension(url: FHIRExtensionUrls.absoluteTimeRangeEnd, value: .decimal(endDate.timeIntervalSince1970.asFHIRDecimalPrimitive()))
         ])
     }
+    
+    
+    @Test
+    func voidExtensionBuilder() throws {
+        nonisolated(unsafe) let url = try #require("https://bdh.stanford.edu/fhir/defs/timeZone".asFHIRURIPrimitive())
+        let timeZone = try #require(TimeZone(identifier: "Europe/Berlin"))
+        let trackTimeZone = FHIRExtensionBuilder { observation in
+            let ext = Extension(url: url, value: .string(timeZone.identifier.asFHIRStringPrimitive()))
+            observation.appendExtension(ext, replaceAllExistingWithSameUrl: true)
+        }
+        let observation = Observation(code: CodeableConcept(), status: .init(.final))
+        #expect(observation.extension == nil)
+        try observation.apply(trackTimeZone)
+        let exts = try #require(observation.extension)
+        #expect(exts == [
+            Extension(url: url, value: .string("Europe/Berlin".asFHIRStringPrimitive()))
+        ])
+    }
 }

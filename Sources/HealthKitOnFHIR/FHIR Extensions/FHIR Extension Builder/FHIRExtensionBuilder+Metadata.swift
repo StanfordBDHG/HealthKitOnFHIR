@@ -6,8 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-// swiftlint:disable file_length
-
 import Foundation
 import HealthKit
 import ModelsR4
@@ -17,192 +15,99 @@ extension FHIRExtensionUrls {
     // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
-    /// Url of a FHIR Extension containing, if applicable, encoded `HKDevice` of the `HKObject` from which a FHIR `Observation` was created.
-    public nonisolated(unsafe) static let sourceDevice = "https://bdh.stanford.edu/fhir/defs/sourceDevice".asFHIRURIPrimitive()!
-    // swiftlint:disable:previous force_unwrapping
-    
-    // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
-    // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
-    // it also never can be mutated to contain any.
-    /// Url of a FHIR Extension containing, if applicable, encoded `HKSourceRevision` of the `HKObject` from which a FHIR `Observation` was created.
-    public nonisolated(unsafe) static let sourceRevision = "https://bdh.stanford.edu/fhir/defs/sourceRevision".asFHIRURIPrimitive()!
-    // swiftlint:disable:previous force_unwrapping
-    
-    // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
-    // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
-    // it also never can be mutated to contain any.
     /// Url of a FHIR Extension containing, if applicable, encoded metadata of the `HKObject` from which a FHIR `Observation` was created.
     public nonisolated(unsafe) static let metadata = "https://bdh.stanford.edu/fhir/defs/metadata".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
 }
 
 
-extension FHIRExtensionBuilder {
-    /// A FHIR Extension Builder that writes encoded `HKDevice` of a HealthKit sample into a FHIR `Observation` created from the sample.
-    public static let sourceDevice = Self { (sample: HKSample, observation) in
-        guard let device = sample.device else {
-            observation.removeAllExtensions(withUrl: FHIRExtensionUrls.sourceDevice)
-            return
-        }
-        let deviceInfo = Extension(url: FHIRExtensionUrls.sourceDevice)
-        let appendDeviceInfoEntry = { (keyPath: KeyPath<HKDevice, String?>) in
-            guard let name = keyPath._kvcKeyPathString else {
-                print("Unable to obtain name for keyPath '\(keyPath)'. Skipping.")
-                return
-            }
-            guard let value = device[keyPath: keyPath] else {
-                return
-            }
-            let url = FHIRExtensionUrls.sourceDevice.appending(component: name)
-            deviceInfo.appendExtension(
-                Extension(url: url, value: .string(value.asFHIRStringPrimitive())),
-                replaceAllExistingWithSameUrl: true
-            )
-        }
-        appendDeviceInfoEntry(\.name)
-        appendDeviceInfoEntry(\.manufacturer)
-        appendDeviceInfoEntry(\.model)
-        appendDeviceInfoEntry(\.hardwareVersion)
-        appendDeviceInfoEntry(\.firmwareVersion)
-        appendDeviceInfoEntry(\.softwareVersion)
-        appendDeviceInfoEntry(\.localIdentifier)
-        appendDeviceInfoEntry(\.udiDeviceIdentifier)
-        observation.appendExtension(deviceInfo, replaceAllExistingWithSameUrl: true)
-    }
-    
-    
-    /// A FHIR Extension Builder that writes encoded `HKSourceRevision` of a HealthKit sample into a FHIR `Observation` created from the sample.
-    public static let sourceRevision = Self { (sample: HKSample, observation) throws in
-        let revision = sample.sourceRevision
-        let deviceInfo = Extension(url: FHIRExtensionUrls.sourceRevision)
-        let fieldUrl = { (components: String...) in
-            FHIRExtensionUrls.sourceRevision.appending(components: components)
-        }
-        let appendDeviceInfoEntry = { (keyPath: KeyPath<HKSourceRevision, String?>) in
-            guard let name = keyPath._kvcKeyPathString else {
-                print("Unable to obtain name for keyPath '\(keyPath)'. Skipping.")
-                return
-            }
-            guard let value = revision[keyPath: keyPath] else {
-                return
-            }
-            let url = fieldUrl(name)
-            deviceInfo.appendExtension(
-                Extension(url: url, value: .string(value.asFHIRStringPrimitive())),
-                replaceAllExistingWithSameUrl: true
-            )
-        }
-        
-        deviceInfo.appendExtension(
-            Extension(
-                extension: [
-                    Extension(url: fieldUrl("source", "name"), value: .string(revision.source.name.asFHIRStringPrimitive())),
-                    Extension(url: fieldUrl("source", "bundleIdentifier"), value: .string(revision.source.bundleIdentifier.asFHIRStringPrimitive()))
-                ],
-                url: fieldUrl("source")
-            ),
-            replaceAllExistingWithSameUrl: true
-        )
-        appendDeviceInfoEntry(\.version)
-        appendDeviceInfoEntry(\.productType)
-        appendDeviceInfoEntry(\.OSVersion)
-        observation.appendExtension(deviceInfo, replaceAllExistingWithSameUrl: true)
-    }
-    
-    
+extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObject> {
     /// A FHIR Extension Builder that writes encoded metadata of a HealthKit sample into a FHIR `Observation` created from the sample.
-    public static let metadata = Self { (sample: HKSample, observation) in // swiftlint:disable:this closure_body_length
-        guard let metadata = sample.metadata, !metadata.isEmpty else {
-            observation.removeAllExtensions(withUrl: FHIRExtensionUrls.metadata)
-            return
-        }
-        let metadataExtension = Extension(url: FHIRExtensionUrls.metadata)
-        for (key, value) in metadata {
-            // The HKObject docs state that "Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity".
-            // Additionally, there are some HKMetadataKey constants which say that they store a BOOL, so we support that as well.
-            let extensionValue: Extension.ValueX
-            switch value {
-            case let value as String:
-                extensionValue = .string(value.asFHIRStringPrimitive())
-            case let value as NSNumber:
-                extensionValue = .decimal(FHIRPrimitive(FHIRDecimal(value.decimalValue)))
-            case let value as Date:
-                extensionValue = .dateTime(FHIRPrimitive(try DateTime(date: value)))
-            case let value as Bool:
-                extensionValue = .boolean(value.asPrimitive())
-            case let value as HKQuantity:
-                switch key {
-                case HKMetadataKeyWeatherTemperature:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .weatherTemperature))
-                case HKMetadataKeyWeatherHumidity:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .weatherHumidity))
-                case HKMetadataKeySessionEstimate:
-                    guard let sample = sample as? HKQuantitySample,
-                          let mapping = HKQuantitySampleMapping.default[sample.quantityType] else {
-                        continue // should be unreachable. skipping
+    public static var metadata: FHIRExtensionBuilder<HKObject> {
+        .init { (object: HKObject, observation) in // swiftlint:disable:this closure_body_length
+            guard let metadata = object.metadata, !metadata.isEmpty else {
+                observation.removeAllExtensions(withUrl: FHIRExtensionUrls.metadata)
+                return
+            }
+            let metadataExtension = Extension(url: FHIRExtensionUrls.metadata)
+            for (key, value) in metadata {
+                // The HKObject docs state that "Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity".
+                // Additionally, there are some HKMetadataKey constants which say that they store a BOOL, so we support that as well.
+                let extensionValue: Extension.ValueX
+                switch value {
+                case let value as String:
+                    extensionValue = .string(value.asFHIRStringPrimitive())
+                case let value as NSNumber:
+                    extensionValue = .decimal(FHIRPrimitive(FHIRDecimal(value.decimalValue)))
+                case let value as Date:
+                    extensionValue = .dateTime(FHIRPrimitive(try DateTime(date: value)))
+                case let value as Bool:
+                    extensionValue = .boolean(value.asPrimitive())
+                case let value as HKQuantity:
+                    switch key {
+                    case HKMetadataKeyWeatherTemperature:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .weatherTemperature))
+                    case HKMetadataKeyWeatherHumidity:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .weatherHumidity))
+                    case HKMetadataKeySessionEstimate:
+                        guard let sample = object as? HKQuantitySample,
+                              let mapping = HKQuantitySampleMapping.default[sample.quantityType] else {
+                            continue // should be unreachable. skipping
+                        }
+                        extensionValue = .quantity(value.buildQuantity(mapping: mapping))
+                    case HKMetadataKeyHeartRateRecoveryActivityDuration:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .heartRateRecoveryActivityDuration))
+                    case HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .heartRateRecoveryMaxObservedRecoveryHeartRate))
+                    case HKMetadataKeyAverageSpeed:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .averageSpeed))
+                    case HKMetadataKeyMaximumSpeed:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .maximumSpeed))
+                    case HKMetadataKeyAlpineSlopeGrade:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .alpineSlopeGrade))
+                    case HKMetadataKeyElevationAscended:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .elevationAscended))
+                    case HKMetadataKeyElevationDescended:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .elevationDescended))
+                    case HKMetadataKeyFitnessMachineDuration:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .fitnessMachineDuration))
+                    case HKMetadataKeyIndoorBikeDistance:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .indoorBikeDistance))
+                    case HKMetadataKeyCrossTrainerDistance:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .crossTrainerDistance))
+                    case HKMetadataKeyHeartRateEventThreshold:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .highHeartRateEventThreshold))
+                    case HKMetadataKeyAverageMETs:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .averageMETs))
+                    case HKMetadataKeyAudioExposureLevel:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .audioExposureLevel))
+                    case HKMetadataKeyAudioExposureDuration:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .audioExposureDuration))
+                    case HKMetadataKeyBarometricPressure:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .barometricPressure))
+                    case HKMetadataKeyVO2MaxValue:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .vo2MaxValue))
+                    case HKMetadataKeyLowCardioFitnessEventThreshold:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .lowCardioFitnessEventThreshold))
+                    case HKMetadataKeyHeadphoneGain:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .headphoneGain))
+                    case HKMetadataKeyMaximumLightIntensity:
+                        extensionValue = .quantity(value.buildQuantity(mapping: .maximumLightIntensity))
+                    default:
+                        print("Encountered unexpected HKQuantity metadata value for key '\(key)': \(value). Skipping.")
+                        continue
                     }
-                    extensionValue = .quantity(value.buildQuantity(mapping: mapping))
-                case HKMetadataKeyHeartRateRecoveryActivityDuration:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .heartRateRecoveryActivityDuration))
-                case HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .heartRateRecoveryMaxObservedRecoveryHeartRate))
-                case HKMetadataKeyAverageSpeed:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .averageSpeed))
-                case HKMetadataKeyMaximumSpeed:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .maximumSpeed))
-                case HKMetadataKeyAlpineSlopeGrade:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .alpineSlopeGrade))
-                case HKMetadataKeyElevationAscended:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .elevationAscended))
-                case HKMetadataKeyElevationDescended:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .elevationDescended))
-                case HKMetadataKeyFitnessMachineDuration:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .fitnessMachineDuration))
-                case HKMetadataKeyIndoorBikeDistance:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .indoorBikeDistance))
-                case HKMetadataKeyCrossTrainerDistance:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .crossTrainerDistance))
-                case HKMetadataKeyHeartRateEventThreshold:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .highHeartRateEventThreshold))
-                case HKMetadataKeyAverageMETs:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .averageMETs))
-                case HKMetadataKeyAudioExposureLevel:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .audioExposureLevel))
-                case HKMetadataKeyAudioExposureDuration:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .audioExposureDuration))
-                case HKMetadataKeyBarometricPressure:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .barometricPressure))
-                case HKMetadataKeyVO2MaxValue:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .vo2MaxValue))
-                case HKMetadataKeyLowCardioFitnessEventThreshold:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .lowCardioFitnessEventThreshold))
-                case HKMetadataKeyHeadphoneGain:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .headphoneGain))
-                case HKMetadataKeyMaximumLightIntensity:
-                    extensionValue = .quantity(value.buildQuantity(mapping: .maximumLightIntensity))
                 default:
-                    print("Encountered unexpected HKQuantity metadata value for key '\(key)': \(value). Skipping.")
+                    print("Encountered unexpected HKSample metadata value of type \(type(of: value)), for key '\(key)': \(value). Skipping.")
                     continue
                 }
-            default:
-                print("Encountered unexpected HKSample metadata value of type \(type(of: value)), for key '\(key)': \(value). Skipping.")
-                continue
+                metadataExtension.appendExtension(
+                    Extension(url: FHIRExtensionUrls.metadata.appending(component: key), value: extensionValue),
+                    replaceAllExistingWithSameUrl: true
+                )
+                observation.appendExtension(metadataExtension, replaceAllExistingWithSameUrl: true)
             }
-            metadataExtension.appendExtension(
-                Extension(url: FHIRExtensionUrls.metadata.appending(component: key), value: extensionValue),
-                replaceAllExistingWithSameUrl: true
-            )
-            observation.appendExtension(metadataExtension, replaceAllExistingWithSameUrl: true)
         }
-    }
-}
-
-
-extension HKSourceRevision {
-    /// We define this as an optional String objc-compatible property, so that we can encode it into an Extension using the API we have above.
-    @objc fileprivate var OSVersion: String? {
-        let version = operatingSystemVersion
-        return "\(version.majorVersion).\(version.minorVersion).\(version.patchVersion)"
     }
 }
 

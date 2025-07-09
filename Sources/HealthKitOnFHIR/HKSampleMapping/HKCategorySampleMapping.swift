@@ -22,7 +22,6 @@ public struct HKCategorySampleMapping: Decodable, Sendable {
     /// An ``HKCategorySampleMapping`` allows developers to customize the mapping of `HKCategorySample`s to an FHIR Observations.
     /// - Parameters:
     ///   - codings: The FHIR codings defined as ``MappedCode``s used for the specified `HKCategorySample` type
-    ///   - categories: The FHIR categories defined as ``MappedCode``s used for the specified `HKCategorySample` type
     public init(
         codings: [MappedCode]
     ) {

@@ -56,7 +56,8 @@ extension Observation {
 
 
 /// A FHIR Type that supports extensions.
-@_documentation(visibility: internal)
+///
+/// - Note: Types outside this package shouldn't declare conformances to this protocol; rather, it is used to provide a range of FHIR Extension-related operations on several FHIR types.
 public protocol FHIRTypeWithExtensions: AnyObject {
     var `extension`: [Extension]? { get set }
 }
