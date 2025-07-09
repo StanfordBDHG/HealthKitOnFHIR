@@ -23,7 +23,7 @@ extension HKSample {
     public func resource(
         withMapping mapping: HKSampleMapping = .default,
         issuedDate: FHIRPrimitive<Instant>? = nil,
-        extensions: [FHIRExtensionBuilder] = []
+        extensions: [any FHIRExtensionBuilderProtocol] = []
     ) throws -> ResourceProxy {
         #if !os(watchOS)
         if let self = self as? HKClinicalRecord {
@@ -53,8 +53,8 @@ extension HKSample {
         } else {
             throw HealthKitOnFHIRError.notSupported
         }
-        for `extension` in extensions + [.sourceDevice, .sourceRevision, .metadata] {
-            try `extension`.apply(input: self, observation: observation)
+        for builder in extensions + [FHIRExtensionBuilder.sourceDevice, .sourceRevision, .metadata] {
+            try builder.apply(typeErasedInput: self, to: observation)
         }
         return ResourceProxy(with: observation)
     }
@@ -67,7 +67,7 @@ extension Sequence where Element: HKSample {
     /// - Note: This method provides significant performance improvements as compared to calling ``ResourceProxyProviding/resource()`` for each element in the collection.
     public func mapIntoResourceProxies(
         using mapping: HKSampleMapping = .default,
-        extensions: [FHIRExtensionBuilder] = []
+        extensions: [any FHIRExtensionBuilderProtocol] = []
     ) throws -> [ResourceProxy] {
         let issuedDate = FHIRPrimitive<Instant>(try Instant(date: .now))
         return try map { try $0.resource(withMapping: mapping, issuedDate: issuedDate, extensions: extensions) }
@@ -78,7 +78,7 @@ extension Sequence where Element: HKSample {
     /// - Note: This method provides significant performance improvements as compared to calling ``ResourceProxyProviding/resource()`` for each element in the collection.
     public func compactMapIntoResourceProxies(
         using mapping: HKSampleMapping = .default,
-        extensions: [FHIRExtensionBuilder] = []
+        extensions: [any FHIRExtensionBuilderProtocol] = []
     ) throws -> [ResourceProxy] {
         let issuedDate = FHIRPrimitive<Instant>(try Instant(date: .now))
         return compactMap { try? $0.resource(withMapping: mapping, issuedDate: issuedDate, extensions: extensions) }
