@@ -220,7 +220,7 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
         
         // Number of milliseconds between samples
         let period: Double = if let samplingFrequency {
-            (1.0 / samplingFrequency.doubleValue(for: HKUnit.hertz())) * 1000
+            (1.0 / samplingFrequency.doubleValue(for: .hertz())) * 1000
         } else {
             ((voltageMeasurements.last?.time ?? 0.0) * 1000) / Double(voltageMeasurements.count)
         }
