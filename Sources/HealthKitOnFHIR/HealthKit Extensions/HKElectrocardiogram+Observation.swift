@@ -219,11 +219,10 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
         let voltageMeasurements = voltageMeasurements.sorted(by: { $0.time < $1.time })
         
         // Number of milliseconds between samples
-        let period: Double
-        if let samplingFrequency {
-            period = 1.0 / samplingFrequency.doubleValue(for: HKUnit.hertz())
+        let period: Double = if let samplingFrequency {
+            (1.0 / samplingFrequency.doubleValue(for: HKUnit.hertz())) * 1000
         } else {
-            period = (voltageMeasurements.last?.time ?? 0.0) / Double(voltageMeasurements.count)
+            ((voltageMeasurements.last?.time ?? 0.0) * 1000) / Double(voltageMeasurements.count)
         }
         
         // Batch the measurements in 10 Second Intervals
