@@ -13,7 +13,6 @@ import Testing
 
 
 @Suite
-@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
 struct HKWorkoutTests {
     static let supportedWorkoutActivityTypes: [HKWorkoutActivityType] = [
         .americanFootball,
@@ -133,24 +132,21 @@ struct HKWorkoutTests {
     }
     
     
-    @Test
-    func hkWorkoutToObservation() throws {
+    @Test(arguments: Self.supportedWorkoutActivityTypes)
+    func hkWorkoutToObservation(activityType: HKWorkoutActivityType) throws {
         // The HKWorkout initializers are deprecated as of iOS 17 in favor of using `HKWorkoutBuilder`, but there
         // is currently no mechanism to use `HKWorkoutBuilder` inside unit tests without an authenticated
         // `HKHealthStore`, so we use this approach.
-        for activityType in Self.supportedWorkoutActivityTypes {
-            let workoutSample = HKWorkout(
-                activityType: activityType,
-                start: try startDate,
-                end: try endDate
-            )
-            
-            let observation = try #require(workoutSample.resource().get(if: Observation.self))
-            let expectedValue = createCodeableConcept(
-                code: try activityType.fhirWorkoutTypeValue,
-                system: "http://developer.apple.com/documentation/healthkit"
-            )
-            #expect(observation.value == .codeableConcept(expectedValue))
-        }
+        let workoutSample = HKWorkout(
+            activityType: activityType,
+            start: try startDate,
+            end: try endDate
+        )
+        let observation = try #require(workoutSample.resource().get(if: Observation.self))
+        let expectedValue = createCodeableConcept(
+            code: try activityType.fhirWorkoutTypeValue,
+            system: "http://developer.apple.com/documentation/healthkit"
+        )
+        #expect(observation.value == .codeableConcept(expectedValue))
     }
 }
