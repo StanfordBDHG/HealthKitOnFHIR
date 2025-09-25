@@ -27,6 +27,7 @@ struct HKStateOfMindTests {
             associations: [.work]
         )
         let observation = try #require(sample.resource().get(if: Observation.self))
+        #expect(observation.effective == .dateTime(try FHIRPrimitive<DateTime>(.init(date: yesterday))))
         #expect(observation.category?.first?.coding?.first?.code == "survey")
         #expect(observation.status == .final)
         let components = try #require(observation.component)
@@ -52,17 +53,20 @@ struct HKStateOfMindTests {
             associations: [.dating, .community, .friends]
         )
         let observation = try #require(sample.resource().get(if: Observation.self))
+        #expect(observation.effective == .dateTime(try FHIRPrimitive<DateTime>(.init(date: yesterday))))
         #expect(observation.category?.first?.coding?.first?.code == "survey")
         #expect(observation.status == .final)
         let components = try #require(observation.component)
-        #expect(components.count == 7)
+        #expect(components.count == 9)
         components.expectContainsComponent(withCode: "HKStateOfMindKind", value: .string("momentary emotion"))
         components.expectContainsComponent(withCode: "HKStateOfMindValence", value: .quantity(.init(value: -0.52)))
         components.expectContainsComponent(withCode: "HKStateOfMindValenceClassification", value: .string("unpleasant"))
         components.expectContainsComponent(withCode: "HKStateOfMindLabel", value: .string("brave"))
         components.expectContainsComponent(withCode: "HKStateOfMindLabel", value: .string("confident"))
+        components.expectContainsComponent(withCode: "HKStateOfMindLabel", value: .string("lonely"))
         components.expectContainsComponent(withCode: "HKStateOfMindAssociation", value: .string("dating"))
         components.expectContainsComponent(withCode: "HKStateOfMindAssociation", value: .string("community"))
+        components.expectContainsComponent(withCode: "HKStateOfMindAssociation", value: .string("friends"))
     }
 }
 
