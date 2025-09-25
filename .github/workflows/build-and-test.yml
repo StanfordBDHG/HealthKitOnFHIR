@@ -35,7 +35,7 @@ jobs:
             destination: 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)'
     with:
       runsonlabels: '["macOS", "self-hosted"]'
-      scheme: SpeziConsent
+      scheme: HealthKitOnFHIR
       destination: ${{ matrix.platform.destination }}
       buildConfig: ${{ matrix.config }}
       resultBundle: ${{ format('HealthKitOnFHIR-{0}-{1}.xcresult', matrix.platform.name, matrix.config) }}
