@@ -27,9 +27,6 @@ struct HKStateOfMindTests {
             associations: [.work]
         )
         let observation = try #require(sample.resource().get(if: Observation.self))
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [.prettyPrinted]
-        print(try #require(String(data: encoder.encode(observation), encoding: .utf8)))
         #expect(observation.category?.first?.coding?.first?.code == "survey")
         #expect(observation.status == .final)
         let components = try #require(observation.component)
