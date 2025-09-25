@@ -51,8 +51,8 @@ struct HKStateOfMindTests {
             date: yesterday,
             kind: .momentaryEmotion,
             valence: -0.52,
-            labels: [.brave, .confident],
-            associations: [.dating, .community]
+            labels: [.brave, .confident, .lonely],
+            associations: [.dating, .community, .friends]
         )
         let observation = try #require(sample.resource().get(if: Observation.self))
         let encoder = JSONEncoder()
