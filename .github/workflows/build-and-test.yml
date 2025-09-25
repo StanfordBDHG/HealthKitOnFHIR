@@ -1,7 +1,7 @@
 #
-# This source file is part of the HealthKitOnFHIR open source project
+# This source file is part of the Stanford Spezi open source project
 #
-# SPDX-FileCopyrightText: 2022 Stanford University and the project authors (see CONTRIBUTORS.md)
+# SPDX-FileCopyrightText: 2025 Stanford University and the project authors (see CONTRIBUTORS.md)
 #
 # SPDX-License-Identifier: MIT
 #
@@ -15,46 +15,52 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: Build-and-Test-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  buildandtest_ios:
-    name: Build and Test Swift Package iOS
+  package_tests:
+    name: Build and Test Swift Package ${{ matrix.platform.name }} (${{ matrix.config }})
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
+    strategy:
+      matrix:
+        config: [Debug]
+        platform:
+          - name: iOS
+            destination: 'platform=iOS Simulator,name=iPhone 17 Pro'
+          - name: macOS
+            destination: 'platform=macOS,name=My Mac'
+          - name: watchOS
+            destination: 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)'
     with:
       runsonlabels: '["macOS", "self-hosted"]'
-      scheme: HealthKitOnFHIR
-      resultBundle: HealthKitOnFHIR-iOS.xcresult
-      artifactname: HealthKitOnFHIR-iOS.xcresult
-  buildandtest_macos:
-    name: Build and Test Swift Package macOS
+      scheme: SpeziConsent
+      destination: ${{ matrix.platform.destination }}
+      buildConfig: ${{ matrix.config }}
+      resultBundle: ${{ format('HealthKitOnFHIR-{0}-{1}.xcresult', matrix.platform.name, matrix.config) }}
+      artifactname: ${{ format('HealthKitOnFHIR-{0}-{1}.xcresult', matrix.platform.name, matrix.config) }}
+  ui_tests:
+    name: Build and Test UI Tests ${{ matrix.platform.name }} (${{ matrix.config }})
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
+    strategy:
+      matrix:
+        config: [Debug]
+        platform:
+          - name: iOS
+            destination: 'platform=iOS Simulator,name=iPhone 17 Pro'
     with:
       runsonlabels: '["macOS", "self-hosted"]'
-      scheme: HealthKitOnFHIR
-      destination: 'platform=macOS,arch=arm64'
-      resultBundle: HealthKitOnFHIR-macOS.xcresult
-      artifactname: HealthKitOnFHIR-macOS.xcresult
-  buildandtest_watchos:
-    name: Build and Test Swift Package watchOS
-    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
-    with:
-      runsonlabels: '["macOS", "self-hosted"]'
-      scheme: HealthKitOnFHIR
-      destination: 'platform=watchOS Simulator,name=Apple Watch Series 10 (46mm)'
-      resultBundle: HealthKitOnFHIR-watchOS.xcresult
-      artifactname: HealthKitOnFHIR-watchOS.xcresult
-  buildandtestuitests:
-    name: Build and Test UI Tests
-    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
-    with:
-      runsonlabels: '["macOS", "self-hosted"]'
-      path: Tests/UITests
+      path: 'Tests/UITests'
       scheme: TestApp
-      artifactname: TestApp.xcresult
+      destination: ${{ matrix.platform.destination }}
+      resultBundle: ${{ format('TestApp-{0}-{1}.xcresult', matrix.platform.name, matrix.config) }}
+      artifactname: ${{ format('TestApp-{0}-{1}.xcresult', matrix.platform.name, matrix.config) }}
   uploadcoveragereport:
     name: Upload Coverage Report
-    needs: [buildandtest_ios, buildandtest_macos, buildandtest_watchos, buildandtestuitests]
+    needs: [package_tests, ui_tests]
     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
     with:
-      coveragereports: HealthKitOnFHIR-iOS.xcresult HealthKitOnFHIR-macOS.xcresult HealthKitOnFHIR-watchOS.xcresult TestApp.xcresult
+      coveragereports: HealthKitOnFHIR-*.xcresult TestApp-*.xcresult
     secrets:
       token: ${{ secrets.CODECOV_TOKEN }}
