@@ -12,8 +12,8 @@ import ModelsR4
 
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
 extension HKStateOfMind: FHIRObservationBuildable {
-    func build(_ observation: Observation, mapping: HKSampleMapping) throws { // swiftlint:disable:this function_body_length
-        let mapping = mapping.stateOfMindSampleMapping
+    func build(_ observation: Observation, mapping: HKSampleMapping) throws {
+        let mapping = mapping.stateOfMindMapping
         for code in mapping.codings {
             observation.appendCoding(code.coding)
         }
@@ -21,66 +21,26 @@ extension HKStateOfMind: FHIRObservationBuildable {
             observation.appendCategory(CodeableConcept(coding: [category.coding]))
         }
         observation.appendComponent(.init(
-            code: CodeableConcept(
-                coding: [
-                    Coding(
-                        code: "HKStateOfMindKind",
-                        display: "State of Mind Kind",
-                        system: "http://developer.apple.com/documentation/healthkit"
-                    )
-                ]
-            ),
+            code: CodeableConcept(coding: mapping.kind.codings.map(\.coding)),
             value: .string(self.kind.stringValue.asFHIRStringPrimitive())
         ))
         observation.appendComponent(.init(
-            code: CodeableConcept(
-                coding: [
-                    Coding(
-                        code: "HKStateOfMindValence",
-                        display: "State of Mind Valence",
-                        system: "http://developer.apple.com/documentation/healthkit"
-                    )
-                ]
-            ),
+            code: CodeableConcept(coding: mapping.valence.codings.map(\.coding)),
             value: .quantity(.init(value: self.valence.asFHIRDecimalPrimitive()))
         ))
         observation.appendComponent(.init(
-            code: CodeableConcept(
-                coding: [
-                    Coding(
-                        code: "HKStateOfMindValenceClassification",
-                        display: "State of Mind Valence Classification",
-                        system: "http://developer.apple.com/documentation/healthkit"
-                    )
-                ]
-            ),
+            code: CodeableConcept(coding: mapping.valenceClassification.codings.map(\.coding)),
             value: .string(self.valenceClassification.stringValue.asFHIRStringPrimitive())
         ))
         for label in self.labels {
             observation.appendComponent(.init(
-                code: CodeableConcept(
-                    coding: [
-                        Coding(
-                            code: "HKStateOfMindLabel",
-                            display: "State of Mind Label",
-                            system: "http://developer.apple.com/documentation/healthkit"
-                        )
-                    ]
-                ),
+                code: CodeableConcept(coding: mapping.label.codings.map(\.coding)),
                 value: .string(label.stringValue.asFHIRStringPrimitive())
             ))
         }
         for association in self.associations {
             observation.appendComponent(.init(
-                code: CodeableConcept(
-                    coding: [
-                        Coding(
-                            code: "HKStateOfMindAssociation",
-                            display: "State of Mind Association",
-                            system: "http://developer.apple.com/documentation/healthkit"
-                        )
-                    ]
-                ),
+                code: CodeableConcept(coding: mapping.association.codings.map(\.coding)),
                 value: .string(association.stringValue.asFHIRStringPrimitive())
             ))
         }

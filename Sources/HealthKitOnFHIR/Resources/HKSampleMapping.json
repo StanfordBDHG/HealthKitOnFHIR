@@ -13,7 +13,52 @@
                 "display": "State of Mind",
                 "system": "http://developer.apple.com/documentation/healthkit"
             }
-        ]
+        ],
+        "kind": {
+            "codings": [
+                {
+                    "code": "HKStateOfMindKind",
+                    "display": "State of Mind Kind",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "valence": {
+            "codings": [
+                {
+                    "code": "HKStateOfMindValence",
+                    "display": "State of Mind Valence",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "valenceClassification": {
+            "codings": [
+                {
+                    "code": "HKStateOfMindValenceClassification",
+                    "display": "State of Mind Valence Classification",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "label": {
+            "codings": [
+                {
+                    "code": "HKStateOfMindLabel",
+                    "display": "State of Mind Label",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        },
+        "association": {
+            "codings": [
+                {
+                    "code": "HKStateOfMindAssociation",
+                    "display": "State of Mind Association",
+                    "system": "http://developer.apple.com/documentation/healthkit"
+                }
+            ]
+        }
     },
     "HKWorkout": {
         "categories": [

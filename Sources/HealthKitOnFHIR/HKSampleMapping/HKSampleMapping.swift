@@ -17,7 +17,7 @@ public struct HKSampleMapping: Decodable, Sendable {
         case correlationMapping = "HKCorrelations"
         case electrocardiogramMapping = "HKElectrocardiogram"
         case workoutSampleMapping = "HKWorkout"
-        case stateOfMindSampleMapping = "HKStateOfMind"
+        case stateOfMindMapping = "HKStateOfMind"
     }
     
     
@@ -40,7 +40,7 @@ public struct HKSampleMapping: Decodable, Sendable {
     /// The mapping of  `HKWorkout`s to FHIR `Observation`s.
     public var workoutSampleMapping: HKWorkoutSampleMapping
     /// The mapping of  `HKStateOfMind` samples to FHIR `Observation`s.
-    public var stateOfMindSampleMapping: HKStateOfMindSampleMapping
+    public var stateOfMindMapping: HKStateOfMindMapping
 
     
     public init(from decoder: any Decoder) throws {
@@ -89,7 +89,7 @@ public struct HKSampleMapping: Decodable, Sendable {
         
         let electrocardiogramMapping = try mappings.decode(HKElectrocardiogramMapping.self, forKey: .electrocardiogramMapping)
         let workoutSampleMapping = try mappings.decode(HKWorkoutSampleMapping.self, forKey: .workoutSampleMapping)
-        let stateOfMindSampleMapping = try mappings.decode(HKStateOfMindSampleMapping.self, forKey: .stateOfMindSampleMapping)
+        let stateOfMindMapping = try mappings.decode(HKStateOfMindMapping.self, forKey: .stateOfMindMapping)
 
         self.init(
             quantitySampleMapping: quantitySampleMapping,
@@ -97,7 +97,7 @@ public struct HKSampleMapping: Decodable, Sendable {
             correlationMapping: correlationMapping,
             electrocardiogramMapping: electrocardiogramMapping,
             workoutSampleMapping: workoutSampleMapping,
-            stateOfMindSampleMapping: stateOfMindSampleMapping
+            stateOfMindMapping: stateOfMindMapping
         )
     }
     
@@ -108,19 +108,20 @@ public struct HKSampleMapping: Decodable, Sendable {
     ///   - correlationMapping: The mapping of `HKCorrelationType`s to FHIR Observations.
     ///   - workoutSampleMapping: The mapping of  `HKWorkout`s to FHIR `Observation`s.
     ///   - electrocardiogramMapping: The mapping of `HKElectrocardiogramMapping`s to FHIR `Observation`s.
+    ///   - stateOfMindMapping: The mapping of `HKStateOfMind` samples to FHIR `Observation`s.
     public init(
         quantitySampleMapping: [HKQuantityType: HKQuantitySampleMapping] = HKQuantitySampleMapping.default,
         categorySampleMapping: [HKCategoryType: HKCategorySampleMapping] = HKCategorySampleMapping.default,
         correlationMapping: [HKCorrelationType: HKCorrelationMapping] = HKCorrelationMapping.default,
         electrocardiogramMapping: HKElectrocardiogramMapping = .default,
         workoutSampleMapping: HKWorkoutSampleMapping = .default,
-        stateOfMindSampleMapping: HKStateOfMindSampleMapping = .default
+        stateOfMindMapping: HKStateOfMindMapping = .default
     ) {
         self.quantitySampleMapping = quantitySampleMapping
         self.categorySampleMapping = categorySampleMapping
         self.correlationMapping = correlationMapping
         self.electrocardiogramMapping = electrocardiogramMapping
         self.workoutSampleMapping = workoutSampleMapping
-        self.stateOfMindSampleMapping = stateOfMindSampleMapping
+        self.stateOfMindMapping = stateOfMindMapping
     }
 }
