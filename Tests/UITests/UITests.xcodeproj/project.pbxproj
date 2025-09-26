@@ -501,7 +501,7 @@
 			repositoryURL = "https://github.com/StanfordBDHG/XCTHealthKit.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 1.1.2;
+				minimumVersion = 1.1.5;
 			};
 		};
 		2F1B52D52A4F7909003AE151 /* XCRemoteSwiftPackageReference "XCTestExtensions" */ = {
@@ -509,7 +509,7 @@
 			repositoryURL = "https://github.com/StanfordBDHG/XCTestExtensions.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 1.2.1;
+				minimumVersion = 1.2.2;
 			};
 		};
 		80DE0CEF2DBAC0E800B519CF /* XCRemoteSwiftPackageReference "SpeziHealthKit" */ = {
