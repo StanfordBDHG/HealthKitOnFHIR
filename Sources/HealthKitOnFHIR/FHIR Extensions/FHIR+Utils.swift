@@ -12,6 +12,7 @@ import ModelsR4
 
 extension DateTime {
     /// Constructs a new `DateTime` from an `Instant`
+    @inlinable
     public init(instant: Instant) throws {
         self.init(
             date: FHIRDate(instantDate: instant.date),
@@ -24,6 +25,7 @@ extension DateTime {
 
 extension FHIRDate {
     /// Constructs a new `FHIRDate` from an `InstantDate`
+    @inlinable
     init(instantDate: InstantDate) {
         self.init(
             year: instantDate.year,
@@ -36,6 +38,7 @@ extension FHIRDate {
 
 extension Decimal {
     /// Creates a `FHIRPrimitive<FHIRDecimal>` with the value of the `Decimal`.
+    @inlinable
     public func asFHIRPrimitive() -> FHIRPrimitive<FHIRDecimal> {
         FHIRPrimitive(FHIRDecimal(self))
     }
@@ -44,6 +47,7 @@ extension Decimal {
 
 extension FHIRPrimitive where PrimitiveType == FHIRURI {
     /// Creates a new `FHIRPrimitive<FHIRURI>`, by appending the specified component.
+    @inlinable
     public func appending(component: some StringProtocol) -> Self {
         guard let value else {
             return self
@@ -52,6 +56,7 @@ extension FHIRPrimitive where PrimitiveType == FHIRURI {
     }
     
     /// Creates a new `FHIRPrimitive<FHIRURI>`, by appending the specified components.
+    @inlinable
     public func appending(components: [some StringProtocol]) -> Self {
         guard let value else {
             return self
