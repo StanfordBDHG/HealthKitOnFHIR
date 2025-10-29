@@ -8,6 +8,7 @@
 
 
 extension RangeReplaceableCollection {
+    @inlinable
     mutating func removeElements(at indices: some Collection<Index>) {
         for idx in indices.sorted().reversed() {
             self.remove(at: idx)

@@ -21,11 +21,15 @@ extension ModelsR4.Element: FHIRResourceMutationExtensions {}
 
 
 extension FHIRResourceMutationExtensions {
-    func appendElement<C: RangeReplaceableCollection>(_ element: C.Element, to keyPath: ReferenceWritableKeyPath<Self, C?>) {
+    /// Appends an element to a `Collection`-typed property.
+    @inlinable
+    public func appendElement<C: RangeReplaceableCollection>(_ element: C.Element, to keyPath: ReferenceWritableKeyPath<Self, C?>) {
         appendElements(CollectionOfOne(element), to: keyPath)
     }
     
-    func appendElements<C: RangeReplaceableCollection>(
+    /// Appends multiple elements to a `Collection`-typed property.
+    @inlinable
+    public func appendElements<C: RangeReplaceableCollection>(
         _ elements: some Collection<C.Element>,
         to keyPath: ReferenceWritableKeyPath<Self, C?>
     ) {
@@ -43,7 +47,8 @@ extension FHIRResourceMutationExtensions {
     /// Also sets the property to `nil` if there are no elements remaining after the removal.
     ///
     /// - returns: the removed element, if any.
-    func removeFirstElement<C: RangeReplaceableCollection>(
+    @inlinable
+    public func removeFirstElement<C: RangeReplaceableCollection>(
         of keyPath: ReferenceWritableKeyPath<Self, C?>,
         where predicate: (C.Element) -> Bool
     ) -> C.Element? {
@@ -60,7 +65,8 @@ extension FHIRResourceMutationExtensions {
     /// Also sets the property to `nil` if there are no elements remaining after the removal.
     ///
     /// - returns: the removed elements, if any.
-    func removeAllElements<C: RangeReplaceableCollection>(
+    @inlinable
+    public func removeAllElements<C: RangeReplaceableCollection>(
         of keyPath: ReferenceWritableKeyPath<Self, C?>,
         where predicate: (C.Element) -> Bool
     ) -> [C.Element]? { // swiftlint:disable:this discouraged_optional_collection
