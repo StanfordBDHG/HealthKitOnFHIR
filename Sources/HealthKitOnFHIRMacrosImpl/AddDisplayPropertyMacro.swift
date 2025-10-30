@@ -12,10 +12,10 @@ import SwiftSyntax
 import SwiftSyntaxMacros
 
 
-/// The `@EnumMacro` macro.
-public struct EnumMacro {}
+/// The `@SynthesizeDisplayPropertyMacro` macro.
+public struct SynthesizeDisplayPropertyMacro {}
 
-extension EnumMacro: MemberMacro {
+extension SynthesizeDisplayPropertyMacro: MemberMacro {
     public static func expansion(
         of node: AttributeSyntax,
         providingMembersOf declaration: some DeclGroupSyntax,
@@ -24,18 +24,18 @@ extension EnumMacro: MemberMacro {
     ) throws -> [DeclSyntax] {
         let inputs: [String] = try { () -> [String] in
             guard let argsList = node.arguments?.as(LabeledExprListSyntax.self) else {
-                throw MacroExpansionErrorMessage("hmmm1")
+                throw MacroExpansionErrorMessage("missing arguments?")
             }
             return try argsList.map { syntax in
                 guard let syntax = syntax.expression.as(StringLiteralExprSyntax.self) else {
-                    throw MacroExpansionErrorMessage("hmmm2")
+                    throw MacroExpansionErrorMessage("Arhument must be a String literal!")
                 }
                 return try syntax.segments.reduce(into: "") { partialResult, segment in
                     switch segment {
                     case .stringSegment(let segment):
                         partialResult.append(contentsOf: segment.content.text)
                     case .expressionSegment:
-                        throw MacroExpansionErrorMessage("hmmm3")
+                        throw MacroExpansionErrorMessage("Argument String isn't allowed to contain interpolations!")
                     }
                 }
             }

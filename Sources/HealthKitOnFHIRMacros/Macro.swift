@@ -8,6 +8,6 @@
 
 
 @attached(member, names: arbitrary)
-public macro EnumCases(
+public macro SynthesizeDisplayProperty(
     _ cases: StaticString...
-) = #externalMacro(module: "HealthKitOnFHIRMacrosImpl", type: "EnumMacro")
+) = #externalMacro(module: "HealthKitOnFHIRMacrosImpl", type: "SynthesizeDisplayPropertyMacro")

@@ -13,6 +13,6 @@ import SwiftSyntaxMacros
 @main
 struct HealthKitOnFHIRMacros: CompilerPlugin {
     var providingMacros: [any Macro.Type] = [
-        EnumMacro.self
+        SynthesizeDisplayPropertyMacro.self
     ]
 }

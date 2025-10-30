@@ -14,7 +14,7 @@ import SwiftSyntaxMacrosGenericTestSupport
 import Testing
 
 let testMacrosSpecs: [String: MacroSpec] = [
-    "EnumCases": MacroSpec(type: EnumMacro.self)
+    "SynthesizeDisplayProperty": MacroSpec(type: SynthesizeDisplayPropertyMacro.self)
 ]
 
 @Suite
@@ -23,7 +23,7 @@ struct HealthKitOnFHIRMacrosTests {
     func macro0() {
         assertMacroExpansion(
             """
-            @EnumCases("inBed", "asleepUnspecified", "awake", "asleepCore", "asleepDeep", "asleepREM")
+            @SynthesizeDisplayProperty("inBed", "asleepUnspecified", "awake", "asleepCore", "asleepDeep", "asleepREM")
             extension HKCategoryValueSleepAnalysis: FHIRCodingConvertibleHKEnum {}
             """,
             expandedSource:
@@ -59,7 +59,7 @@ struct HealthKitOnFHIRMacrosTests {
     func macro1() {
         assertMacroExpansion(
             """
-            @EnumCases("inBed", "asleepUnspecified", "awake", "asleepCore", "asleepDeep", "asleepREM")
+            @SynthesizeDisplayProperty("inBed", "asleepUnspecified", "awake", "asleepCore", "asleepDeep", "asleepREM")
             @available(iOS 18.0, macOS 15.0, watchOS 11.0, *)
             extension HKCategoryValueSleepAnalysis: FHIRCodingConvertibleHKEnum {}
             """,

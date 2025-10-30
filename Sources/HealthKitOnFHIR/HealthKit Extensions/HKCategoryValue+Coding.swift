@@ -52,53 +52,53 @@ extension FHIRCodingConvertibleHKEnum {
 // MARK: Extensions
 
 @available(iOS 18.0, macOS 15.0, watchOS 11.0, *)
-@EnumCases("unspecified", "light", "medium", "heavy", "none")
+@SynthesizeDisplayProperty("unspecified", "light", "medium", "heavy", "none")
 extension HKCategoryValueVaginalBleeding: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("dry", "sticky", "creamy", "watery", "eggWhite")
+@SynthesizeDisplayProperty("dry", "sticky", "creamy", "watery", "eggWhite")
 extension HKCategoryValueCervicalMucusQuality: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("unspecified", "light", "medium", "heavy", "none")
+@SynthesizeDisplayProperty("unspecified", "light", "medium", "heavy", "none")
 extension HKCategoryValueMenstrualFlow: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("negative", "luteinizingHormoneSurge", "indeterminate", "estrogenSurge")
+@SynthesizeDisplayProperty("negative", "luteinizingHormoneSurge", "indeterminate", "estrogenSurge")
 extension HKCategoryValueOvulationTestResult: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("unspecified", "implant", "injection", "intrauterineDevice", "intravaginalRing", "oral", "patch")
+@SynthesizeDisplayProperty("unspecified", "implant", "injection", "intrauterineDevice", "intravaginalRing", "oral", "patch")
 extension HKCategoryValueContraceptive: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("inBed", "asleepUnspecified", "awake", "asleepCore", "asleepDeep", "asleepREM")
+@SynthesizeDisplayProperty("inBed", "asleepUnspecified", "awake", "asleepCore", "asleepDeep", "asleepREM")
 extension HKCategoryValueSleepAnalysis: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("unspecified", "noChange", "decreased", "increased")
+@SynthesizeDisplayProperty("unspecified", "noChange", "decreased", "increased")
 extension HKCategoryValueAppetiteChanges: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("momentaryLimit")
+@SynthesizeDisplayProperty("momentaryLimit")
 extension HKCategoryValueEnvironmentalAudioExposureEvent: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("sevenDayLimit")
+@SynthesizeDisplayProperty("sevenDayLimit")
 extension HKCategoryValueHeadphoneAudioExposureEvent: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("lowFitness")
+@SynthesizeDisplayProperty("lowFitness")
 extension HKCategoryValueLowCardioFitnessEvent: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("ok", "low", "veryLow")
+@SynthesizeDisplayProperty("ok", "low", "veryLow")
 extension HKAppleWalkingSteadinessClassification: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("initialLow", "initialVeryLow", "repeatLow", "repeatVeryLow")
+@SynthesizeDisplayProperty("initialLow", "initialVeryLow", "repeatLow", "repeatVeryLow")
 extension HKCategoryValueAppleWalkingSteadinessEvent: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("negative", "positive", "indeterminate")
+@SynthesizeDisplayProperty("negative", "positive", "indeterminate")
 extension HKCategoryValuePregnancyTestResult: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("negative", "positive", "indeterminate")
+@SynthesizeDisplayProperty("negative", "positive", "indeterminate")
 extension HKCategoryValueProgesteroneTestResult: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("stood", "idle")
+@SynthesizeDisplayProperty("stood", "idle")
 extension HKCategoryValueAppleStandHour: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("unspecified", "notPresent", "mild", "moderate", "severe")
+@SynthesizeDisplayProperty("unspecified", "notPresent", "mild", "moderate", "severe")
 extension HKCategoryValueSeverity: FHIRCodingConvertibleHKEnum {}
 
-@EnumCases("present", "notPresent")
+@SynthesizeDisplayProperty("present", "notPresent")
 extension HKCategoryValuePresence: FHIRCodingConvertibleHKEnum {}

@@ -11,14 +11,14 @@ import HealthKitOnFHIRMacros
 import ModelsR4
 
 
-@EnumCases(
+@SynthesizeDisplayProperty(
     "notSet", "sinusRhythm", "atrialFibrillation", "inconclusiveLowHeartRate",
     "inconclusiveHighHeartRate", "inconclusivePoorReading", "inconclusiveOther", "unrecognized"
 )
 extension HKElectrocardiogram.Classification: FHIRCodingConvertibleHKEnum {}
 
 
-@EnumCases("notSet", "none", "present")
+@SynthesizeDisplayProperty("notSet", "none", "present")
 extension HKElectrocardiogram.SymptomsStatus: FHIRCodingConvertibleHKEnum {}
 
 
