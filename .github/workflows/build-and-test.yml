@@ -35,11 +35,11 @@ jobs:
             destination: 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)'
     with:
       runsonlabels: '["macOS", "self-hosted"]'
-      scheme: HealthKitOnFHIR
+      scheme: HealthKitOnFHIR-Package
       destination: ${{ matrix.platform.destination }}
       buildConfig: ${{ matrix.config }}
-      resultBundle: ${{ format('HealthKitOnFHIR-{0}-{1}.xcresult', matrix.platform.name, matrix.config) }}
-      artifactname: ${{ format('HealthKitOnFHIR-{0}-{1}.xcresult', matrix.platform.name, matrix.config) }}
+      resultBundle: ${{ format('HealthKitOnFHIR-Package-{0}-{1}.xcresult', matrix.platform.name, matrix.config) }}
+      artifactname: ${{ format('HealthKitOnFHIR-Package-{0}-{1}.xcresult', matrix.platform.name, matrix.config) }}
   ui_tests:
     name: Build and Test UI Tests ${{ matrix.platform.name }} (${{ matrix.config }})
     uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
@@ -61,6 +61,6 @@ jobs:
     needs: [package_tests, ui_tests]
     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
     with:
-      coveragereports: HealthKitOnFHIR-*.xcresult TestApp-*.xcresult
+      coveragereports: HealthKitOnFHIR-Package-*.xcresult TestApp-*.xcresult
     secrets:
       token: ${{ secrets.CODECOV_TOKEN }}
