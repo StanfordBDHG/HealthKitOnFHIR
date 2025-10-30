@@ -7,53 +7,19 @@
 //
 
 import HealthKit
+import HealthKitOnFHIRMacros
 import ModelsR4
 
 
-extension HKElectrocardiogram.Classification: FHIRCompatibleHKCategoryValueType {
-    var fhirCategoryValue: String {
-        get throws {
-            switch self {
-            case .notSet:
-                return "notSet"
-            case .sinusRhythm:
-                return "sinusRhythm"
-            case .atrialFibrillation:
-                return "atrialFibrillation"
-            case .inconclusiveLowHeartRate:
-                return "inconclusiveLowHeartRate"
-            case .inconclusiveHighHeartRate:
-                return "inconclusiveHighHeartRate"
-            case .inconclusivePoorReading:
-                return "inconclusivePoorReading"
-            case .inconclusiveOther:
-                return "inconclusiveOther"
-            case .unrecognized:
-                return "unrecognized"
-            @unknown default:
-                throw HealthKitOnFHIRError.invalidValue
-            }
-        }
-    }
-}
+@EnumCases(
+    "notSet", "sinusRhythm", "atrialFibrillation", "inconclusiveLowHeartRate",
+    "inconclusiveHighHeartRate", "inconclusivePoorReading", "inconclusiveOther", "unrecognized"
+)
+extension HKElectrocardiogram.Classification: FHIRCodingConvertibleHKEnum {}
 
 
-extension HKElectrocardiogram.SymptomsStatus: FHIRCompatibleHKCategoryValueType {
-    var fhirCategoryValue: String {
-        get throws {
-            switch self {
-            case .notSet:
-                return "notSet"
-            case .none:
-                return "none"
-            case .present:
-                return "present"
-            @unknown default:
-                throw HealthKitOnFHIRError.invalidValue
-            }
-        }
-    }
-}
+@EnumCases("notSet", "none", "present")
+extension HKElectrocardiogram.SymptomsStatus: FHIRCodingConvertibleHKEnum {}
 
 
 extension HKElectrocardiogram {
@@ -108,9 +74,9 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
         }
         try appendNumberOfVoltageMeasurementsComponent(to: observation, mapping: mapping)
         try appendSamplingFrequencyComponent(to: observation, mapping: mapping)
-        try appendClassificationComponent(to: observation, mapping: mapping)
+        appendClassificationComponent(to: observation, mapping: mapping)
         try appendAverageHeartRateComponent(to: observation, mapping: mapping)
-        try appendSymptomsStatusComponent(to: observation, mapping: mapping)
+        appendSymptomsStatusComponent(to: observation, mapping: mapping)
     }
     
     
@@ -156,9 +122,13 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
     private func appendClassificationComponent(
         to observation: Observation,
         mapping: HKElectrocardiogramMapping
-    ) throws {
+    ) {
         let classificationComponent = ObservationComponent(code: CodeableConcept(coding: mapping.classification.codings.map(\.coding)))
-        classificationComponent.value = .string(try classification.fhirCategoryValue.asFHIRStringPrimitive())
+        if let display = classification.display {
+            classificationComponent.value = .string(display.asFHIRStringPrimitive())
+        } else {
+            classificationComponent.value = .integer(classification.rawValue.asFHIRIntegerPrimitive())
+        }
         observation.appendComponent(classificationComponent)
     }
     
@@ -185,9 +155,13 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
     private func appendSymptomsStatusComponent(
         to observation: Observation,
         mapping: HKElectrocardiogramMapping
-    ) throws {
+    ) {
         let symptomsStatusComponent = ObservationComponent(code: CodeableConcept(coding: mapping.symptomsStatus.codings.map(\.coding)))
-        symptomsStatusComponent.value = .string(try symptomsStatus.fhirCategoryValue.asFHIRStringPrimitive())
+        if let display = symptomsStatus.display {
+            symptomsStatusComponent.value = .string(display.asFHIRStringPrimitive())
+        } else {
+            symptomsStatusComponent.value = .integer(symptomsStatus.rawValue.asFHIRIntegerPrimitive())
+        }
         observation.appendComponent(symptomsStatusComponent)
     }
     
@@ -204,7 +178,11 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
             let symptomComponent = ObservationComponent(
                 code: CodeableConcept(coding: mapping.codings.map(\.coding))
             )
-            symptomComponent.value = .string(try symptom.value.fhirCategoryValue.asFHIRStringPrimitive())
+            if let display = symptom.value.display {
+                symptomComponent.value = .string(display.asFHIRStringPrimitive())
+            } else {
+                symptomComponent.value = .integer(symptom.value.rawValue.asFHIRIntegerPrimitive())
+            }
             observation.appendComponent(symptomComponent)
         }
     }

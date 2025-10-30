@@ -14,18 +14,18 @@ import Testing
 @MainActor // to work around https://github.com/apple/FHIRModels/issues/36
 struct HKElectrocardiogramTests {
     @Test
-    func electrocardiogramCategoryTests() throws {
-        #expect(try HKElectrocardiogram.SymptomsStatus.notSet.fhirCategoryValue == "notSet")
-        #expect(try HKElectrocardiogram.SymptomsStatus.none.fhirCategoryValue == "none")
-        #expect(try HKElectrocardiogram.SymptomsStatus.present.fhirCategoryValue == "present")
+    func electrocardiogramCategoryTests() {
+        #expect(HKElectrocardiogram.SymptomsStatus.notSet.display == "not set")
+        #expect(HKElectrocardiogram.SymptomsStatus.none.display == "none")
+        #expect(HKElectrocardiogram.SymptomsStatus.present.display == "present")
         
-        #expect(try HKElectrocardiogram.Classification.notSet.fhirCategoryValue == "notSet")
-        #expect(try HKElectrocardiogram.Classification.sinusRhythm.fhirCategoryValue == "sinusRhythm")
-        #expect(try HKElectrocardiogram.Classification.atrialFibrillation.fhirCategoryValue == "atrialFibrillation")
-        #expect(try HKElectrocardiogram.Classification.inconclusiveLowHeartRate.fhirCategoryValue == "inconclusiveLowHeartRate")
-        #expect(try HKElectrocardiogram.Classification.inconclusiveHighHeartRate.fhirCategoryValue == "inconclusiveHighHeartRate")
-        #expect(try HKElectrocardiogram.Classification.inconclusivePoorReading.fhirCategoryValue == "inconclusivePoorReading")
-        #expect(try HKElectrocardiogram.Classification.inconclusiveOther.fhirCategoryValue == "inconclusiveOther")
-        #expect(try HKElectrocardiogram.Classification.unrecognized.fhirCategoryValue == "unrecognized")
+        #expect(HKElectrocardiogram.Classification.notSet.display == "not set")
+        #expect(HKElectrocardiogram.Classification.sinusRhythm.display == "sinus rhythm")
+        #expect(HKElectrocardiogram.Classification.atrialFibrillation.display == "atrial fibrillation")
+        #expect(HKElectrocardiogram.Classification.inconclusiveLowHeartRate.display == "inconclusive low heart rate")
+        #expect(HKElectrocardiogram.Classification.inconclusiveHighHeartRate.display == "inconclusive high heart rate")
+        #expect(HKElectrocardiogram.Classification.inconclusivePoorReading.display == "inconclusive poor reading")
+        #expect(HKElectrocardiogram.Classification.inconclusiveOther.display == "inconclusive other")
+        #expect(HKElectrocardiogram.Classification.unrecognized.display == "unrecognized")
     }
 }

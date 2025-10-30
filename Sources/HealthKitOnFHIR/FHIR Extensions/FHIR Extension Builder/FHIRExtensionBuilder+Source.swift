@@ -16,14 +16,14 @@ extension FHIRExtensionUrls {
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
     /// Url of a FHIR Extension containing, if applicable, encoded `HKDevice` of the `HKObject` from which a FHIR `Observation` was created.
-    public nonisolated(unsafe) static let sourceDevice = "https://bdh.stanford.edu/fhir/defs/sourceDevice".asFHIRURIPrimitive()!
+    nonisolated(unsafe) public static let sourceDevice = "https://bdh.stanford.edu/fhir/defs/sourceDevice".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
     
     // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
     /// Url of a FHIR Extension containing, if applicable, encoded `HKSourceRevision` of the `HKObject` from which a FHIR `Observation` was created.
-    public nonisolated(unsafe) static let sourceRevision = "https://bdh.stanford.edu/fhir/defs/sourceRevision".asFHIRURIPrimitive()!
+    nonisolated(unsafe) public static let sourceRevision = "https://bdh.stanford.edu/fhir/defs/sourceRevision".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
 }
 

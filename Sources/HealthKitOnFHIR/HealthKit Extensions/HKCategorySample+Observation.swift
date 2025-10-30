@@ -11,7 +11,7 @@ import ModelsR4
 
 
 extension HKCategorySample: FHIRObservationBuildable {
-    func build(_ observation: Observation, mapping: HKSampleMapping) throws {
+    func build(_ observation: Observation, mapping: HKSampleMapping) throws { // swiftlint:disable:this cyclomatic_complexity
         guard let mapping = mapping.categorySampleMapping[self.categoryType] else {
             throw HealthKitOnFHIRError.notSupported
         }
@@ -23,7 +23,11 @@ extension HKCategorySample: FHIRObservationBuildable {
             guard let value = valueType.init(rawValue: self.value) else {
                 throw HealthKitOnFHIRError.invalidValue
             }
-            observation.setValue(try value.fhirCategoryValue)
+            if let display = value.display {
+                observation.value = .string(display.asFHIRStringPrimitive())
+            } else {
+                observation.value = .integer(self.value.asFHIRIntegerPrimitive())
+            }
         } else {
             // If the sample doesn't have a value type associated with it, we set the value to the category identifier
             observation.setValue(self.categoryType.identifier)
@@ -90,10 +94,10 @@ extension HKCategoryType {
     struct AssociatedDataInfo {
         static var noDataCarried: Self { .init(valueType: nil) }
         
-        let valueType: (any FHIRCompatibleHKCategoryValueType.Type)?
+        let valueType: (any FHIRCodingConvertibleHKEnum.Type)?
         let metadataKeys: Set<String>
         
-        init(valueType: (any FHIRCompatibleHKCategoryValueType.Type)?, metadataKeys: Set<String> = []) {
+        init(valueType: (any FHIRCodingConvertibleHKEnum.Type)?, metadataKeys: Set<String> = []) {
             self.valueType = valueType
             self.metadataKeys = metadataKeys
         }
