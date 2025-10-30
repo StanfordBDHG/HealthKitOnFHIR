@@ -114,8 +114,7 @@ struct HKCategorySampleTests {
         (HKCategoryValueOvulationTestResult.negative, "1", "negative"),
         (HKCategoryValueOvulationTestResult.luteinizingHormoneSurge, "2", "luteinizing hormone surge"),
         (HKCategoryValueOvulationTestResult.indeterminate, "3", "indeterminate"),
-        (HKCategoryValueOvulationTestResult.estrogenSurge, "4", "estrogen surge"),
-        (HKCategoryValueOvulationTestResult.positive, "2", "luteinizing hormone surge")
+        (HKCategoryValueOvulationTestResult.estrogenSurge, "4", "estrogen surge")
     ])
     func ovulationTestResult(value: HKCategoryValueOvulationTestResult, expectedCode: String, expectedDisplay: String) throws {
         let system: FHIRPrimitive<FHIRURI> = "https://developer.apple.com/documentation/healthkit/hkcategoryvalueovulationtestresult"

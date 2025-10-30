@@ -34,7 +34,7 @@ class TestAppUITests: XCTestCase {
         app.collectionViews.buttons["Write Step Count"].tap()
         
         // Enable Apple Health Access if needed
-        try app.handleHealthKitAuthorization()
+        app.handleHealthKitAuthorization()
         
         // Check that the data is written
         XCTAssert(app.collectionViews.staticTexts["Data successfully written!"].waitForExistence(timeout: 5))
@@ -66,7 +66,7 @@ class TestAppUITests: XCTestCase {
         app.buttons["Read Electrocardiogram"].tap()
         
         // Enable Apple Health Access if needed
-        try app.handleHealthKitAuthorization()
+        app.handleHealthKitAuthorization()
         
         XCTAssert(app.staticTexts["Passed"].waitForExistence(timeout: 10))
         
@@ -88,7 +88,7 @@ class TestAppUITests: XCTestCase {
         app.collectionViews.buttons["Create Sample Workout"].tap()
 
         // Enable Apple Health Access if needed
-        try app.handleHealthKitAuthorization()
+        app.handleHealthKitAuthorization()
 
         // Dismiss results view
         app.swipeDown(velocity: XCUIGestureVelocity.fast)
