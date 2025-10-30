@@ -22,8 +22,7 @@ let package = Package(
         .watchOS(.v10)
     ],
     products: [
-        .library(name: "HealthKitOnFHIR", targets: ["HealthKitOnFHIR"]),
-        .library(name: "HealthKitOnFHIRMacros", targets: ["HealthKitOnFHIRMacros"])
+        .library(name: "HealthKitOnFHIR", targets: ["HealthKitOnFHIR"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/FHIRModels.git", .upToNextMajor(from: "0.7.0")),

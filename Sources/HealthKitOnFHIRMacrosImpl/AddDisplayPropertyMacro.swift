@@ -22,29 +22,32 @@ extension SynthesizeDisplayPropertyMacro: MemberMacro {
         conformingTo protocols: [TypeSyntax],
         in context: some MacroExpansionContext
     ) throws -> [DeclSyntax] {
-        let inputs: [String] = try { () -> [String] in
+        let caseNames: [String] = try { () -> [String] in
             guard let argsList = node.arguments?.as(LabeledExprListSyntax.self) else {
                 throw MacroExpansionErrorMessage("missing arguments?")
             }
-            return try argsList.map { syntax in
-                guard let syntax = syntax.expression.as(StringLiteralExprSyntax.self) else {
-                    throw MacroExpansionErrorMessage("Arhument must be a String literal!")
-                }
-                return try syntax.segments.reduce(into: "") { partialResult, segment in
-                    switch segment {
-                    case .stringSegment(let segment):
-                        partialResult.append(contentsOf: segment.content.text)
-                    case .expressionSegment:
-                        throw MacroExpansionErrorMessage("Argument String isn't allowed to contain interpolations!")
+            return try argsList.dropFirst().map { syntax in
+                if let syntax = syntax.expression.as((MemberAccessExprSyntax.self)) {
+                    return syntax.declName.baseName.text
+                } else if let syntax = syntax.expression.as(StringLiteralExprSyntax.self) {
+                    return try syntax.segments.reduce(into: "") { partialResult, segment in
+                        switch segment {
+                        case .stringSegment(let segment):
+                            partialResult.append(contentsOf: segment.content.text)
+                        case .expressionSegment:
+                            throw MacroExpansionErrorMessage("Argument String isn't allowed to contain interpolations!")
+                        }
                     }
+                } else {
+                    throw MacroExpansionErrorMessage("Arhument must be an enum case expression!")
                 }
             }
         }()
         let displayProperty = try VariableDeclSyntax("var display: String?") {
             SwitchExprSyntax(subject: "self" as ExprSyntax) {
-                for input in inputs {
-                    .switchCase(SwitchCaseSyntax("case .\(raw: input):") {
-                        #""\#(raw: displayText(for: input))""#
+                for name in caseNames {
+                    .switchCase(SwitchCaseSyntax("case .\(raw: name):") {
+                        #""\#(raw: displayText(for: name))""#
                     })
                 }
                 SwitchCaseListSyntax.Element.switchCase(SwitchCaseSyntax("@unknown default:") {
@@ -76,17 +79,5 @@ extension SynthesizeDisplayPropertyMacro: MemberMacro {
                 }
             }
             .joined(separator: " ")
-    }
-}
-
-
-extension StringProtocol {
-    func withFirstCharacterUppercased() -> String {
-        var string = String(self)
-        string.replaceSubrange(
-            string.startIndex..<string.index(after: string.startIndex),
-            with: string[string.startIndex].uppercased()
-        )
-        return string
     }
 }

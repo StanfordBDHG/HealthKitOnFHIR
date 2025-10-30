@@ -10,58 +10,102 @@ import HealthKit
 import HealthKitOnFHIRMacros
 
 
-@SynthesizeDisplayProperty("version1", "version2")
+@SynthesizeDisplayProperty(
+    HKAppleECGAlgorithmVersion.self,
+    .version1, .version2
+)
 extension HKAppleECGAlgorithmVersion: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("preprandial", "postprandial")
+@SynthesizeDisplayProperty(
+    HKBloodGlucoseMealTime.self,
+    .preprandial, .postprandial
+)
 extension HKBloodGlucoseMealTime: FHIRCodingConvertibleHKEnum {}
 
 @SynthesizeDisplayProperty(
-    "other", "armpit", "body", "ear", "finger", "gastroIntestinal",
-    "mouth", "rectum", "toe", "earDrum", "temporalArtery", "forehead"
+    HKBodyTemperatureSensorLocation.self,
+    .other, .armpit, .body, .ear, .finger, .gastroIntestinal,
+    .mouth, .rectum, .toe, .earDrum, .temporalArtery, .forehead
 )
 extension HKBodyTemperatureSensorLocation: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("maxExercise60Minute", "maxExercise20Minute", "rampTest", "predictionExercise")
+@SynthesizeDisplayProperty(
+    HKCyclingFunctionalThresholdPowerTestType.self,
+    .maxExercise60Minute, .maxExercise20Minute, .rampTest, .predictionExercise)
 extension HKCyclingFunctionalThresholdPowerTestType: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("unknown", "left", "right", "central")
+@SynthesizeDisplayProperty(
+    HKDevicePlacementSide.self,
+    .unknown, .left, .right, .central
+)
 extension HKDevicePlacementSide: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("notSet", "sedentary", "active")
+@SynthesizeDisplayProperty(
+    HKHeartRateMotionContext.self,
+    .notSet, .sedentary, .active
+)
 extension HKHeartRateMotionContext: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("maxExercise", "predictionSubMaxExercise", "predictionNonExercise")
+@SynthesizeDisplayProperty(
+    HKHeartRateRecoveryTestType.self,
+    .maxExercise, .predictionSubMaxExercise, .predictionNonExercise
+)
 extension HKHeartRateRecoveryTestType: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("other", "chest", "wrist", "finger", "hand", "earLobe", "foot")
+@SynthesizeDisplayProperty(
+    HKHeartRateSensorLocation.self,
+    .other, .chest, .wrist, .finger, .hand, .earLobe, .foot
+)
 extension HKHeartRateSensorLocation: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("basal", "bolus")
+@SynthesizeDisplayProperty(
+    HKInsulinDeliveryReason.self,
+    .basal, .bolus
+)
 extension HKInsulinDeliveryReason: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("activityLookup", "deviceSensed")
+@SynthesizeDisplayProperty(
+    HKPhysicalEffortEstimationType.self,
+    .activityLookup, .deviceSensed
+)
 extension HKPhysicalEffortEstimationType: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("unknown", "mixed", "freestyle", "backstroke", "breaststroke", "butterfly", "kickboard")
+@SynthesizeDisplayProperty(
+    HKSwimmingStrokeStyle.self,
+    .unknown, .mixed, .freestyle, .backstroke, .breaststroke, .butterfly, .kickboard
+)
 extension HKSwimmingStrokeStyle: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("notSet", "stationary", "active")
+@SynthesizeDisplayProperty(
+    HKUserMotionContext.self,
+    .notSet, .stationary, .active
+)
 extension HKUserMotionContext: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("maxExercise", "predictionSubMaxExercise", "predictionNonExercise", "predictionStepTest")
+@SynthesizeDisplayProperty(
+    HKVO2MaxTestType.self,
+    .maxExercise, .predictionSubMaxExercise, .predictionNonExercise,
+    additionalCases: "predictionStepTest"
+)
 extension HKVO2MaxTestType: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("freshWater", "saltWater")
+@SynthesizeDisplayProperty(
+    HKWaterSalinity.self,
+    .freshWater, .saltWater
+)
 extension HKWaterSalinity: FHIRCodingConvertibleHKEnum {}
 
 @SynthesizeDisplayProperty(
-    "none", "clear", "fair", "partlyCloudy", "mostlyCloudy", "cloudy", "foggy", "haze",
-    "windy", "blustery", "smoky", "dust", "snow", "hail", "sleet", "freezingDrizzle",
-    "freezingRain", "mixedRainAndHail", "mixedRainAndSnow", "mixedRainAndSleet", "mixedSnowAndSleet",
-    "drizzle", "scatteredShowers", "showers", "thunderstorms", "tropicalStorm", "hurricane", "tornado"
+    HKWeatherCondition.self,
+    .none, .clear, .fair, .partlyCloudy, .mostlyCloudy, .cloudy, .foggy, .haze,
+    .windy, .blustery, .smoky, .dust, .snow, .hail, .sleet, .freezingDrizzle,
+    .freezingRain, .mixedRainAndHail, .mixedRainAndSnow, .mixedRainAndSleet, .mixedSnowAndSleet,
+    .drizzle, .scatteredShowers, .showers, .thunderstorms, .tropicalStorm, .hurricane, .tornado
 )
 extension HKWeatherCondition: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("unknown", "pool", "openWater")
+@SynthesizeDisplayProperty(
+    HKWorkoutSwimmingLocationType.self,
+    .unknown, .pool, .openWater
+)
 extension HKWorkoutSwimmingLocationType: FHIRCodingConvertibleHKEnum {}

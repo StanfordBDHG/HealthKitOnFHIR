@@ -12,13 +12,17 @@ import ModelsR4
 
 
 @SynthesizeDisplayProperty(
-    "notSet", "sinusRhythm", "atrialFibrillation", "inconclusiveLowHeartRate",
-    "inconclusiveHighHeartRate", "inconclusivePoorReading", "inconclusiveOther", "unrecognized"
+    HKElectrocardiogram.Classification.self,
+    .notSet, .sinusRhythm, .atrialFibrillation, .inconclusiveLowHeartRate,
+    .inconclusiveHighHeartRate, .inconclusivePoorReading, .inconclusiveOther, .unrecognized
 )
 extension HKElectrocardiogram.Classification: FHIRCodingConvertibleHKEnum {}
 
 
-@SynthesizeDisplayProperty("notSet", "none", "present")
+@SynthesizeDisplayProperty(
+    HKElectrocardiogram.SymptomsStatus.self,
+    .notSet, .none, .present
+)
 extension HKElectrocardiogram.SymptomsStatus: FHIRCodingConvertibleHKEnum {}
 
 

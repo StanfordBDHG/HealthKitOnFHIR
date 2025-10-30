@@ -52,53 +52,104 @@ extension FHIRCodingConvertibleHKEnum {
 // MARK: Extensions
 
 @available(iOS 18.0, macOS 15.0, watchOS 11.0, *)
-@SynthesizeDisplayProperty("unspecified", "light", "medium", "heavy", "none")
+@SynthesizeDisplayProperty(
+    HKCategoryValueVaginalBleeding.self,
+    .unspecified, .light, .medium, .heavy, .none
+)
 extension HKCategoryValueVaginalBleeding: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("dry", "sticky", "creamy", "watery", "eggWhite")
+@SynthesizeDisplayProperty(
+    HKCategoryValueCervicalMucusQuality.self,
+    .dry, .sticky, .creamy, .watery, .eggWhite
+)
 extension HKCategoryValueCervicalMucusQuality: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("unspecified", "light", "medium", "heavy", "none")
+@SynthesizeDisplayProperty(
+    HKCategoryValueMenstrualFlow.self,
+    .unspecified, .light, .medium, .heavy, .none
+)
 extension HKCategoryValueMenstrualFlow: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("negative", "luteinizingHormoneSurge", "indeterminate", "estrogenSurge")
+@SynthesizeDisplayProperty(
+    HKCategoryValueOvulationTestResult.self,
+    .negative, .luteinizingHormoneSurge, .indeterminate, .estrogenSurge
+)
 extension HKCategoryValueOvulationTestResult: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("unspecified", "implant", "injection", "intrauterineDevice", "intravaginalRing", "oral", "patch")
+@SynthesizeDisplayProperty(
+    HKCategoryValueContraceptive.self,
+    .unspecified, .implant, .injection, .intrauterineDevice, .intravaginalRing, .oral, .patch
+)
 extension HKCategoryValueContraceptive: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("inBed", "asleepUnspecified", "awake", "asleepCore", "asleepDeep", "asleepREM")
+@SynthesizeDisplayProperty(
+    HKCategoryValueSleepAnalysis.self,
+    .inBed, .asleepUnspecified, .awake, .asleepCore, .asleepDeep, .asleepREM
+)
 extension HKCategoryValueSleepAnalysis: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("unspecified", "noChange", "decreased", "increased")
+@SynthesizeDisplayProperty(
+    HKCategoryValueAppetiteChanges.self,
+    .unspecified, .noChange, .decreased, .increased
+)
 extension HKCategoryValueAppetiteChanges: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("momentaryLimit")
+@SynthesizeDisplayProperty(
+    HKCategoryValueEnvironmentalAudioExposureEvent.self,
+    .momentaryLimit
+)
 extension HKCategoryValueEnvironmentalAudioExposureEvent: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("sevenDayLimit")
+@SynthesizeDisplayProperty(
+    HKCategoryValueHeadphoneAudioExposureEvent.self,
+    .sevenDayLimit
+)
 extension HKCategoryValueHeadphoneAudioExposureEvent: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("lowFitness")
+@SynthesizeDisplayProperty(
+    HKCategoryValueLowCardioFitnessEvent.self,
+    .lowFitness
+)
 extension HKCategoryValueLowCardioFitnessEvent: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("ok", "low", "veryLow")
+@SynthesizeDisplayProperty(
+    HKAppleWalkingSteadinessClassification.self,
+    .ok, .low, .veryLow
+)
 extension HKAppleWalkingSteadinessClassification: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("initialLow", "initialVeryLow", "repeatLow", "repeatVeryLow")
+@SynthesizeDisplayProperty(
+    HKCategoryValueAppleWalkingSteadinessEvent.self,
+    .initialLow, .initialVeryLow, .repeatLow, .repeatVeryLow
+)
 extension HKCategoryValueAppleWalkingSteadinessEvent: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("negative", "positive", "indeterminate")
+@SynthesizeDisplayProperty(
+    HKCategoryValuePregnancyTestResult.self,
+    .negative, .positive, .indeterminate
+)
 extension HKCategoryValuePregnancyTestResult: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("negative", "positive", "indeterminate")
+@SynthesizeDisplayProperty(
+    HKCategoryValueProgesteroneTestResult.self,
+    .negative, .positive, .indeterminate
+)
 extension HKCategoryValueProgesteroneTestResult: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("stood", "idle")
+@SynthesizeDisplayProperty(
+    HKCategoryValueAppleStandHour.self,
+    .stood, .idle
+)
 extension HKCategoryValueAppleStandHour: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("unspecified", "notPresent", "mild", "moderate", "severe")
+@SynthesizeDisplayProperty(
+    HKCategoryValueSeverity.self,
+    .unspecified, .notPresent, .mild, .moderate, .severe
+)
 extension HKCategoryValueSeverity: FHIRCodingConvertibleHKEnum {}
 
-@SynthesizeDisplayProperty("present", "notPresent")
+@SynthesizeDisplayProperty(
+    HKCategoryValuePresence.self,
+    .present, .notPresent
+)
 extension HKCategoryValuePresence: FHIRCodingConvertibleHKEnum {}

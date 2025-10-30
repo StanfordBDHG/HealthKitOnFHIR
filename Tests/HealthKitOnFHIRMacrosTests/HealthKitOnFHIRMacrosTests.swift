@@ -7,6 +7,8 @@
 //
 
 #if os(macOS) // macro tests can only be run on the host machine
+import HealthKit
+import HealthKitOnFHIRMacros
 import HealthKitOnFHIRMacrosImpl
 import SwiftSyntaxMacroExpansion
 import SwiftSyntaxMacros
@@ -23,7 +25,10 @@ struct HealthKitOnFHIRMacrosTests {
     func macro0() {
         assertMacroExpansion(
             """
-            @SynthesizeDisplayProperty("inBed", "asleepUnspecified", "awake", "asleepCore", "asleepDeep", "asleepREM")
+            @SynthesizeDisplayProperty(
+                HKCategoryValueSleepAnalysis.self,
+                .inBed, .asleepUnspecified, .awake, .asleepCore, .asleepDeep, .asleepREM
+            )
             extension HKCategoryValueSleepAnalysis: FHIRCodingConvertibleHKEnum {}
             """,
             expandedSource:
@@ -59,13 +64,56 @@ struct HealthKitOnFHIRMacrosTests {
     func macro1() {
         assertMacroExpansion(
             """
-            @SynthesizeDisplayProperty("inBed", "asleepUnspecified", "awake", "asleepCore", "asleepDeep", "asleepREM")
+            @SynthesizeDisplayProperty(
+                HKCategoryValueSleepAnalysis.self,
+                .inBed, .asleepUnspecified, .awake, .asleepCore, .asleepDeep, .asleepREM
+            )
             @available(iOS 18.0, macOS 15.0, watchOS 11.0, *)
             extension HKCategoryValueSleepAnalysis: FHIRCodingConvertibleHKEnum {}
             """,
             expandedSource:
             """
             @available(iOS 18.0, macOS 15.0, watchOS 11.0, *)
+            extension HKCategoryValueSleepAnalysis: FHIRCodingConvertibleHKEnum {
+            
+                var display: String? {
+                    switch self {
+                    case .inBed:
+                        "in bed"
+                    case .asleepUnspecified:
+                        "asleep unspecified"
+                    case .awake:
+                        "awake"
+                    case .asleepCore:
+                        "asleep core"
+                    case .asleepDeep:
+                        "asleep deep"
+                    case .asleepREM:
+                        "asleep REM"
+                    @unknown default:
+                        nil
+                    }
+                }
+            }
+            """,
+            macroSpecs: testMacrosSpecs,
+            failureHandler: { Issue.record("\($0.message)") }
+        )
+    }
+    
+    @Test
+    func macro2() {
+        assertMacroExpansion(
+            """
+            @SynthesizeDisplayProperty(
+                HKCategoryValueSleepAnalysis.self,
+                .inBed, .asleepUnspecified, .awake, .asleepCore,
+                additionalCases: "asleepDeep", "asleepREM"
+            )
+            extension HKCategoryValueSleepAnalysis: FHIRCodingConvertibleHKEnum {}
+            """,
+            expandedSource:
+            """
             extension HKCategoryValueSleepAnalysis: FHIRCodingConvertibleHKEnum {
             
                 var display: String? {
