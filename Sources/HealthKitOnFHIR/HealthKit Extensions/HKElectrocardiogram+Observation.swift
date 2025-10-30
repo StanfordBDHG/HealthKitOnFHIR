@@ -124,11 +124,7 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
         mapping: HKElectrocardiogramMapping
     ) {
         let classificationComponent = ObservationComponent(code: CodeableConcept(coding: mapping.classification.codings.map(\.coding)))
-        if let display = classification.display {
-            classificationComponent.value = .string(display.asFHIRStringPrimitive())
-        } else {
-            classificationComponent.value = .integer(classification.rawValue.asFHIRIntegerPrimitive())
-        }
+        classificationComponent.value = .codeableConcept(CodeableConcept(coding: [classification.asCoding]))
         observation.appendComponent(classificationComponent)
     }
     
@@ -157,11 +153,7 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
         mapping: HKElectrocardiogramMapping
     ) {
         let symptomsStatusComponent = ObservationComponent(code: CodeableConcept(coding: mapping.symptomsStatus.codings.map(\.coding)))
-        if let display = symptomsStatus.display {
-            symptomsStatusComponent.value = .string(display.asFHIRStringPrimitive())
-        } else {
-            symptomsStatusComponent.value = .integer(symptomsStatus.rawValue.asFHIRIntegerPrimitive())
-        }
+        symptomsStatusComponent.value = .codeableConcept(CodeableConcept(coding: [symptomsStatus.asCoding]))
         observation.appendComponent(symptomsStatusComponent)
     }
     
@@ -178,11 +170,7 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
             let symptomComponent = ObservationComponent(
                 code: CodeableConcept(coding: mapping.codings.map(\.coding))
             )
-            if let display = symptom.value.display {
-                symptomComponent.value = .string(display.asFHIRStringPrimitive())
-            } else {
-                symptomComponent.value = .integer(symptom.value.rawValue.asFHIRIntegerPrimitive())
-            }
+            symptomComponent.value = .codeableConcept(CodeableConcept(coding: [symptom.value.asCoding]))
             observation.appendComponent(symptomComponent)
         }
     }

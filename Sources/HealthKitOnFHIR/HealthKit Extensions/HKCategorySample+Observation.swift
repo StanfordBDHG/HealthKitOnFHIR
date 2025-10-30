@@ -23,11 +23,7 @@ extension HKCategorySample: FHIRObservationBuildable {
             guard let value = valueType.init(rawValue: self.value) else {
                 throw HealthKitOnFHIRError.invalidValue
             }
-            if let display = value.display {
-                observation.value = .string(display.asFHIRStringPrimitive())
-            } else {
-                observation.value = .integer(self.value.asFHIRIntegerPrimitive())
-            }
+            observation.value = .codeableConcept(CodeableConcept(coding: [value.asCoding]))
         } else {
             // If the sample doesn't have a value type associated with it, we set the value to the category identifier
             observation.setValue(self.categoryType.identifier)
