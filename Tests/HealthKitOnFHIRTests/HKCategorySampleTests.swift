@@ -69,7 +69,13 @@ struct HKCategorySampleTests {
                 categoryType: .cervicalMucusQuality,
                 display: "Cervical Mucus Quality"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -86,7 +92,13 @@ struct HKCategorySampleTests {
                 categoryType: .menstrualFlow,
                 display: "Menstrual Flow"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -102,7 +114,13 @@ struct HKCategorySampleTests {
                 categoryType: .ovulationTestResult,
                 display: "Ovulation Test Result"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -118,7 +136,13 @@ struct HKCategorySampleTests {
                 categoryType: .contraceptive,
                 display: "Contraceptive"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -134,7 +158,13 @@ struct HKCategorySampleTests {
                 categoryType: .sleepAnalysis,
                 display: "Sleep Analysis"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -150,7 +180,13 @@ struct HKCategorySampleTests {
                 categoryType: .appetiteChanges,
                 display: "Appetite Changes"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -164,7 +200,13 @@ struct HKCategorySampleTests {
             categoryType: .environmentalAudioExposureEvent,
             display: "Environmental Audio Exposure Event"
         ))
-        #expect(observation.value == .string("momentary limit".asFHIRStringPrimitive()))
+        #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+            Coding(
+                code: "1".asFHIRStringPrimitive(),
+                display: "momentary limit".asFHIRStringPrimitive(),
+                system: "https://developer.apple.com/documentation/healthkit/hkcategoryvalueenvironmentalaudioexposureevent".asFHIRURIPrimitive()
+            )
+        ])))
     }
 
     @Test
@@ -177,7 +219,13 @@ struct HKCategorySampleTests {
             categoryType: .headphoneAudioExposureEvent,
             display: "Headphone Audio Exposure Event"
         ))
-        #expect(observation.value == .string("seven day limit".asFHIRStringPrimitive()))
+        #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+            Coding(
+                code: "1".asFHIRStringPrimitive(),
+                display: "seven day limit".asFHIRStringPrimitive(),
+                system: "https://developer.apple.com/documentation/healthkit/hkcategoryvalueheadphoneaudioexposureevent".asFHIRURIPrimitive()
+            )
+        ])))
     }
 
     @Test
@@ -190,7 +238,13 @@ struct HKCategorySampleTests {
             categoryType: .lowCardioFitnessEvent,
             display: "Low Cardio Fitness Event"
         ))
-        #expect(observation.value == .string("low fitness".asFHIRStringPrimitive()))
+        #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+            Coding(
+                code: "1".asFHIRStringPrimitive(),
+                display: "low fitness".asFHIRStringPrimitive(),
+                system: "https://developer.apple.com/documentation/healthkit/hkcategoryvaluelowcardiofitnessevent".asFHIRURIPrimitive()
+            )
+        ])))
     }
     
     @Test
@@ -206,7 +260,13 @@ struct HKCategorySampleTests {
             categoryType: .lowCardioFitnessEvent,
             display: "Low Cardio Fitness Event"
         ))
-        #expect(observation.value == .string("low fitness".asFHIRStringPrimitive()))
+        #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+            Coding(
+                code: "1".asFHIRStringPrimitive(),
+                display: "low fitness".asFHIRStringPrimitive(),
+                system: "https://developer.apple.com/documentation/healthkit/hkcategoryvaluelowcardiofitnessevent".asFHIRURIPrimitive()
+            )
+        ])))
         #expect(observation.component?.count == 1)
         let component = try #require(observation.component?.first)
         #expect(component.code.coding == [
@@ -236,7 +296,13 @@ struct HKCategorySampleTests {
                 categoryType: .appleWalkingSteadinessEvent,
                 display: "Apple Walking Steadiness Event"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -309,7 +375,13 @@ struct HKCategorySampleTests {
                 categoryType: .pregnancyTestResult,
                 display: "Pregnancy Test Result"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
     
@@ -338,7 +410,13 @@ struct HKCategorySampleTests {
                 categoryType: .progesteroneTestResult,
                 display: "Progesterone Test Result"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
     
@@ -404,7 +482,13 @@ struct HKCategorySampleTests {
                 categoryType: .appleStandHour,
                 display: "Apple Stand Hour"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -553,7 +637,13 @@ struct HKCategorySampleTests {
                 categoryType: type,
                 display: display
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: Swift.type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -679,7 +769,13 @@ struct HKCategorySampleTests {
                 categoryType: .moodChanges,
                 display: "Mood Changes"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
 
@@ -695,7 +791,13 @@ struct HKCategorySampleTests {
                 categoryType: .sleepChanges,
                 display: "Sleep Changes"
             ))
-            #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+            #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+                Coding(
+                    code: value.code.asFHIRStringPrimitive(),
+                    display: try #require(value.display).asFHIRStringPrimitive(),
+                    system: type(of: value).system
+                )
+            ])))
         }
     }
     
@@ -716,7 +818,13 @@ struct HKCategorySampleTests {
             categoryType: category,
             display: displayTitle
         ))
-        #expect(try observation.value == .string(#require(value.display).asFHIRStringPrimitive()))
+        #expect(observation.value == .codeableConcept(CodeableConcept(coding: [
+            Coding(
+                code: value.code.asFHIRStringPrimitive(),
+                display: try #require(value.display).asFHIRStringPrimitive(),
+                system: type(of: value).system
+            )
+        ])))
     }
 
     @Test

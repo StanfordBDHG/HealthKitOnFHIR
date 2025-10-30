@@ -51,8 +51,8 @@ extension FHIRCodingConvertibleHKEnum {
 
 // MARK: Extensions
 
-@EnumCases("unspecified", "light", "medium", "heavy", "none")
 @available(iOS 18.0, macOS 15.0, watchOS 11.0, *)
+@EnumCases("unspecified", "light", "medium", "heavy", "none")
 extension HKCategoryValueVaginalBleeding: FHIRCodingConvertibleHKEnum {}
 
 @EnumCases("dry", "sticky", "creamy", "watery", "eggWhite")

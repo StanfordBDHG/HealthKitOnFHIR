@@ -11,7 +11,7 @@ import ModelsR4
 
 
 extension HKCategorySample: FHIRObservationBuildable {
-    func build(_ observation: Observation, mapping: HKSampleMapping) throws { // swiftlint:disable:this cyclomatic_complexity
+    func build(_ observation: Observation, mapping: HKSampleMapping) throws {
         guard let mapping = mapping.categorySampleMapping[self.categoryType] else {
             throw HealthKitOnFHIRError.notSupported
         }
