@@ -16,14 +16,14 @@ extension FHIRExtensionUrls {
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
     /// Url of a FHIR Extension containing, if applicable, the absolute start date timestamp of a FHIR `Observation`.
-    public nonisolated(unsafe) static let absoluteTimeRangeStart = "https://bdh.stanford.edu/fhir/defs/absoluteTimeRangeStart".asFHIRURIPrimitive()!
+    nonisolated(unsafe) public static let absoluteTimeRangeStart = "https://bdh.stanford.edu/fhir/defs/absoluteTimeRangeStart".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
     
     // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
     /// Url of a FHIR Extension containing, if applicable, the absolute end date timestamp of a FHIR `Observation`.
-    public nonisolated(unsafe) static let absoluteTimeRangeEnd = "https://bdh.stanford.edu/fhir/defs/absoluteTimeRangeEnd".asFHIRURIPrimitive()!
+    nonisolated(unsafe) public static let absoluteTimeRangeEnd = "https://bdh.stanford.edu/fhir/defs/absoluteTimeRangeEnd".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
 }
 

@@ -23,7 +23,7 @@ extension HKCategorySample: FHIRObservationBuildable {
             guard let value = valueType.init(rawValue: self.value) else {
                 throw HealthKitOnFHIRError.invalidValue
             }
-            observation.setValue(try value.fhirCategoryValue)
+            observation.value = .codeableConcept(CodeableConcept(coding: [value.asCoding]))
         } else {
             // If the sample doesn't have a value type associated with it, we set the value to the category identifier
             observation.setValue(self.categoryType.identifier)
@@ -90,10 +90,10 @@ extension HKCategoryType {
     struct AssociatedDataInfo {
         static var noDataCarried: Self { .init(valueType: nil) }
         
-        let valueType: (any FHIRCompatibleHKCategoryValueType.Type)?
+        let valueType: (any FHIRCodingConvertibleHKEnum.Type)?
         let metadataKeys: Set<String>
         
-        init(valueType: (any FHIRCompatibleHKCategoryValueType.Type)?, metadataKeys: Set<String> = []) {
+        init(valueType: (any FHIRCodingConvertibleHKEnum.Type)?, metadataKeys: Set<String> = []) {
             self.valueType = valueType
             self.metadataKeys = metadataKeys
         }

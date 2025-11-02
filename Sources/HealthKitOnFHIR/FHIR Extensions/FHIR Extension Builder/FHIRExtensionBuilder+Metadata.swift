@@ -16,7 +16,7 @@ extension FHIRExtensionUrls {
     // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
     // it also never can be mutated to contain any.
     /// Url of a FHIR Extension containing, if applicable, encoded metadata of the `HKObject` from which a FHIR `Observation` was created.
-    public nonisolated(unsafe) static let metadata = "https://bdh.stanford.edu/fhir/defs/metadata".asFHIRURIPrimitive()!
+    nonisolated(unsafe) public static let metadata = "https://bdh.stanford.edu/fhir/defs/metadata".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
 }
 
@@ -38,7 +38,11 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
                 case let value as String:
                     extensionValue = .string(value.asFHIRStringPrimitive())
                 case let value as NSNumber:
-                    extensionValue = .decimal(FHIRPrimitive(FHIRDecimal(value.decimalValue)))
+                    if let type = Self.type(forMetadataKey: key), let value = type.init(rawValue: value.intValue) {
+                        extensionValue = .coding(value.asCoding)
+                    } else {
+                        extensionValue = .decimal(FHIRPrimitive(FHIRDecimal(value.decimalValue)))
+                    }
                 case let value as Date:
                     extensionValue = .dateTime(FHIRPrimitive(try DateTime(date: value)))
                 case let value as Bool:
@@ -98,7 +102,7 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
                         continue
                     }
                 default:
-                    print("Encountered unexpected HKSample metadata value of type \(type(of: value)), for key '\(key)': \(value). Skipping.")
+                    print("Encountered unexpected HKSample metadata value of type \(Swift.type(of: value)), for key '\(key)': \(value). Skipping.")
                     continue
                 }
                 metadataExtension.appendExtension(
@@ -107,6 +111,45 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
                 )
                 observation.appendExtension(metadataExtension, replaceAllExistingWithSameUrl: true)
             }
+        }
+    }
+    
+    private static func type(forMetadataKey key: String) -> (any FHIRCodingConvertibleHKEnum.Type)? { // swiftlint:disable:this cyclomatic_complexity
+        switch key {
+        case HKMetadataKeyAppleECGAlgorithmVersion:
+            HKAppleECGAlgorithmVersion.self
+        case HKMetadataKeyBloodGlucoseMealTime:
+            HKBloodGlucoseMealTime.self
+        case HKMetadataKeyBodyTemperatureSensorLocation:
+            HKBodyTemperatureSensorLocation.self
+        case HKMetadataKeyCyclingFunctionalThresholdPowerTestType:
+            HKCyclingFunctionalThresholdPowerTestType.self
+        case HKMetadataKeyDevicePlacementSide:
+            HKDevicePlacementSide.self
+        case HKMetadataKeyHeartRateMotionContext:
+            HKHeartRateMotionContext.self
+        case HKMetadataKeyHeartRateRecoveryTestType:
+            HKHeartRateRecoveryTestType.self
+        case HKMetadataKeyHeartRateSensorLocation:
+            HKHeartRateSensorLocation.self
+        case HKMetadataKeyInsulinDeliveryReason:
+            HKInsulinDeliveryReason.self
+        case HKMetadataKeyPhysicalEffortEstimationType:
+            HKPhysicalEffortEstimationType.self
+        case HKMetadataKeySwimmingStrokeStyle:
+            HKSwimmingStrokeStyle.self
+        case HKMetadataKeyUserMotionContext:
+            HKUserMotionContext.self
+        case HKMetadataKeyVO2MaxTestType:
+            HKVO2MaxTestType.self
+        case HKMetadataKeyWaterSalinity:
+            HKWaterSalinity.self
+        case HKMetadataKeyWeatherCondition:
+            HKWeatherCondition.self
+        case HKMetadataKeySwimmingLocationType:
+            HKWorkoutSwimmingLocationType.self
+        default:
+            nil
         }
     }
 }

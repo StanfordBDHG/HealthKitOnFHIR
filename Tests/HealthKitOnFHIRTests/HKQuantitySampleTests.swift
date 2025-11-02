@@ -2333,7 +2333,11 @@ struct HKQuantitySampleTests {
         try checkProperty(
             in: metadataExtension,
             [HKMetadataKeyWeatherCondition],
-            value: .decimal(Decimal(metadataWeather.rawValue).asFHIRPrimitive())
+            value: .coding(Coding(
+                code: "12".asFHIRStringPrimitive(),
+                display: "snow",
+                system: "https://developer.apple.com/documentation/healthkit/hkweathercondition".asFHIRURIPrimitive()
+            ))
         )
         
         // can't unit-test the encoding of the source revision into the extensions,
