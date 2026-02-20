@@ -28,7 +28,8 @@ let package = Package(
         .package(url: "https://github.com/apple/FHIRModels.git", from: "0.7.0"),
         .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", revision: "da8a582df550bcbcaf61a8922cb6b928efe0fb36"),
         .package(url: "https://github.com/swiftlang/swift-syntax.git", from: "602.0.0"),
-        .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.1")
+        .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.1"),
+        .package(url: "https://github.com/StanfordSpezi/SpeziFoundation.git", from: "2.7.0")
     ] + swiftLintPackage(),
     targets: [
         .macro(
@@ -63,7 +64,8 @@ let package = Package(
         .testTarget(
             name: "HealthKitOnFHIRTests",
             dependencies: [
-                .target(name: "HealthKitOnFHIR")
+                .target(name: "HealthKitOnFHIR"),
+                .product(name: "SpeziFoundation", package: "SpeziFoundation")
             ],
             swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
             plugins: [] + swiftLintPlugin()
