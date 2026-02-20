@@ -33,6 +33,7 @@ jobs:
             destination: 'platform=macOS,name=My Mac'
           - name: watchOS
             destination: 'platform=watchOS Simulator,name=Apple Watch Series 11 (46mm)'
+      fail-fast: false
     with:
       runsonlabels: '["macOS", "self-hosted"]'
       scheme: HealthKitOnFHIR
