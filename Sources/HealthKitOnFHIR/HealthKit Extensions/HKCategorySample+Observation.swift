@@ -26,7 +26,7 @@ extension HKCategorySample: FHIRObservationBuildable {
             observation.value = .codeableConcept(CodeableConcept(coding: [value.asCoding]))
         } else {
             // If the sample doesn't have a value type associated with it, we set the value to the category identifier
-            observation.setValue(self.categoryType.identifier)
+            observation.value = .string(self.categoryType.identifier.asFHIRStringPrimitive())
         }
         for metadataKey in assocDataInfo.metadataKeys {
             guard let value = self.metadata?[metadataKey] else {

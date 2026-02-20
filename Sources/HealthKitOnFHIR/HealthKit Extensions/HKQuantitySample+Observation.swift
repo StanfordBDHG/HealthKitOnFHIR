@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import FHIRModelsExtensions
 import HealthKit
 import ModelsR4
 
@@ -18,7 +19,7 @@ extension HKQuantitySample: FHIRObservationBuildable {
         for code in mapping.codings {
             observation.appendCoding(code.coding)
         }
-        observation.setValue(quantity.buildQuantity(mapping: mapping))
+        observation.value = .quantity(quantity.buildQuantity(mapping: mapping))
     }
 }
 

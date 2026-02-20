@@ -25,7 +25,8 @@ let package = Package(
         .library(name: "HealthKitOnFHIR", targets: ["HealthKitOnFHIR"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/FHIRModels.git", .upToNextMajor(from: "0.7.0")),
+        .package(url: "https://github.com/apple/FHIRModels.git", from: "0.7.0"),
+        .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", revision: "da8a582df550bcbcaf61a8922cb6b928efe0fb36"),
         .package(url: "https://github.com/swiftlang/swift-syntax.git", from: "602.0.0"),
         .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.1")
     ] + swiftLintPackage(),
@@ -50,7 +51,8 @@ let package = Package(
             name: "HealthKitOnFHIR",
             dependencies: [
                 .target(name: "HealthKitOnFHIRMacros"),
-                .product(name: "ModelsR4", package: "FHIRModels")
+                .product(name: "ModelsR4", package: "FHIRModels"),
+                .product(name: "FHIRModelsExtensions", package: "FHIRModelsExtensions")
             ],
             resources: [
                 .process("Resources")
