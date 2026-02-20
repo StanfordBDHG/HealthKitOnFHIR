@@ -19,10 +19,8 @@ struct UITestsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                ContentView()
-            }
-            .spezi(delegate)
+            ContentView()
+                .spezi(delegate)
         }
     }
 }
