@@ -73,6 +73,7 @@ let package = Package(
             dependencies: [
                 .target(name: "HealthKitOnFHIRMacros"),
                 .target(name: "HealthKitOnFHIRMacrosImpl"),
+                .product(name: "FHIRModelsExtensions", package: "FHIRModelsExtensions"),
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax")
             ]
