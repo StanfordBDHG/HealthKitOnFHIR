@@ -6,11 +6,9 @@
 // SPDX-License-Identifier: MIT
 //
 
-// swiftlint:disable file_types_order
-
-import SwiftUI
 import Spezi
 import SpeziHealthKit
+import SwiftUI
 
 
 @main
