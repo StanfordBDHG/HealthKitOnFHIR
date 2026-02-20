@@ -24,21 +24,28 @@ final class HealthKitManager: Sendable {
         }
     }
     
-    
     func requestStepAuthorization() async throws {
-        guard let healthStore,
-              let stepType = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
-            throw HKError(.errorHealthDataUnavailable)
-        }
-        try await healthStore.requestAuthorization(toShare: [stepType], read: [stepType])
+        try await requestReadWriteAuthorization(for: [.stepCount])
     }
     
-    func readStepCount(sorted sortDescriptors: [SortDescriptor<HKQuantitySample>] = [], limit: Int? = nil) async throws -> [HKQuantitySample] {
+    func requestReadWriteAuthorization(for identifiers: [HKQuantityTypeIdentifier]) async throws {
+        guard let healthStore else {
+            throw HKError(.errorHealthDataUnavailable)
+        }
+        let sampleTypes = Set(identifiers.map { HKQuantityType($0) })
+        try await healthStore.requestAuthorization(toShare: sampleTypes, read: sampleTypes)
+    }
+    
+    func readSamples(
+        for identifier: HKQuantityTypeIdentifier,
+        sorted sortDescriptors: [SortDescriptor<HKQuantitySample>] = [],
+        limit: Int? = nil
+    ) async throws -> [HKQuantitySample] {
         guard let healthStore else {
             throw HKError(.errorHealthDataUnavailable)
         }
         let query = HKSampleQueryDescriptor(
-            predicates: [.quantitySample(type: HKQuantityType(.stepCount))],
+            predicates: [.quantitySample(type: HKQuantityType(identifier))],
             sortDescriptors: sortDescriptors,
             limit: limit ?? HKObjectQueryNoLimit
         )

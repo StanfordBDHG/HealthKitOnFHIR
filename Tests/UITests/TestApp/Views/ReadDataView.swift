@@ -6,12 +6,15 @@
 // SPDX-License-Identifier: MIT
 //
 
-@preconcurrency import HealthKit
+import HealthKit
+import SpeziHealthKit
 import SwiftUI
 
 
-struct ReadDataView: View {
-    @State private var manager = HealthKitManager()
+struct ReadDataView<Sample: _HKSampleWithSampleType>: View {
+    @Environment(HealthKit.self) private var healthKit
+    
+    private let sampleType: SampleType<Sample>
     
     @State private var json = ""
     @State private var showingSheet = false
@@ -20,9 +23,9 @@ struct ReadDataView: View {
     var body: some View {
         Form {
             Section {
-                Button("Read Step Count") {
+                Button("Read \(sampleType.displayTitle)") {
                     Task {
-                        try await readSteps()
+                        try await readData()
                         showingSheet.toggle()
                     }
                 }
@@ -35,31 +38,94 @@ struct ReadDataView: View {
     }
     
     
-    private func readSteps() async throws {
-        try await manager.requestStepAuthorization()
-        
-        let observations = try await manager.readStepCount(
-            sorted: [.init(\.startDate, order: .reverse)],
-            limit: 1
+    init(_ sampleType: SampleType<Sample>) {
+        self.sampleType = sampleType
+    }
+    
+    private func readData() async throws {
+        try await healthKit.askForAuthorization(for: .init(read: [sampleType]))
+        let samples = try await healthKit.query(
+            sampleType,
+            timeRange: .ever,
+            limit: 1,
+            sortedBy: [.init(\.startDate, order: .reverse)]
         )
-            .compactMap { sample in
-                try? sample.resource().get()
-            }
-
+        let observations = samples.compactMap { try? $0.resource().get() }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
+        let data = try encoder.encode(observations)
+        self.json = String(decoding: data, as: UTF8.self)
         
-        guard let data = try? encoder.encode(observations) else {
-            return
+        
+        try await healthKit.askForAuthorization(for: .init(read: HKQuantityType.allKnownQuantities))
+        try await healthKit.askForAuthorization(for: .init(read: HKCategoryType.allKnownCategories))
+        try await healthKit.askForAuthorization(for: .init(read: HKCorrelationType.allKnownCorrelations))
+        
+        var sampleTypesWithoutData = Set<String>()
+        var sampleTypesWithDevice = Set<String>()
+        var sampleTypesWithoutDevice = Set<String>()
+        
+        try await hmmm(
+            allSampleTypes: HKQuantityType.allKnownQuantities.compactMap { SampleType<HKQuantitySample>(HKQuantityTypeIdentifier(rawValue: $0.identifier)) },
+            sampleTypesWithoutData: &sampleTypesWithoutData,
+            sampleTypesWithDevice: &sampleTypesWithDevice,
+            sampleTypesWithoutDevice: &sampleTypesWithoutDevice
+        )
+        try await hmmm(
+            allSampleTypes: HKCategoryType.allKnownCategories.compactMap { SampleType<HKCategorySample>(HKCategoryTypeIdentifier(rawValue: $0.identifier)) },
+            sampleTypesWithoutData: &sampleTypesWithoutData,
+            sampleTypesWithDevice: &sampleTypesWithDevice,
+            sampleTypesWithoutDevice: &sampleTypesWithoutDevice
+        )
+        try await hmmm(
+            allSampleTypes: HKCorrelationType.allKnownCorrelations.compactMap { SampleType<HKCorrelation>(HKCorrelationTypeIdentifier(rawValue: $0.identifier)) },
+            sampleTypesWithoutData: &sampleTypesWithoutData,
+            sampleTypesWithDevice: &sampleTypesWithDevice,
+            sampleTypesWithoutDevice: &sampleTypesWithoutDevice
+        )
+        
+        print("Sample Types With Device:")
+        for sampleType in sampleTypesWithDevice.sorted() {
+            print("- \(sampleType)")
         }
         
-        self.json = String(decoding: data, as: UTF8.self)
+        print()
+        print("Sample Types Without Device:")
+        for sampleType in sampleTypesWithoutDevice.sorted() {
+            print("- \(sampleType)")
+        }
+        
+        print()
+        print("Sample Types Without Data:")
+        for sampleType in sampleTypesWithoutData.sorted() {
+            print("- \(sampleType)")
+        }
+    }
+    
+    
+    private func hmmm<S: _HKSampleWithSampleType>(
+        allSampleTypes: [SampleType<S>],
+        sampleTypesWithoutData: inout Set<String>,
+        sampleTypesWithDevice: inout Set<String>,
+        sampleTypesWithoutDevice: inout Set<String>
+    ) async throws {
+        for sampleType in allSampleTypes {
+            guard let sample = try await healthKit.query(sampleType, timeRange: .ever, limit: 1, sortedBy: [.init(\.startDate, order: .reverse)]).first else {
+                sampleTypesWithoutData.insert(sampleType.id)
+                continue
+            }
+            if sample.device != nil {
+                sampleTypesWithDevice.insert(sampleType.id)
+            } else {
+                sampleTypesWithoutDevice.insert(sampleType.id)
+            }
+        }
     }
 }
 
 
-struct ReadDataView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReadDataView()
-    }
-}
+//extension SampleType where Sample._SampleType: _HKSampleTypeWithIdentifierType {
+//    init?(_ sampleType: Sample._SampleType) {
+//        self.init(Sample._SampleType._Identifier(rawValue: sampleType.identifier))
+//    }
+//}

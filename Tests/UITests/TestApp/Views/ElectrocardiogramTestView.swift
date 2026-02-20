@@ -7,14 +7,14 @@
 //
 
 import Foundation
-@preconcurrency import HealthKit
+import HealthKit
 import HealthKitOnFHIR
 import ModelsR4
 import SwiftUI
 
 
 struct ElectrocardiogramTestView: View {
-    @State private var manager = HealthKitManager()
+    @Environment(HealthKitManager.self) private var manager
     
     @State private var observation: Observation?
     @State private var passed = false
