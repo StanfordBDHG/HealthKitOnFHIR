@@ -14,7 +14,6 @@ import XCTHealthKit
 class TestAppUITests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
         continueAfterFailure = false
     }
     
@@ -40,11 +39,11 @@ class TestAppUITests: XCTestCase {
         XCTAssert(app.collectionViews.staticTexts["Data successfully written!"].waitForExistence(timeout: 5))
         
         // Return back to the main view
-        app.navigationBars["Write Data"].buttons["HealthKitOnFHIR Tests"].tap()
+        app.navigationBars.buttons["BackButton"].tap()
         
         // Check that the data can be read
         app.collectionViews.buttons["Read Data"].tap()
-        app.collectionViews.buttons["Read Step Count"].tap()
+        app.collectionViews.buttons["Read Steps"].tap()
         
         // Dismiss results view
         app.swipeDown(velocity: XCUIGestureVelocity.fast)

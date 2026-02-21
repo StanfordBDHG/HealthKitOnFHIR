@@ -10,7 +10,7 @@ import HealthKit
 import SwiftUI
 
 struct CreateWorkoutView: View {
-    @State private var manager = HealthKitManager()
+    @Environment(HealthKitManager.self) private var manager
 
     @State private var json = ""
     @State private var showingSheet = false

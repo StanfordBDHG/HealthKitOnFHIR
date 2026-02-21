@@ -6,15 +6,41 @@
 // SPDX-License-Identifier: MIT
 //
 
-import HealthKitOnFHIR
+import Spezi
+import SpeziHealthKit
 import SwiftUI
 
 
 @main
 struct UITestsApp: App {
+    @UIApplicationDelegateAdaptor private var delegate: TestAppDelegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .spezi(delegate)
         }
     }
+}
+
+
+final class TestAppDelegate: SpeziAppDelegate {
+    override var configuration: Configuration {
+        Configuration(standard: TestAppStandard()) {
+            HealthKit()
+        }
+    }
+}
+
+
+actor TestAppStandard: Standard, HealthKitConstraint {
+    func handleNewSamples<Sample>(
+        _ addedSamples: some Collection<Sample> & Sendable,
+        ofType sampleType: SampleType<Sample>
+    ) {}
+    
+    func handleDeletedObjects<Sample>(
+        _ deletedObjects: some Collection<HKDeletedObject> & Sendable,
+        ofType sampleType: SampleType<Sample>
+    ) {}
 }

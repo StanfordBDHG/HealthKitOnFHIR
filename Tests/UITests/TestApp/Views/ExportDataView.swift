@@ -91,13 +91,8 @@ struct ExportDataView: View {
 
 extension HKHealthStore {
     func query(_ sampleType: HKQuantityType) async throws -> [HKQuantitySample] {
-        let cal = Calendar.current
         let predicate = HKSamplePredicate.quantitySample(
             type: sampleType
-//            predicate: HKQuery.predicateForSamples(
-//                withStart: cal.startOfDay(for: .now),
-//                end: cal.date(byAdding: .day, value: 1, to: cal.startOfDay(for: .now))!
-//            )
         )
         let descriptor = HKSampleQueryDescriptor(
             predicates: [predicate],

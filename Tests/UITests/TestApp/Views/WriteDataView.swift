@@ -12,7 +12,7 @@ import SwiftUI
 
 
 struct WriteDataView: View {
-    private var manager = HealthKitManager()
+    @Environment(HealthKitManager.self) private var manager
     @State private var steps: Double?
     @State private var status = ""
     

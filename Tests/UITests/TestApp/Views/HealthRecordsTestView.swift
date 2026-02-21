@@ -6,13 +6,13 @@
 // SPDX-License-Identifier: MIT
 //
 
-@preconcurrency import HealthKit
+import HealthKit
 import ModelsR4
 import SwiftUI
 
 
 struct HealthRecordsTestView: View {
-    @State private var manager = HealthKitManager()
+    @Environment(HealthKitManager.self) private var manager
     
     @State private var json = ""
     @State private var showingSheet = false

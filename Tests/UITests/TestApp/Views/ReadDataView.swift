@@ -6,12 +6,15 @@
 // SPDX-License-Identifier: MIT
 //
 
-@preconcurrency import HealthKit
+import HealthKit
+import SpeziHealthKit
 import SwiftUI
 
 
-struct ReadDataView: View {
-    @State private var manager = HealthKitManager()
+struct ReadDataView<Sample: _HKSampleWithSampleType>: View {
+    @Environment(HealthKit.self) private var healthKit
+    
+    private let sampleType: SampleType<Sample>
     
     @State private var json = ""
     @State private var showingSheet = false
@@ -20,9 +23,9 @@ struct ReadDataView: View {
     var body: some View {
         Form {
             Section {
-                Button("Read Step Count") {
+                Button("Read \(sampleType.displayTitle)") {
                     Task {
-                        try await readSteps()
+                        try await readData()
                         showingSheet.toggle()
                     }
                 }
@@ -35,31 +38,22 @@ struct ReadDataView: View {
     }
     
     
-    private func readSteps() async throws {
-        try await manager.requestStepAuthorization()
-        
-        let observations = try await manager.readStepCount(
-            sorted: [.init(\.startDate, order: .reverse)],
-            limit: 1
+    init(_ sampleType: SampleType<Sample>) {
+        self.sampleType = sampleType
+    }
+    
+    private func readData() async throws {
+        try await healthKit.askForAuthorization(for: .init(read: [sampleType]))
+        let samples = try await healthKit.query(
+            sampleType,
+            timeRange: .ever,
+            limit: 1,
+            sortedBy: [.init(\.startDate, order: .reverse)]
         )
-            .compactMap { sample in
-                try? sample.resource().get()
-            }
-
+        let observations = samples.compactMap { try? $0.resource().get() }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
-        
-        guard let data = try? encoder.encode(observations) else {
-            return
-        }
-        
+        let data = try encoder.encode(observations)
         self.json = String(decoding: data, as: UTF8.self)
-    }
-}
-
-
-struct ReadDataView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReadDataView()
     }
 }
