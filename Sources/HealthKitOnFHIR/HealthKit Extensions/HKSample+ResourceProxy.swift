@@ -19,7 +19,8 @@ extension HKSample {
     /// - parameter extensions: Any ``FHIRExtensionBuilder``s that should be applied to each of the produced observations.
     ///     The ``FHIRExtensionBuilder/sourceDevice-9m1t7``, ``FHIRExtensionBuilder/sourceRevision-8b3xb``, and ``FHIRExtensionBuilder/metadata`` extension builders are always enabled when creating a FHIR `Observation`s from a `HKSample`.
     /// - returns: A `ResourceProxy`containing an FHIR  `Observation` based on the concrete subclass of `HKSample`.
-    /// - throws: If a specific `HKSample` type is currently not supported the property returns an ``HealthKitOnFHIRError/notSupported`` error.
+    /// - throws: If a specific `HKSample` type is not supported, or if the sample for some reason cannot be turned as a FHIR resource
+    ///     (e.g., because it contains values that cannot be represented using the FHIR types)
     ///
     /// - Important: When mapping an array of HKSample objects into ResourceProxies, for performance reasons always prefer ``Swift/Sequence/mapIntoResourceProxies(using:extensions:)`` or ``Swift/Sequence/mapIntoResourceProxies(using:extensions:)``.
     public func resource(
