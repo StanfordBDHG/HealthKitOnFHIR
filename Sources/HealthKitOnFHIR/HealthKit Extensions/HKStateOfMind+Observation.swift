@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+import FHIRModelsExtensions
 import HealthKit
 import ModelsR4
 
@@ -26,7 +27,7 @@ extension HKStateOfMind: FHIRObservationBuildable {
         ))
         observation.appendComponent(.init(
             code: CodeableConcept(coding: mapping.valence.codings.map(\.coding)),
-            value: .quantity(.init(value: self.valence.asFHIRDecimalPrimitive()))
+            value: .quantity(.init(value: try self.valence.asFHIRDecimalPrimitiveSafe()))
         ))
         observation.appendComponent(.init(
             code: CodeableConcept(coding: mapping.valenceClassification.codings.map(\.coding)),

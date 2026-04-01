@@ -51,53 +51,53 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
                 case let value as HKQuantity:
                     switch key {
                     case HKMetadataKeyWeatherTemperature:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .weatherTemperature))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .weatherTemperature))
                     case HKMetadataKeyWeatherHumidity:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .weatherHumidity))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .weatherHumidity))
                     case HKMetadataKeySessionEstimate:
                         guard let sample = object as? HKQuantitySample,
                               let mapping = HKQuantitySampleMapping.default[sample.quantityType] else {
                             continue // should be unreachable. skipping
                         }
-                        extensionValue = .quantity(value.buildQuantity(mapping: mapping))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: mapping))
                     case HKMetadataKeyHeartRateRecoveryActivityDuration:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .heartRateRecoveryActivityDuration))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .heartRateRecoveryActivityDuration))
                     case HKMetadataKeyHeartRateRecoveryMaxObservedRecoveryHeartRate:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .heartRateRecoveryMaxObservedRecoveryHeartRate))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .heartRateRecoveryMaxObservedRecoveryHeartRate))
                     case HKMetadataKeyAverageSpeed:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .averageSpeed))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .averageSpeed))
                     case HKMetadataKeyMaximumSpeed:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .maximumSpeed))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .maximumSpeed))
                     case HKMetadataKeyAlpineSlopeGrade:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .alpineSlopeGrade))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .alpineSlopeGrade))
                     case HKMetadataKeyElevationAscended:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .elevationAscended))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .elevationAscended))
                     case HKMetadataKeyElevationDescended:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .elevationDescended))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .elevationDescended))
                     case HKMetadataKeyFitnessMachineDuration:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .fitnessMachineDuration))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .fitnessMachineDuration))
                     case HKMetadataKeyIndoorBikeDistance:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .indoorBikeDistance))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .indoorBikeDistance))
                     case HKMetadataKeyCrossTrainerDistance:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .crossTrainerDistance))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .crossTrainerDistance))
                     case HKMetadataKeyHeartRateEventThreshold:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .highHeartRateEventThreshold))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .highHeartRateEventThreshold))
                     case HKMetadataKeyAverageMETs:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .averageMETs))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .averageMETs))
                     case HKMetadataKeyAudioExposureLevel:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .audioExposureLevel))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .audioExposureLevel))
                     case HKMetadataKeyAudioExposureDuration:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .audioExposureDuration))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .audioExposureDuration))
                     case HKMetadataKeyBarometricPressure:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .barometricPressure))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .barometricPressure))
                     case HKMetadataKeyVO2MaxValue:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .vo2MaxValue))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .vo2MaxValue))
                     case HKMetadataKeyLowCardioFitnessEventThreshold:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .lowCardioFitnessEventThreshold))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .lowCardioFitnessEventThreshold))
                     case HKMetadataKeyHeadphoneGain:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .headphoneGain))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .headphoneGain))
                     case HKMetadataKeyMaximumLightIntensity:
-                        extensionValue = .quantity(value.buildQuantity(mapping: .maximumLightIntensity))
+                        extensionValue = .quantity(try value.buildQuantity(mapping: .maximumLightIntensity))
                     default:
                         print("Encountered unexpected HKQuantity metadata value for key '\(key)': \(value). Skipping.")
                         continue
