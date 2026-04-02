@@ -2173,6 +2173,53 @@ struct HKQuantitySampleTests {
         #expect(sample.quantityType.codes.isEmpty)
     }
     
+    @Test func invalidValue() throws {
+        #expect(Decimal(Double.nan).doubleValue.isNaN)
+        #expect(Decimal(Double.signalingNaN).doubleValue.isNaN)
+        
+        let unit: HKUnit = .count().unitDivided(by: .minute())
+        let makeSample = {
+            HKQuantitySample(
+                type: HKQuantityType(.heartRate),
+                quantity: HKQuantity(unit: unit, doubleValue: $0),
+                start: .now,
+                end: .now
+            )
+        }
+        #expect(throws: (any Error).self) {
+            try makeSample(+.infinity).resource()
+        }
+        #expect(throws: (any Error).self) {
+            try makeSample(-.infinity).resource()
+        }
+        #expect(throws: Never.self) {
+            try makeSample(.nan).resource()
+        }
+        
+        let samples = [
+            makeSample(+.infinity),
+            makeSample(-.infinity),
+            makeSample(.nan),
+            makeSample(.signalingNaN),
+            makeSample(+0),
+            makeSample(-0)
+        ]
+        
+        let resources = try samples.compactMapIntoResourceProxies()
+        let values: [Double] = resources.compactMap { resource in
+            guard let observation = resource.get(if: Observation.self) else {
+                return nil
+            }
+            switch observation.value {
+            case .quantity(let quantity):
+                return quantity.value?.value?.decimal.doubleValue
+            default:
+                return nil
+            }
+        }
+        #expect(values.map(\.bitPattern) == [Double.nan, .nan, 0, 0].map(\.bitPattern))
+    }
+    
     @Test
     func collectionSampleToResourceProxy() throws {
         func makeSample(numSteps: Int, date: DateComponents) throws -> HKQuantitySample {

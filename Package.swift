@@ -1,5 +1,4 @@
 // swift-tools-version:6.2
-
 //
 // This source file is part of the HealthKitOnFHIR open source project
 // 
@@ -11,6 +10,11 @@
 import CompilerPluginSupport
 import class Foundation.ProcessInfo
 import PackageDescription
+
+/// Whether the package should run SwiftLint as part of its build process.
+///
+/// Set this to `false` before committing any changes.
+let enableSwiftLintPlugin = false
 
 
 let package = Package(
@@ -26,11 +30,11 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/FHIRModels.git", from: "0.7.0"),
-        .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", from: "0.1.0"),
+        .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", from: "0.1.1"),
         .package(url: "https://github.com/swiftlang/swift-syntax.git", from: "602.0.0"),
         .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.1"),
         .package(url: "https://github.com/StanfordSpezi/SpeziFoundation.git", from: "2.7.0")
-    ] + swiftLintPackage(),
+    ] + swiftLintPackage,
     targets: [
         .macro(
             name: "HealthKitOnFHIRMacrosImpl",
@@ -40,13 +44,15 @@ let package = Package(
                 .product(name: "SwiftDiagnostics", package: "swift-syntax"),
                 .product(name: "Algorithms", package: "swift-algorithms")
             ],
-            swiftSettings: [.enableUpcomingFeature("ExistentialAny")]
+            swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
+            plugins: [] + swiftLintPlugin
         ),
         .target(
             name: "HealthKitOnFHIRMacros",
             dependencies: [
                 .target(name: "HealthKitOnFHIRMacrosImpl")
-            ]
+            ],
+            plugins: [] + swiftLintPlugin
         ),
         .target(
             name: "HealthKitOnFHIR",
@@ -59,7 +65,7 @@ let package = Package(
                 .process("Resources")
             ],
             swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
-            plugins: [] + swiftLintPlugin()
+            plugins: [] + swiftLintPlugin
         ),
         .testTarget(
             name: "HealthKitOnFHIRTests",
@@ -68,7 +74,7 @@ let package = Package(
                 .product(name: "SpeziFoundation", package: "SpeziFoundation")
             ],
             swiftSettings: [.enableUpcomingFeature("ExistentialAny")],
-            plugins: [] + swiftLintPlugin()
+            plugins: [] + swiftLintPlugin
         ),
         .testTarget(
             name: "HealthKitOnFHIRMacrosTests",
@@ -78,24 +84,26 @@ let package = Package(
                 .product(name: "FHIRModelsExtensions", package: "FHIRModelsExtensions"),
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax")
-            ]
+            ],
+            plugins: [] + swiftLintPlugin
         )
     ]
 )
 
 
-func swiftLintPlugin() -> [Target.PluginUsage] {
-    // Fully quit Xcode and open again with `open --env SPEZI_DEVELOPMENT_SWIFTLINT /Applications/Xcode.app`
-    if ProcessInfo.processInfo.environment["SPEZI_DEVELOPMENT_SWIFTLINT"] != nil {
-        [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint")]
+// MARK: SwiftLint support
+
+var swiftLintPlugin: [Target.PluginUsage] {
+    if enableSwiftLintPlugin {
+        [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
     } else {
         []
     }
 }
 
-func swiftLintPackage() -> [PackageDescription.Package.Dependency] {
-    if ProcessInfo.processInfo.environment["SPEZI_DEVELOPMENT_SWIFTLINT"] != nil {
-        [.package(url: "https://github.com/realm/SwiftLint.git", from: "0.55.1")]
+var swiftLintPackage: [PackageDescription.Package.Dependency] {
+    if enableSwiftLintPlugin {
+        [.package(url: "https://github.com/SimplyDanny/SwiftLintPlugins.git", from: "0.63.2")]
     } else {
         []
     }

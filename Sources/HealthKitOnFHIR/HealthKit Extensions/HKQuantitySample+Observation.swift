@@ -19,7 +19,7 @@ extension HKQuantitySample: FHIRObservationBuildable {
         for code in mapping.codings {
             observation.appendCoding(code.coding)
         }
-        observation.value = .quantity(quantity.buildQuantity(mapping: mapping))
+        observation.value = .quantity(try quantity.buildQuantity(mapping: mapping))
     }
 }
 
@@ -32,22 +32,22 @@ extension HKQuantity {
         guard let mapping = mappings[quantityType] else {
             throw HealthKitOnFHIRError.notSupported
         }
-        return buildObservationComponent(mapping: mapping)
+        return try buildObservationComponent(mapping: mapping)
     }
     
-    func buildObservationComponent(mapping: HKQuantitySampleMapping) -> ObservationComponent {
+    func buildObservationComponent(mapping: HKQuantitySampleMapping) throws -> ObservationComponent {
         ObservationComponent(
             code: CodeableConcept(coding: mapping.codings.map(\.coding)),
-            value: .quantity(buildQuantity(mapping: mapping))
+            value: .quantity(try buildQuantity(mapping: mapping))
         )
     }
     
-    func buildQuantity(mapping: HKQuantitySampleMapping) -> Quantity {
+    func buildQuantity(mapping: HKQuantitySampleMapping) throws -> Quantity {
         Quantity(
             code: mapping.unit.code?.asFHIRStringPrimitive(),
             system: mapping.unit.system?.asFHIRURIPrimitive(),
             unit: mapping.unit.unit.asFHIRStringPrimitive(),
-            value: self.doubleValue(for: mapping.unit.hkunit).asFHIRDecimalPrimitive()
+            value: try self.doubleValue(for: mapping.unit.hkunit).asFHIRDecimalPrimitiveSafe()
         )
     }
 }

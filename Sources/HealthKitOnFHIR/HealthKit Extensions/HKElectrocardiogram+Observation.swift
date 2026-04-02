@@ -98,7 +98,7 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
                 code: mapping.numberOfVoltageMeasurements.unit.code?.asFHIRStringPrimitive(),
                 system: mapping.numberOfVoltageMeasurements.unit.system?.asFHIRURIPrimitive(),
                 unit: mapping.numberOfVoltageMeasurements.unit.unit.asFHIRStringPrimitive(),
-                value: Double(numberOfVoltageMeasurements).asFHIRDecimalPrimitive()
+                value: try Double(numberOfVoltageMeasurements).asFHIRDecimalPrimitiveSafe()
             )
         )
         observation.appendComponent(numberOfVoltageMeasurementsComponent)
@@ -117,7 +117,7 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
                     code: mapping.samplingFrequency.unit.code?.asFHIRStringPrimitive(),
                     system: mapping.samplingFrequency.unit.system?.asFHIRURIPrimitive(),
                     unit: mapping.samplingFrequency.unit.unit.asFHIRStringPrimitive(),
-                    value: samplingFrequency.doubleValue(for: mapping.samplingFrequency.unit.hkunit).asFHIRDecimalPrimitive()
+                    value: try samplingFrequency.doubleValue(for: mapping.samplingFrequency.unit.hkunit).asFHIRDecimalPrimitiveSafe()
                 )
             )
             observation.appendComponent(samplingFrequencyComponent)
@@ -146,7 +146,7 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
                     code: mapping.averageHeartRate.unit.code?.asFHIRStringPrimitive(),
                     system: mapping.averageHeartRate.unit.system?.asFHIRURIPrimitive(),
                     unit: mapping.averageHeartRate.unit.unit.asFHIRStringPrimitive(),
-                    value: averageHeartRate.doubleValue(for: mapping.averageHeartRate.unit.hkunit).asFHIRDecimalPrimitive()
+                    value: try averageHeartRate.doubleValue(for: mapping.averageHeartRate.unit.hkunit).asFHIRDecimalPrimitiveSafe()
                 )
             )
             observation.appendComponent(averageHeartRateComponent)
@@ -233,7 +233,7 @@ extension HKElectrocardiogram: FHIRObservationBuildable {
                         unit: mapping.unit.unit.asFHIRStringPrimitive(),
                         value: 0.asFHIRDecimalPrimitive()
                     ),
-                    period: period.asFHIRDecimalPrimitive()
+                    period: try period.asFHIRDecimalPrimitiveSafe()
                 )
             )
             observation.appendComponent(voltageMeasurementBatchComponent)
