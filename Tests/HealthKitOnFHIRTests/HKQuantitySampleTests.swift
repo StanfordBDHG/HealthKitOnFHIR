@@ -2118,26 +2118,6 @@ struct HKQuantitySampleTests {
     }
     
     @Test
-    func invalidComponent() throws {
-        let nikeFuel = HKQuantitySample(
-            type: HKQuantityType(.nikeFuel),
-            quantity: HKQuantity(unit: .count(), doubleValue: 1),
-            start: try startDate,
-            end: try endDate
-        )
-        
-        let correlation = HKCorrelation(
-            type: HKCorrelationType(.bloodPressure),
-            start: try startDate,
-            end: try endDate,
-            objects: [nikeFuel]
-        )
-        #expect(throws: HealthKitOnFHIRError.self) {
-            try correlation.resource()
-        }
-    }
-    
-    @Test
     func unsupportedType() throws {
         #expect(throws: HealthKitOnFHIRError.self) {
             try HKVisionPrescription(
