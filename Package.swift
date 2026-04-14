@@ -29,9 +29,9 @@ let package = Package(
         .library(name: "HealthKitOnFHIR", targets: ["HealthKitOnFHIR"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/FHIRModels.git", from: "0.7.0"),
-        .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", from: "0.1.1"),
-        .package(url: "https://github.com/swiftlang/swift-syntax.git", from: "602.0.0"),
+        .package(url: "https://github.com/apple/FHIRModels.git", "0.8.0"..<"0.9.0"),
+        .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", from: "0.1.2"),
+        .package(url: "https://github.com/swiftlang/swift-syntax.git", "602.0.0"..<"605.0.0"),
         .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.1"),
         .package(url: "https://github.com/StanfordSpezi/SpeziFoundation.git", from: "2.7.0")
     ] + swiftLintPackage,
