@@ -13,8 +13,8 @@ ignorePatterns:
   - pattern: '^doc:.*$'
   - pattern: '^http://localhost.*$'
   - pattern: 'http://unitsofmeasure\.org'
-  # Zenodo rate-limits automated requests and answers with 403 or times out.
-  - pattern: '^https://zenodo\.org/.*$'
+  # The Zenodo badge endpoints rate-limit automated requests and answer with 403 or time out.
+  - pattern: '^https://zenodo\.org/badge/.*$'
 replacementPatterns:
   - pattern: '(.*)#gh-dark-mode-only'
     replacement: '$1'
