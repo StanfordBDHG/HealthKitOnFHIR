@@ -13,6 +13,10 @@ ignorePatterns:
   - pattern: '^doc:.*$'
   - pattern: '^http://localhost.*$'
   - pattern: 'http://unitsofmeasure\.org'
+  # The Zenodo badge endpoints rate-limit automated requests and answer with 403 or time out.
+  - pattern: '^https://zenodo\.org/badge/.*$'
+  # The Swift Package Index answers automated requests with 403 intermittently.
+  - pattern: '^https://swiftpackageindex\.com/StanfordBDHG/.*$'
 replacementPatterns:
   - pattern: '(.*)#gh-dark-mode-only'
     replacement: '$1'

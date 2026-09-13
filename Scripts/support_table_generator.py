@@ -232,6 +232,14 @@ def create_code_links(type, types):
 
         return '[{}]({})'.format(code, code_url)
 
+def create_healthkit_url(identifier):
+    """Builds the developer.apple.com URL for a HealthKit type identifier constant such as HKQuantityTypeIdentifierBodyMass."""
+    for prefix in ('HKQuantityTypeIdentifier', 'HKCategoryTypeIdentifier', 'HKCorrelationTypeIdentifier', 'HKClinicalTypeIdentifier'):
+        if identifier.startswith(prefix):
+            return '{}/{}/{}'.format(HEALTHKIT_URL, prefix.lower(), identifier[len(prefix):].lower())
+    return '{}/{}'.format(HEALTHKIT_URL, identifier.lower())
+
+
 def create_quantity_types_table():
     markdown = '# Supported HKQuantityTypes'
     markdown += create_header()
@@ -264,7 +272,7 @@ def create_quantity_types_table():
 
     # Link all the HealthKit types to Apple docs
     for type in rows:
-        url = '{}/{}'.format(HEALTHKIT_URL, type[0])
+        url = create_healthkit_url(type[0])
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKQuantityTypeIdentifier'), url)
 
     # Add the statistics
@@ -305,7 +313,7 @@ def create_correlation_types_table():
 
     # Link all the HealthKit types to Apple docs
     for type in rows:
-        url = '{}/{}'.format(HEALTHKIT_URL, type[0])
+        url = create_healthkit_url(type[0])
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKCorrelationTypeIdentifier'), url)
 
     # Add the statistics
@@ -343,7 +351,7 @@ def create_category_types_table():
 
     # Link all the HealthKit types to Apple docs
     for type in rows:
-        url = '{}/{}'.format(HEALTHKIT_URL, type[0])
+        url = create_healthkit_url(type[0])
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKCategoryTypeIdentifier'), url)
 
     # Add the statistics
@@ -383,7 +391,7 @@ def create_clinical_types_table():
 
     # Link all the HealthKit types to Apple docs
     for type in rows:
-        url = '{}/{}'.format(HEALTHKIT_URL, type[0])
+        url = create_healthkit_url(type[0])
         type[0] = '[{}]({})'.format(type[0].removeprefix('HKClinicalTypeIdentifier'), url)
 
     # Add the statistics

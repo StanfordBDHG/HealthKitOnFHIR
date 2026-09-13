@@ -157,9 +157,7 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
 
 
 extension HKQuantitySampleMapping {
-    // swiftlint:disable:next force_unwrapping
     private static let healthKitCodingSystemUrl = URL(string: "http://developer.apple.com/documentation/healthkit")!
-    // swiftlint:disable:next force_unwrapping
     private static let unitsOfMeasureCodingSystemUrl = URL(string: "http://unitsofmeasure.org")!
     
     fileprivate static let weatherTemperature = HKQuantitySampleMapping(
