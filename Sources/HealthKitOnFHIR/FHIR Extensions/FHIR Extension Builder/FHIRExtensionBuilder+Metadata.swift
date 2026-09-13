@@ -107,8 +107,12 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
                     Extension(url: FHIRExtensionUrls.metadata.appending(component: key), value: extensionValue),
                     replaceAllExistingWithSameUrl: true
                 )
-                observation.appendExtension(metadataExtension, replaceAllExistingWithSameUrl: true)
             }
+            guard metadataExtension.extension?.isEmpty == false else {
+                // none of the entries could be encoded; leave the observation as it is
+                return
+            }
+            observation.appendExtension(metadataExtension, replaceAllExistingWithSameUrl: true)
         }
     }
     

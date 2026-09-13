@@ -58,7 +58,6 @@ let package = Package(
             name: "HealthKitOnFHIR",
             dependencies: [
                 .target(name: "HealthKitOnFHIRMacros"),
-                .product(name: "FMCore", package: "FHIRModels"),
                 .product(name: "ModelsR4", package: "FHIRModels"),
                 .product(name: "FHIRModelsExtensions", package: "FHIRModelsExtensions")
             ],

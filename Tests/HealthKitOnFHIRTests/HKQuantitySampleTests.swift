@@ -2322,6 +2322,27 @@ struct HKQuantitySampleTests {
     }
     
     @Test
+    func customExtensionBuilder() throws {
+        let noteUrl = FHIRPrimitive(FHIRURI(stringLiteral: "https://bdh.stanford.edu/fhir/defs/testNote"))
+        let noteBuilder = FHIRExtensionBuilder<HKQuantitySample> { sample, observation in
+            observation.appendExtension(
+                Extension(url: noteUrl, value: .string(sample.quantityType.identifier.asFHIRStringPrimitive())),
+                replaceAllExistingWithSameUrl: true
+            )
+        }
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            extensions: [noteBuilder]
+        )
+        let extensions = try #require(observation.extension)
+        #expect(extensions.map(\.url) == [FHIRExtensionUrls.sourceRevision, noteUrl])
+        #expect(observation.extensions(for: noteUrl) == [
+            Extension(url: noteUrl, value: .string("HKQuantityTypeIdentifierStepCount".asFHIRStringPrimitive()))
+        ])
+    }
+    
+    @Test
     func absoluteTimeRangeStoredInExtension() throws {
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = .gmt
