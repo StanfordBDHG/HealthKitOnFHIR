@@ -24,7 +24,7 @@ HealthKitOnFHIR supports:
 - Extensions to convert data from Apple HealthKit to HL7® FHIR® R4.
 - Customizable mappings between HealthKit data types and standardized codes (e.g., LOINC)
 
-Please refer to the [HKObject Support Table](Sources/HealthKitOnFHIR/HealthKitOnFHIR.docc/HKSampleSupportTables.md) for a complete list of supported types.
+Please refer to the [HKObject Support Tables](https://swiftpackageindex.com/StanfordBDHG/HealthKitOnFHIR/documentation/healthkitonfhir/hksamplesupporttables) in the documentation for a complete list of supported types.
 
 > [!NOTE] 
 > HealthKitOnFHIR will use the time zone specified in [HKMetadataKeyTimeZone](https://developer.apple.com/documentation/healthkit/hkmetadatakeytimezone) when creating FHIR Observations from HealthKit samples. If no time zone is specified, HealthKitOnFHIR will use the device's current time zone.
