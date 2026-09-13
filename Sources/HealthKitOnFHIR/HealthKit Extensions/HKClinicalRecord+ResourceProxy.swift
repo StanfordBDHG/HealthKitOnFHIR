@@ -6,7 +6,6 @@
 // SPDX-License-Identifier: MIT
 //
 
-import FMCore
 import HealthKit
 import ModelsR4
 
@@ -21,6 +20,6 @@ extension HKClinicalRecord {
         guard fhirResource.fhirVersion == HKFHIRVersion.primaryR4() else {
             throw HealthKitOnFHIRError.unsupportedFHIRVersion
         }
-        return try JSONDecoder.fhirModelsReadyDecoder().decode(ResourceProxy.self, from: fhirResource.data)
+        return try JSONDecoder().decode(ResourceProxy.self, from: fhirResource.data)
     }
 }
