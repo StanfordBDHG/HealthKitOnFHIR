@@ -938,7 +938,7 @@
         "HKQuantityTypeIdentifierAtrialFibrillationBurden": {
             "codings": [
                 {
-                    "code": "HKQuantityTypeIdentifierAppleSleepingWristTemperature",
+                    "code": "HKQuantityTypeIdentifierAtrialFibrillationBurden",
                     "display": "Atrial Fibrillation Burden",
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
@@ -1203,7 +1203,7 @@
         "HKQuantityTypeIdentifierCyclingSpeed": {
             "codings": [
                 {
-                    "code": "HKQuantityTypeIdentifierCyclingFunctionalThresholdPower",
+                    "code": "HKQuantityTypeIdentifierCyclingSpeed",
                     "display": "Cycling Speed",
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
@@ -1263,8 +1263,8 @@
         "HKQuantityTypeIdentifierDietaryCarbohydrates": {
             "codings": [
                 {
-                    "code": "HKQuantityTypeIdentifierDietaryCarbohydates",
-                    "display": "Dietary Carbohydates",
+                    "code": "HKQuantityTypeIdentifierDietaryCarbohydrates",
+                    "display": "Dietary Carbohydrates",
                     "system": "http://developer.apple.com/documentation/healthkit"
                 }
             ],

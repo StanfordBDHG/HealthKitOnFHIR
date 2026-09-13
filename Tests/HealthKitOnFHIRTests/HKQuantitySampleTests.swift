@@ -170,8 +170,8 @@ struct HKQuantitySampleTests {
         )
         #expect(observation.code.coding == [
             createCoding(
-                code: "HKQuantityTypeIdentifierDietaryCarbohydates",
-                display: "Dietary Carbohydates",
+                code: "HKQuantityTypeIdentifierDietaryCarbohydrates",
+                display: "Dietary Carbohydrates",
                 system: .apple
             )
         ])
@@ -1222,6 +1222,52 @@ struct HKQuantitySampleTests {
                 system: "http://unitsofmeasure.org".asFHIRURIPrimitive(),
                 unit: "%",
                 value: 50.asFHIRDecimalPrimitive()
+            )
+        ))
+    }
+    
+    @Test
+    func atrialFibrillationBurden() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.atrialFibrillationBurden),
+            quantity: HKQuantity(unit: .percent(), doubleValue: 3)
+        )
+        #expect(observation.code.coding == [
+            createCoding(
+                code: "HKQuantityTypeIdentifierAtrialFibrillationBurden",
+                display: "Atrial Fibrillation Burden",
+                system: .apple
+            )
+        ])
+        #expect(observation.value == .quantity(
+            Quantity(
+                code: "%",
+                system: "http://unitsofmeasure.org",
+                unit: "%",
+                value: 3.asFHIRDecimalPrimitive()
+            )
+        ))
+    }
+    
+    @Test
+    func cyclingSpeed() throws {
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.cyclingSpeed),
+            quantity: HKQuantity(unit: HKUnit.meterUnit(with: .kilo).unitDivided(by: .hour()), doubleValue: 25)
+        )
+        #expect(observation.code.coding == [
+            createCoding(
+                code: "HKQuantityTypeIdentifierCyclingSpeed",
+                display: "Cycling Speed",
+                system: .apple
+            )
+        ])
+        #expect(observation.value == .quantity(
+            Quantity(
+                code: "km/h",
+                system: "http://unitsofmeasure.org",
+                unit: "km/h",
+                value: 25.asFHIRDecimalPrimitive()
             )
         ))
     }
