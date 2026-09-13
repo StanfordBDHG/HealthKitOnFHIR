@@ -13,11 +13,8 @@ import ModelsR4
 
 
 extension FHIRExtensionUrls {
-    // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
-    // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
-    // it also never can be mutated to contain any.
     /// Url of a FHIR Extension containing, if applicable, encoded metadata of the `HKObject` from which a FHIR `Observation` was created.
-    nonisolated(unsafe) public static let metadata = "https://bdh.stanford.edu/fhir/defs/metadata".asFHIRURIPrimitive()!
+    public static let metadata = "https://bdh.stanford.edu/fhir/defs/metadata".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
 }
 
@@ -30,7 +27,7 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
                 observation.removeAllExtensions(withUrl: FHIRExtensionUrls.metadata)
                 return
             }
-            let metadataExtension = Extension(url: FHIRExtensionUrls.metadata)
+            var metadataExtension = Extension(url: FHIRExtensionUrls.metadata)
             for (key, value) in metadata {
                 // The HKObject docs state that "Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity".
                 // Additionally, there are some HKMetadataKey constants which say that they store a BOOL, so we support that as well.

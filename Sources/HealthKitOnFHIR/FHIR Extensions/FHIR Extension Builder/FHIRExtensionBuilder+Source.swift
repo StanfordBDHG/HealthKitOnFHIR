@@ -13,18 +13,12 @@ import ModelsR4
 
 
 extension FHIRExtensionUrls {
-    // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
-    // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
-    // it also never can be mutated to contain any.
     /// Url of a FHIR Extension containing, if applicable, encoded `HKDevice` of the `HKObject` from which a FHIR `Observation` was created.
-    nonisolated(unsafe) public static let sourceDevice = "https://bdh.stanford.edu/fhir/defs/sourceDevice".asFHIRURIPrimitive()!
+    public static let sourceDevice = "https://bdh.stanford.edu/fhir/defs/sourceDevice".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
     
-    // SAFETY: this is in fact safe, since the FHIRPrimitive's `extension` property is empty.
-    // As a result, the actual instance doesn't contain any mutable state, and since this is a let,
-    // it also never can be mutated to contain any.
     /// Url of a FHIR Extension containing, if applicable, encoded `HKSourceRevision` of the `HKObject` from which a FHIR `Observation` was created.
-    nonisolated(unsafe) public static let sourceRevision = "https://bdh.stanford.edu/fhir/defs/sourceRevision".asFHIRURIPrimitive()!
+    public static let sourceRevision = "https://bdh.stanford.edu/fhir/defs/sourceRevision".asFHIRURIPrimitive()!
     // swiftlint:disable:previous force_unwrapping
 }
 
@@ -33,7 +27,7 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKDevi
     /// A FHIR Extension Builder that writes a  `HKDevice` into a FHIR `Observation`.
     public static var sourceDevice: Self {
         .init { (device: HKDevice, observation) in
-            let deviceInfo = Extension(url: FHIRExtensionUrls.sourceDevice)
+            var deviceInfo = Extension(url: FHIRExtensionUrls.sourceDevice)
             let appendDeviceInfoEntry = { (keyPath: KeyPath<HKDevice, String?>) in
                 guard let name = keyPath._kvcKeyPathString else {
                     print("Unable to obtain name for keyPath '\(keyPath)'. Skipping.")
@@ -66,7 +60,7 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKSour
     /// A FHIR Extension Builder that writes a `HKSourceRevision` into a FHIR `Observation`.
     public static var sourceRevision: Self {
         .init { (revision: HKSourceRevision, observation) throws in // swiftlint:disable:this closure_body_length
-            let deviceInfo = Extension(url: FHIRExtensionUrls.sourceRevision)
+            var deviceInfo = Extension(url: FHIRExtensionUrls.sourceRevision)
             let fieldUrl = { (components: String...) in
                 FHIRExtensionUrls.sourceRevision.appending(components: components)
             }

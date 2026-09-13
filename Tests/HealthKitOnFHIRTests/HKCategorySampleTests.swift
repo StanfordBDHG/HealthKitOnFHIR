@@ -13,7 +13,6 @@ import Testing
 
 
 // swiftlint:disable file_length type_body_length
-@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
 struct HKCategorySampleTests {
     var startDate: Date {
         get throws {

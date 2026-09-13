@@ -57,10 +57,10 @@ struct HealthRecordsTestView: View {
     private func readHealthRecords(type: HKClinicalTypeIdentifier) async throws {
         try await manager.requestHealthRecordsAuthorization()
         
-        let resources: [Resource] = try await manager.readHealthRecords(type: type)
+        let resources: [ResourceProxy] = try await manager.readHealthRecords(type: type)
             .compactMap { sample in
                 do {
-                    return try sample.resource().get()
+                    return try sample.resource()
                 } catch {
                     print(error.localizedDescription)
                 }

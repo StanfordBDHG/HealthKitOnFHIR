@@ -29,8 +29,8 @@ let package = Package(
         .library(name: "HealthKitOnFHIR", targets: ["HealthKitOnFHIR"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/FHIRModels.git", "0.8.0"..<"0.9.0"),
-        .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", from: "0.1.1"),
+        .package(url: "https://github.com/apple/FHIRModels.git", .upToNextMinor(from: "0.9.3")),
+        .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", branch: "update-fhirmodels-0.9"),
         .package(url: "https://github.com/swiftlang/swift-syntax.git", from: "602.0.0"),
         .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.1"),
         .package(url: "https://github.com/StanfordSpezi/SpeziFoundation.git", from: "2.7.0")
@@ -58,6 +58,7 @@ let package = Package(
             name: "HealthKitOnFHIR",
             dependencies: [
                 .target(name: "HealthKitOnFHIRMacros"),
+                .product(name: "FMCore", package: "FHIRModels"),
                 .product(name: "ModelsR4", package: "FHIRModels"),
                 .product(name: "FHIRModelsExtensions", package: "FHIRModelsExtensions")
             ],
