@@ -13,7 +13,7 @@ import ModelsR4
 
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
 extension HKStateOfMind: FHIRObservationBuildable {
-    func build(_ observation: Observation, mapping: HKSampleMapping) throws {
+    func build(_ observation: inout Observation, mapping: HKSampleMapping) throws {
         let mapping = mapping.stateOfMindMapping
         for code in mapping.codings {
             observation.appendCoding(code.coding)

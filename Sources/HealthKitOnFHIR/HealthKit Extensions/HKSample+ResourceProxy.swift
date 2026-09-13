@@ -33,7 +33,7 @@ extension HKSample {
             return try self.resource()
         }
         #endif
-        let observation = Observation(
+        var observation = Observation(
             code: CodeableConcept(),
             status: FHIRPrimitive(.final)
         )
@@ -52,7 +52,7 @@ extension HKSample {
         }
         // Set specific data based on HealthKit type
         if let self = self as? any FHIRObservationBuildable {
-            try self.build(observation, mapping: mapping)
+            try self.build(&observation, mapping: mapping)
         } else {
             throw HealthKitOnFHIRError.notSupported
         }
@@ -60,7 +60,7 @@ extension HKSample {
             .sourceDevice, .sourceRevision, .metadata
         ]
         for builder in baseExtensions + extensions {
-            try builder.apply(typeErasedInput: self, to: observation)
+            try builder.apply(typeErasedInput: self, to: &observation)
         }
         return ResourceProxy(with: observation)
     }
