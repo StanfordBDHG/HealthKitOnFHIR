@@ -27,7 +27,11 @@ struct HKStateOfMindTests {
             associations: [.work]
         )
         let observation = try #require(sample.resource().get(if: Observation.self))
-        #expect(observation.effective == .dateTime(try FHIRPrimitive<DateTime>(.init(date: yesterday))))
+        guard case let .dateTime(effective) = observation.effective else {
+            Issue.record("Expected a dateTime effective value")
+            return
+        }
+        #expect(try #require(effective.value).asNSDate() == yesterday)
         #expect(observation.category?.first?.coding?.first?.code == "survey")
         #expect(observation.status == .final)
         let components = try #require(observation.component)
@@ -53,7 +57,11 @@ struct HKStateOfMindTests {
             associations: [.dating, .community, .friends]
         )
         let observation = try #require(sample.resource().get(if: Observation.self))
-        #expect(observation.effective == .dateTime(try FHIRPrimitive<DateTime>(.init(date: yesterday))))
+        guard case let .dateTime(effective) = observation.effective else {
+            Issue.record("Expected a dateTime effective value")
+            return
+        }
+        #expect(try #require(effective.value).asNSDate() == yesterday)
         #expect(observation.category?.first?.coding?.first?.code == "survey")
         #expect(observation.status == .final)
         let components = try #require(observation.component)
