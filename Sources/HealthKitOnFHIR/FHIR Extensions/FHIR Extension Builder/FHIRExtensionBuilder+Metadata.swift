@@ -33,21 +33,24 @@ extension FHIRExtensionBuilderProtocol where Self == FHIRExtensionBuilder<HKObje
             let metadataExtension = Extension(url: FHIRExtensionUrls.metadata)
             for (key, value) in metadata {
                 // The HKObject docs state that "Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity".
-                // Additionally, there are some HKMetadataKey constants which say that they store a BOOL, so we support that as well.
+                // HealthKit returns BOOL values as boolean NSNumbers, which are matched before other NSNumbers. Numbers that `Decimal` cannot
+                // represent are skipped: infinity and NaN, which would encode as invalid JSON, and -infinity, which would silently become 0.
                 let extensionValue: Extension.ValueX
                 switch value {
                 case let value as String:
                     extensionValue = .string(value.asFHIRStringPrimitive())
+                case let value as NSNumber where CFGetTypeID(value) == CFBooleanGetTypeID():
+                    extensionValue = .boolean(value.boolValue.asPrimitive())
                 case let value as NSNumber:
                     if let type = Self.type(forMetadataKey: key), let value = type.init(rawValue: value.intValue) {
                         extensionValue = .coding(value.asCoding)
-                    } else {
+                    } else if value.doubleValue.isFinite && !value.decimalValue.isNaN {
                         extensionValue = .decimal(FHIRPrimitive(FHIRDecimal(value.decimalValue)))
+                    } else {
+                        continue
                     }
                 case let value as Date:
                     extensionValue = .dateTime(FHIRPrimitive(try DateTime(date: value)))
-                case let value as Bool:
-                    extensionValue = .boolean(value.asPrimitive())
                 case let value as HKQuantity:
                     switch key {
                     case HKMetadataKeyWeatherTemperature:
