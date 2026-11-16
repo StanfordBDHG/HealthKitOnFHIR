@@ -1,0 +1,12 @@
+#
+# This source file is part of the HealthKitOnFHIR open source project
+#
+# SPDX-FileCopyrightText: 2026 Stanford University and the project authors (see CONTRIBUTORS.md)
+#
+# SPDX-License-Identifier: MIT
+#
+
+# The UI test plan collects coverage for all targets, so that Xcode writes a readable coverage archive.
+# Only the package sources count toward the coverage; the UI test app and the tests themselves are excluded.
+ignore:
+  - "Tests/**"
