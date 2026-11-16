@@ -30,7 +30,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/FHIRModels.git", .upToNextMinor(from: "0.9.4")),
-        .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", branch: "update-fhirmodels-0.9"),
+        .package(url: "https://github.com/StanfordBDHG/FHIRModelsExtensions.git", from: "0.2.0"),
         .package(url: "https://github.com/swiftlang/swift-syntax.git", from: "602.0.0"),
         .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.1"),
         .package(url: "https://github.com/StanfordSpezi/SpeziFoundation.git", from: "2.7.0")
