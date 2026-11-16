@@ -22,7 +22,7 @@ extension HKSample {
     /// - throws: If a specific `HKSample` type is not supported, or if the sample for some reason cannot be turned into a FHIR resource
     ///     (e.g., because it contains values that cannot be represented using the FHIR types)
     ///
-    /// - Important: When mapping an array of HKSample objects into ResourceProxies, for performance reasons always prefer ``Swift/Sequence/mapIntoResourceProxies(using:extensions:)`` or ``Swift/Sequence/mapIntoResourceProxies(using:extensions:)``.
+    /// - Important: When mapping an array of HKSample objects into ResourceProxies, for performance reasons always prefer ``Swift/Sequence/mapIntoResourceProxies(using:issuedDate:extensions:)`` or ``Swift/Sequence/compactMapIntoResourceProxies(using:issuedDate:extensions:)``.
     public func resource(
         withMapping mapping: HKSampleMapping = .default,
         issuedDate: FHIRPrimitive<Instant>? = nil,
@@ -39,7 +39,10 @@ extension HKSample {
         )
         // Set basic elements applicable to all observations
         observation.id = self.uuid.uuidString.asFHIRStringPrimitive()
-        observation.appendIdentifier(Identifier(id: observation.id))
+        observation.appendIdentifier(Identifier(
+            system: "urn:ietf:rfc:3986".asFHIRURIPrimitive(),
+            value: "urn:uuid:\(self.uuid.uuidString.lowercased())".asFHIRStringPrimitive()
+        ))
         try observation.setEffective(
             startDate: self.startDate,
             endDate: self.endDate,
@@ -81,7 +84,7 @@ extension Sequence where Element: HKSample {
         issuedDate: FHIRPrimitive<Instant>? = nil,
         extensions: [any FHIRExtensionBuilderProtocol] = []
     ) throws -> [ResourceProxy] {
-        let issuedDate = try issuedDate ?? FHIRPrimitive<Instant>(try Instant(date: .now))
+        let issuedDate = try issuedDate ?? .now
         return try map { try $0.resource(withMapping: mapping, issuedDate: issuedDate, extensions: extensions) }
     }
     
@@ -100,7 +103,18 @@ extension Sequence where Element: HKSample {
         issuedDate: FHIRPrimitive<Instant>? = nil,
         extensions: [any FHIRExtensionBuilderProtocol] = []
     ) throws -> [ResourceProxy] {
-        let issuedDate = try issuedDate ?? FHIRPrimitive<Instant>(try Instant(date: .now))
+        let issuedDate = try issuedDate ?? .now
         return compactMap { try? $0.resource(withMapping: mapping, issuedDate: issuedDate, extensions: extensions) }
+    }
+}
+
+
+extension FHIRPrimitive where PrimitiveType == Instant {
+    /// The current instant, written with the GMT offset the current time zone has at this instant.
+    fileprivate static var now: Self {
+        get throws {
+            let now = Date()
+            return Self(try Instant(date: now, timeZone: TimeZone.current.fixedOffset(at: now)))
+        }
     }
 }
