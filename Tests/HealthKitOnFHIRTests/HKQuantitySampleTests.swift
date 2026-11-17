@@ -16,7 +16,6 @@ import Testing
 
 // swiftlint:disable file_length
 // We disable the file length rule as this is a test class
-@MainActor // to work around https://github.com/apple/FHIRModels/issues/36
 struct HKQuantitySampleTests {
     // swiftlint:disable:previous type_body_length
     // We disable the type body length as this is a test class
@@ -2320,6 +2319,27 @@ struct HKQuantitySampleTests {
         for resource in resources {
             #expect(resource.get(if: Observation.self) != nil)
         }
+    }
+    
+    @Test
+    func customExtensionBuilder() throws {
+        let noteUrl = FHIRPrimitive(FHIRURI(stringLiteral: "https://bdh.stanford.edu/fhir/defs/testNote"))
+        let noteBuilder = FHIRExtensionBuilder<HKQuantitySample> { sample, observation in
+            observation.appendExtension(
+                Extension(url: noteUrl, value: .string(sample.quantityType.identifier.asFHIRStringPrimitive())),
+                replaceAllExistingWithSameUrl: true
+            )
+        }
+        let observation = try createObservationFrom(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: .count(), doubleValue: 42),
+            extensions: [noteBuilder]
+        )
+        let extensions = try #require(observation.extension)
+        #expect(extensions.map(\.url) == [FHIRExtensionUrls.sourceRevision, noteUrl])
+        #expect(observation.extensions(for: noteUrl) == [
+            Extension(url: noteUrl, value: .string("HKQuantityTypeIdentifierStepCount".asFHIRStringPrimitive()))
+        ])
     }
     
     @Test
